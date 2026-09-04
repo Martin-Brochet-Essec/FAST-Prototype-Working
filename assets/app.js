@@ -255,7 +255,7 @@ window.FAST = (function(){
   // {QUESTION_LIBRE}) et ne garde que les `limite` précédentes, du plus
   // ancien au plus récent.
   function getRecentQuestions(limite){
-    limite = limite || 10;
+    limite = limite || 5;
     const all = JSON.parse(localStorage.getItem('fast_answers') || '[]');
     const questions = all
       .filter(e => e.screen === 'your-question')
@@ -268,6 +268,24 @@ window.FAST = (function(){
   function formatQuestionsBlock(liste){
     if(!liste || liste.length === 0) return '(aucune question précédente enregistrée)';
     return liste.map((q, idx) => (idx + 1) + '. ' + q).join('\n');
+  }
+
+  // Historique des réponses d'approfondissement de rounds précédents.
+  // `exclureDernier` doit être true quand le round en cours est déjà
+  // enregistré (ex: runFinalSynthesis, appelée après que l'utilisatrice a
+  // répondu) et false quand il ne l'est pas encore (ex: generateDeepenQuestions,
+  // appelée avant que les 3 questions du round en cours n'aient de réponse).
+  // Garde les `limiteRounds` rounds précédents (par défaut 5, soit 15
+  // paires), aplaties en une liste de {q,a}, du plus ancien au plus récent.
+  function getRecentDeepenHistory(limiteRounds, exclureDernier){
+    limiteRounds = limiteRounds || 5;
+    const all = JSON.parse(localStorage.getItem('fast_answers') || '[]');
+    const rounds = all.filter(e => e.screen === 'deepen');
+    const roundsUtilisables = exclureDernier ? rounds.slice(0, -1) : rounds;
+    const derniersRounds = roundsUtilisables.slice(-limiteRounds);
+    const paires = [];
+    derniersRounds.forEach(r => r.qa.forEach(p => paires.push(p)));
+    return paires;
   }
 
   // Mémoire "moyen terme" : le profil (Q10+Q5) est-il déjà complet ?
@@ -389,7 +407,8 @@ window.FAST = (function(){
     // your-question.html enregistre une seule paire {q, a} sous ce screen id
     const qaYourQuestion = getAnswersFor('your-question');
     const questionLibre = (qaYourQuestion[0] && qaYourQuestion[0].a) || '';
-    const historique = getRecentQuestions(10);
+    const historique = getRecentQuestions(5);
+    const historiqueDeepen = getRecentDeepenHistory(5, true);
 
     const prompt = await loadCoachPrompt(coachId);
 
@@ -399,7 +418,8 @@ window.FAST = (function(){
         .replace('{ANSWERS_Q5}', formatAnswersBlock(qaQ5))
         .replace('{ANSWERS_DEEPEN}', formatAnswersBlock(qaDeepen))
         .replace('{QUESTION_LIBRE}', questionLibre)
-        .replace('{HISTORIQUE_QUESTIONS}', formatQuestionsBlock(historique));
+        .replace('{HISTORIQUE_QUESTIONS}', formatQuestionsBlock(historique))
+        .replace('{HISTORIQUE_DEEPEN}', formatAnswersBlock(historiqueDeepen));
 
     const reponseIA = await window.FAST_AI.interrogerAgentIA(promptFinal);
 
@@ -473,13 +493,15 @@ window.FAST = (function(){
     }
 
     const prompt = await loadCoachPrompt(coachId);
-    const historique = getRecentQuestions(10);
+    const historique = getRecentQuestions(5);
+    const historiqueDeepen = getRecentDeepenHistory(5, false);
     const promptFinal = construireConsigneIA() + prompt.systemPrompt + "\n\n" +
       prompt.userPromptTemplate
         .replace('{ANSWERS_Q10}', formatAnswersBlock(qaQ10))
         .replace('{ANSWERS_Q5}', formatAnswersBlock(qaQ5))
         .replace('{QUESTION_LIBRE}', questionLibre)
-        .replace('{HISTORIQUE_QUESTIONS}', formatQuestionsBlock(historique));
+        .replace('{HISTORIQUE_QUESTIONS}', formatQuestionsBlock(historique))
+        .replace('{HISTORIQUE_DEEPEN}', formatAnswersBlock(historiqueDeepen));
 
     const reponseIA = await window.FAST_AI.interrogerAgentIA(promptFinal);
     const questions = parseTroisQuestions(reponseIA);
@@ -533,7 +555,10 @@ window.FAST = (function(){
     const brouillonDejaRempli = qa.filter(Boolean).length > 0;
     if(!brouillonDejaRempli){
       const reponsesFinalisees = getAnswersFor(screenId);
-      if(reponsesFinalisees.length === items.length){
+      const texteDe = idx => (typeof items[idx] === 'object' && items[idx] !== null) ? items[idx].text : items[idx];
+      const memeSerieDeQuestions = reponsesFinalisees.length === items.length &&
+        reponsesFinalisees.every((r, idx) => r.q === texteDe(idx));
+      if(memeSerieDeQuestions){
         qa = reponsesFinalisees.map(r => ({ q: r.q, a: r.a }));
         etats = items.map((item, idx) =>
           (typeof item === 'object' && item !== null) ? reconstruireEtat(item, qa[idx].a) : undefined
@@ -880,7 +905,7 @@ window.FAST = (function(){
     logAnswers: logAnswers, exportTxt: exportTxt,
     getAnswersFor: getAnswersFor, runCoachSynthesis: runCoachSynthesis,
     hasCompletedProfile: hasCompletedProfile, clearProfileData: clearProfileData,
-    getRecentQuestions: getRecentQuestions,
+    getRecentQuestions: getRecentQuestions, getRecentDeepenHistory: getRecentDeepenHistory,
     runFinalSynthesis: runFinalSynthesis,
     runProfileDeepening: runProfileDeepening,
     generateDeepenQuestions: generateDeepenQuestions,
