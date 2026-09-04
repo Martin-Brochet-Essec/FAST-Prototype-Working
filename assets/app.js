@@ -249,6 +249,27 @@ window.FAST = (function(){
     return entry ? entry.qa : [];
   }
 
+  // Historique de toutes les questions libres posées (your-question.html),
+  // conservé d'une session à l'autre puisque localStorage persiste. Exclut
+  // la question la plus récente (déjà transmise séparément via
+  // {QUESTION_LIBRE}) et ne garde que les `limite` précédentes, du plus
+  // ancien au plus récent.
+  function getRecentQuestions(limite){
+    limite = limite || 10;
+    const all = JSON.parse(localStorage.getItem('fast_answers') || '[]');
+    const questions = all
+      .filter(e => e.screen === 'your-question')
+      .map(e => (e.qa[0] && e.qa[0].a) || '')
+      .filter(Boolean);
+    const precedentes = questions.slice(0, -1); // retire la question en cours
+    return precedentes.slice(-limite);
+  }
+
+  function formatQuestionsBlock(liste){
+    if(!liste || liste.length === 0) return '(aucune question précédente enregistrée)';
+    return liste.map((q, idx) => (idx + 1) + '. ' + q).join('\n');
+  }
+
   // Mémoire "moyen terme" : le profil (Q10+Q5) est-il déjà complet ?
   // Utilisé pour sauter directement à your-question.html et afficher
   // "on vous connaît déjà" plutôt que de reposer les mêmes questions.
@@ -258,9 +279,12 @@ window.FAST = (function(){
 
   // Efface tout ce qui dépend du profil (réponses + synthèses IA en cache +
   // brouillons en cours) — utilisé par le bouton "Refaire le profil".
+  // NB : l'historique des questions libres ("your-question") n'est PAS
+  // effacé ici — il doit survivre à une remise à zéro du profil, puisqu'il
+  // sert de mémoire long terme indépendante (voir getRecentQuestions).
   function clearProfileData(){
     const all = JSON.parse(localStorage.getItem('fast_answers') || '[]');
-    const nettoye = all.filter(e => !['q10', 'q5', 'deepen', 'your-question'].includes(e.screen));
+    const nettoye = all.filter(e => !['q10', 'q5', 'deepen'].includes(e.screen));
     localStorage.setItem('fast_answers', JSON.stringify(nettoye));
     ['fast_last_synthesis', 'fast_profile_deepening', 'fast_deepen_questions', 'fast_final_synthesis',
      'fast_draft_q10', 'fast_draft_q5', 'fast_draft_deepen'].forEach(k => localStorage.removeItem(k));
@@ -365,6 +389,7 @@ window.FAST = (function(){
     // your-question.html enregistre une seule paire {q, a} sous ce screen id
     const qaYourQuestion = getAnswersFor('your-question');
     const questionLibre = (qaYourQuestion[0] && qaYourQuestion[0].a) || '';
+    const historique = getRecentQuestions(10);
 
     const prompt = await loadCoachPrompt(coachId);
 
@@ -373,7 +398,8 @@ window.FAST = (function(){
         .replace('{ANSWERS_Q10}', formatAnswersBlock(qaQ10))
         .replace('{ANSWERS_Q5}', formatAnswersBlock(qaQ5))
         .replace('{ANSWERS_DEEPEN}', formatAnswersBlock(qaDeepen))
-        .replace('{QUESTION_LIBRE}', questionLibre);
+        .replace('{QUESTION_LIBRE}', questionLibre)
+        .replace('{HISTORIQUE_QUESTIONS}', formatQuestionsBlock(historique));
 
     const reponseIA = await window.FAST_AI.interrogerAgentIA(promptFinal);
 
@@ -447,11 +473,13 @@ window.FAST = (function(){
     }
 
     const prompt = await loadCoachPrompt(coachId);
+    const historique = getRecentQuestions(10);
     const promptFinal = construireConsigneIA() + prompt.systemPrompt + "\n\n" +
       prompt.userPromptTemplate
         .replace('{ANSWERS_Q10}', formatAnswersBlock(qaQ10))
         .replace('{ANSWERS_Q5}', formatAnswersBlock(qaQ5))
-        .replace('{QUESTION_LIBRE}', questionLibre);
+        .replace('{QUESTION_LIBRE}', questionLibre)
+        .replace('{HISTORIQUE_QUESTIONS}', formatQuestionsBlock(historique));
 
     const reponseIA = await window.FAST_AI.interrogerAgentIA(promptFinal);
     const questions = parseTroisQuestions(reponseIA);
@@ -852,6 +880,7 @@ window.FAST = (function(){
     logAnswers: logAnswers, exportTxt: exportTxt,
     getAnswersFor: getAnswersFor, runCoachSynthesis: runCoachSynthesis,
     hasCompletedProfile: hasCompletedProfile, clearProfileData: clearProfileData,
+    getRecentQuestions: getRecentQuestions,
     runFinalSynthesis: runFinalSynthesis,
     runProfileDeepening: runProfileDeepening,
     generateDeepenQuestions: generateDeepenQuestions,
