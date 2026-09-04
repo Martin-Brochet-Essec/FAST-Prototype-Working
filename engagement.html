@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Engagement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+  
+<!-- Le composant centralisé gère seul la statusbar et le menu -->
+  <fast-header></fast-header>
+  
+  <section class="screen">
+<a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
+<div class="eyebrow" data-i18n="eng_eyebrow">Et ensuite ?</div>
+<h1 data-i18n="eng_h1">On reprend contact ?</h1>
+<p class="lead" data-i18n="eng_lead">Pour approfondir ensemble, on aimerait prendre de vos nouvelles dans quelques jours.</p>
+<div class="card">
+  <div class="toggle-row"><span data-i18n="eng_toggle1">Un point dans 3 jours</span><div class="switch on" id="sw3" onclick="this.classList.toggle('on')"><div class="knob"></div></div></div>
+  <div class="toggle-row"><span data-i18n="eng_toggle2">Un point dans 10 jours</span><div class="switch on" id="sw10" onclick="this.classList.toggle('on')"><div class="knob"></div></div></div>
+</div>
+<button class="btn btn-text" onclick="FAST.exportTxt()" data-i18n="eng_export" style="text-align:left; padding-left:0;">Télécharger mes réponses (.txt)</button>
+<div class="spacer"></div>
+<a class="btn btn-primary" href="finalize-account.html" id="engNext" data-i18n="eng_cta">Continuer</a>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  document.getElementById('engNext').addEventListener('click', function(){
+    FAST.saveConfig({
+      followup3d: document.getElementById('sw3').classList.contains('on'),
+      followup10d: document.getElementById('sw10').classList.contains('on')
+    });
+  });
+});
+</script>
+</body>
+</html>

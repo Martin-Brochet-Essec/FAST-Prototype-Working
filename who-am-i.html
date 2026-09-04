@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Qui suis-je</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+
+  <!-- Le composant centralisé gère seul la statusbar et le menu -->
+  <fast-header></fast-header>
+
+
+  <section class="screen">
+<a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
+<div class="eyebrow" data-i18n="whoami_eyebrow">Votre profil</div>
+<h1 data-i18n="whoami_h1">Qui suis-je</h1>
+<p class="lead" data-i18n="whoami_lead">Ce que nous avons appris de vous jusqu'ici — vous pouvez corriger à tout moment.</p>
+<div class="card">
+  <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 8px;" data-i18n="whoami_section_summary">Résumé collecté</h3>
+  <p class="summary-box" id="summaryText">Your summary will appear here as you answer the profiling questions.</p>
+  <button class="btn btn-ghost" id="whoami-modifier" data-i18n="whoami_modifier" style="margin-top:10px; display:none;">Modifier mes réponses de profil</button>
+</div>
+<div class="card">
+  <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 8px;" data-i18n="whoami_section_milestones">Parcours & jalons atteints</h3>
+  <div class="milestone"><div class="dot-done"></div><span data-i18n="whoami_milestone_1">Diagnostic initial</span></div>
+  <div class="milestone"><div class="dot-done"></div><span data-i18n="whoami_milestone_2">Première semaine de routine</span></div>
+  <div class="milestone"><div class="dot-done"></div><span data-i18n="whoami_milestone_3">Premier exercice complété</span></div>
+</div>
+<div class="card">
+  <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 8px;" data-i18n="whoami_correct_label">Une correction à apporter ?</h3>
+  <textarea id="correction" rows="3" data-i18n-ph="whoami_correct_ph" placeholder="Ajoutez une précision ou une correction..."></textarea>
+  <button class="btn btn-ghost" id="correctionSave" data-i18n="whoami_cta">Enregistrer la correction</button>
+</div>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/ai-config.js"></script>
+<script src="assets/ai.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function(){
+  const summaryEl = document.getElementById('summaryText');
+  const boutonModifier = document.getElementById('whoami-modifier');
+
+  // Affiche la synthèse Q10+Q5 (ou Q10 seul si Q5 pas encore fait), en la
+  // recalculant si les réponses stockées ne correspondent plus au cache
+  // (ex: Q10 modifié sans être allée jusqu'au bout du parcours Q5).
+  async function chargerResume(){
+    const qaQ10 = FAST.getAnswersFor('q10');
+    const qaQ5 = FAST.getAnswersFor('q5');
+    if(qaQ10.length === 0) return; // rien à afficher, on garde le placeholder
+
+    try{
+      if(qaQ5.length > 0){
+        const cacheBrut = localStorage.getItem('fast_profile_deepening');
+        let synthese = null;
+        if(cacheBrut){
+          const cache = JSON.parse(cacheBrut);
+          if(cache.coachId === 'profile_deepening' &&
+             JSON.stringify(cache.qaQ10) === JSON.stringify(qaQ10) &&
+             JSON.stringify(cache.qaQ5) === JSON.stringify(qaQ5)){
+            synthese = cache;
+          }
+        }
+        if(!synthese) synthese = await FAST.runProfileDeepening('profile_deepening');
+        summaryEl.textContent = synthese.reponseIA;
+
+      } else {
+        const cacheBrut = localStorage.getItem('fast_last_synthesis');
+        let synthese = null;
+        if(cacheBrut){
+          const cache = JSON.parse(cacheBrut);
+          if(cache.coachId === 'executive' && JSON.stringify(cache.qa) === JSON.stringify(qaQ10)){
+            synthese = cache;
+          }
+        }
+        if(!synthese) synthese = await FAST.runCoachSynthesis('executive', 'q10');
+        summaryEl.textContent = synthese.reponseIA;
+      }
+    }catch(erreur){
+      summaryEl.textContent = 'Error: ' + erreur.message;
+    }
+  }
+
+  await chargerResume();
+
+  if(FAST.getAnswersFor('q10').length > 0){
+    boutonModifier.style.display = 'inline-block';
+    boutonModifier.addEventListener('click', function(){
+      window.location.href = 'q10.html?edit=1';
+    });
+  }
+
+  document.getElementById('correctionSave').addEventListener('click', function(){
+    var note = document.getElementById('correction').value;
+    FAST.logAnswers('who-am-i-correction', [{q: 'Correction manuelle', a: note}]);
+    document.getElementById('correction').value = '';
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Virtual coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+
+  <!-- Le composant centralisé gère seul la statusbar et le menu -->
+  <fast-header></fast-header>
+  
+  <section class="screen">
+<div class="topbar">
+  <a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
+  <button class="menubtn" onclick="FAST.openMenu()" aria-label="Menu">&#9776;</button>
+</div>
+<div class="eyebrow" data-i18n="ch_eyebrow">Virtual coaching</div>
+<h1 data-i18n="ch_h1">Deux objectifs, un rythme</h1>
+<a class="card card-tap" href="diagnostic.html" style="display:block; text-decoration:none; color:inherit;">
+  <div class="obj-card"><div class="obj-dot" style="background:var(--rose-mid);"></div>
+    <div><h3 style="margin:0 0 4px; font-size:14.5px;" data-i18n="ch_obj1_title">Objectif 1 — Diagnostic</h3><p style="font-size:12.5px; color:var(--text-dim); margin:0;" data-i18n="ch_obj1_desc[...]
+  </div>
+</a>
+<a class="card card-tap" href="coaching-plan.html" style="display:block; text-decoration:none; color:inherit;">
+  <div class="obj-card"><div class="obj-dot" style="background:var(--rose-deep);"></div>
+    <div><h3 style="margin:0 0 4px; font-size:14.5px;" data-i18n="ch_obj2_title">Objectif 2 — Routine</h3><p style="font-size:12.5px; color:var(--text-dim); margin:0;" data-i18n="ch_obj2_desc">U[...]
+  </div>
+</a>
+<div class="spacer"></div>
+<a class="btn btn-ghost" href="new-question.html" data-i18n="ch_urgent">Poser une question en urgence</a>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

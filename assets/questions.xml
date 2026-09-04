@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questions>
+  <set id="q10" lang="fr">
+
+    <question type="single_choice" required="true">
+      <text>Quel est votre secteur d'activité aujourd'hui ?</text>
+      <options>
+        <option>Tech / IT</option>
+        <option>Finance</option>
+        <option>Santé</option>
+        <option>Industrie</option>
+        <option>Retail</option>
+        <option>Éducation</option>
+        <option>Conseil</option>
+        <option>Droit</option>
+        <option>Média</option>
+      </options>
+      <other label="Autre, précisez"/>
+    </question>
+
+    <question type="single_choice" required="true">
+      <text>Depuis combien de temps occupez-vous votre poste actuel ?</text>
+      <options>
+        <option>0-11 mois</option>
+        <option>1-2 ans</option>
+        <option>3-5 ans</option>
+        <option>6-10 ans</option>
+        <option>11-20 ans</option>
+        <option>20 ans et +</option>
+      </options>
+      <other label="Autre, précisez"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>Quel objectif de carrière visez-vous dans les 12 prochains mois ?</text>
+      <options>
+        <option>Obtenir une promotion</option>
+        <option>Évoluer vers un poste de direction</option>
+        <option>Changer de poste ou d'entreprise</option>
+        <option>Élargir mon réseau professionnel</option>
+        <option>Développer de nouvelles compétences</option>
+      </options>
+      <other label="Autre, précisez"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>Qu'est-ce qui vous semble le plus difficile à obtenir ?</text>
+      <options>
+        <option>Reconnaissance salariale</option>
+        <option>Promotion</option>
+        <option>Équilibre vie pro/perso</option>
+        <option>Confiance en vous</option>
+      </options>
+      <other label="Autre, précisez"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1">
+      <text>Avez-vous des proches dont vous avez la charge au quotidien ?</text>
+      <options>
+        <option exclusive="true">Aucun</option>
+        <option>Enfant(s)</option>
+        <option>Conjoint(e)</option>
+        <option>Parents</option>
+      </options>
+      <other label="Autre, précisez"/>
+    </question>
+
+    <question type="scale" required="true">
+      <text>Comment décririez-vous le soutien de votre entourage dans votre vie professionnelle ?</text>
+      <scale min="-3" max="3">
+        <label value="-3">Ennemi</label>
+        <label value="-2">Me décourage</label>
+        <label value="-1">Ne m'écoute pas</label>
+        <label value="0">Neutre</label>
+        <label value="1">Supporter</label>
+        <label value="2">De grand conseil</label>
+        <label value="3">Ils se sacrifient pour moi</label>
+      </scale>
+      <remark label="Remarque, précisez" required="false"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1">
+      <text>Votre manager vous donne-t-il de la visibilité sur des projets stratégiques ?</text>
+      <options>
+        <option>Aucune visibilité</option>
+        <option>Informée après coup</option>
+        <option>Consultée ponctuellement</option>
+        <option>Impliquée dans les décisions</option>
+        <option>Pilote de projets stratégiques</option>
+      </options>
+      <other label="Autre, précisez"/>
+    </question>
+
+    <question type="single_choice" required="true">
+      <text>Votre entreprise favorise-t-elle réellement l'accès des femmes aux postes de direction ?</text>
+      <options>
+        <option>Oui</option>
+        <option>Non</option>
+        <option needs_precision="true" precision_label="Précisez">Cela dépend</option>
+      </options>
+    </question>
+
+    <question type="scale" required="true">
+      <text>De 1 à 5, à quel point vous sentez-vous légitime dans vos ambitions actuelles ?</text>
+      <scale min="1" max="5"></scale>
+      <remark label="Remarque, précisez" required="false"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>Qu'est-ce qui vous a poussée à chercher de l'aide aujourd'hui ?</text>
+      <options>
+        <option>Me sentir bloquée professionnellement</option>
+        <option>Manque de reconnaissance</option>
+        <option>Besoin de prendre confiance</option>
+        <option>Envie de changer de trajectoire</option>
+        <option>Mieux concilier vie pro/perso</option>
+      </options>
+      <other label="Autre, précisez"/>
+    </question>
+
+  </set>
+  <set id="q10" lang="en">
+
+    <question type="single_choice" required="true">
+      <text>What's your industry today?</text>
+      <options>
+        <option>Tech / IT</option>
+        <option>Finance</option>
+        <option>Healthcare</option>
+        <option>Industry</option>
+        <option>Retail</option>
+        <option>Education</option>
+        <option>Consulting</option>
+        <option>Law</option>
+        <option>Media</option>
+      </options>
+      <other label="Other, please specify"/>
+    </question>
+
+    <question type="single_choice" required="true">
+      <text>How long have you been in your current role?</text>
+      <options>
+        <option>0-11 months</option>
+        <option>1-2 years</option>
+        <option>3-5 years</option>
+        <option>6-10 years</option>
+        <option>11-20 years</option>
+        <option>20+ years</option>
+      </options>
+      <other label="Other, please specify"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>What career goal are you aiming for in the next 12 months?</text>
+      <options>
+        <option>Get a promotion</option>
+        <option>Move into a leadership role</option>
+        <option>Change roles or companies</option>
+        <option>Grow my professional network</option>
+        <option>Develop new skills</option>
+      </options>
+      <other label="Other, please specify"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>What feels hardest to get right now?</text>
+      <options>
+        <option>Fair pay / recognition</option>
+        <option>Promotion</option>
+        <option>Work/life balance</option>
+        <option>Self-confidence</option>
+      </options>
+      <other label="Other, please specify"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1">
+      <text>Do you have dependents you care for day to day?</text>
+      <options>
+        <option exclusive="true">None</option>
+        <option>Child(ren)</option>
+        <option>Partner</option>
+        <option>Parents</option>
+      </options>
+      <other label="Other, please specify"/>
+    </question>
+
+    <question type="scale" required="true">
+      <text>How would you describe the support you get from those close to you, professionally?</text>
+      <scale min="-3" max="3">
+        <label value="-3">Undermines me</label>
+        <label value="-2">Discourages me</label>
+        <label value="-1">Doesn't listen to me</label>
+        <label value="0">Neutral</label>
+        <label value="1">Supportive</label>
+        <label value="2">A great advisor</label>
+        <label value="3">They sacrifice for me</label>
+      </scale>
+      <remark label="Remark, please specify" required="false"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1">
+      <text>Does your manager give you visibility on strategic projects?</text>
+      <options>
+        <option>No visibility</option>
+        <option>Informed after the fact</option>
+        <option>Consulted occasionally</option>
+        <option>Involved in decisions</option>
+        <option>Leading strategic projects</option>
+      </options>
+      <other label="Other, please specify"/>
+    </question>
+
+    <question type="single_choice" required="true">
+      <text>Does your company genuinely support women reaching leadership roles?</text>
+      <options>
+        <option>Yes</option>
+        <option>No</option>
+        <option needs_precision="true" precision_label="Please specify">It depends</option>
+      </options>
+    </question>
+
+    <question type="scale" required="true">
+      <text>From 1 to 5, how legitimate do you feel in your current ambitions?</text>
+      <scale min="1" max="5"></scale>
+      <remark label="Remark, please specify" required="false"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>What made you look for help today?</text>
+      <options>
+        <option>Feeling stuck professionally</option>
+        <option>Lack of recognition</option>
+        <option>Needing more confidence</option>
+        <option>Wanting a new direction</option>
+        <option>Better work/life balance</option>
+      </options>
+      <other label="Other, please specify"/>
+    </question>
+
+  </set>
+  <set id="q10" lang="es">
+
+    <question type="single_choice" required="true">
+      <text>¿Cuál es tu sector hoy?</text>
+      <options>
+        <option>Tecnología</option>
+        <option>Finanzas</option>
+        <option>Salud</option>
+        <option>Industria</option>
+        <option>Retail</option>
+        <option>Educación</option>
+        <option>Consultoría</option>
+        <option>Derecho</option>
+        <option>Medios</option>
+      </options>
+      <other label="Otro, especifica"/>
+    </question>
+
+    <question type="single_choice" required="true">
+      <text>¿Cuánto tiempo llevas en tu puesto actual?</text>
+      <options>
+        <option>0-11 meses</option>
+        <option>1-2 años</option>
+        <option>3-5 años</option>
+        <option>6-10 años</option>
+        <option>11-20 años</option>
+        <option>20 años o más</option>
+      </options>
+      <other label="Otro, especifica"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>¿Qué objetivo profesional te planteas para los próximos 12 meses?</text>
+      <options>
+        <option>Conseguir un ascenso</option>
+        <option>Llegar a un puesto directivo</option>
+        <option>Cambiar de puesto o empresa</option>
+        <option>Ampliar mi red profesional</option>
+        <option>Desarrollar nuevas habilidades</option>
+      </options>
+      <other label="Otro, especifica"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>¿Qué te resulta más difícil hoy?</text>
+      <options>
+        <option>Reconocimiento salarial</option>
+        <option>Ascenso</option>
+        <option>Equilibrio vida-trabajo</option>
+        <option>Confianza en ti misma</option>
+      </options>
+      <other label="Otro, especifica"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1">
+      <text>¿Tienes personas a tu cargo en el día a día?</text>
+      <options>
+        <option exclusive="true">Ninguna</option>
+        <option>Hijo(s)</option>
+        <option>Pareja</option>
+        <option>Padres</option>
+      </options>
+      <other label="Otro, especifica"/>
+    </question>
+
+    <question type="scale" required="true">
+      <text>¿Cómo describirías el apoyo de tu entorno cercano en tu vida profesional?</text>
+      <scale min="-3" max="3">
+        <label value="-3">Enemigo</label>
+        <label value="-2">Me desanima</label>
+        <label value="-1">No me escucha</label>
+        <label value="0">Neutral</label>
+        <label value="1">Me apoya</label>
+        <label value="2">Gran consejero</label>
+        <label value="3">Se sacrifican por mí</label>
+      </scale>
+      <remark label="Comentario, especifica" required="false"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1">
+      <text>¿Tu manager te da visibilidad en proyectos estratégicos?</text>
+      <options>
+        <option>Ninguna visibilidad</option>
+        <option>Informada después</option>
+        <option>Consultada puntualmente</option>
+        <option>Implicada en decisiones</option>
+        <option>Lidero proyectos estratégicos</option>
+      </options>
+      <other label="Otro, especifica"/>
+    </question>
+
+    <question type="single_choice" required="true">
+      <text>¿Tu empresa favorece realmente el acceso de las mujeres a puestos de dirección?</text>
+      <options>
+        <option>Sí</option>
+        <option>No</option>
+        <option needs_precision="true" precision_label="Especifica">Depende</option>
+      </options>
+    </question>
+
+    <question type="scale" required="true">
+      <text>De 1 a 5, ¿cuánta legitimidad sientes en tus ambiciones actuales?</text>
+      <scale min="1" max="5"></scale>
+      <remark label="Comentario, especifica" required="false"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>¿Qué te ha llevado a buscar ayuda hoy?</text>
+      <options>
+        <option>Sentirme estancada profesionalmente</option>
+        <option>Falta de reconocimiento</option>
+        <option>Necesito más confianza</option>
+        <option>Ganas de cambiar de rumbo</option>
+        <option>Mejor equilibrio vida-trabajo</option>
+      </options>
+      <other label="Otro, especifica"/>
+    </question>
+
+  </set>
+  <set id="q10" lang="ro">
+
+    <question type="single_choice" required="true">
+      <text>Care este domeniul tău de activitate azi?</text>
+      <options>
+        <option>Tehnologie</option>
+        <option>Finanțe</option>
+        <option>Sănătate</option>
+        <option>Industrie</option>
+        <option>Retail</option>
+        <option>Educație</option>
+        <option>Consultanță</option>
+        <option>Drept</option>
+        <option>Media</option>
+      </options>
+      <other label="Altceva, precizează"/>
+    </question>
+
+    <question type="single_choice" required="true">
+      <text>De cât timp ești în rolul actual?</text>
+      <options>
+        <option>0-11 luni</option>
+        <option>1-2 ani</option>
+        <option>3-5 ani</option>
+        <option>6-10 ani</option>
+        <option>11-20 ani</option>
+        <option>20 de ani și peste</option>
+      </options>
+      <other label="Altceva, precizează"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>Ce obiectiv de carieră îți propui pentru următoarele 12 luni?</text>
+      <options>
+        <option>Obținerea unei promovări</option>
+        <option>Trecerea într-un rol de conducere</option>
+        <option>Schimbarea postului sau companiei</option>
+        <option>Extinderea rețelei profesionale</option>
+        <option>Dezvoltarea de noi competențe</option>
+      </options>
+      <other label="Altceva, precizează"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>Ce ți se pare cel mai greu de obținut acum?</text>
+      <options>
+        <option>Recunoaștere salarială</option>
+        <option>Promovare</option>
+        <option>Echilibru viață-muncă</option>
+        <option>Încredere în tine</option>
+      </options>
+      <other label="Altceva, precizează"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1">
+      <text>Ai persoane în grija ta zi de zi?</text>
+      <options>
+        <option exclusive="true">Niciuna</option>
+        <option>Copil(i)</option>
+        <option>Partener(ă)</option>
+        <option>Părinți</option>
+      </options>
+      <other label="Altceva, precizează"/>
+    </question>
+
+    <question type="scale" required="true">
+      <text>Cum ai descrie sprijinul primit de la cei apropiați, pe plan profesional?</text>
+      <scale min="-3" max="3">
+        <label value="-3">Dușman</label>
+        <label value="-2">Mă descurajează</label>
+        <label value="-1">Nu mă ascultă</label>
+        <label value="0">Neutru</label>
+        <label value="1">Mă susține</label>
+        <label value="2">Sfătuitor de mare ajutor</label>
+        <label value="3">Se sacrifică pentru mine</label>
+      </scale>
+      <remark label="Observație, precizează" required="false"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1">
+      <text>Managerul tău îți oferă vizibilitate pe proiecte strategice?</text>
+      <options>
+        <option>Fără vizibilitate</option>
+        <option>Informată ulterior</option>
+        <option>Consultată ocazional</option>
+        <option>Implicată în decizii</option>
+        <option>Conduc proiecte strategice</option>
+      </options>
+      <other label="Altceva, precizează"/>
+    </question>
+
+    <question type="single_choice" required="true">
+      <text>Compania ta susține cu adevărat accesul femeilor la poziții de conducere?</text>
+      <options>
+        <option>Da</option>
+        <option>Nu</option>
+        <option needs_precision="true" precision_label="Precizează">Depinde</option>
+      </options>
+    </question>
+
+    <question type="scale" required="true">
+      <text>De la 1 la 5, cât de legitimă te simți în ambițiile tale actuale?</text>
+      <scale min="1" max="5"></scale>
+      <remark label="Observație, precizează" required="false"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>Ce te-a determinat să cauți ajutor azi?</text>
+      <options>
+        <option>Mă simt blocată profesional</option>
+        <option>Lipsa recunoașterii</option>
+        <option>Am nevoie de mai multă încredere</option>
+        <option>Vreau să schimb direcția</option>
+        <option>Echilibru mai bun viață-muncă</option>
+      </options>
+      <other label="Altceva, precizează"/>
+    </question>
+
+  </set>
+  <set id="q5" lang="fr">
+
+    <question type="single_choice" required="true">
+      <text>Ce manque de visibilité : est-ce lié à votre manager, à votre réseau, ou aux deux ?</text>
+      <options>
+        <option>Mon manager</option>
+        <option>Mon réseau</option>
+        <option>Les deux</option>
+      </options>
+      <other label="Autre, précisez"/>
+    </question>
+
+    <question type="single_choice" required="true">
+      <text>Quand cette difficulté est-elle devenue plus pressante ?</text>
+      <options>
+        <option>0-11 mois</option>
+        <option>1-2 ans</option>
+        <option>3-5 ans</option>
+        <option>6-10 ans</option>
+        <option>10 ans et +</option>
+      </options>
+      <other label="Autre, précisez"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>En avez-vous déjà parlé à quelqu'un en interne ?</text>
+      <options>
+        <option>RH</option>
+        <option>Manager</option>
+        <option>Collègues</option>
+        <option>Syndicat</option>
+      </options>
+      <other label="Autre, précisez"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>Qu'est-ce qui vous ferait dire, dans 3 mois, que la situation a changé ?</text>
+      <options>
+        <option>Promotion obtenue</option>
+        <option>Reconnaissance accrue</option>
+        <option>Meilleur équilibre</option>
+        <option>Confiance accrue</option>
+        <option>Nouveau poste</option>
+        <option>Salaire réévalué</option>
+        <option>Réseau élargi</option>
+        <option>Moins stressée</option>
+        <option>Rôle stratégique</option>
+      </options>
+      <other label="Autre, précisez"/>
+    </question>
+
+    <question type="yes_no" required="true">
+      <text>Y a-t-il une dimension familiale qui pèse sur cette décision ?</text>
+      <if_yes label="Précisez" required="true"/>
+    </question>
+
+  </set>
+  <set id="q5" lang="en">
+
+    <question type="single_choice" required="true">
+      <text>Is this lack of visibility about your manager, your network, or both?</text>
+      <options>
+        <option>My manager</option>
+        <option>My network</option>
+        <option>Both</option>
+      </options>
+      <other label="Other, please specify"/>
+    </question>
+
+    <question type="single_choice" required="true">
+      <text>When did this difficulty become more pressing?</text>
+      <options>
+        <option>0-11 months</option>
+        <option>1-2 years</option>
+        <option>3-5 years</option>
+        <option>6-10 years</option>
+        <option>10+ years</option>
+      </options>
+      <other label="Other, please specify"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>Have you already talked to someone internally about it?</text>
+      <options>
+        <option>HR</option>
+        <option>Manager</option>
+        <option>Colleagues</option>
+        <option>Union</option>
+      </options>
+      <other label="Other, please specify"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>What would tell you, in 3 months, that things have changed?</text>
+      <options>
+        <option>Got promoted</option>
+        <option>More recognition</option>
+        <option>Better balance</option>
+        <option>More confidence</option>
+        <option>New role</option>
+        <option>Salary raised</option>
+        <option>Bigger network</option>
+        <option>Less stress</option>
+        <option>Strategic role</option>
+      </options>
+      <other label="Other, please specify"/>
+    </question>
+
+    <question type="yes_no" required="true">
+      <text>Is there a family dimension weighing on this decision?</text>
+      <if_yes label="Please specify" required="true"/>
+    </question>
+
+  </set>
+  <set id="q5" lang="es">
+
+    <question type="single_choice" required="true">
+      <text>Esa falta de visibilidad, ¿tiene que ver con tu manager, con tu red, o con ambos?</text>
+      <options>
+        <option>Mi manager</option>
+        <option>Mi red</option>
+        <option>Ambos</option>
+      </options>
+      <other label="Otro, especifica"/>
+    </question>
+
+    <question type="single_choice" required="true">
+      <text>¿Cuándo se volvió más urgente esta dificultad?</text>
+      <options>
+        <option>0-11 meses</option>
+        <option>1-2 años</option>
+        <option>3-5 años</option>
+        <option>6-10 años</option>
+        <option>10 años o más</option>
+      </options>
+      <other label="Otro, especifica"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>¿Ya has hablado de esto con alguien internamente?</text>
+      <options>
+        <option>RRHH</option>
+        <option>Manager</option>
+        <option>Compañeras</option>
+        <option>Sindicato</option>
+      </options>
+      <other label="Otro, especifica"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>¿Qué te haría decir, dentro de 3 meses, que la situación ha cambiado?</text>
+      <options>
+        <option>Ascenso conseguido</option>
+        <option>Más reconocimiento</option>
+        <option>Mejor equilibrio</option>
+        <option>Más confianza</option>
+        <option>Nuevo puesto</option>
+        <option>Salario mejorado</option>
+        <option>Red ampliada</option>
+        <option>Menos estrés</option>
+        <option>Rol estratégico</option>
+      </options>
+      <other label="Otro, especifica"/>
+    </question>
+
+    <question type="yes_no" required="true">
+      <text>¿Hay una dimensión familiar que pese en esta decisión?</text>
+      <if_yes label="Especifica" required="true"/>
+    </question>
+
+  </set>
+  <set id="q5" lang="ro">
+
+    <question type="single_choice" required="true">
+      <text>Lipsa asta de vizibilitate ține de manager, de rețeaua ta, sau de amândouă?</text>
+      <options>
+        <option>Managerul meu</option>
+        <option>Rețeaua mea</option>
+        <option>Amândouă</option>
+      </options>
+      <other label="Altceva, precizează"/>
+    </question>
+
+    <question type="single_choice" required="true">
+      <text>Când a devenit mai presantă această dificultate?</text>
+      <options>
+        <option>0-11 luni</option>
+        <option>1-2 ani</option>
+        <option>3-5 ani</option>
+        <option>6-10 ani</option>
+        <option>10 ani și peste</option>
+      </options>
+      <other label="Altceva, precizează"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>Ai vorbit deja cu cineva intern despre asta?</text>
+      <options>
+        <option>HR</option>
+        <option>Manager</option>
+        <option>Colegi</option>
+        <option>Sindicat</option>
+      </options>
+      <other label="Altceva, precizează"/>
+    </question>
+
+    <question type="multi_choice" required="true" min="1" max="3">
+      <text>Ce te-ar face să spui, peste 3 luni, că situația s-a schimbat?</text>
+      <options>
+        <option>Promovare obținută</option>
+        <option>Mai multă recunoaștere</option>
+        <option>Echilibru mai bun</option>
+        <option>Mai multă încredere</option>
+        <option>Post nou</option>
+        <option>Salariu mărit</option>
+        <option>Rețea extinsă</option>
+        <option>Mai puțin stres</option>
+        <option>Rol strategic</option>
+      </options>
+      <other label="Altceva, precizează"/>
+    </question>
+
+    <question type="yes_no" required="true">
+      <text>Există o dimensiune familială care apasă asupra acestei decizii?</text>
+      <if_yes label="Precizează" required="true"/>
+    </question>
+
+  </set>
+  <set id="deepen" lang="fr">
+    <q id="1">Depuis quand cette situation vous pèse-t-elle ?</q>
+    <q id="2">Avez-vous déjà envisagé une option pour la résoudre ?</q>
+    <q id="3">Attendez-vous un conseil concret, ou d'être rassurée sur votre décision ?</q>
+  </set>
+  <set id="deepen" lang="en">
+    <q id="1">How long has this situation been weighing on you?</q>
+    <q id="2">Have you already considered an option to resolve it?</q>
+    <q id="3">Are you looking for concrete advice, or reassurance about your decision?</q>
+  </set>
+  <set id="deepen" lang="es">
+    <q id="1">¿Desde cuándo te pesa esta situación?</q>
+    <q id="2">¿Ya has considerado alguna opción para resolverla?</q>
+    <q id="3">¿Buscas un consejo concreto, o que te tranquilicen sobre tu decisión?</q>
+  </set>
+  <set id="deepen" lang="ro">
+    <q id="1">De când te apasă această situație?</q>
+    <q id="2">Ai luat deja în considerare o opțiune pentru a o rezolva?</q>
+    <q id="3">Cauți un sfat concret, sau vrei să fii liniștită în privința deciziei tale?</q>
+  </set>
+  <set id="nq" lang="fr">
+    <q id="1">En une phrase, de quoi s'agit-il ?</q>
+    <q id="2">C'est urgent, ou vous avez un peu de temps ?</q>
+  </set>
+  <set id="nq" lang="en">
+    <q id="1">In one sentence, what's this about?</q>
+    <q id="2">Is it urgent, or do you have a bit of time?</q>
+  </set>
+  <set id="nq" lang="es">
+    <q id="1">En una frase, ¿de qué se trata?</q>
+    <q id="2">¿Es urgente, o tienes algo de tiempo?</q>
+  </set>
+  <set id="nq" lang="ro">
+    <q id="1">Într-o propoziție, despre ce este vorba?</q>
+    <q id="2">Este urgent, sau ai puțin timp?</q>
+  </set>
+</questions>

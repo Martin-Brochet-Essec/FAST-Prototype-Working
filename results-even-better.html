@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Votre profil approfondi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+
+  <fast-header></fast-header>
+
+  <section class="screen">
+    <div class="eyebrow" data-i18n="reb_eyebrow">Votre profil, plus précisément</div>
+
+    <div class="card" id="reb-chargement">
+      <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="reb_chargement">
+        Nous croisons vos réponses pour affiner votre profil...
+      </p>
+    </div>
+
+    <div class="card" id="reb-contenu" style="display:none;">
+      <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="reb_synthese_title">Ce que nous précisons</h3>
+      <p id="reb-texte" style="font-size:14px; color:var(--text); line-height:1.7; margin:0;"></p>
+      <p style="font-size:12px; color:var(--text-dim); margin:12px 0 0;" data-i18n="reb_note">Vous pouvez maintenant nous poser la question qui vous préoccupe aujourd'hui.</p>
+    </div>
+
+    <div class="card" id="reb-erreur" style="display:none;">
+      <p style="font-size:13.5px; color:#c0392b; line-height:1.6; margin:0;" id="reb-erreur-texte"></p>
+    </div>
+
+    <div class="steprow">
+      <button class="btn btn-primary" id="reb-continuer" data-i18n="reb_continuer" style="display:none;">Poser ma question</button>
+    </div>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/ai-config.js"></script>
+<script src="assets/ai.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function(){
+  const chargement = document.getElementById('reb-chargement');
+  const contenu = document.getElementById('reb-contenu');
+  const texte = document.getElementById('reb-texte');
+  const erreurBloc = document.getElementById('reb-erreur');
+  const erreurTexte = document.getElementById('reb-erreur-texte');
+  const boutonContinuer = document.getElementById('reb-continuer');
+
+  try{
+    // Cache : si Q10+Q5 n'ont pas changé depuis la dernière fois, on
+    // réutilise la synthèse déjà calculée sans rappeler l'IA.
+    const qaQ10Actuelles = FAST.getAnswersFor('q10');
+    const qaQ5Actuelles = FAST.getAnswersFor('q5');
+    const cacheBrut = localStorage.getItem('fast_profile_deepening');
+    let synthese = null;
+
+    if(cacheBrut){
+      const cache = JSON.parse(cacheBrut);
+      const memeCoach = cache.coachId === 'profile_deepening';
+      const memesReponses =
+        JSON.stringify(cache.qaQ10) === JSON.stringify(qaQ10Actuelles) &&
+        JSON.stringify(cache.qaQ5) === JSON.stringify(qaQ5Actuelles);
+      if(memeCoach && memesReponses) synthese = cache;
+    }
+
+    // 'profile_deepening' = id du coach dans assets/prompts.xml
+    if(!synthese){
+      synthese = await FAST.runProfileDeepening('profile_deepening');
+    }
+
+    chargement.style.display = 'none';
+    contenu.style.display = 'block';
+    texte.textContent = synthese.reponseIA;
+    boutonContinuer.style.display = 'inline-block';
+
+  }catch(erreur){
+    chargement.style.display = 'none';
+    erreurBloc.style.display = 'block';
+    erreurTexte.textContent = 'Error: ' + erreur.message;
+  }
+
+  boutonContinuer.addEventListener('click', function(){
+    window.location.href = 'your-question.html';
+  });
+});
+</script>
+</body>
+</html>

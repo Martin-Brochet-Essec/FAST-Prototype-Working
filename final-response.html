@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Notre réponse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+
+  <fast-header></fast-header>
+
+  <section class="screen">
+    <div class="eyebrow" data-i18n="final_eyebrow">Notre réponse</div>
+
+    <div class="card" id="final-chargement">
+      <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="final_chargement">
+        Nous préparons votre réponse à partir de l'ensemble de vos réponses...
+      </p>
+    </div>
+
+    <div class="card" id="final-contenu" style="display:none;">
+      <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="final_titre">Notre conseil</h3>
+      <p id="final-texte" style="font-size:14px; color:var(--text); line-height:1.7; margin:0;"></p>
+    </div>
+
+    <div class="card" id="final-erreur" style="display:none;">
+      <p style="font-size:13.5px; color:#c0392b; line-height:1.6; margin:0;" id="final-erreur-texte"></p>
+    </div>
+
+    <div class="steprow">
+      <button class="btn btn-primary" id="final-continuer" data-i18n="final_continuer" style="display:none;">Retour à l'accueil</button>
+    </div>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/flow-config.js"></script>
+<script src="assets/ai-config.js"></script>
+<script src="assets/ai.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function(){
+  const chargement = document.getElementById('final-chargement');
+  const contenu = document.getElementById('final-contenu');
+  const texte = document.getElementById('final-texte');
+  const erreurBloc = document.getElementById('final-erreur');
+  const erreurTexte = document.getElementById('final-erreur-texte');
+  const boutonContinuer = document.getElementById('final-continuer');
+
+  try{
+    // Vérifie si une synthèse finale déjà calculée correspond exactement
+    // aux réponses actuelles (Q10 + Q5 + question libre + deepen) : si
+    // oui, on l'affiche sans rappeler l'IA.
+    const qaQ10Actuelles = FAST.getAnswersFor('q10');
+    const qaQ5Actuelles = FAST.getAnswersFor('q5');
+    const qaDeepenActuelles = FAST.getAnswersFor('deepen');
+    const qaYourQuestionActuelles = FAST.getAnswersFor('your-question');
+    const questionLibreActuelle = (qaYourQuestionActuelles[0] && qaYourQuestionActuelles[0].a) || '';
+
+    const cacheBrut = localStorage.getItem('fast_final_synthesis');
+    let synthese = null;
+
+    if(cacheBrut){
+      const cache = JSON.parse(cacheBrut);
+      const memeCoach = cache.coachId === 'final_answer';
+      const memesReponses =
+        JSON.stringify(cache.qaQ10) === JSON.stringify(qaQ10Actuelles) &&
+        JSON.stringify(cache.qaQ5) === JSON.stringify(qaQ5Actuelles) &&
+        JSON.stringify(cache.qaDeepen) === JSON.stringify(qaDeepenActuelles) &&
+        cache.questionLibre === questionLibreActuelle;
+      if(memeCoach && memesReponses) synthese = cache;
+    }
+
+    // 'final_answer' = id du coach dans assets/prompts.xml
+    // combine automatiquement les réponses q10 + q5 + la question libre
+    if(!synthese){
+      synthese = await FAST.runFinalSynthesis('final_answer');
+    }
+
+    // Selon assets/flow-config.js : soit on affiche la réponse ici, soit on
+    // simule son envoi par email et on redirige vers cet écran de
+    // confirmation (aucun email n'est réellement envoyé, site statique).
+    if(window.FAST_FLOW_CONFIG && window.FAST_FLOW_CONFIG.MODE_FINAL === 'email'){
+      window.location.href = 'email-sent.html';
+      return;
+    }
+
+    chargement.style.display = 'none';
+    contenu.style.display = 'block';
+    texte.textContent = synthese.reponseIA;
+    boutonContinuer.style.display = 'inline-block';
+
+  }catch(erreur){
+    chargement.style.display = 'none';
+    erreurBloc.style.display = 'block';
+    erreurTexte.textContent = 'Error: ' + erreur.message;
+  }
+
+  boutonContinuer.addEventListener('click', function(){
+    window.location.href = 'index.html';
+  });
+});
+</script>
+</body>
+</html>

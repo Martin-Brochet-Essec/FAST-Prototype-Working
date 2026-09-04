@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Accueil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+  <div class="statusbar"><span>9:41</span><span class="brandmark">FAST</span></div>
+  <div class="menu-overlay" id="menuOverlay" onclick="if(event.target===this) FAST.closeMenu()">
+    <div class="menu-panel">
+      <a class="menu-item" href="profile.html" data-i18n="menu_profil">Profil</a>
+      <a class="menu-item" href="who-am-i.html" data-i18n="menu_whoami">Qui suis-je</a>
+      <a class="menu-item" href="config.html" data-i18n="menu_config">Configuration</a>
+      <a class="menu-item" href="subscription.html" data-i18n="menu_subscription">Abonnement</a>
+      <a class="menu-item" href="index.html" data-i18n="menu_deconnexion">Se déconnecter</a>
+    </div>
+  </div>
+  <section class="screen">
+<div class="home-header">
+  <div>
+    <div class="eyebrow" data-i18n="home_eyebrow">Bonjour</div>
+    <h1><span id="greetName">vous</span></h1>
+  </div>
+  <button class="menubtn" onclick="FAST.openMenu()" aria-label="Menu">&#9776;</button>
+</div>
+<input type="text" id="firstnameInput" data-i18n-ph="home_firstname_ph" placeholder="Votre prénom">
+<div class="constellation" aria-hidden="true">
+  <div class="node n-i" data-i18n-label="node_i" data-label="Vous"></div>
+  <div class="node n-f" data-i18n-label="node_f" data-label="Famille"></div>
+  <div class="node n-e" data-i18n-label="node_e" data-label="Entreprise"></div>
+  <div class="node n-s" data-i18n-label="node_s" data-label="Société"></div>
+</div>
+<p class="lead" style="margin-top:16px;" data-i18n="home_lead">TEST Un espace confidentiel pour avancer sur votre carrière, à votre rythme.</p>
+<div class="homegrid">
+  <a class="tile" href="describe-process.html">
+    <div class="tile-icon i">?</div>
+    <h3 data-i18n="home_tile_question_title">Poser une question</h3>
+    <p data-i18n="home_tile_question_desc">Une situation à débloquer, là, maintenant.</p>
+  </a>
+  <a class="tile" href="new-question.html">
+    <div class="tile-icon e">&rarr;</div>
+    <h3 data-i18n="home_tile_coaching_title">Se connecter</h3>
+    <p data-i18n="home_tile_coaching_desc">Accéder à mon compte et mon coaching.</p>
+  </a>
+  <a class="tile" href="marketplace.html">
+    <div class="tile-icon f">&#9670;</div>
+    <h3 data-i18n="home_tile_market_title">Marketplace</h3>
+    <p data-i18n="home_tile_market_desc">Coachs, associations, formations.</p>
+  </a>
+  <a class="tile" href="articles.html">
+    <div class="tile-icon s">&#9638;</div>
+    <h3 data-i18n="home_tile_articles_title">Articles</h3>
+    <p data-i18n="home_tile_articles_desc">Lectures recommandées pour vous.</p>
+  </a>
+</div>
+<div class="spacer"></div>
+<p class="legal" style="text-align:center;" data-i18n="home_footer">Prototype — écran d'accueil</p>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var p = FAST.getProfile();
+  var input = document.getElementById('firstnameInput');
+  if(p.firstname) input.value = p.firstname;
+  input.addEventListener('input', function(){ FAST.saveProfile({firstname: input.value}); });
+});
+</script>
+</body>
+</html>

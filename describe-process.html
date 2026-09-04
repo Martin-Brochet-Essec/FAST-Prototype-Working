@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Décrire le process</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+  
+<!-- Le composant centralisé gère seul la statusbar et le menu -->
+  <fast-header></fast-header>
+  
+  
+  <section class="screen">
+<a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
+<div class="eyebrow" data-i18n="dp_eyebrow">15 minutes, pas plus</div>
+<h1 data-i18n="dp_h1">On règle ça ensemble</h1>
+<p class="lead" data-i18n="dp_lead">Donnez-nous le contexte, on approfondit, et vous recevez une première réponse par email — c'est aussi ce qui nous permet de vérifier que vous existez bien.[...]
+<input type="email" id="visitorEmail" data-i18n-ph="dp_email_ph" placeholder="Votre email">
+<div class="spacer"></div>
+<a class="btn btn-primary" href="q10.html" id="dpNext" data-i18n="dp_cta">Commencer</a>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  document.getElementById('visitorEmail').addEventListener('input', function(e){
+    FAST.saveProfile({email: e.target.value});
+  });
+});
+</script>
+</body>
+</html>

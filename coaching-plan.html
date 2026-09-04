@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Coaching plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+  
+  <!-- Le composant centralisé gère seul la statusbar et le menu -->
+  <fast-header></fast-header>
+  
+  <section class="screen">
+<a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
+<div class="eyebrow" data-i18n="cp_eyebrow">Objectif 2</div>
+<h1 data-i18n="cp_h1">Votre exercice de la semaine</h1>
+<div class="card"><h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="cp_axe_title">Axe de travail</h3><p style="font-size:14px; margin:0; line-height:1.5;" data-i18n="c[...]
+<div class="card"><h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="cp_defi_title">Défi de la semaine</h3><p style="font-size:14px; margin:0; line-height:1.5;" data-i[...]
+<div class="card">
+  <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 10px;" data-i18n="cp_feel_title">Comment vous sentez-vous aujourd'hui ?</h3>
+  <div class="feel-row">
+    <div class="feel" onclick="FAST.selectFeel(this)" data-i18n="cp_feel1">Difficile</div>
+    <div class="feel" onclick="FAST.selectFeel(this)" data-i18n="cp_feel2">Neutre</div>
+    <div class="feel" onclick="FAST.selectFeel(this)" data-i18n="cp_feel3">Motivant</div>
+  </div>
+</div>
+<div class="spacer"></div>
+<a class="btn btn-primary" href="coaching-hub.html" data-i18n="cp_cta">Enregistrer</a>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

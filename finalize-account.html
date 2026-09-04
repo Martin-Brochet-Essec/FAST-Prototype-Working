@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Finaliser le compte</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+  
+<!-- Le composant centralisé gère seul la statusbar et le menu -->
+  <fast-header></fast-header>
+  
+  <section class="screen">
+<a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
+<div class="eyebrow" data-i18n="fin_eyebrow">Pour aller plus loin</div>
+<h1 data-i18n="fin_h1">Votre parcours en 3 phases</h1>
+<div class="phase-row"><div class="phase-num">01</div><div class="phase-txt"><h3 data-i18n="fin_p1_title">Diagnostic</h3><p data-i18n="fin_p1_desc">5 jours, 15 minutes chacun, pour cerner ce qui freine votre trajectoire.</p></div></div>
+<div class="phase-row"><div class="phase-num">02</div><div class="phase-txt"><h3 data-i18n="fin_p2_title">Routine</h3><p data-i18n="fin_p2_desc">Un exercice par semaine, avec un suivi quotidien de votre ressenti.</p></div></div>
+<div class="phase-row"><div class="phase-num">03</div><div class="phase-txt"><h3 data-i18n="fin_p3_title">Marketplace</h3><p data-i18n="fin_p3_desc">Accès aux coachs et associations quand vous êtes prête à aller plus loin.</p></div></div>
+<div class="roi" data-i18n="fin_roi">15 min investies aujourd'hui = un plan d'action personnalisé cette semaine.</div>
+<div class="spacer"></div>
+<a class="btn btn-primary" href="coaching-hub.html" data-i18n="fin_cta">Découvrir mon coaching</a>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

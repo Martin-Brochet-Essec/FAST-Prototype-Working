@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Votre synthèse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+
+  <fast-header></fast-header>
+
+  <section class="screen">
+    <div class="eyebrow" data-i18n="results_eyebrow">Votre synthèse</div>
+
+    <div class="card" id="results-chargement">
+      <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="results_chargement">
+        Nous analysons vos réponses...
+      </p>
+    </div>
+
+    <div class="card" id="results-contenu" style="display:none;">
+      <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="results_synthese_title">Ce que nous comprenons</h3>
+      <p id="results-texte" style="font-size:14px; color:var(--text); line-height:1.7; margin:0;"></p>
+      <p style="font-size:12px; color:var(--text-dim); margin:12px 0 0;" data-i18n="results_note">Quelques précisions supplémentaires vont nous aider à affiner cette première lecture.</p>
+    </div>
+
+    <div class="card" id="results-erreur" style="display:none;">
+      <p style="font-size:13.5px; color:#c0392b; line-height:1.6; margin:0;" id="results-erreur-texte"></p>
+    </div>
+
+    <div class="steprow">
+      <button class="btn btn-primary" id="results-continuer" data-i18n="results_continuer" style="display:none;">Continuer</button>
+    </div>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/ai-config.js"></script>
+<script src="assets/ai.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function(){
+  const chargement = document.getElementById('results-chargement');
+  const contenu = document.getElementById('results-contenu');
+  const texte = document.getElementById('results-texte');
+  const erreurBloc = document.getElementById('results-erreur');
+  const erreurTexte = document.getElementById('results-erreur-texte');
+  const boutonContinuer = document.getElementById('results-continuer');
+
+  try{
+    // Vérifie si une synthèse déjà calculée correspond exactement aux
+    // réponses actuelles de Q10 : si oui, on l'affiche sans rappeler l'IA.
+    const qaQ10Actuelles = FAST.getAnswersFor('q10');
+    const cacheBrut = localStorage.getItem('fast_last_synthesis');
+    let synthese = null;
+
+    if(cacheBrut){
+      const cache = JSON.parse(cacheBrut);
+      const memeCoach = cache.coachId === 'executive';
+      const memesReponses = JSON.stringify(cache.qa) === JSON.stringify(qaQ10Actuelles);
+      if(memeCoach && memesReponses) synthese = cache;
+    }
+
+    // 'executive' = id du coach dans assets/prompts.xml
+    // 'q10' = set de questions dont les réponses servent d'input
+    if(!synthese){
+      synthese = await FAST.runCoachSynthesis('executive', 'q10');
+    }
+
+    chargement.style.display = 'none';
+    contenu.style.display = 'block';
+    texte.textContent = synthese.reponseIA;
+    boutonContinuer.style.display = 'inline-block';
+
+  }catch(erreur){
+    chargement.style.display = 'none';
+    erreurBloc.style.display = 'block';
+    erreurTexte.textContent = 'Error: ' + erreur.message;
+  }
+
+  boutonContinuer.addEventListener('click', function(){
+    window.location.href = 'q5.html';
+  });
+});
+</script>
+</body>
+</html>

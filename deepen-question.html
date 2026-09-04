@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — On approfondit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+
+  <!-- Le composant centralisé gère seul la statusbar et le menu -->
+  <fast-header></fast-header>
+
+  <section class="screen">
+<a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
+<div class="eyebrow" data-i18n="deepen_eyebrow">On approfondit</div>
+
+<!-- Étape 1 : génération des 3 questions par l'IA -->
+<div class="card" id="deepen-chargement">
+  <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="deepen_generation">
+    Nous préparons 3 questions pour bien cerner votre situation...
+  </p>
+</div>
+
+<div class="card" id="deepen-erreur" style="display:none;">
+  <p style="font-size:13.5px; color:#c0392b; line-height:1.6; margin:0;" id="deepen-erreur-texte"></p>
+</div>
+
+<!-- Étape 2 : le stepper habituel, une fois les questions obtenues -->
+<div id="deepen-stepper" style="display:none;">
+  <div class="card">
+    <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="deepen_lead">Trois questions pour bien saisir votre situation avant de vous répondre.</p>
+  </div>
+  <div class="progress-label" id="q-progress"></div>
+  <div class="qcard"><p id="q-text"></p></div>
+  <textarea class="answer-field" rows="2" id="q-answer" data-i18n-ph="answer_ph" placeholder="Votre réponse..."></textarea>
+  <div id="q-options"></div>
+  <div class="dots" id="q-dots"></div>
+  <div class="steprow">
+    <button class="btn btn-ghost" id="q-prev" data-i18n="nav_prev">Précédent</button>
+    <button class="btn btn-primary" id="q-next"></button>
+  </div>
+</div>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/ai-config.js"></script>
+<script src="assets/ai.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function(){
+  const chargement = document.getElementById('deepen-chargement');
+  const erreurBloc = document.getElementById('deepen-erreur');
+  const erreurTexte = document.getElementById('deepen-erreur-texte');
+  const stepperBloc = document.getElementById('deepen-stepper');
+
+  try{
+    // 'deepen_questions_generator' = id du coach dans assets/prompts.xml
+    // Génère 3 questions à partir de Q10 + Q5 + la question libre posée
+    // dans your-question.html (voir assets/app.js).
+    const questions = await FAST.generateDeepenQuestions('deepen_questions_generator');
+
+    chargement.style.display = 'none';
+    stepperBloc.style.display = 'block';
+
+    // 'deepen' reste l'identifiant de stockage (screenId), pour que
+    // final-response.html retrouve ces réponses via getAnswersFor('deepen'),
+    // même si les questions elles-mêmes sont maintenant dynamiques.
+    FAST.startStepper(questions, 'deepen', 'deepen_label', 'final-response.html');
+
+  }catch(erreur){
+    chargement.style.display = 'none';
+    erreurBloc.style.display = 'block';
+    erreurTexte.textContent = 'Error: ' + erreur.message;
+  }
+});
+</script>
+</body>
+</html>

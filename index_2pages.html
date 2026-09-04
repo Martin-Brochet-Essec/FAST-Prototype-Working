@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Page 1 — Question</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <main class="carte">
+    <h1>Étape 1 — On vous pose une question</h1>
+
+    <p class="question" id="question-affichee">
+      Chargement de la question...
+    </p>
+
+    <form id="formulaire-reponse">
+      <label for="champ-reponse">Votre réponse</label>
+      <textarea id="champ-reponse" name="reponse" rows="5" required
+                placeholder="Écrivez votre réponse ici..."></textarea>
+
+      <button type="submit" id="bouton-envoyer">Envoyer ma réponse</button>
+    </form>
+
+    <p id="statut" class="statut"></p>
+
+    <p class="avertissement">
+      ⚠️ Exemple de prototype : la clé API est appelée directement depuis ce
+      navigateur, donc visible dans le code source. Ne mettez jamais une
+      vraie clé de production dans un dépôt GitHub public.
+    </p>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/page1.js"></script>
+</body>
+</html>

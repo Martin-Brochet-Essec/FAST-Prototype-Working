@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — On vous connaît déjà</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+
+  <fast-header></fast-header>
+
+  <section class="screen">
+    <div class="eyebrow" data-i18n="wb_eyebrow">Bon retour</div>
+    <h1 style="font-size:20px; margin:4px 0 16px;" data-i18n="wb_h1">On vous connaît déjà</h1>
+    <p class="lead" data-i18n="wb_lead">Vous avez déjà répondu aux 10 et 5 questions de profil. Passons directement à votre question du jour.</p>
+
+    <div class="steprow">
+      <button class="btn btn-primary" id="wb-continuer" data-i18n="wb_continuer">Poser ma question</button>
+    </div>
+    <div class="steprow">
+      <button class="btn btn-ghost" id="wb-modifier" data-i18n="wb_modifier">Je veux modifier mes réponses</button>
+    </div>
+    <div class="steprow">
+      <button class="btn btn-ghost" id="wb-refaire" data-i18n="wb_refaire">Refaire mon profil depuis le début</button>
+    </div>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  document.getElementById('wb-continuer').addEventListener('click', function(){
+    window.location.href = 'your-question.html';
+  });
+  document.getElementById('wb-modifier').addEventListener('click', function(){
+    // ?edit=1 indique à q10.html de ne PAS renvoyer ici : l'utilisatrice
+    // veut revoir/modifier ses réponses existantes (conservées grâce au
+    // brouillon), pas repartir de zéro.
+    window.location.href = 'q10.html?edit=1';
+  });
+  document.getElementById('wb-refaire').addEventListener('click', function(){
+    FAST.clearProfileData();
+    window.location.href = 'q10.html';
+  });
+});
+</script>
+</body>
+</html>

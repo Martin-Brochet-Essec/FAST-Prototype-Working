@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Abonnement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+
+  <!-- Le composant centralisé gère seul la statusbar et le menu -->
+  <fast-header></fast-header>
+
+
+  <section class="screen">
+<a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
+<div class="eyebrow" data-i18n="sub_eyebrow">Abonnement</div>
+<h1 data-i18n="sub_h1">Choisissez votre formule</h1>
+<p class="lead" data-i18n="sub_lead">Vous pouvez changer de formule à tout moment.</p>
+<div class="card tier-card">
+  <h3 data-i18n="sub_tier1_name">Essentiel</h3>
+  <div class="tier-price" data-i18n="sub_tier1_price">Gratuit</div>
+  <p style="font-size:12.5px; color:var(--text-dim);" data-i18n="sub_tier1_desc">Coach virtuel quotidien et accès à la marketplace.</p>
+  <button class="btn btn-ghost" onclick="FAST.saveConfig({tier:'essential'}); window.location.href='index.html';" data-i18n="sub_cta">Choisir</button>
+</div>
+<div class="card tier-card">
+  <h3 data-i18n="sub_tier2_name">Coaching</h3>
+  <div class="tier-price" data-i18n="sub_tier2_price">19€ / mois</div>
+  <p style="font-size:12.5px; color:var(--text-dim);" data-i18n="sub_tier2_desc">Diagnostic complet, routine hebdomadaire et suivi personnalisé.</p>
+  <button class="btn btn-primary" onclick="FAST.saveConfig({tier:'coaching'}); window.location.href='index.html';" data-i18n="sub_cta">Choisir</button>
+</div>
+<div class="card tier-card">
+  <h3 data-i18n="sub_tier3_name">Signature</h3>
+  <div class="tier-price" data-i18n="sub_tier3_price">49€ / mois</div>
+  <p style="font-size:12.5px; color:var(--text-dim);" data-i18n="sub_tier3_desc">Tout Coaching, plus accès prioritaire aux coachs humains.</p>
+  <button class="btn btn-ghost" onclick="FAST.saveConfig({tier:'signature'}); window.location.href='index.html';" data-i18n="sub_cta">Choisir</button>
+</div>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

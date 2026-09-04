@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Réponse envoyée</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+    
+<!-- Le composant centralisé gère seul la statusbar et le menu -->
+  <fast-header></fast-header>
+  
+  <section class="screen">
+<div class="spacer"></div>
+<div style="text-align:center;">
+  <div class="constellation" style="margin-bottom:24px;">
+    <div class="node n-i"></div><div class="node n-f"></div><div class="node n-e"></div><div class="node n-s"></div>
+  </div>
+  <h2 data-i18n="mailsent_h2">Réponse envoyée</h2>
+  <p class="lead" data-i18n="mailsent_lead">Vous la trouverez à l'adresse indiquée dans quelques instants.</p>
+</div>
+<div class="spacer"></div>
+<a class="btn btn-text" href="email-backup.html" data-i18n="mailsent_noreceived">Je n'ai rien reçu</a>
+<a class="btn btn-primary" href="engagement.html" style="margin-top:10px;" data-i18n="mailsent_continue">Continuer</a>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/app.js"></script>
+
+</body>
+</html>

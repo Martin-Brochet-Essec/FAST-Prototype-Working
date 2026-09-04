@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Votre situation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+
+  <!-- Le composant centralisé gère seul la statusbar et le menu -->
+  <fast-header></fast-header>
+
+
+  <section class="screen">
+<a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
+<div class="eyebrow" data-i18n="yq_eyebrow">Votre situation</div>
+<h1 data-i18n="yq_h1">Qu'est-ce qui vous bloque ?</h1>
+<textarea rows="6" id="questionText" data-i18n-ph="yq_ph" placeholder="Décrivez la situation, avec vos mots..."></textarea>
+<p class="legal" data-i18n="yq_legal">Ceci est un premier conseil, pas un accompagnement complet. Pour aller plus loin sur une décision importante, nous devrons prendre le temps de travailler ensemble plus sérieusement.</p>
+<div class="spacer"></div>
+<button class="btn btn-primary" id="yqNext" data-i18n="yq_cta">Envoyer</button>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  document.getElementById('yqNext').addEventListener('click', function(){
+    var q = document.getElementById('questionText').value;
+    FAST.logAnswers('your-question', [{q: 'Question posée', a: q}]);
+    window.location.href = 'deepen-question.html';
+  });
+});
+</script>
+</body>
+</html>

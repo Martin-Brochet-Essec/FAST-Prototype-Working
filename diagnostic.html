@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Diagnostic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+  
+<!-- Le composant centralisé gère seul la statusbar et le menu -->
+  <fast-header></fast-header>
+  
+    <section class="screen">
+<a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
+<div class="eyebrow" data-i18n="diag_eyebrow">Objectif 1</div>
+<h1 data-i18n="diag_h1">Votre diagnostic</h1>
+<div class="day-picker" id="dayPicker"></div>
+<div class="card" id="dayContent"></div>
+<div class="spacer"></div>
+<a class="btn btn-primary" href="coaching-hub.html" data-i18n="diag_cta">Retour au coaching</a>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/app.js"></script>
+<script>
+var DIAG_DAYS = ['diag_d1','diag_d2','diag_d3','diag_d4','diag_d5'];
+var dayCursor = 0;
+function renderDiagnostic(){
+  var d = FAST.dict();
+  var prefix = d.day_prefix || 'J';
+  document.getElementById('dayPicker').innerHTML = DIAG_DAYS.map(function(_, i){
+    return '<div class="day-pill ' + (i===dayCursor?'active':'') + '" onclick="selectDiagDay(' + i + ')">' + prefix + (i+1) + '</div>';
+  }).join('');
+  var key = DIAG_DAYS[dayCursor];
+  document.getElementById('dayContent').innerHTML =
+    '<h3 style="font-size:14px;margin:0 0 8px;">' + (d[key+'_title']||'') + '</h3>' +
+    '<p style="font-size:13px;color:var(--text-dim);margin:0;line-height:1.55;">' + (d[key+'_body']||'') + '</p>';
+}
+function selectDiagDay(i){ dayCursor = i; renderDiagnostic(); }
+document.addEventListener('DOMContentLoaded', function(){
+  FAST.applyI18n().then(renderDiagnostic);
+  setTimeout(renderDiagnostic, 300);
+});
+</script>
+</body>
+</html>

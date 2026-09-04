@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Mon profil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+
+  <!-- Le composant centralisé gère seul la statusbar et le menu -->
+  <fast-header></fast-header>
+
+
+  <section class="screen">
+<a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
+<div class="eyebrow" data-i18n="profile_eyebrow">Mon compte</div>
+<h1 data-i18n="profile_h1">Vos informations</h1>
+<p class="lead" data-i18n="profile_lead">Ces informations restent confidentielles et servent uniquement à personnaliser votre accompagnement.</p>
+<input type="text" id="pFirst" data-i18n-ph="profile_ph_firstname" placeholder="Prénom">
+<input type="text" id="pLast" data-i18n-ph="profile_ph_lastname" placeholder="Nom">
+<input type="email" id="pEmail" data-i18n-ph="profile_ph_email" placeholder="Email">
+<input type="password" id="pPassword" data-i18n-ph="profile_ph_password" placeholder="Mot de passe">
+<input type="tel" id="pPhone" data-i18n-ph="profile_ph_phone" placeholder="Téléphone">
+<input type="text" id="pLinkedin" data-i18n-ph="profile_ph_linkedin" placeholder="Lien LinkedIn">
+<div class="spacer"></div>
+<button class="btn btn-primary" id="profileSave" data-i18n="profile_cta">Enregistrer</button>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var p = FAST.getProfile();
+  var map = {pFirst:'firstname', pLast:'lastname', pEmail:'email', pPassword:'password', pPhone:'phone', pLinkedin:'linkedin'};
+  Object.keys(map).forEach(function(id){ if(p[map[id]]) document.getElementById(id).value = p[map[id]]; });
+  document.getElementById('profileSave').addEventListener('click', function(){
+    var patch = {};
+    Object.keys(map).forEach(function(id){ patch[map[id]] = document.getElementById(id).value; });
+    FAST.saveProfile(patch);
+    window.location.href = 'index.html';
+  });
+});
+</script>
+</body>
+</html>

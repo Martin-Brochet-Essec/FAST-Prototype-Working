@@ -1,0 +1,97 @@
+:root {
+  --couleur-fond: #f7f5f2;
+  --couleur-carte: #ffffff;
+  --couleur-accent: #2f5d8a;
+  --couleur-texte: #22262b;
+  --couleur-texte-doux: #5b6572;
+  --rayon: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--couleur-fond);
+  font-family: system-ui, "Segoe UI", Arial, sans-serif;
+  color: var(--couleur-texte);
+  padding: 24px;
+}
+
+.carte {
+  background: var(--couleur-carte);
+  border-radius: var(--rayon);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  padding: 32px;
+  max-width: 560px;
+  width: 100%;
+}
+
+h1 { font-size: 1.4rem; margin-top: 0; }
+h2 { font-size: 1rem; color: var(--couleur-texte-doux); margin-bottom: 6px; }
+
+.question {
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: #eef3f8;
+  border-left: 4px solid var(--couleur-accent);
+  padding: 12px 14px;
+  border-radius: 6px;
+}
+
+label { display: block; margin: 16px 0 6px; font-weight: 600; }
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+button {
+  margin-top: 16px;
+  background: var(--couleur-accent);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.statut { margin-top: 12px; color: var(--couleur-texte-doux); font-size: 0.9rem; }
+
+.bloc-recap, .bloc-ia {
+  background: #f2f4f6;
+  border-radius: 6px;
+  padding: 14px;
+  margin-top: 16px;
+}
+
+.reponse-ia { font-size: 1.05rem; }
+
+.lien-retour {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--couleur-accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.lien-retour:hover { text-decoration: underline; }
+
+.avertissement {
+  background: #fdecea;
+  border-left: 4px solid #c0392b;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-top: 16px;
+}

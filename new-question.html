@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Nouvelle question</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+
+  <!-- Le composant centralisé gère seul la statusbar et le menu -->
+  <fast-header></fast-header>
+
+
+  <section class="screen">
+<a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
+<div class="eyebrow" data-i18n="nq_eyebrow">Bon retour</div>
+<h1 data-i18n="nq_h1">Une nouvelle question ?</h1>
+<p class="lead" data-i18n="nq_lead">Deux questions rapides pour qu'on comprenne bien le contexte, puis on vous écoute.</p>
+<div class="progress-label" id="q-progress"></div>
+<div class="qcard"><p id="q-text"></p></div>
+<textarea class="answer-field" rows="2" id="q-answer" data-i18n-ph="answer_ph" placeholder="Votre réponse..."></textarea>
+<div class="dots" id="q-dots"></div>
+<div class="steprow">
+  <button class="btn btn-ghost" id="q-prev" data-i18n="nav_prev">Précédent</button>
+  <button class="btn btn-primary" id="q-next"></button>
+</div>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  FAST.runStepper('nq', 'nq_label', 'your-question.html');
+});
+</script>
+</body>
+</html>

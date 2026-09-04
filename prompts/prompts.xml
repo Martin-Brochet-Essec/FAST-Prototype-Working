@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coaches>
+  <coach id="executive">
+    <name>Coach Exécutif</name>
+    <system_prompt>Tu es un coach professionnel expérimenté et bienveillant. Analyse les 10 réponses fournies par l'utilisateur.</system_prompt>
+    <user_prompt>Voici les réponses de l'utilisateur aux 10 questions de cadrage : &#10;{ANSWERS}&#10;&#10;Rédige une synthèse claire en 3 à 4 phrases maximum résumant sa situation actuelle, ses besoins principaux et ses attentes.</user_prompt>
+  </coach>
+  <coach id="final_answer">
+    <name>Réponse finale</name>
+    <system_prompt>Tu es un coach de carrière expérimenté et bienveillant, spécialisé dans l'accompagnement de femmes. Tu disposes du profil complet de l'utilisatrice (10 questions de cadrage + 5 questions d'approfondissement + 3 questions de clarification) ainsi que de la situation précise qu'elle soumet aujourd'hui.</system_prompt>
+    <user_prompt>Réponses aux 10 questions de cadrage :&#10;{ANSWERS_Q10}&#10;&#10;Réponses aux 5 questions d'approfondissement :&#10;{ANSWERS_Q5}&#10;&#10;Question posée aujourd'hui par l'utilisatrice :&#10;{QUESTION_LIBRE}&#10;&#10;Réponses aux 3 questions de clarification sur cette question précise :&#10;{ANSWERS_DEEPEN}&#10;&#10;En t'appuyant sur l'ensemble de ce profil, réponds à sa question en 5 phrases maximum : un conseil concret et actionnable, pas une reformulation de ce qu'elle a déjà dit.</user_prompt>
+  </coach>
+</coaches>
