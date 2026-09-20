@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Développer mes compétences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+
+  <fast-header></fast-header>
+
+  <section class="screen">
+    <a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
+    <div class="eyebrow" data-i18n="skills_eyebrow">Développement de compétences</div>
+    <h1 style="font-size:20px; margin:4px 0 8px;" data-i18n="skills_h1">Vos compétences à développer</h1>
+    <p class="lead" data-i18n="skills_lead">Une sélection de compétences pour progresser vers des responsabilités plus importantes.</p>
+
+    <div class="card" id="skills-chargement">
+      <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="skills_chargement">
+        Nous préparons votre sélection de compétences...
+      </p>
+    </div>
+
+    <div id="skills-contenu" style="display:none;">
+      <p id="skills-titre-prioritaire" style="font-size:12px; text-transform:uppercase; letter-spacing:.03em; color:var(--rose-deep); margin:16px 0 6px; display:none;"></p>
+      <div id="skills-liste-prioritaire"></div>
+
+      <p id="skills-titre-autres" style="font-size:12px; text-transform:uppercase; letter-spacing:.03em; color:var(--text-dim); margin:20px 0 6px;"></p>
+      <div id="skills-liste-autres"></div>
+    </div>
+
+    <div class="card" id="skills-erreur" style="display:none;">
+      <p style="font-size:13.5px; color:#c0392b; line-height:1.6; margin:0;" id="skills-erreur-texte"></p>
+    </div>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/ai-config.js"></script>
+<script src="assets/ai.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function(){
+  const chargement = document.getElementById('skills-chargement');
+  const contenu = document.getElementById('skills-contenu');
+  const erreurBloc = document.getElementById('skills-erreur');
+  const erreurTexte = document.getElementById('skills-erreur-texte');
+  const titrePrioritaire = document.getElementById('skills-titre-prioritaire');
+  const listePrioritaire = document.getElementById('skills-liste-prioritaire');
+  const titreAutres = document.getElementById('skills-titre-autres');
+  const listeAutres = document.getElementById('skills-liste-autres');
+
+  function carteCompetence(skill){
+    const d = FAST.dict();
+    const carte = document.createElement('div');
+    carte.className = 'card';
+    carte.style.marginBottom = '10px';
+
+    const nomCoach = document.createElement('p');
+    nomCoach.style.cssText = 'font-size:11px; color:var(--text-dim); margin:0 0 4px; text-transform:uppercase; letter-spacing:.02em;';
+    nomCoach.textContent = skill.coachNom;
+    carte.appendChild(nomCoach);
+
+    const titre = document.createElement('h3');
+    titre.style.cssText = 'font-size:14.5px; margin:0 0 4px;';
+    titre.textContent = skill.title;
+    carte.appendChild(titre);
+
+    const desc = document.createElement('p');
+    desc.style.cssText = 'font-size:13px; color:var(--text); line-height:1.5; margin:0 0 10px;';
+    desc.textContent = skill.description;
+    carte.appendChild(desc);
+
+    const bouton = document.createElement('button');
+    bouton.className = 'btn btn-primary';
+    bouton.textContent = d.skills_cta || 'Améliorer cette compétence';
+    bouton.addEventListener('click', function(){
+      window.location.href = 'under-construction.html';
+    });
+    carte.appendChild(bouton);
+
+    return carte;
+  }
+
+  try{
+    const skills = await FAST.getSkillsOrdonnees();
+    const d = FAST.dict();
+
+    const prioritaires = skills.filter(s => s.prioritaire);
+    const autres = skills.filter(s => !s.prioritaire);
+
+    if(prioritaires.length > 0){
+      titrePrioritaire.textContent = d.skills_section_priority || 'Vos compétences prioritaires';
+      titrePrioritaire.style.display = 'block';
+      prioritaires.forEach(s => listePrioritaire.appendChild(carteCompetence(s)));
+    }
+
+    titreAutres.textContent = d.skills_section_other || 'Autres compétences';
+    autres.forEach(s => listeAutres.appendChild(carteCompetence(s)));
+
+    chargement.style.display = 'none';
+    contenu.style.display = 'block';
+
+  }catch(erreur){
+    chargement.style.display = 'none';
+    erreurBloc.style.display = 'block';
+    erreurTexte.textContent = 'Error: ' + erreur.message;
+  }
+});
+</script>
+</body>
+</html>
