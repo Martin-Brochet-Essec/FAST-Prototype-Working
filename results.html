@@ -32,6 +32,7 @@
     <div class="card" id="results-contenu" style="display:none;">
       <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="results_synthese_title">Ce que nous comprenons</h3>
       <p id="results-texte" style="font-size:14px; color:var(--text); line-height:1.7; margin:0;"></p>
+      <p id="results-coach-ligne" style="font-size:13.5px; font-weight:600; color:var(--rose-deep); margin:14px 0 0;"></p>
       <p style="font-size:12px; color:var(--text-dim); margin:12px 0 0;" data-i18n="results_note">Quelques précisions supplémentaires vont nous aider à affiner cette première lecture.</p>
     </div>
 
@@ -81,6 +82,12 @@ document.addEventListener('DOMContentLoaded', async function(){
     contenu.style.display = 'block';
     texte.textContent = synthese.reponseIA;
     boutonContinuer.style.display = 'inline-block';
+
+    // À ce stade (juste après Q10, avant Q5), le coach spécialisé n'a
+    // jamais encore été identifié — la recommandation vient du e-Coach
+    // Générique, qui ne se déclenche qu'après Q5 (results-even-better.html).
+    document.getElementById('results-coach-ligne').textContent =
+      FAST.dict().coach_non_identifie || "Votre coach n'est pas encore identifié.";
 
   }catch(erreur){
     chargement.style.display = 'none';

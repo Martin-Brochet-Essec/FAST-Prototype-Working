@@ -89,14 +89,20 @@ document.addEventListener('DOMContentLoaded', async function(){
       try{
         const profils = await FAST.loadCoachProfiles();
         const p = profils[synthese.coachRecommande];
+        const ligne = document.getElementById('reb-coach-ligne');
+        const d = FAST.dict();
         if(p){
-          const ligne = document.getElementById('reb-coach-ligne');
-          const d = FAST.dict();
           const libelle = d.reb_coach_suggere || 'Coach suggéré :';
           ligne.textContent = libelle + ' ' + p.name + ' (' + p.tagline + ')';
-          ligne.style.display = 'block';
+        } else {
+          ligne.textContent = d.coach_non_identifie || "Votre coach n'est pas encore identifié.";
         }
+        ligne.style.display = 'block';
       }catch(e){ /* pas bloquant si le libellé du coach échoue à s'afficher */ }
+    } else {
+      const ligne = document.getElementById('reb-coach-ligne');
+      ligne.textContent = FAST.dict().coach_non_identifie || "Votre coach n'est pas encore identifié.";
+      ligne.style.display = 'block';
     }
 
   }catch(erreur){
