@@ -470,10 +470,30 @@ window.FAST = (function(){
     return { ids: [auto || 'individual'], manuel: false };
   }
 
+  // S'assure qu'une vraie recommandation (basée sur les réponses) existe
+  // avant de répondre à une question, plutôt que de silencieusement
+  // retomber sur "individual" par défaut. Utile quand l'utilisatrice
+  // atteint your-question.html sans être passée par results-even-better.html
+  // (ex: parcours new-question.html pour une utilisatrice déjà connue).
+  // Ne fait rien si un choix manuel existe déjà, ou si une recommandation
+  // automatique a déjà été calculée, ou si Q10/Q5 ne sont pas disponibles
+  // (dans ce dernier cas, le repli "individual" reste le seul recours).
+  async function assurerCoachDetermine(){
+    if(getCoachManuel().length > 0) return;
+    if(getCoachRecommande()) return;
+    const qaQ10 = getAnswersFor('q10');
+    const qaQ5 = getAnswersFor('q5');
+    if(qaQ10.length > 0 && qaQ5.length > 0){
+      try{ await runProfileDeepening('profile_deepening'); }
+      catch(e){ /* échec silencieux : le repli "individual" prendra le relais */ }
+    }
+  }
+
   // Construit {COACH_NOM}/{COACH_EXPERTISE} pour un ou plusieurs coachs
   // (mix) : noms joints par " + ", expertises concaténées avec leur nom en
   // préfixe pour rester lisible par l'IA en cas de mix.
   async function construireContexteCoach(){
+    await assurerCoachDetermine();
     const profils = await loadCoachProfiles();
     const { ids } = getCoachActuel();
     const valides = ids.filter(id => profils[id]);
@@ -610,6 +630,11 @@ window.FAST = (function(){
     const qaQ5 = getAnswersFor('q5');
     const qaYourQuestion = getAnswersFor('your-question');
     const questionLibre = (qaYourQuestion[0] && qaYourQuestion[0].a) || '';
+
+    // Déterminé AVANT la signature de cache : sinon un coach "individual"
+    // provisoire pourrait s'y retrouver figé avant d'être remplacé par la
+    // vraie recommandation calculée à partir des réponses.
+    await assurerCoachDetermine();
     const coachActuel = getCoachActuel();
 
     const signatureActuelle = JSON.stringify({ qaQ10: qaQ10, qaQ5: qaQ5, questionLibre: questionLibre, coach: coachActuel.ids });
