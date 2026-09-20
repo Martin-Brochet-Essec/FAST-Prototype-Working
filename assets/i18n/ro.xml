@@ -207,4 +207,11 @@
   <string key="hist_h1">Toate întrebările și răspunsurile tale</string>
   <string key="hist_export">Descarcă (.txt)</string>
   <string key="hist_vide">Nicio întrebare sau răspuns înregistrat încă.</string>
+  <string key="reb_coach_suggere">Coach sugerat:</string>
+  <string key="whoami_coach_title">e-Coach-ul tău</string>
+  <string key="whoami_coach_actuel">Coach actual:</string>
+  <string key="whoami_coach_manuel">(alegere manuală)</string>
+  <string key="whoami_coach_auto_suffixe">(recomandare automată)</string>
+  <string key="whoami_coach_save">Salvează alegerea mea</string>
+  <string key="whoami_coach_auto">Revino la recomandarea automată</string>
 </i18n>

@@ -207,4 +207,11 @@
   <string key="hist_h1">Toutes vos questions et réponses</string>
   <string key="hist_export">Télécharger (.txt)</string>
   <string key="hist_vide">Aucune question ou réponse enregistrée pour le moment.</string>
+  <string key="reb_coach_suggere">Coach suggéré :</string>
+  <string key="whoami_coach_title">Votre e-Coach</string>
+  <string key="whoami_coach_actuel">Coach actuel :</string>
+  <string key="whoami_coach_manuel">(choix manuel)</string>
+  <string key="whoami_coach_auto_suffixe">(recommandation automatique)</string>
+  <string key="whoami_coach_save">Enregistrer mon choix</string>
+  <string key="whoami_coach_auto">Revenir à la recommandation automatique</string>
 </i18n>
