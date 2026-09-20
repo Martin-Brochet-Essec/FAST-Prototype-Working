@@ -83,11 +83,23 @@ document.addEventListener('DOMContentLoaded', async function(){
     texte.textContent = synthese.reponseIA;
     boutonContinuer.style.display = 'inline-block';
 
-    // À ce stade (juste après Q10, avant Q5), le coach spécialisé n'a
-    // jamais encore été identifié — la recommandation vient du e-Coach
-    // Générique, qui ne se déclenche qu'après Q5 (results-even-better.html).
-    document.getElementById('results-coach-ligne').textContent =
-      FAST.dict().coach_non_identifie || "Votre coach n'est pas encore identifié.";
+    const ligneCoach = document.getElementById('results-coach-ligne');
+    if(synthese.coachRecommande){
+      try{
+        const profils = await FAST.loadCoachProfiles();
+        const p = profils[synthese.coachRecommande];
+        const d = FAST.dict();
+        if(p){
+          const libelle = d.reb_coach_suggere || 'Coach suggéré :';
+          const mentionAuto = d.coach_mention_auto || '(Auto)';
+          ligneCoach.textContent = libelle + ' ' + p.name + ' (' + p.tagline + ') ' + mentionAuto;
+        } else {
+          ligneCoach.textContent = d.coach_non_identifie || "Votre coach n'est pas encore identifié.";
+        }
+      }catch(e){ /* pas bloquant si le libellé du coach échoue à s'afficher */ }
+    } else {
+      ligneCoach.textContent = FAST.dict().coach_non_identifie || "Votre coach n'est pas encore identifié.";
+    }
 
   }catch(erreur){
     chargement.style.display = 'none';

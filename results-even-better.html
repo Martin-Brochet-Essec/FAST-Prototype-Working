@@ -93,7 +93,8 @@ document.addEventListener('DOMContentLoaded', async function(){
         const d = FAST.dict();
         if(p){
           const libelle = d.reb_coach_suggere || 'Coach suggéré :';
-          ligne.textContent = libelle + ' ' + p.name + ' (' + p.tagline + ')';
+          const mentionAuto = d.coach_mention_auto || '(Auto)';
+          ligne.textContent = libelle + ' ' + p.name + ' (' + p.tagline + ') ' + mentionAuto;
         } else {
           ligne.textContent = d.coach_non_identifie || "Votre coach n'est pas encore identifié.";
         }
