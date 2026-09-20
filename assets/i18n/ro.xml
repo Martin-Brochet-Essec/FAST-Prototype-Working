@@ -18,8 +18,8 @@
   <string key="home_lead">Un spațiu confidențial pentru a-ți dezvolta cariera, în ritmul tău.</string>
   <string key="home_tile_question_title">Pune o întrebare</string>
   <string key="home_tile_question_desc">O situație de deblocat, chiar acum.</string>
-  <string key="home_tile_coaching_title">Conectare</string>
-  <string key="home_tile_coaching_desc">Accesează contul și coachingul tău.</string>
+  <string key="home_tile_coaching_title">Lucrează la abilitățile mele</string>
+  <string key="home_tile_coaching_desc">Consolidează abilitățile care vor face diferența.</string>
   <string key="home_tile_market_title">Marketplace</string>
   <string key="home_tile_market_desc">Coachi, asociații, cursuri.</string>
   <string key="home_tile_articles_title">Articole</string>
@@ -216,4 +216,15 @@
   <string key="whoami_coach_auto">Revino la recomandarea automată</string>
   <string key="coach_non_identifie">Coach-ul tău nu a fost încă identificat.</string>
   <string key="coach_mention_auto">(Auto)</string>
+  <string key="menu_skills">Îmbunătățește-mi abilitățile</string>
+  <string key="skills_eyebrow">Dezvoltarea abilităților</string>
+  <string key="skills_h1">Abilități de dezvoltat</string>
+  <string key="skills_lead">O selecție de abilități pentru a avansa spre responsabilități mai mari.</string>
+  <string key="skills_chargement">Pregătim selecția ta de abilități...</string>
+  <string key="skills_section_priority">Abilitățile tale prioritare</string>
+  <string key="skills_section_other">Alte abilități</string>
+  <string key="skills_cta">Îmbunătățește această abilitate</string>
+  <string key="uc_eyebrow">În curând</string>
+  <string key="uc_h1">Această pagină este în construcție</string>
+  <string key="uc_lead">Modulul pentru îmbunătățirea acestei abilități va fi disponibil în curând.</string>
 </i18n>

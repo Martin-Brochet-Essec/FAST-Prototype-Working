@@ -18,8 +18,8 @@
   <string key="home_lead">Un espacio confidencial para avanzar en tu carrera, a tu ritmo.</string>
   <string key="home_tile_question_title">Hacer una pregunta</string>
   <string key="home_tile_question_desc">Una situación que desbloquear, ahora mismo.</string>
-  <string key="home_tile_coaching_title">Iniciar sesión</string>
-  <string key="home_tile_coaching_desc">Acceder a mi cuenta y mi coaching.</string>
+  <string key="home_tile_coaching_title">Trabajar en mis habilidades</string>
+  <string key="home_tile_coaching_desc">Refuerza las habilidades que marcarán la diferencia.</string>
   <string key="home_tile_market_title">Marketplace</string>
   <string key="home_tile_market_desc">Coaches, asociaciones, formaciones.</string>
   <string key="home_tile_articles_title">Artículos</string>
@@ -216,4 +216,15 @@
   <string key="whoami_coach_auto">Volver a la recomendación automática</string>
   <string key="coach_non_identifie">Tu coach aún no ha sido identificado.</string>
   <string key="coach_mention_auto">(Auto)</string>
+  <string key="menu_skills">Mejorar mis habilidades</string>
+  <string key="skills_eyebrow">Desarrollo de habilidades</string>
+  <string key="skills_h1">Habilidades a desarrollar</string>
+  <string key="skills_lead">Una selección de habilidades para avanzar hacia mayores responsabilidades.</string>
+  <string key="skills_chargement">Preparando tu selección de habilidades...</string>
+  <string key="skills_section_priority">Tus habilidades prioritarias</string>
+  <string key="skills_section_other">Otras habilidades</string>
+  <string key="skills_cta">Mejorar esta habilidad</string>
+  <string key="uc_eyebrow">Próximamente</string>
+  <string key="uc_h1">Esta página está en construcción</string>
+  <string key="uc_lead">El módulo para mejorar esta habilidad llegará pronto.</string>
 </i18n>

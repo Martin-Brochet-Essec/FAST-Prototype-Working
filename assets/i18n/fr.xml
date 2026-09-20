@@ -18,8 +18,8 @@
   <string key="home_lead"> Un espace confidentiel pour avancer sur votre carrière, à votre rythme.</string>
   <string key="home_tile_question_title">Poser une question</string>
   <string key="home_tile_question_desc">Une situation à débloquer, là, maintenant.</string>
-  <string key="home_tile_coaching_title">Se connecter</string>
-  <string key="home_tile_coaching_desc">Accéder à mon compte et mon coaching.</string>
+  <string key="home_tile_coaching_title">Travailler sur mes compétences</string>
+  <string key="home_tile_coaching_desc">Renforcez les compétences qui feront la différence.</string>
   <string key="home_tile_market_title">Marketplace</string>
   <string key="home_tile_market_desc">Coachs, associations, formations.</string>
   <string key="home_tile_articles_title">Articles</string>
@@ -216,4 +216,15 @@
   <string key="whoami_coach_auto">Revenir à la recommandation automatique</string>
   <string key="coach_non_identifie">Votre coach n'est pas encore identifié.</string>
   <string key="coach_mention_auto">(Auto)</string>
+  <string key="menu_skills">Améliorer mes compétences</string>
+  <string key="skills_eyebrow">Développement de compétences</string>
+  <string key="skills_h1">Vos compétences à développer</string>
+  <string key="skills_lead">Une sélection de compétences pour progresser vers des responsabilités plus importantes.</string>
+  <string key="skills_chargement">Nous préparons votre sélection de compétences...</string>
+  <string key="skills_section_priority">Vos compétences prioritaires</string>
+  <string key="skills_section_other">Autres compétences</string>
+  <string key="skills_cta">Améliorer cette compétence</string>
+  <string key="uc_eyebrow">Bientôt disponible</string>
+  <string key="uc_h1">Cette page est en construction</string>
+  <string key="uc_lead">Le module d'amélioration de cette compétence arrive prochainement.</string>
 </i18n>

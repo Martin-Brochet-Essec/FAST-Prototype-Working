@@ -18,8 +18,8 @@
   <string key="home_lead">A confidential space to move your career forward, at your own pace.</string>
   <string key="home_tile_question_title">Ask a question</string>
   <string key="home_tile_question_desc">A situation to unblock, right now.</string>
-  <string key="home_tile_coaching_title">Log in</string>
-  <string key="home_tile_coaching_desc">Access my account and my coaching.</string>
+  <string key="home_tile_coaching_title">Work on my skills</string>
+  <string key="home_tile_coaching_desc">Strengthen the skills that will make the difference.</string>
   <string key="home_tile_market_title">Marketplace</string>
   <string key="home_tile_market_desc">Coaches, associations, training.</string>
   <string key="home_tile_articles_title">Articles</string>
@@ -216,4 +216,15 @@
   <string key="whoami_coach_auto">Go back to automatic recommendation</string>
   <string key="coach_non_identifie">Your coach hasn't been identified yet.</string>
   <string key="coach_mention_auto">(Auto)</string>
+  <string key="menu_skills">Improve my skills</string>
+  <string key="skills_eyebrow">Skill development</string>
+  <string key="skills_h1">Skills to develop</string>
+  <string key="skills_lead">A selection of skills to help you move towards greater responsibility.</string>
+  <string key="skills_chargement">Preparing your skill selection...</string>
+  <string key="skills_section_priority">Your priority skills</string>
+  <string key="skills_section_other">Other skills</string>
+  <string key="skills_cta">Improve this skill</string>
+  <string key="uc_eyebrow">Coming soon</string>
+  <string key="uc_h1">This page is under construction</string>
+  <string key="uc_lead">The module to improve this skill is coming soon.</string>
 </i18n>
