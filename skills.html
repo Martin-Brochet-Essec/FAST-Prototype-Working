@@ -85,7 +85,11 @@ document.addEventListener('DOMContentLoaded', async function(){
     bouton.className = 'btn btn-primary';
     bouton.textContent = d.skills_cta || 'Améliorer cette compétence';
     bouton.addEventListener('click', function(){
-      window.location.href = 'under-construction.html';
+      // Un seul module existe pour l'instant (coaching-julie) : toutes les
+      // compétences y mènent, avec la compétence choisie transmise en
+      // paramètre pour préparer un futur catalogue module-par-compétence.
+      const skillParam = encodeURIComponent(skill.title);
+      window.location.href = 'module.html?module=coaching-julie&skill=' + skillParam;
     });
     carte.appendChild(bouton);
 
