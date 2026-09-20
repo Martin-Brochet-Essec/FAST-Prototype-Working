@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAST — Historique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Petrona:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="device">
+  <div class="langswitch">
+    <button class="langbtn" data-lang="fr" onclick="FAST.setLang('fr')">FR</button>
+    <button class="langbtn" data-lang="en" onclick="FAST.setLang('en')">EN</button>
+    <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
+    <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
+  </div>
+
+  <fast-header></fast-header>
+
+  <section class="screen">
+    <a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
+    <div class="eyebrow" data-i18n="hist_eyebrow">Votre historique</div>
+    <h1 style="font-size:20px; margin:4px 0 12px;" data-i18n="hist_h1">Toutes vos questions et réponses</h1>
+
+    <div class="steprow">
+      <button class="btn btn-primary" id="hist-export" data-i18n="hist_export">Télécharger (.txt)</button>
+    </div>
+
+    <div id="hist-vide" class="card" style="margin-top:14px; display:none;">
+      <p style="font-size:13.5px; color:var(--text-dim); margin:0;" data-i18n="hist_vide">Aucune question ou réponse enregistrée pour le moment.</p>
+    </div>
+
+    <div id="hist-liste" style="margin-top:14px;"></div>
+  </section>
+</div>
+<script src="assets/fallback.js"></script>
+<script src="assets/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const listeEl = document.getElementById('hist-liste');
+  const videEl = document.getElementById('hist-vide');
+  const all = JSON.parse(localStorage.getItem('fast_answers') || '[]');
+
+  if(all.length === 0){
+    videEl.style.display = 'block';
+  } else {
+    all.forEach(function(entree){
+      const groupe = document.createElement('div');
+      groupe.className = 'card';
+      groupe.style.marginBottom = '10px';
+
+      const entete = document.createElement('p');
+      entete.style.cssText = 'font-size:11px; color:var(--text-dim); margin:0 0 8px; text-transform:uppercase; letter-spacing:.02em;';
+      const date = new Date(entree.ts);
+      entete.textContent = entree.screen + ' — ' + date.toLocaleString();
+      groupe.appendChild(entete);
+
+      entree.qa.forEach(function(paire){
+        const blocQ = document.createElement('p');
+        blocQ.style.cssText = 'font-size:13.5px; margin:0 0 2px;';
+        blocQ.innerHTML = '<strong>Qst :</strong> ' + (paire.q || '');
+        groupe.appendChild(blocQ);
+
+        const blocA = document.createElement('p');
+        blocA.style.cssText = 'font-size:13.5px; color:var(--text); margin:0 0 10px;';
+        blocA.innerHTML = '<strong>Answer :</strong> ' + (paire.a || '');
+        groupe.appendChild(blocA);
+      });
+
+      listeEl.appendChild(groupe);
+    });
+  }
+
+  document.getElementById('hist-export').addEventListener('click', function(){
+    FAST.exportHistoriqueTxt();
+  });
+});
+</script>
+</body>
+</html>
