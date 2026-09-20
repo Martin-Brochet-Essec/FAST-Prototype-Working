@@ -41,7 +41,7 @@ window.FAST_AI = (function(){
       },
       body: JSON.stringify({
         model: C.ANTHROPIC.MODELE,
-        max_tokens: 300,
+        max_tokens: 500,
         messages: [{ role: "user", content: promptFinal }]
       })
     });

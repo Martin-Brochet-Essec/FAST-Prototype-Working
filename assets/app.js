@@ -432,12 +432,21 @@ window.FAST = (function(){
 
   // Extrait la ligne finale "COACH: id" d'une réponse IA (e-Coach Générique) :
   // renvoie { texte: synthèse nettoyée, coachId: id ou null si absent/invalide }.
+  // Extrait la ligne finale "COACH: id" d'une réponse IA (e-Coach Générique).
+  // Cherche sur la DERNIÈRE LIGNE NON VIDE plutôt que d'exiger que "id" soit
+  // le tout dernier caractère du texte — sinon un simple point final, un
+  // saut de ligne superflu, ou une majuscule ("Individual") suffit à faire
+  // échouer l'extraction silencieusement.
   function extraireRecommandationCoach(reponseIA){
-    const m = reponseIA.match(/COACH:\s*([a-z]+)\s*$/i);
-    if(!m) return { texte: reponseIA.trim(), coachId: null };
+    const lignes = reponseIA.split('\n').map(l => l.trim()).filter(Boolean);
+    const derniere = lignes[lignes.length - 1] || '';
+    const m = derniere.match(/COACH:\s*([a-zA-Z]+)/i);
+    if(!m){
+      return { texte: reponseIA.trim(), coachId: null };
+    }
     const id = m[1].toLowerCase();
-    const texte = reponseIA.slice(0, m.index).trim();
-    return { texte: texte, coachId: ID_COACHS_VALIDES.includes(id) ? id : null };
+    const texte = lignes.slice(0, -1).join('\n').trim();
+    return { texte: texte || reponseIA.trim(), coachId: ID_COACHS_VALIDES.includes(id) ? id : null };
   }
 
   // Choix manuel de coach(s) — persistant d'une session à l'autre. Un
