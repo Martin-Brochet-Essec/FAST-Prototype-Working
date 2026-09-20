@@ -522,18 +522,24 @@ window.FAST = (function(){
   async function runCoachSynthesis(coachId, sourceScreenId){
     const qa = getAnswersFor(sourceScreenId);
     const answersBlock = formatAnswersBlock(qa);
+    const profils = await loadCoachProfiles();
     const prompt = await loadCoachPrompt(coachId);
 
     const promptFinal = construireConsigneIA() + prompt.systemPrompt + "\n\n" +
-      prompt.userPromptTemplate.replace('{ANSWERS}', answersBlock);
+      prompt.userPromptTemplate
+        .replace('{ANSWERS}', answersBlock)
+        .replace('{DESCRIPTIONS_COACHS}', formaterDescriptionsCoachs(profils));
 
-    const reponseIA = await window.FAST_AI.interrogerAgentIA(promptFinal);
+    const reponseBrute = await window.FAST_AI.interrogerAgentIA(promptFinal);
+    const { texte, coachId: coachRecommandeId } = extraireRecommandationCoach(reponseBrute);
+    if(coachRecommandeId) setCoachRecommande(coachRecommandeId);
 
     const synthese = {
       coachId: coachId,
       source: sourceScreenId,
       ts: new Date().toISOString(),
-      reponseIA: reponseIA,
+      reponseIA: texte,
+      coachRecommande: coachRecommandeId,
       qa: qa
     };
     localStorage.setItem('fast_last_synthesis', JSON.stringify(synthese));
