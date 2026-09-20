@@ -202,4 +202,9 @@
   <string key="choix_possibles_tous">toate</string>
   <string key="oui_label">Da</string>
   <string key="non_label">Nu</string>
+  <string key="menu_historique">Istoric</string>
+  <string key="hist_eyebrow">Istoricul tău</string>
+  <string key="hist_h1">Toate întrebările și răspunsurile tale</string>
+  <string key="hist_export">Descarcă (.txt)</string>
+  <string key="hist_vide">Nicio întrebare sau răspuns înregistrat încă.</string>
 </i18n>

@@ -202,4 +202,9 @@
   <string key="choix_possibles_tous">todas</string>
   <string key="oui_label">Sí</string>
   <string key="non_label">No</string>
+  <string key="menu_historique">Historial</string>
+  <string key="hist_eyebrow">Tu historial</string>
+  <string key="hist_h1">Todas tus preguntas y respuestas</string>
+  <string key="hist_export">Descargar (.txt)</string>
+  <string key="hist_vide">Todavía no hay ninguna pregunta o respuesta registrada.</string>
 </i18n>
