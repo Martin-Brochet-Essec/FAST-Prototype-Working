@@ -17,16 +17,7 @@
     <button class="langbtn" data-lang="es" onclick="FAST.setLang('es')">ES</button>
     <button class="langbtn" data-lang="ro" onclick="FAST.setLang('ro')">RO</button>
   </div>
-  <div class="statusbar"><span>9:41</span><span class="brandmark">FAST</span></div>
-  <div class="menu-overlay" id="menuOverlay" onclick="if(event.target===this) FAST.closeMenu()">
-    <div class="menu-panel">
-      <a class="menu-item" href="profile.html" data-i18n="menu_profil">Profil</a>
-      <a class="menu-item" href="who-am-i.html" data-i18n="menu_whoami">Qui suis-je</a>
-      <a class="menu-item" href="config.html" data-i18n="menu_config">Configuration</a>
-      <a class="menu-item" href="subscription.html" data-i18n="menu_subscription">Abonnement</a>
-      <a class="menu-item" href="index.html" data-i18n="menu_deconnexion">Se déconnecter</a>
-    </div>
-  </div>
+  <fast-header></fast-header>
   <section class="screen">
 <div class="home-header">
   <div>
