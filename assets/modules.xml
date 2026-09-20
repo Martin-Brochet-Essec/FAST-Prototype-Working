@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modules>
+
+  <module id="coaching-julie">
+    <name>Coaching Julie — du lundi au samedi</name>
+    <description>Un parcours d'une semaine, un petit défi chaque jour, pour avancer concrètement sur votre sujet.</description>
+
+    <exercices>
+      <exercice numero="1" jour="Lundi">
+        <objectif>Repérer une situation où votre voix n'a pas été suffisamment entendue, et préparer une phrase simple pour la faire entendre la prochaine fois.</objectif>
+        <duree_jours>1</duree_jours>
+      </exercice>
+      <exercice numero="2" jour="Mardi">
+        <objectif>Mettre cette phrase en pratique dans une réunion ou un échange, et observer la réaction obtenue.</objectif>
+        <duree_jours>1</duree_jours>
+      </exercice>
+      <exercice numero="3" jour="Mercredi">
+        <objectif>Identifier une tâche que vous pourriez déléguer aujourd'hui, et la déléguer réellement.</objectif>
+        <duree_jours>1</duree_jours>
+      </exercice>
+      <exercice numero="4" jour="Jeudi">
+        <objectif>Demander à un collègue ou un proche un retour constructif sur votre posture cette semaine.</objectif>
+        <duree_jours>1</duree_jours>
+      </exercice>
+      <exercice numero="5" jour="Vendredi">
+        <objectif>Noter une réussite de la semaine, aussi petite soit-elle, et la partager avec quelqu'un.</objectif>
+        <duree_jours>1</duree_jours>
+      </exercice>
+    </exercices>
+
+    <bilan>
+      <description>Bilan du samedi : un petit examen de la semaine, une synthèse, puis le choix entre approfondir avec votre e-Coach ou être mise en relation.</description>
+    </bilan>
+  </module>
+
+</modules>

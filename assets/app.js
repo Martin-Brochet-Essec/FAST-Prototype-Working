@@ -541,6 +541,150 @@ window.FAST = (function(){
     return { nom: nom, expertise: expertise };
   }
 
+  // ---- Modules d'accompagnement quotidien ----
+  // Schéma générique : un module est une suite d'exercices (objectif +
+  // durée). Pour chaque exercice : l'utilisatrice documente son retour
+  // d'expérience en texte libre, l'IA l'évalue (avec le contexte du coach
+  // actuel + le profil + l'historique du module), puis l'utilisatrice
+  // indique si l'objectif est atteint. Si oui, exercice suivant. Si non,
+  // la durée de CE MÊME exercice est prolongée de 25% et on redemande un
+  // retour d'expérience, sans avancer. Une fois tous les exercices
+  // terminés, un bilan de synthèse est proposé.
+
+  async function loadModule(moduleId){
+    const res = await fetch('assets/modules.xml');
+    if(!res.ok) throw new Error("assets/modules.xml introuvable (HTTP " + res.status + ").");
+    const doc = new DOMParser().parseFromString(await res.text(), 'text/xml');
+    const noeud = Array.from(doc.querySelectorAll('module')).find(m => m.getAttribute('id') === moduleId);
+    if(!noeud) throw new Error(`Module "${moduleId}" introuvable dans assets/modules.xml.`);
+    const exercices = Array.from(noeud.querySelectorAll('exercices > exercice')).map(e => ({
+      numero: parseInt(e.getAttribute('numero'), 10),
+      jour: e.getAttribute('jour') || '',
+      objectif: (e.querySelector('objectif')?.textContent || '').trim(),
+      dureeJours: parseFloat(e.querySelector('duree_jours')?.textContent || '1')
+    }));
+    return {
+      id: moduleId,
+      name: (noeud.querySelector('name')?.textContent || '').trim(),
+      description: (noeud.querySelector('description')?.textContent || '').trim(),
+      exercices: exercices,
+      bilanDescription: (noeud.querySelector('bilan > description')?.textContent || '').trim()
+    };
+  }
+
+  function getEtatModule(moduleId){
+    try{ return JSON.parse(localStorage.getItem('fast_module_' + moduleId) || 'null'); }
+    catch(e){ return null; }
+  }
+  function sauverEtatModule(moduleId, etat){
+    localStorage.setItem('fast_module_' + moduleId, JSON.stringify(etat));
+  }
+
+  // Démarre (ou reprend) un module : renvoie l'état courant.
+  function demarrerOuReprendreModule(moduleId){
+    let etat = getEtatModule(moduleId);
+    if(!etat){
+      etat = { indexExercice: 0, dureeCourante: null, etape: 'attente_retour', historique: [], termine: false };
+      sauverEtatModule(moduleId, etat);
+    }
+    return etat;
+  }
+
+  // Soumet le retour d'expérience de l'utilisatrice pour l'exercice
+  // courant, obtient l'évaluation IA, et l'ajoute à l'historique.
+  async function soumettreRetourExercice(moduleId, exercice, retourTexte){
+    const qaQ10 = getAnswersFor('q10');
+    const qaQ5 = getAnswersFor('q5');
+    const etat = getEtatModule(moduleId) || demarrerOuReprendreModule(moduleId);
+
+    const historiqueTexte = etat.historique.length === 0
+      ? '(aucun exercice précédent dans ce module)'
+      : etat.historique.map((h, idx) =>
+          `${idx + 1}. Objectif : ${h.objectif}\nRetour : ${h.retour}\nÉvaluation : ${h.evaluation}`
+        ).join('\n\n');
+
+    const contexteCoach = await construireContexteCoach();
+    const prompt = await loadCoachPrompt('module_evaluation');
+    const promptFinal = construireConsigneIA() + prompt.systemPrompt + "\n\n" +
+      prompt.userPromptTemplate
+        .replace('{ANSWERS_Q10}', formatAnswersBlock(qaQ10))
+        .replace('{ANSWERS_Q5}', formatAnswersBlock(qaQ5))
+        .replace('{HISTORIQUE_MODULE}', historiqueTexte)
+        .replace('{EXERCICE_COURANT}', exercice.objectif)
+        .replace('{RETOUR_UTILISATRICE}', retourTexte)
+        .replace(/{COACH_NOM}/g, contexteCoach.nom)
+        .replace(/{COACH_EXPERTISE}/g, contexteCoach.expertise);
+
+    const evaluation = await window.FAST_AI.interrogerAgentIA(promptFinal);
+
+    etat.dernierRetour = retourTexte;
+    etat.derniereEvaluation = evaluation;
+    etat.etape = 'attente_confirmation';
+    sauverEtatModule(moduleId, etat);
+    return evaluation;
+  }
+
+  // L'utilisatrice indique si elle considère l'objectif atteint.
+  // Oui -> exercice suivant. Non -> la durée de CE exercice est prolongée
+  // de 25% et on redemande un nouveau retour d'expérience sans avancer.
+  function soumettreConfirmationObjectif(moduleId, exercice, objectifAtteint){
+    const etat = getEtatModule(moduleId);
+    if(!etat) throw new Error("État du module introuvable — le module n'a pas été démarré correctement.");
+
+    etat.historique.push({
+      exerciceNumero: exercice.numero,
+      objectif: exercice.objectif,
+      retour: etat.dernierRetour,
+      evaluation: etat.derniereEvaluation,
+      objectifAtteint: objectifAtteint
+    });
+
+    if(objectifAtteint){
+      etat.indexExercice += 1;
+      etat.dureeCourante = null;
+      etat.etape = 'attente_retour';
+    } else {
+      const dureeBase = etat.dureeCourante || exercice.dureeJours;
+      etat.dureeCourante = dureeBase * 1.25;
+      etat.etape = 'attente_retour';
+    }
+    delete etat.dernierRetour;
+    delete etat.derniereEvaluation;
+    sauverEtatModule(moduleId, etat);
+    return etat;
+  }
+
+  // Bilan de fin de module (tous les exercices terminés) : synthèse de la
+  // semaine à partir de l'historique complet.
+  async function produireBilanModule(moduleId){
+    const qaQ10 = getAnswersFor('q10');
+    const qaQ5 = getAnswersFor('q5');
+    const etat = getEtatModule(moduleId);
+    if(!etat) throw new Error("État du module introuvable.");
+
+    if(etat.bilan) return etat.bilan; // déjà calculé, pas de rappel IA
+
+    const historiqueTexte = etat.historique.map((h, idx) =>
+      `${idx + 1}. Objectif : ${h.objectif}\nRetour : ${h.retour}\nÉvaluation : ${h.evaluation}\nObjectif atteint : ${h.objectifAtteint ? 'Oui' : 'Non'}`
+    ).join('\n\n');
+
+    const contexteCoach = await construireContexteCoach();
+    const prompt = await loadCoachPrompt('module_bilan');
+    const promptFinal = construireConsigneIA() + prompt.systemPrompt + "\n\n" +
+      prompt.userPromptTemplate
+        .replace('{ANSWERS_Q10}', formatAnswersBlock(qaQ10))
+        .replace('{ANSWERS_Q5}', formatAnswersBlock(qaQ5))
+        .replace('{HISTORIQUE_MODULE}', historiqueTexte)
+        .replace(/{COACH_NOM}/g, contexteCoach.nom)
+        .replace(/{COACH_EXPERTISE}/g, contexteCoach.expertise);
+
+    const bilan = await window.FAST_AI.interrogerAgentIA(promptFinal);
+    etat.bilan = bilan;
+    etat.termine = true;
+    sauverEtatModule(moduleId, etat);
+    return bilan;
+  }
+
 
   // Point d'entrée utilisé par results.html : rassemble les réponses du set
   // `sourceScreenId` (typiquement 'q10'), assemble le prompt du coach
@@ -1108,6 +1252,9 @@ window.FAST = (function(){
     loadCoachProfiles: loadCoachProfiles, getCoachManuel: getCoachManuel, setCoachManuel: setCoachManuel,
     getCoachRecommande: getCoachRecommande, getCoachActuel: getCoachActuel, idsCoachsValides: ID_COACHS_VALIDES,
     getSkillsOrdonnees: getSkillsOrdonnees,
+    loadModule: loadModule, demarrerOuReprendreModule: demarrerOuReprendreModule, getEtatModule: getEtatModule,
+    soumettreRetourExercice: soumettreRetourExercice, soumettreConfirmationObjectif: soumettreConfirmationObjectif,
+    produireBilanModule: produireBilanModule,
     runFinalSynthesis: runFinalSynthesis,
     runProfileDeepening: runProfileDeepening,
     generateDeepenQuestions: generateDeepenQuestions,
