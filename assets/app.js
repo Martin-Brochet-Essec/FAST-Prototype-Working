@@ -325,12 +325,15 @@ window.FAST = (function(){
   // NB : l'historique des questions libres ("your-question") n'est PAS
   // effacé ici — il doit survivre à une remise à zéro du profil, puisqu'il
   // sert de mémoire long terme indépendante (voir getRecentQuestions).
+  // NB : le choix manuel de coach ("fast_coach_manuel") n'est PAS effacé —
+  // seule la recommandation automatique l'est, pour qu'une nouvelle soit
+  // proposée au prochain passage par Q10+Q5, sans perdre un choix explicite.
   function clearProfileData(){
     const all = JSON.parse(localStorage.getItem('fast_answers') || '[]');
     const nettoye = all.filter(e => !['q10', 'q5', 'deepen'].includes(e.screen));
     localStorage.setItem('fast_answers', JSON.stringify(nettoye));
     ['fast_last_synthesis', 'fast_profile_deepening', 'fast_deepen_questions', 'fast_final_synthesis',
-     'fast_draft_q10', 'fast_draft_q5', 'fast_draft_deepen'].forEach(k => localStorage.removeItem(k));
+     'fast_draft_q10', 'fast_draft_q5', 'fast_draft_deepen', 'fast_coach_recommande'].forEach(k => localStorage.removeItem(k));
   }
 
   // Réponses vides = section clairement signalée plutôt que silencieusement
@@ -394,6 +397,94 @@ window.FAST = (function(){
       "Réponds impérativement en " + nomLangue + ", quelle que soit la langue du texte ci-dessous.\n\n";
   }
 
+  // ---- e-Coachs spécialisés (Society / Family / Enterprise / Individual) ----
+
+  const ID_COACHS_VALIDES = ['society', 'family', 'enterprise', 'individual'];
+
+  // Charge les 4 profils de coachs spécialisés depuis <coach_profiles> dans
+  // assets/prompts.xml. Retourne un objet { id: {id, name, tagline, expertise} }.
+  async function loadCoachProfiles(){
+    const res = await fetch('assets/prompts.xml');
+    if(!res.ok) throw new Error("assets/prompts.xml introuvable (HTTP " + res.status + ").");
+    const doc = new DOMParser().parseFromString(await res.text(), 'text/xml');
+    const profils = {};
+    Array.from(doc.querySelectorAll('coach_profiles > profile')).forEach(p => {
+      const id = p.getAttribute('id');
+      profils[id] = {
+        id: id,
+        name: (p.querySelector('name')?.textContent || '').trim(),
+        tagline: (p.querySelector('tagline')?.textContent || '').trim(),
+        expertise: (p.querySelector('expertise')?.textContent || '').trim()
+      };
+    });
+    return profils;
+  }
+
+  // Formate les 4 profils pour le prompt du e-Coach Générique (qui doit
+  // choisir lequel recommander).
+  function formaterDescriptionsCoachs(profils){
+    return ID_COACHS_VALIDES.map(id => {
+      const p = profils[id];
+      if(!p) return '';
+      return `- ${id} (${p.name} — ${p.tagline}) : ${p.expertise}`;
+    }).filter(Boolean).join('\n');
+  }
+
+  // Extrait la ligne finale "COACH: id" d'une réponse IA (e-Coach Générique) :
+  // renvoie { texte: synthèse nettoyée, coachId: id ou null si absent/invalide }.
+  function extraireRecommandationCoach(reponseIA){
+    const m = reponseIA.match(/COACH:\s*([a-z]+)\s*$/i);
+    if(!m) return { texte: reponseIA.trim(), coachId: null };
+    const id = m[1].toLowerCase();
+    const texte = reponseIA.slice(0, m.index).trim();
+    return { texte: texte, coachId: ID_COACHS_VALIDES.includes(id) ? id : null };
+  }
+
+  // Choix manuel de coach(s) — persistant d'une session à l'autre. Un
+  // tableau vide signifie "pas de choix manuel, utiliser la recommandation
+  // automatique". Plusieurs ids = "mix" de coachs.
+  function getCoachManuel(){
+    try{ return JSON.parse(localStorage.getItem('fast_coach_manuel') || '[]'); }
+    catch(e){ return []; }
+  }
+  function setCoachManuel(ids){
+    localStorage.setItem('fast_coach_manuel', JSON.stringify(ids || []));
+  }
+
+  // Dernière recommandation automatique du e-Coach Générique (mise à jour à
+  // chaque nouvelle synthèse Q10+Q5, sans écraser un choix manuel existant).
+  function getCoachRecommande(){
+    return localStorage.getItem('fast_coach_recommande') || '';
+  }
+  function setCoachRecommande(id){
+    if(id) localStorage.setItem('fast_coach_recommande', id);
+  }
+
+  // Le ou les coachs effectivement utilisés : le choix manuel s'il existe,
+  // sinon la recommandation automatique (repli sur "individual" si aucune
+  // des deux n'existe encore, ex. avant tout passage par Q10/Q5).
+  function getCoachActuel(){
+    const manuel = getCoachManuel();
+    if(manuel.length > 0) return { ids: manuel, manuel: true };
+    const auto = getCoachRecommande();
+    return { ids: [auto || 'individual'], manuel: false };
+  }
+
+  // Construit {COACH_NOM}/{COACH_EXPERTISE} pour un ou plusieurs coachs
+  // (mix) : noms joints par " + ", expertises concaténées avec leur nom en
+  // préfixe pour rester lisible par l'IA en cas de mix.
+  async function construireContexteCoach(){
+    const profils = await loadCoachProfiles();
+    const { ids } = getCoachActuel();
+    const valides = ids.filter(id => profils[id]);
+    if(valides.length === 0){
+      return { nom: 'Coach de carrière généraliste', expertise: 'Accompagnement de carrière généraliste, tous domaines.' };
+    }
+    const nom = valides.map(id => profils[id].name).join(' + ');
+    const expertise = valides.map(id => `[${profils[id].name}] ${profils[id].expertise}`).join('\n');
+    return { nom: nom, expertise: expertise };
+  }
+
 
   // Point d'entrée utilisé par results.html : rassemble les réponses du set
   // `sourceScreenId` (typiquement 'q10'), assemble le prompt du coach
@@ -434,6 +525,7 @@ window.FAST = (function(){
     const questionLibre = (qaYourQuestion[0] && qaYourQuestion[0].a) || '';
     const historique = getRecentQuestions(5);
     const historiqueDeepen = getRecentDeepenHistory(5, true);
+    const contexteCoach = await construireContexteCoach();
 
     const prompt = await loadCoachPrompt(coachId);
 
@@ -444,7 +536,9 @@ window.FAST = (function(){
         .replace('{ANSWERS_DEEPEN}', formatAnswersBlock(qaDeepen))
         .replace('{QUESTION_LIBRE}', questionLibre)
         .replace('{HISTORIQUE_QUESTIONS}', formatQuestionsBlock(historique))
-        .replace('{HISTORIQUE_DEEPEN}', formatAnswersBlock(historiqueDeepen));
+        .replace('{HISTORIQUE_DEEPEN}', formatAnswersBlock(historiqueDeepen))
+        .replace(/{COACH_NOM}/g, contexteCoach.nom)
+        .replace(/{COACH_EXPERTISE}/g, contexteCoach.expertise);
 
     const reponseIA = await window.FAST_AI.interrogerAgentIA(promptFinal);
 
@@ -452,6 +546,7 @@ window.FAST = (function(){
       coachId: coachId,
       ts: new Date().toISOString(),
       reponseIA: reponseIA,
+      coachEffectif: getCoachActuel().ids,
       qaQ10: qaQ10, qaQ5: qaQ5, qaDeepen: qaDeepen, questionLibre: questionLibre
     };
     localStorage.setItem('fast_final_synthesis', JSON.stringify(synthese));
@@ -459,23 +554,31 @@ window.FAST = (function(){
   }
 
   // Approfondissement du profil (Q10 + Q5) : utilisé par
-  // results-even-better.html, coach "profile_deepening".
+  // results-even-better.html, coach "profile_deepening". En plus de la
+  // synthèse, ce coach recommande un e-Coach spécialisé (society/family/
+  // enterprise/individual), extrait de la réponse et mémorisé comme
+  // recommandation automatique (sans écraser un choix manuel existant).
   async function runProfileDeepening(coachId){
     const qaQ10 = getAnswersFor('q10');
     const qaQ5 = getAnswersFor('q5');
 
+    const profils = await loadCoachProfiles();
     const prompt = await loadCoachPrompt(coachId);
     const promptFinal = construireConsigneIA() + prompt.systemPrompt + "\n\n" +
       prompt.userPromptTemplate
         .replace('{ANSWERS_Q10}', formatAnswersBlock(qaQ10))
-        .replace('{ANSWERS_Q5}', formatAnswersBlock(qaQ5));
+        .replace('{ANSWERS_Q5}', formatAnswersBlock(qaQ5))
+        .replace('{DESCRIPTIONS_COACHS}', formaterDescriptionsCoachs(profils));
 
-    const reponseIA = await window.FAST_AI.interrogerAgentIA(promptFinal);
+    const reponseBrute = await window.FAST_AI.interrogerAgentIA(promptFinal);
+    const { texte, coachId: coachRecommandeId } = extraireRecommandationCoach(reponseBrute);
+    if(coachRecommandeId) setCoachRecommande(coachRecommandeId);
 
     const synthese = {
       coachId: coachId,
       ts: new Date().toISOString(),
-      reponseIA: reponseIA,
+      reponseIA: texte,
+      coachRecommande: coachRecommandeId,
       qaQ10: qaQ10, qaQ5: qaQ5
     };
     localStorage.setItem('fast_profile_deepening', JSON.stringify(synthese));
@@ -507,8 +610,9 @@ window.FAST = (function(){
     const qaQ5 = getAnswersFor('q5');
     const qaYourQuestion = getAnswersFor('your-question');
     const questionLibre = (qaYourQuestion[0] && qaYourQuestion[0].a) || '';
+    const coachActuel = getCoachActuel();
 
-    const signatureActuelle = JSON.stringify({ qaQ10: qaQ10, qaQ5: qaQ5, questionLibre: questionLibre });
+    const signatureActuelle = JSON.stringify({ qaQ10: qaQ10, qaQ5: qaQ5, questionLibre: questionLibre, coach: coachActuel.ids });
     const cacheBrut = localStorage.getItem('fast_deepen_questions');
     if(cacheBrut){
       const cache = JSON.parse(cacheBrut);
@@ -517,6 +621,7 @@ window.FAST = (function(){
       }
     }
 
+    const contexteCoach = await construireContexteCoach();
     const prompt = await loadCoachPrompt(coachId);
     const historique = getRecentQuestions(5);
     const historiqueDeepen = getRecentDeepenHistory(5, false);
@@ -526,7 +631,9 @@ window.FAST = (function(){
         .replace('{ANSWERS_Q5}', formatAnswersBlock(qaQ5))
         .replace('{QUESTION_LIBRE}', questionLibre)
         .replace('{HISTORIQUE_QUESTIONS}', formatQuestionsBlock(historique))
-        .replace('{HISTORIQUE_DEEPEN}', formatAnswersBlock(historiqueDeepen));
+        .replace('{HISTORIQUE_DEEPEN}', formatAnswersBlock(historiqueDeepen))
+        .replace(/{COACH_NOM}/g, contexteCoach.nom)
+        .replace(/{COACH_EXPERTISE}/g, contexteCoach.expertise);
 
     const reponseIA = await window.FAST_AI.interrogerAgentIA(promptFinal);
     const questions = parseTroisQuestions(reponseIA);
@@ -931,6 +1038,8 @@ window.FAST = (function(){
     getAnswersFor: getAnswersFor, runCoachSynthesis: runCoachSynthesis,
     hasCompletedProfile: hasCompletedProfile, clearProfileData: clearProfileData,
     getRecentQuestions: getRecentQuestions, getRecentDeepenHistory: getRecentDeepenHistory,
+    loadCoachProfiles: loadCoachProfiles, getCoachManuel: getCoachManuel, setCoachManuel: setCoachManuel,
+    getCoachRecommande: getCoachRecommande, getCoachActuel: getCoachActuel, idsCoachsValides: ID_COACHS_VALIDES,
     runFinalSynthesis: runFinalSynthesis,
     runProfileDeepening: runProfileDeepening,
     generateDeepenQuestions: generateDeepenQuestions,
