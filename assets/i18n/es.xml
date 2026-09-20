@@ -214,4 +214,5 @@
   <string key="whoami_coach_auto_suffixe">(recomendación automática)</string>
   <string key="whoami_coach_save">Guardar mi elección</string>
   <string key="whoami_coach_auto">Volver a la recomendación automática</string>
+  <string key="coach_non_identifie">Tu coach aún no ha sido identificado.</string>
 </i18n>
