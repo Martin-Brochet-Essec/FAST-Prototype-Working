@@ -34,24 +34,52 @@
     <name>e-Coach Society</name>
     <tagline>Normes, législation et institutions</tagline>
     <expertise>Lobbying et négociation institutionnelle : maîtriser le fonctionnement des instances décisionnelles pour faire évoluer les normes et lois en faveur de l'équité. Décryptage du cadre juridique (ex. quotas sur la parité) pour exiger une véritable représentativité. Déconstruction des stéréotypes sociétaux : identifier et déjouer activement les biais culturels et la pression sociale pesant sur les femmes. Plaidoyer et prise de parole : porter une voix collective forte face aux médias et institutions pour sensibiliser à l'égalité. Cartographie des réseaux d'influence : connecter son parcours aux grands réseaux nationaux et internationaux d'empouvoirement féminin.</expertise>
+  
+    <skills>
+      <skill><title>Décryptage du cadre juridique</title><description>Exploiter la législation (ex. quotas sur la parité) pour exiger une véritable représentativité.</description></skill>
+      <skill><title>Déconstruction des stéréotypes sociétaux</title><description>Identifier et déjouer activement les biais culturels et la pression sociale pesant sur les femmes.</description></skill>
+      <skill><title>Plaidoyer et prise de parole</title><description>Porter une voix collective forte face aux médias et institutions pour sensibiliser à l'égalité.</description></skill>
+      <skill><title>Cartographie des réseaux d'influence</title><description>Connecter son parcours aux grands réseaux nationaux et internationaux d'empouvoirement féminin.</description></skill>
+    </skills>
   </profile>
 
   <profile id="family">
     <name>e-Coach Family</name>
     <tagline>Éducation, logistique et équilibre domestique</tagline>
     <expertise>Négociation du partage domestique : établir une répartition équitable des charges opérationnelles et de l'éducation au sein du foyer. Délégation logistique sans culpabilité : structurer et externaliser les tâches quotidiennes pour préserver son énergie et son temps de travail. Gestion du temps partagé : fixer des frontières étanches entre vie professionnelle et vie personnelle pour éviter l'épuisement. Éducation aux rôles égalitaires : transmettre aux enfants une vision déconstruite des stéréotypes de genre dès le plus jeune âge. Communication de crise intra-famille : réguler les tensions liées aux contraintes de carrière grâce à un dialogue affirmé au foyer.</expertise>
+  
+    <skills>
+      <skill><title>Délégation logistique sans culpabilité</title><description>Structurer et externaliser les tâches quotidiennes pour préserver son énergie et son temps de travail.</description></skill>
+      <skill><title>Gestion du temps partagé</title><description>Fixer des frontières étanches entre vie professionnelle et vie personnelle pour éviter l'épuisement.</description></skill>
+      <skill><title>Éducation aux rôles égalitaires</title><description>Transmettre aux enfants une vision déconstruite des stéréotypes de genre dès le plus jeune âge.</description></skill>
+      <skill><title>Communication de crise intra-familiale</title><description>Réguler les tensions liées aux contraintes de carrière grâce à un dialogue affirmé au foyer.</description></skill>
+    </skills>
   </profile>
 
   <profile id="enterprise">
     <name>e-Coach Enterprise</name>
     <tagline>Culture d'entreprise, opportunités et réseaux</tagline>
     <expertise>Revendication du pouvoir décisionnel : refuser les rôles d'exécutante et exiger l'autorité sur ses projets et budgets. Protection du portefeuille stratégique : sécuriser la propriété de ses comptes clients et réussites face aux tentatives d'appropriation. Navigation dans l'informel politique : décoder et intégrer les réseaux informels de l'entreprise où se prennent les vraies décisions. Recrutement de sponsors internes : identifier et rallier des mentors et alliés influents capables de soutenir sa progression. Négociation salariale et financière : négocier fermement sa rémunération, ses primes de performance et ses moyens d'action.</expertise>
+  
+    <skills>
+      <skill><title>Protection du portefeuille stratégique</title><description>Sécuriser la propriété de ses comptes clients et réussites face aux tentatives d'appropriation.</description></skill>
+      <skill><title>Navigation dans l'informel politique</title><description>Décoder et intégrer les réseaux informels de l'entreprise où se prennent les vraies décisions.</description></skill>
+      <skill><title>Recrutement de sponsors internes</title><description>Identifier et rallier des mentors et alliés influents capables de soutenir sa progression.</description></skill>
+      <skill><title>Négociation salariale et financière</title><description>Négocier fermement sa rémunération, ses primes de performance et ses moyens d'action.</description></skill>
+    </skills>
   </profile>
 
   <profile id="individual">
     <name>e-Coach Individual</name>
     <tagline>Compétences propres et présence exécutive</tagline>
     <expertise>Affirmation de l'autorité directe : adopter un style de communication cash et ferme sans craindre la désapprobation. Présence et posture exécutive : incarner la légitimité et la confiance en soi lors des interventions face au C-suite. Gestion du stress décisionnel : conserver sa lucidité et son calme face aux intimidations ou environnements agressifs. Autopromotion et valorisation personnelle : faire connaître ses résultats et revendiquer ouvertement l'impact de son travail. Développement de la résilience : transformer les obstacles et les remises en cause en leviers d'action et de progression.</expertise>
+  
+    <skills>
+      <skill><title>Présence et posture exécutive</title><description>Incarner la légitimité et la confiance en soi lors des interventions face au C-suite.</description></skill>
+      <skill><title>Gestion du stress décisionnel</title><description>Conserver sa lucidité et son calme face aux intimidations ou environnements agressifs.</description></skill>
+      <skill><title>Autopromotion et valorisation personnelle</title><description>Faire connaître ses résultats et revendiquer ouvertement l'impact de son travail.</description></skill>
+      <skill><title>Développement de la résilience</title><description>Transformer les obstacles et les remises en cause en leviers d'action et de progression.</description></skill>
+    </skills>
   </profile>
 
 </coach_profiles>

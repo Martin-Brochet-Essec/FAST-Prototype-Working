@@ -410,14 +410,41 @@ window.FAST = (function(){
     const profils = {};
     Array.from(doc.querySelectorAll('coach_profiles > profile')).forEach(p => {
       const id = p.getAttribute('id');
+      const skills = Array.from(p.querySelectorAll('skills > skill')).map(s => ({
+        title: (s.querySelector('title')?.textContent || '').trim(),
+        description: (s.querySelector('description')?.textContent || '').trim()
+      }));
       profils[id] = {
         id: id,
         name: (p.querySelector('name')?.textContent || '').trim(),
         tagline: (p.querySelector('tagline')?.textContent || '').trim(),
-        expertise: (p.querySelector('expertise')?.textContent || '').trim()
+        expertise: (p.querySelector('expertise')?.textContent || '').trim(),
+        skills: skills
       };
     });
     return profils;
+  }
+
+  // Liste des 16 compétences (4 par coach), avec celles du coach actuel
+  // (choisi manuellement ou identifié automatiquement) en premier, puis
+  // celles des 3 autres coachs à la suite (toujours utiles à proposer).
+  // Détermine un coach si aucun n'existe encore (voir assurerCoachDetermine).
+  async function getSkillsOrdonnees(){
+    await assurerCoachDetermine();
+    const profils = await loadCoachProfiles();
+    const { ids: idsPrioritaires } = getCoachActuel();
+    const idsRestants = ID_COACHS_VALIDES.filter(id => !idsPrioritaires.includes(id));
+    const ordreCoachs = idsPrioritaires.filter(id => profils[id]).concat(idsRestants);
+
+    const liste = [];
+    ordreCoachs.forEach(id => {
+      const p = profils[id];
+      if(!p) return;
+      (p.skills || []).forEach(s => {
+        liste.push({ coachId: id, coachNom: p.name, prioritaire: idsPrioritaires.includes(id), title: s.title, description: s.description });
+      });
+    });
+    return liste;
   }
 
   // Formate les 4 profils pour le prompt du e-Coach Générique (qui doit
@@ -1080,6 +1107,7 @@ window.FAST = (function(){
     getRecentQuestions: getRecentQuestions, getRecentDeepenHistory: getRecentDeepenHistory,
     loadCoachProfiles: loadCoachProfiles, getCoachManuel: getCoachManuel, setCoachManuel: setCoachManuel,
     getCoachRecommande: getCoachRecommande, getCoachActuel: getCoachActuel, idsCoachsValides: ID_COACHS_VALIDES,
+    getSkillsOrdonnees: getSkillsOrdonnees,
     runFinalSynthesis: runFinalSynthesis,
     runProfileDeepening: runProfileDeepening,
     generateDeepenQuestions: generateDeepenQuestions,
@@ -1106,6 +1134,7 @@ class FastHeader extends HTMLElement {
           <a class="menu-item" href="profile.html" data-i18n="menu_profil">Profil</a>
           <a class="menu-item" href="who-am-i.html" data-i18n="menu_whoami">Qui suis-je</a>
           <a class="menu-item" href="history.html" data-i18n="menu_historique">Historique</a>
+          <a class="menu-item" href="skills.html" data-i18n="menu_skills">Améliorer mes compétences</a>
           <a class="menu-item" href="config.html" data-i18n="menu_config">Configuration</a>
           <a class="menu-item" href="subscription.html" data-i18n="menu_subscription">Abonnement</a>
           <a class="menu-item" href="index.html" data-i18n="menu_deconnexion">Se déconnecter</a>
