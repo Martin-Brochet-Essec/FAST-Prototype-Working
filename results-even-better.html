@@ -32,6 +32,7 @@
     <div class="card" id="reb-contenu" style="display:none;">
       <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="reb_synthese_title">Ce que nous précisons</h3>
       <p id="reb-texte" style="font-size:14px; color:var(--text); line-height:1.7; margin:0;"></p>
+      <p id="reb-coach-ligne" style="font-size:13.5px; font-weight:600; color:var(--rose-deep); margin:14px 0 0; display:none;"></p>
       <p style="font-size:12px; color:var(--text-dim); margin:12px 0 0;" data-i18n="reb_note">Vous pouvez maintenant nous poser la question qui vous préoccupe aujourd'hui.</p>
     </div>
 
@@ -83,6 +84,20 @@ document.addEventListener('DOMContentLoaded', async function(){
     contenu.style.display = 'block';
     texte.textContent = synthese.reponseIA;
     boutonContinuer.style.display = 'inline-block';
+
+    if(synthese.coachRecommande){
+      try{
+        const profils = await FAST.loadCoachProfiles();
+        const p = profils[synthese.coachRecommande];
+        if(p){
+          const ligne = document.getElementById('reb-coach-ligne');
+          const d = FAST.dict();
+          const libelle = d.reb_coach_suggere || 'Coach suggéré :';
+          ligne.textContent = libelle + ' ' + p.name + ' (' + p.tagline + ')';
+          ligne.style.display = 'block';
+        }
+      }catch(e){ /* pas bloquant si le libellé du coach échoue à s'afficher */ }
+    }
 
   }catch(erreur){
     chargement.style.display = 'none';

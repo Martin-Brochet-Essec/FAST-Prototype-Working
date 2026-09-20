@@ -69,16 +69,18 @@ document.addEventListener('DOMContentLoaded', async function(){
 
     const cacheBrut = localStorage.getItem('fast_final_synthesis');
     let synthese = null;
+    const coachActuelIds = JSON.stringify(FAST.getCoachActuel().ids);
 
     if(cacheBrut){
       const cache = JSON.parse(cacheBrut);
       const memeCoach = cache.coachId === 'final_answer';
+      const memeCoachEffectif = JSON.stringify(cache.coachEffectif || []) === coachActuelIds;
       const memesReponses =
         JSON.stringify(cache.qaQ10) === JSON.stringify(qaQ10Actuelles) &&
         JSON.stringify(cache.qaQ5) === JSON.stringify(qaQ5Actuelles) &&
         JSON.stringify(cache.qaDeepen) === JSON.stringify(qaDeepenActuelles) &&
         cache.questionLibre === questionLibreActuelle;
-      if(memeCoach && memesReponses) synthese = cache;
+      if(memeCoach && memeCoachEffectif && memesReponses) synthese = cache;
     }
 
     // 'final_answer' = id du coach dans assets/prompts.xml

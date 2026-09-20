@@ -32,6 +32,17 @@
   <p class="summary-box" id="summaryText">Your summary will appear here as you answer the profiling questions.</p>
   <button class="btn btn-ghost" id="whoami-modifier" data-i18n="whoami_modifier" style="margin-top:10px; display:none;">Modifier mes réponses de profil</button>
 </div>
+<div class="card" id="coach-card" style="display:none;">
+  <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 8px;" data-i18n="whoami_coach_title">Votre e-Coach</h3>
+  <p id="coach-actuel-ligne" style="font-size:13.5px; font-weight:600; margin:0 0 10px;"></p>
+  <div id="coach-choix"></div>
+  <div class="steprow" style="margin-top:10px;">
+    <button class="btn btn-ghost" id="coach-save" data-i18n="whoami_coach_save" disabled>Enregistrer mon choix</button>
+  </div>
+  <div class="steprow">
+    <button class="btn btn-ghost" id="coach-auto" data-i18n="whoami_coach_auto">Revenir à la recommandation automatique</button>
+  </div>
+</div>
 <div class="card">
   <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 8px;" data-i18n="whoami_section_milestones">Parcours & jalons atteints</h3>
   <div class="milestone"><div class="dot-done"></div><span data-i18n="whoami_milestone_1">Diagnostic initial</span></div>
@@ -95,6 +106,66 @@ document.addEventListener('DOMContentLoaded', async function(){
   }
 
   await chargerResume();
+
+  // ---- Section e-Coach : affichage + sélection manuelle (mono ou mix) ----
+  if(FAST.getAnswersFor('q5').length > 0){
+    const carteCoach = document.getElementById('coach-card');
+    carteCoach.style.display = 'block';
+
+    try{
+      const profils = await FAST.loadCoachProfiles();
+      const ligneActuel = document.getElementById('coach-actuel-ligne');
+      const conteneurChoix = document.getElementById('coach-choix');
+      const boutonSave = document.getElementById('coach-save');
+      const boutonAuto = document.getElementById('coach-auto');
+      const d = FAST.dict();
+
+      function rafraichirLigneActuelle(){
+        const { ids, manuel } = FAST.getCoachActuel();
+        const noms = ids.filter(id => profils[id]).map(id => profils[id].name).join(' + ') || '—';
+        const suffixe = manuel ? (d.whoami_coach_manuel || '(choix manuel)') : (d.whoami_coach_auto_suffixe || '(recommandation automatique)');
+        ligneActuel.textContent = (d.whoami_coach_actuel || 'Coach actuel :') + ' ' + noms + ' ' + suffixe;
+      }
+
+      function rafraichirBoutonSave(){
+        const coches = Array.from(conteneurChoix.querySelectorAll('input[type=checkbox]:checked'));
+        boutonSave.disabled = coches.length === 0;
+      }
+
+      const manuelActuel = FAST.getCoachManuel();
+      FAST.idsCoachsValides.forEach(function(id){
+        const p = profils[id];
+        if(!p) return;
+        const ligne = document.createElement('label');
+        ligne.style.cssText = 'display:flex; align-items:center; gap:8px; padding:7px 0; font-size:13.5px; cursor:pointer;';
+        const input = document.createElement('input');
+        input.type = 'checkbox';
+        input.value = id;
+        input.checked = manuelActuel.includes(id);
+        input.addEventListener('change', rafraichirBoutonSave);
+        ligne.appendChild(input);
+        ligne.appendChild(document.createTextNode(p.name + ' — ' + p.tagline));
+        conteneurChoix.appendChild(ligne);
+      });
+
+      rafraichirLigneActuelle();
+      rafraichirBoutonSave();
+
+      boutonSave.addEventListener('click', function(){
+        const choisis = Array.from(conteneurChoix.querySelectorAll('input[type=checkbox]:checked')).map(i => i.value);
+        FAST.setCoachManuel(choisis);
+        rafraichirLigneActuelle();
+      });
+
+      boutonAuto.addEventListener('click', function(){
+        FAST.setCoachManuel([]);
+        conteneurChoix.querySelectorAll('input[type=checkbox]').forEach(i => { i.checked = false; });
+        rafraichirBoutonSave();
+        rafraichirLigneActuelle();
+      });
+
+    }catch(e){ /* pas bloquant si la section coach échoue à se charger */ }
+  }
 
   if(FAST.getAnswersFor('q10').length > 0){
     boutonModifier.style.display = 'inline-block';
