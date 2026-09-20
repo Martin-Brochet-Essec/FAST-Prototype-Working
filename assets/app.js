@@ -239,6 +239,31 @@ window.FAST = (function(){
     document.body.removeChild(a);
   }
 
+  // Export dédié à la page Historique : format "Qst : / Answer :" demandé,
+  // distinct de exportTxt() (format "Q:/R:") déjà utilisée par ailleurs
+  // (engagement.html), pour ne pas modifier son comportement existant.
+  function exportHistoriqueTxt(){
+    const p = getProfile();
+    const username = (p.firstname || 'utilisatrice').replace(/[^a-zA-Z0-9_-]/g, '_');
+    const all = JSON.parse(localStorage.getItem('fast_answers') || '[]');
+    let content = 'FAST — Historique\nUtilisatrice : ' + username + '\nGénéré le : ' + new Date().toString() + '\n\n';
+    if(all.length === 0){ content += '(aucune réponse enregistrée pour le moment)\n'; }
+    all.forEach(entry => {
+      content += '--- ' + entry.screen + ' (' + entry.ts + ') ---\n';
+      entry.qa.forEach(q => { content += 'Qst : ' + q.q + '\nAnswer : ' + (q.a || '') + '\n\n'; });
+    });
+    const now = new Date();
+    const stamp = now.getFullYear() + pad(now.getMonth()+1) + pad(now.getDate()) + '_' + pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds());
+    const filename = 'FAST_historique_' + username + '_' + stamp + '.txt';
+    const blob = new Blob([content], { type: 'text/plain' });
+    const a2 = document.createElement('a');
+    a2.href = URL.createObjectURL(blob);
+    a2.download = filename;
+    document.body.appendChild(a2);
+    a2.click();
+    document.body.removeChild(a2);
+  }
+
   // ---- Synthèse IA à partir des réponses d'un set de questions ----
 
   // Retrouve les réponses enregistrées pour un écran donné (le plus récent
@@ -902,7 +927,7 @@ window.FAST = (function(){
     loadQuestions: loadQuestions, runStepper: runStepper,
     getProfile: getProfile, saveProfile: saveProfile,
     getConfig: getConfig, saveConfig: saveConfig,
-    logAnswers: logAnswers, exportTxt: exportTxt,
+    logAnswers: logAnswers, exportTxt: exportTxt, exportHistoriqueTxt: exportHistoriqueTxt,
     getAnswersFor: getAnswersFor, runCoachSynthesis: runCoachSynthesis,
     hasCompletedProfile: hasCompletedProfile, clearProfileData: clearProfileData,
     getRecentQuestions: getRecentQuestions, getRecentDeepenHistory: getRecentDeepenHistory,
@@ -931,6 +956,7 @@ class FastHeader extends HTMLElement {
           <a class="menu-item" href="index.html" data-i18n="menu_accueil">Accueil</a>
           <a class="menu-item" href="profile.html" data-i18n="menu_profil">Profil</a>
           <a class="menu-item" href="who-am-i.html" data-i18n="menu_whoami">Qui suis-je</a>
+          <a class="menu-item" href="history.html" data-i18n="menu_historique">Historique</a>
           <a class="menu-item" href="config.html" data-i18n="menu_config">Configuration</a>
           <a class="menu-item" href="subscription.html" data-i18n="menu_subscription">Abonnement</a>
           <a class="menu-item" href="index.html" data-i18n="menu_deconnexion">Se déconnecter</a>
