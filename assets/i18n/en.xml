@@ -227,4 +227,21 @@
   <string key="uc_eyebrow">Coming soon</string>
   <string key="uc_h1">This page is under construction</string>
   <string key="uc_lead">The module to improve this skill is coming soon.</string>
+  <string key="module_suggestion_lead">Want to make real progress this week?</string>
+  <string key="module_suggestion_cta">Discover the Coaching Julie path</string>
+  <string key="module_eyebrow">Your path</string>
+  <string key="module_chargement">Loading your path...</string>
+  <string key="module_progression_label">Exercise</string>
+  <string key="module_retour_label">How did it go?</string>
+  <string key="module_retour_ph">Tell us about your experience...</string>
+  <string key="module_retour_envoyer">Send my feedback</string>
+  <string key="module_evaluation_title">What your coach thinks</string>
+  <string key="module_confirmation_question">Do you feel you've reached the goal of this exercise?</string>
+  <string key="module_objectif_oui">Yes, next exercise</string>
+  <string key="module_objectif_non">Not yet, extend a bit</string>
+  <string key="module_bilan_chargement">Preparing your weekly review...</string>
+  <string key="module_bilan_title">Your review</string>
+  <string key="module_bilan_choix_lead">What now?</string>
+  <string key="module_bilan_approfondir">Go deeper with my e-Coach</string>
+  <string key="module_bilan_mise_en_relation">Get connected</string>
 </i18n>

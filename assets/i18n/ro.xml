@@ -227,4 +227,21 @@
   <string key="uc_eyebrow">În curând</string>
   <string key="uc_h1">Această pagină este în construcție</string>
   <string key="uc_lead">Modulul pentru îmbunătățirea acestei abilități va fi disponibil în curând.</string>
+  <string key="module_suggestion_lead">Vrei să avansezi concret chiar din această săptămână?</string>
+  <string key="module_suggestion_cta">Descoperă parcursul Coaching Julie</string>
+  <string key="module_eyebrow">Parcursul tău</string>
+  <string key="module_chargement">Se încarcă parcursul tău...</string>
+  <string key="module_progression_label">Exercițiu</string>
+  <string key="module_retour_label">Cum a fost?</string>
+  <string key="module_retour_ph">Povestește-ne experiența ta...</string>
+  <string key="module_retour_envoyer">Trimite răspunsul meu</string>
+  <string key="module_evaluation_title">Ce crede coach-ul tău</string>
+  <string key="module_confirmation_question">Consideri că ai atins obiectivul acestui exercițiu?</string>
+  <string key="module_objectif_oui">Da, următorul exercițiu</string>
+  <string key="module_objectif_non">Încă nu, mai prelungim puțin</string>
+  <string key="module_bilan_chargement">Pregătim bilanțul săptămânii tale...</string>
+  <string key="module_bilan_title">Bilanțul tău</string>
+  <string key="module_bilan_choix_lead">Și acum?</string>
+  <string key="module_bilan_approfondir">Aprofundează cu e-Coach-ul meu</string>
+  <string key="module_bilan_mise_en_relation">Fii pusă în legătură</string>
 </i18n>

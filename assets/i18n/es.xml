@@ -227,4 +227,21 @@
   <string key="uc_eyebrow">Próximamente</string>
   <string key="uc_h1">Esta página está en construcción</string>
   <string key="uc_lead">El módulo para mejorar esta habilidad llegará pronto.</string>
+  <string key="module_suggestion_lead">¿Quieres avanzar de verdad esta semana?</string>
+  <string key="module_suggestion_cta">Descubrir el recorrido Coaching Julie</string>
+  <string key="module_eyebrow">Tu recorrido</string>
+  <string key="module_chargement">Cargando tu recorrido...</string>
+  <string key="module_progression_label">Ejercicio</string>
+  <string key="module_retour_label">¿Cómo te fue?</string>
+  <string key="module_retour_ph">Cuéntanos tu experiencia...</string>
+  <string key="module_retour_envoyer">Enviar mi respuesta</string>
+  <string key="module_evaluation_title">Lo que piensa tu coach</string>
+  <string key="module_confirmation_question">¿Sientes que has alcanzado el objetivo de este ejercicio?</string>
+  <string key="module_objectif_oui">Sí, siguiente ejercicio</string>
+  <string key="module_objectif_non">Todavía no, prolongar un poco</string>
+  <string key="module_bilan_chargement">Preparando el balance de tu semana...</string>
+  <string key="module_bilan_title">Tu balance</string>
+  <string key="module_bilan_choix_lead">¿Y ahora?</string>
+  <string key="module_bilan_approfondir">Profundizar con mi e-Coach</string>
+  <string key="module_bilan_mise_en_relation">Ser puesta en contacto</string>
 </i18n>
