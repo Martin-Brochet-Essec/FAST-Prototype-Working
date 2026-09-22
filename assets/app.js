@@ -647,23 +647,33 @@ window.FAST = (function(){
     return dispo[Math.floor(Math.random() * dispo.length)];
   }
 
-  // Enregistre la réponse à une question de quiz. Renvoie si elle était
-  // correcte, pour l'affichage immédiat (bloc vert/rouge).
+  // Enregistre la réponse à une question de quiz (avec l'index choisi, pour
+  // permettre une relecture ultérieure). Renvoie si elle était correcte,
+  // pour l'affichage immédiat (bloc vert/rouge).
   function soumettreReponseQuiz(moduleId, question, indexChoisi){
     const etat = getEtatModule(moduleId);
     const correcte = indexChoisi === question.bonneReponse;
     etat.questionsVuesSemaine.push(question.id);
-    etat.reponsesQuizSemaine[question.id] = correcte;
+    etat.reponsesQuizSemaine[question.id] = { correcte: correcte, indexChoisi: indexChoisi };
     etat.quizAujourdhui.repondues += 1;
     if(correcte) etat.quizAujourdhui.correctes += 1; else etat.quizAujourdhui.incorrectes += 1;
     sauverEtatModule(moduleId, etat);
     return correcte;
   }
 
-  // "J'en ferai plus demain" : passe à la proposition d'exercice du jour.
+  // "J'en ferai plus demain" : passe normalement à la proposition
+  // d'exercice du jour — SAUF en mode rattrapage (questions ratées reprises
+  // depuis le bilan du samedi), où l'on retourne directement au bilan avec
+  // une nouvelle analyse, sans repasser par l'exercice du vendredi.
   function arreterQuizPourAujourdhui(moduleId){
     const etat = getEtatModule(moduleId);
-    etat.phase = 'exercice_propose';
+    if(etat.modeRattrapage){
+      etat.modeRattrapage = false;
+      etat.phase = 'bilan';
+      delete etat.bilan; // force une nouvelle synthèse IA
+    } else {
+      etat.phase = 'exercice_propose';
+    }
     sauverEtatModule(moduleId, etat);
     return etat;
   }
@@ -671,18 +681,18 @@ window.FAST = (function(){
   function formaterStatsQuiz(etat){
     const total = Object.keys(etat.reponsesQuizSemaine).length;
     if(total === 0) return "(aucune question de quiz répondue pour l'instant)";
-    const correctes = Object.values(etat.reponsesQuizSemaine).filter(Boolean).length;
+    const correctes = Object.values(etat.reponsesQuizSemaine).filter(r => r.correcte).length;
     return `${correctes} bonnes réponses sur ${total} questions répondues cette semaine.`;
   }
 
   // ---- Exercice du jour ----
 
-  // L'utilisatrice indique l'exercice qu'elle compte réaliser (texte libre,
-  // à partir de l'objectif suggéré du jour). Avance au jour suivant, ou au
-  // bilan si c'était le jour 5.
   // Valide la proposition d'exercice du jour et avance. Plus de champ
   // libre : l'exercice suggéré (pré-écrit dans le module) est utilisé tel
   // quel, l'utilisatrice n'a pas à reformuler ce qu'elle va faire.
+  // Conserve aussi le nombre de questions de quiz répondues ce jour-là,
+  // pour que l'IA puisse commenter l'atteinte (ou non) de l'objectif
+  // quotidien de 10 questions.
   function validerExerciceDuJour(moduleId, moduleDef){
     const etat = getEtatModule(moduleId);
     const exerciceDuJour = moduleDef.exercices[etat.jour - 1];
@@ -691,7 +701,8 @@ window.FAST = (function(){
       jour: etat.jour,
       objectifSuggere: exerciceDuJour ? exerciceDuJour.objectif : '',
       retour: null,
-      analyse: null
+      analyse: null,
+      quizRepondues: etat.quizAujourdhui.repondues
     });
 
     if(etat.jour >= moduleDef.exercices.length){
@@ -703,6 +714,26 @@ window.FAST = (function(){
     }
     sauverEtatModule(moduleId, etat);
     return etat;
+  }
+
+  // Réinitialise complètement un module : l'utilisatrice repart de zéro,
+  // toutes les réponses (exercices + quiz) sont oubliées.
+  function reinitialiserModule(moduleId){
+    localStorage.removeItem('fast_module_' + moduleId);
+  }
+
+  // Formate une entrée d'historique en indiquant si l'objectif quotidien de
+  // quiz (10 questions) a été atteint ce jour-là — pour que l'IA félicite
+  // ou responsabilise en conséquence (voir consigne dans prompts.xml).
+  function formaterEntreeHistorique(h, idx){
+    const q = (h.quizRepondues !== undefined) ? h.quizRepondues : null;
+    let statutQuiz = '';
+    if(q !== null){
+      statutQuiz = q >= 10
+        ? ` (objectif quotidien de 10 questions dépassé : ${q} répondues)`
+        : ` (objectif quotidien de 10 questions NON atteint : seulement ${q} répondues)`;
+    }
+    return `${idx + 1}. Objectif : ${h.objectifSuggere}${statutQuiz}\nRetour : ${h.retour || '(pas encore)'}\nAnalyse : ${h.analyse || '(pas encore)'}`;
   }
 
   // Retour sur le dernier exercice de la semaine (celui du vendredi),
@@ -727,9 +758,7 @@ window.FAST = (function(){
     const derniereEntree = etat.historiqueExercices[etat.historiqueExercices.length - 1];
     derniereEntree.retour = retourTexte;
 
-    const historiqueTexte = etat.historiqueExercices.slice(0, -1).map((h, idx) =>
-      `${idx + 1}. Objectif : ${h.objectifSuggere}\nRetour : ${h.retour || '(pas encore)'}\nAnalyse : ${h.analyse || '(pas encore)'}`
-    ).join('\n\n') || '(aucun exercice précédent)';
+    const historiqueTexte = etat.historiqueExercices.slice(0, -1).map(formaterEntreeHistorique).join('\n\n') || '(aucun exercice précédent)';
 
     const contexteCoach = await construireContexteCoach();
     const prompt = await loadCoachPrompt('module_analyse');
@@ -764,7 +793,7 @@ window.FAST = (function(){
 
   function getQuestionsRateesSemaine(moduleDef, moduleId){
     const etat = getEtatModule(moduleId);
-    const idsRatees = Object.keys(etat.reponsesQuizSemaine).filter(id => !etat.reponsesQuizSemaine[id]);
+    const idsRatees = Object.keys(etat.reponsesQuizSemaine).filter(id => !etat.reponsesQuizSemaine[id].correcte);
     return moduleDef.questions.filter(q => idsRatees.includes(q.id));
   }
 
@@ -775,9 +804,7 @@ window.FAST = (function(){
     if(!etat) throw new Error("État du module introuvable.");
     if(etat.bilan) return etat.bilan; // déjà calculé, pas de rappel IA
 
-    const historiqueTexte = etat.historiqueExercices.map((h, idx) =>
-      `${idx + 1}. Objectif : ${h.objectifSuggere}\nRetour : ${h.retour || '(non renseigné)'}\nAnalyse : ${h.analyse || '(non renseignée)'}`
-    ).join('\n\n');
+    const historiqueTexte = etat.historiqueExercices.map(formaterEntreeHistorique).join('\n\n');
 
     const contexteCoach = await construireContexteCoach();
     const prompt = await loadCoachPrompt('module_bilan');
@@ -1370,6 +1397,7 @@ window.FAST = (function(){
     soumettreRetourVeille: soumettreRetourVeille, passerAuQuizDuJour: passerAuQuizDuJour,
     soumettreRetourSamedi: soumettreRetourSamedi,
     getQuestionsRateesSemaine: getQuestionsRateesSemaine, produireBilanModule: produireBilanModule,
+    reinitialiserModule: reinitialiserModule,
     runFinalSynthesis: runFinalSynthesis,
     runProfileDeepening: runProfileDeepening,
     generateDeepenQuestions: generateDeepenQuestions,

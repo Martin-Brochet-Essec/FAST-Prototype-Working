@@ -20,11 +20,8 @@
 
   <fast-header></fast-header>
 
-  <section class="screen" style="display:flex; gap:10px;">
-    <!-- Barre de progression du quiz : 50 briques fixes, groupées par 10 -->
-    <div id="quiz-barre" style="display:none; width:20px; flex-direction:column; gap:8px; padding-top:4px;"></div>
-
-    <div style="flex:1; min-width:0;">
+  <section class="screen">
+    <div>
       <a class="back" href="index.html" data-i18n="back_generic">Retour</a>
       <div class="eyebrow" id="module-eyebrow">…</div>
       <h1 style="font-size:20px; margin:4px 0 12px;" id="module-titre">…</h1>
@@ -66,11 +63,36 @@
       <!-- Étape : quiz -->
       <div id="module-etape-quiz" style="display:none;">
         <p id="quiz-progression" style="font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.02em; margin:0 0 8px;"></p>
-        <div class="card" id="quiz-question-bloc">
-          <p id="quiz-texte" style="font-size:14.5px; margin:0 0 10px;"></p>
-          <div id="quiz-options"></div>
-          <p id="quiz-explication" style="font-size:12.5px; color:var(--text-dim); line-height:1.5; margin:10px 0 0; display:none;"></p>
+
+        <!-- "Serpent" de progression : 50 briques (5 groupes de 10, un
+             symbole par jour), enveloppant la carte de question. Grise =
+             pas encore répondue, verte/rouge = répondue (cliquable pour
+             relire), symbole selon le jour d'origine de la question. -->
+        <div id="quiz-serpent-haut" style="display:none; flex-wrap:wrap; gap:3px; margin-bottom:6px;"></div>
+        <div style="display:flex; gap:6px; align-items:stretch;">
+          <div id="quiz-serpent-gauche" style="display:none; flex-direction:column; gap:3px; flex-shrink:0;"></div>
+          <div style="flex:1; min-width:0;">
+            <div class="card" id="quiz-question-bloc">
+              <p id="quiz-texte" style="font-size:14px; margin:0 0 10px;"></p>
+              <div id="quiz-options"></div>
+              <p id="quiz-explication" style="font-size:12px; color:var(--text-dim); line-height:1.5; margin:10px 0 0; display:none;"></p>
+            </div>
+          </div>
+          <div id="quiz-serpent-droite" style="display:none; flex-direction:column; gap:3px; flex-shrink:0;"></div>
         </div>
+        <div id="quiz-serpent-bas" style="display:none; flex-wrap:wrap; gap:3px; margin-top:6px;"></div>
+
+        <!-- Relecture d'une question déjà répondue (clic sur une brique verte/rouge) -->
+        <div class="card" id="quiz-relecture" style="display:none; border:1px solid var(--rose-deep);">
+          <p id="relecture-jour" style="font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.02em; margin:0 0 8px;"></p>
+          <p id="relecture-texte" style="font-size:14px; margin:0 0 10px;"></p>
+          <div id="relecture-options"></div>
+          <p id="relecture-explication" style="font-size:12px; color:var(--text-dim); line-height:1.5; margin:10px 0 0;"></p>
+          <div class="steprow">
+            <button class="btn btn-ghost" id="relecture-fermer" data-i18n="module_relecture_fermer">Fermer</button>
+          </div>
+        </div>
+
         <div class="card" id="quiz-fin-banque" style="display:none;">
           <p style="font-size:13.5px; color:var(--text-dim); margin:0;" data-i18n="module_quiz_banque_epuisee">Vous avez fait le tour de toutes les questions cette semaine.</p>
         </div>
@@ -124,6 +146,12 @@
         <div class="steprow">
           <button class="btn btn-ghost" id="bilan-mise-en-relation" data-i18n="module_bilan_mise_en_relation">Être mise en relation</button>
         </div>
+        <div class="steprow">
+          <button class="btn btn-ghost" id="bilan-accueil" data-i18n="module_bilan_accueil">Retour à l'accueil</button>
+        </div>
+        <div class="steprow">
+          <button class="btn btn-ghost" id="bilan-recommencer" data-i18n="module_bilan_recommencer" style="color:#c0392b;">Recommencer toute la semaine</button>
+        </div>
       </div>
     </div>
   </section>
@@ -148,13 +176,21 @@ document.addEventListener('DOMContentLoaded', async function(){
     retourSamedi: document.getElementById('module-etape-retour-samedi'),
     bilan: document.getElementById('module-etape-bilan')
   };
-  const barreQuiz = document.getElementById('quiz-barre');
+  const zonesSerpent = {
+    haut: document.getElementById('quiz-serpent-haut'),
+    droite: document.getElementById('quiz-serpent-droite'),
+    bas: document.getElementById('quiz-serpent-bas'),
+    gauche: document.getElementById('quiz-serpent-gauche')
+  };
+  const zoneRelecture = document.getElementById('quiz-relecture');
+  const SYMBOLES_JOUR = ['+', '×', '▲', '●', '◆']; // Lundi, Mardi, Mercredi, Jeudi, Vendredi
 
-  let moduleDef, etat, questionCourante;
+  let moduleDef, etat, questionCourante, ordreAffichageCourant;
 
   function masquerToutesEtapes(){
     Object.values(etapes).forEach(el => { el.style.display = 'none'; });
-    barreQuiz.style.display = 'none';
+    Object.values(zonesSerpent).forEach(z => { z.style.display = 'none'; });
+    zoneRelecture.style.display = 'none';
   }
 
   function afficherErreur(erreur){
@@ -164,29 +200,79 @@ document.addEventListener('DOMContentLoaded', async function(){
     erreurTexte.textContent = 'Error: ' + erreur.message;
   }
 
+  function creerBrique(question, etatCourant, index){
+    const reponse = etatCourant.reponsesQuizSemaine[question.id];
+    let couleur = '#d9d9d9'; // grise : pas encore répondue cette semaine
+    let cliquable = false;
+    if(reponse){
+      couleur = reponse.correcte ? '#27ae60' : '#c0392b';
+      cliquable = true;
+    }
+    const symbole = SYMBOLES_JOUR[Math.floor(index / 10)] || '';
+    const brique = document.createElement('div');
+    brique.textContent = symbole;
+    brique.style.cssText = 'width:16px; height:16px; border-radius:3px; background:' + couleur +
+      '; display:flex; align-items:center; justify-content:center; font-size:9px; line-height:1; color:#fff; flex-shrink:0; ' +
+      (cliquable ? 'cursor:pointer;' : 'cursor:default;');
+    if(cliquable){
+      brique.title = symbole;
+      brique.addEventListener('click', function(){ ouvrirRelecture(question, reponse); });
+    }
+    return brique;
+  }
+
+  // Barre "serpent" : 50 briques (5 groupes de 10, un symbole par jour)
+  // réparties tout autour de la carte de question (haut, droite, bas,
+  // gauche). Grise = jamais répondue cette semaine, verte/rouge = déjà
+  // répondue et cliquable pour relire.
   function dessinerBarreQuiz(){
-    barreQuiz.innerHTML = '';
     const etatCourant = FAST.getEtatModule(moduleId);
     const total = moduleDef.questions.length;
+    Object.values(zonesSerpent).forEach(z => { z.innerHTML = ''; });
 
-    for(let groupe = 0; groupe < Math.ceil(total / 10); groupe++){
-      const blocGroupe = document.createElement('div');
-      blocGroupe.style.cssText = 'display:flex; flex-direction:column; gap:2px;';
-      for(let i = 0; i < 10; i++){
-        const idx = groupe * 10 + i;
-        if(idx >= total) break;
-        const question = moduleDef.questions[idx];
-        const reponse = etatCourant.reponsesQuizSemaine[question.id];
-        let couleur = '#d9d9d9'; // grise : pas encore répondue cette semaine
-        if(reponse === true) couleur = '#27ae60';
-        else if(reponse === false) couleur = '#c0392b';
-        const brique = document.createElement('div');
-        brique.style.cssText = 'width:14px; height:8px; border-radius:2px; background:' + couleur + ';';
-        blocGroupe.appendChild(brique);
+    const repartition = [
+      { zone: zonesSerpent.haut, n: 15, direction: 'row' },
+      { zone: zonesSerpent.droite, n: 10, direction: 'column' },
+      { zone: zonesSerpent.bas, n: 15, direction: 'row' },
+      { zone: zonesSerpent.gauche, n: 10, direction: 'column' }
+    ];
+    let idx = 0;
+    repartition.forEach(function(section){
+      for(let i = 0; i < section.n && idx < total; i++, idx++){
+        section.zone.appendChild(creerBrique(moduleDef.questions[idx], etatCourant, idx));
       }
-      barreQuiz.appendChild(blocGroupe);
-    }
-    barreQuiz.style.display = 'flex';
+      section.zone.style.display = idx > 0 ? 'flex' : 'none';
+    });
+  }
+
+  // Affiche une question déjà répondue en lecture seule : sa réponse
+  // choisie, la bonne réponse, et l'explication.
+  function ouvrirRelecture(question, reponse){
+    document.getElementById('quiz-question-bloc').style.display = 'none';
+    document.getElementById('quiz-fin-banque').style.display = 'none';
+    zoneRelecture.style.display = 'block';
+
+    const d = FAST.dict();
+    document.getElementById('relecture-jour').textContent = d.module_relecture_label || 'Relecture';
+    document.getElementById('relecture-texte').textContent = question.text;
+
+    const optionsEl = document.getElementById('relecture-options');
+    optionsEl.innerHTML = '';
+    question.options.forEach(function(opt, idx){
+      const ligne = document.createElement('div');
+      let style = 'padding:10px 12px; margin-bottom:6px; border-radius:8px; border:1px solid #ccc; font-size:13px; box-sizing:border-box;';
+      if(idx === question.bonneReponse){ style += 'background:#27ae60; color:#fff; border-color:transparent;'; }
+      else if(idx === reponse.indexChoisi){ style += 'background:#c0392b; color:#fff; border-color:transparent;'; }
+      ligne.style.cssText = style;
+      ligne.textContent = opt;
+      optionsEl.appendChild(ligne);
+    });
+    document.getElementById('relecture-explication').textContent = question.explication || '';
+  }
+
+  function fermerRelecture(){
+    zoneRelecture.style.display = 'none';
+    document.getElementById('quiz-question-bloc').style.display = 'block';
   }
 
   async function afficherEtapeCourante(){
@@ -261,19 +347,28 @@ document.addEventListener('DOMContentLoaded', async function(){
     const optionsEl = document.getElementById('quiz-options');
     optionsEl.innerHTML = '';
 
-    questionCourante.options.forEach(function(opt, idx){
+    // Ordre d'affichage mélangé à chaque fois (Fisher-Yates), pour que la
+    // bonne réponse ne soit pas toujours à la même position.
+    ordreAffichageCourant = questionCourante.options.map((_, i) => i);
+    for(let i = ordreAffichageCourant.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [ordreAffichageCourant[i], ordreAffichageCourant[j]] = [ordreAffichageCourant[j], ordreAffichageCourant[i]];
+    }
+
+    ordreAffichageCourant.forEach(function(indexCanonique){
       const bouton = document.createElement('button');
       bouton.type = 'button';
-      bouton.textContent = opt;
-      bouton.style.cssText = 'display:block; width:100%; text-align:left; padding:10px 12px; margin-bottom:6px; border-radius:8px; border:1px solid #ccc; background:#fff; font-size:13.5px; cursor:pointer;';
+      bouton.textContent = questionCourante.options[indexCanonique];
+      bouton.style.cssText = 'display:block; width:100%; box-sizing:border-box; text-align:left; padding:12px 10px; margin-bottom:6px; border-radius:8px; border:1px solid #ccc; background:#fff; font-size:13px; line-height:1.4; cursor:pointer;';
       bouton.addEventListener('click', function(){
-        const correcte = FAST.soumettreReponseQuiz(moduleId, questionCourante, idx);
+        const correcte = FAST.soumettreReponseQuiz(moduleId, questionCourante, indexCanonique);
         bouton.style.background = correcte ? '#27ae60' : '#c0392b';
         bouton.style.color = '#fff';
         bouton.style.borderColor = 'transparent';
         Array.from(optionsEl.children).forEach(b => { b.disabled = true; });
         if(!correcte){
-          const bonneOption = optionsEl.children[questionCourante.bonneReponse];
+          const posBonneReponse = ordreAffichageCourant.indexOf(questionCourante.bonneReponse);
+          const bonneOption = optionsEl.children[posBonneReponse];
           bonneOption.style.background = '#27ae60';
           bonneOption.style.color = '#fff';
         }
@@ -363,15 +458,34 @@ document.addEventListener('DOMContentLoaded', async function(){
     }
     // Réinitialise l'accès à ces questions pour le rattrapage : on les
     // retire de "vues cette semaine" afin qu'elles puissent réapparaître
-    // dans le quiz.
+    // dans le quiz. modeRattrapage=true : une fois arrêté, on repasse
+    // directement au bilan (nouvelle analyse), pas par l'exercice du
+    // vendredi.
     const etatCourant = FAST.getEtatModule(moduleId);
     const idsRattrapage = rattrapage.map(q => q.id);
     etatCourant.questionsVuesSemaine = etatCourant.questionsVuesSemaine.filter(id => !idsRattrapage.includes(id));
     idsRattrapage.forEach(id => { delete etatCourant.reponsesQuizSemaine[id]; });
     etatCourant.phase = 'quiz';
+    etatCourant.modeRattrapage = true;
     etatCourant.quizAujourdhui = { correctes: 0, incorrectes: 0, repondues: 0 };
     localStorage.setItem('fast_module_' + moduleId, JSON.stringify(etatCourant));
     afficherEtapeCourante();
+  });
+
+  document.getElementById('relecture-fermer').addEventListener('click', function(){
+    fermerRelecture();
+  });
+
+  document.getElementById('bilan-accueil').addEventListener('click', function(){
+    window.location.href = 'index.html';
+  });
+
+  document.getElementById('bilan-recommencer').addEventListener('click', function(){
+    const d = FAST.dict();
+    const confirmation = window.confirm(d.module_bilan_recommencer_confirm || 'Toutes vos réponses de la semaine seront oubliées. Continuer ?');
+    if(!confirmation) return;
+    FAST.reinitialiserModule(moduleId);
+    window.location.href = 'module.html?module=' + encodeURIComponent(moduleId);
   });
 
   document.getElementById('bilan-mise-en-relation').addEventListener('click', function(){

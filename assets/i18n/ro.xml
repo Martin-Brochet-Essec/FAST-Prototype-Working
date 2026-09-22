@@ -260,4 +260,9 @@
   <string key="skills_formation_vedette_label">Formare de test</string>
   <string key="skills_formation_vedette_desc">Să-ți faci cunoscute rezultatele și să-ți revendici deschis impactul muncii.</string>
   <string key="module_quiz_suivante">Următoarea întrebare</string>
+  <string key="module_relecture_fermer">Închide</string>
+  <string key="module_relecture_label">Recapitulare</string>
+  <string key="module_bilan_accueil">Înapoi acasă</string>
+  <string key="module_bilan_recommencer">Reia toată săptămâna</string>
+  <string key="module_bilan_recommencer_confirm">Toate răspunsurile din această săptămână vor fi uitate. Continui?</string>
 </i18n>

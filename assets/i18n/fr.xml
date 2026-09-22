@@ -260,4 +260,9 @@
   <string key="skills_formation_vedette_label">Formation à l'essai</string>
   <string key="skills_formation_vedette_desc">Faire connaître ses résultats et revendiquer ouvertement l'impact de son travail.</string>
   <string key="module_quiz_suivante">Question suivante</string>
+  <string key="module_relecture_fermer">Fermer</string>
+  <string key="module_relecture_label">Relecture</string>
+  <string key="module_bilan_accueil">Retour à l'accueil</string>
+  <string key="module_bilan_recommencer">Recommencer toute la semaine</string>
+  <string key="module_bilan_recommencer_confirm">Toutes vos réponses de la semaine seront oubliées. Continuer ?</string>
 </i18n>
