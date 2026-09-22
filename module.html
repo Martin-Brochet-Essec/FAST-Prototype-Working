@@ -20,69 +20,98 @@
 
   <fast-header></fast-header>
 
-  <section class="screen">
-    <a class="back" href="index.html" data-i18n="back_generic">Retour</a>
-    <div class="eyebrow" id="module-eyebrow">…</div>
-    <h1 style="font-size:20px; margin:4px 0 12px;" id="module-titre">…</h1>
+  <section class="screen" style="display:flex; gap:10px;">
+    <div style="flex:1; min-width:0;">
+      <a class="back" href="index.html" data-i18n="back_generic">Retour</a>
+      <div class="eyebrow" id="module-eyebrow">…</div>
+      <h1 style="font-size:20px; margin:4px 0 12px;" id="module-titre">…</h1>
 
-    <div class="card" id="module-chargement">
-      <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="module_chargement">
-        Chargement de votre parcours...
-      </p>
-    </div>
-
-    <div class="card" id="module-erreur" style="display:none;">
-      <p style="font-size:13.5px; color:#c0392b; line-height:1.6; margin:0;" id="module-erreur-texte"></p>
-    </div>
-
-    <!-- Étape : exercice en cours, attente du retour d'expérience -->
-    <div id="module-etape-retour" style="display:none;">
-      <div class="card">
-        <p id="module-progression" style="font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.02em; margin:0 0 8px;"></p>
-        <h3 style="font-size:14.5px; margin:0 0 6px;" id="module-jour-titre"></h3>
-        <p id="module-objectif" style="font-size:13.5px; line-height:1.6; margin:0;"></p>
-      </div>
-      <p class="lead" data-i18n="module_retour_label">Comment ça s'est passé ?</p>
-      <textarea id="module-retour-texte" rows="5" data-i18n-ph="module_retour_ph" placeholder="Racontez votre expérience..."></textarea>
-      <div class="steprow">
-        <button class="btn btn-primary" id="module-retour-envoyer" data-i18n="module_retour_envoyer">Envoyer mon retour</button>
-      </div>
-    </div>
-
-    <!-- Étape : évaluation IA affichée, confirmation objectif atteint -->
-    <div id="module-etape-confirmation" style="display:none;">
-      <div class="card">
-        <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="module_evaluation_title">Ce que votre coach en pense</h3>
-        <p id="module-evaluation-texte" style="font-size:14px; color:var(--text); line-height:1.7; margin:0;"></p>
-      </div>
-      <p class="lead" data-i18n="module_confirmation_question">Considérez-vous avoir atteint l'objectif de cet exercice ?</p>
-      <div class="steprow">
-        <button class="btn btn-primary" id="module-objectif-oui" data-i18n="module_objectif_oui">Oui, exercice suivant</button>
-      </div>
-      <div class="steprow">
-        <button class="btn btn-ghost" id="module-objectif-non" data-i18n="module_objectif_non">Pas encore, prolonger un peu</button>
-      </div>
-    </div>
-
-    <!-- Étape : bilan de fin de module -->
-    <div id="module-etape-bilan" style="display:none;">
-      <div class="card" id="module-bilan-chargement">
-        <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="module_bilan_chargement">
-          Préparation du bilan de votre semaine...
+      <div class="card" id="module-chargement">
+        <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="module_chargement">
+          Chargement de votre parcours...
         </p>
       </div>
-      <div class="card" id="module-bilan-contenu" style="display:none;">
-        <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="module_bilan_title">Votre bilan</h3>
-        <p id="module-bilan-texte" style="font-size:13.5px; color:var(--text); line-height:1.7; margin:0; white-space:pre-line;"></p>
+
+      <div class="card" id="module-erreur" style="display:none;">
+        <p style="font-size:13.5px; color:#c0392b; line-height:1.6; margin:0;" id="module-erreur-texte"></p>
       </div>
-      <p class="lead" data-i18n="module_bilan_choix_lead">Et maintenant ?</p>
-      <div class="steprow">
-        <button class="btn btn-primary" id="module-bilan-approfondir" data-i18n="module_bilan_approfondir">Approfondir avec mon e-Coach</button>
+
+      <!-- Étape : retour sur l'exercice de la veille (jour 2 à 5) -->
+      <div id="module-etape-retour-veille" style="display:none;">
+        <div class="card">
+          <p id="rv-jour" style="font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.02em; margin:0 0 8px;"></p>
+          <p id="rv-exercice-choisi" style="font-size:13.5px; line-height:1.6; margin:0; font-style:italic;"></p>
+        </div>
+        <p class="lead" data-i18n="module_retour_label">Comment ça s'est passé ?</p>
+        <textarea id="rv-texte" rows="5" data-i18n-ph="module_retour_ph" placeholder="Racontez votre expérience..."></textarea>
+        <div class="steprow">
+          <button class="btn btn-primary" id="rv-envoyer" data-i18n="module_retour_envoyer">Envoyer mon retour</button>
+        </div>
       </div>
-      <div class="steprow">
-        <button class="btn btn-ghost" id="module-bilan-mise-en-relation" data-i18n="module_bilan_mise_en_relation">Être mise en relation</button>
+
+      <!-- Étape : analyse IA de la veille -->
+      <div id="module-etape-analyse-veille" style="display:none;">
+        <div class="card">
+          <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="module_analyse_title">Ce que votre coach en pense</h3>
+          <p id="analyse-texte" style="font-size:14px; color:var(--text); line-height:1.7; margin:0;"></p>
+        </div>
+        <div class="steprow">
+          <button class="btn btn-primary" id="analyse-continuer" data-i18n="module_analyse_continuer">Continuer vers le quiz</button>
+        </div>
+      </div>
+
+      <!-- Étape : quiz -->
+      <div id="module-etape-quiz" style="display:none;">
+        <p id="quiz-progression" style="font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.02em; margin:0 0 8px;"></p>
+        <div class="card" id="quiz-question-bloc">
+          <p id="quiz-texte" style="font-size:14.5px; margin:0 0 10px;"></p>
+          <div id="quiz-options"></div>
+        </div>
+        <div class="card" id="quiz-fin-banque" style="display:none;">
+          <p style="font-size:13.5px; color:var(--text-dim); margin:0;" data-i18n="module_quiz_banque_epuisee">Vous avez fait le tour de toutes les questions cette semaine.</p>
+        </div>
+        <div class="steprow">
+          <button class="btn btn-ghost" id="quiz-plus-tard" data-i18n="module_quiz_plus_tard">J'en ferai plus demain</button>
+        </div>
+      </div>
+
+      <!-- Étape : proposition d'exercice du jour -->
+      <div id="module-etape-exercice" style="display:none;">
+        <div class="card">
+          <p id="ex-jour" style="font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.02em; margin:0 0 8px;"></p>
+          <h3 style="font-size:14.5px; margin:0 0 6px;" data-i18n="module_exercice_suggere_title">Idée pour aujourd'hui</h3>
+          <p id="ex-objectif-suggere" style="font-size:13.5px; line-height:1.6; margin:0;"></p>
+        </div>
+        <p class="lead" data-i18n="module_exercice_label">Qu'allez-vous faire concrètement aujourd'hui ?</p>
+        <textarea id="ex-texte" rows="4" data-i18n-ph="module_exercice_ph" placeholder="Décrivez votre exercice du jour..."></textarea>
+        <div class="steprow">
+          <button class="btn btn-primary" id="ex-envoyer" data-i18n="module_exercice_envoyer">C'est parti</button>
+        </div>
+      </div>
+
+      <!-- Étape : bilan du samedi -->
+      <div id="module-etape-bilan" style="display:none;">
+        <div class="card" id="bilan-chargement">
+          <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="module_bilan_chargement">
+            Préparation du bilan de votre semaine...
+          </p>
+        </div>
+        <div class="card" id="bilan-contenu" style="display:none;">
+          <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="module_bilan_title">Votre bilan</h3>
+          <p id="bilan-texte" style="font-size:13.5px; color:var(--text); line-height:1.7; margin:0; white-space:pre-line;"></p>
+        </div>
+        <p class="lead" data-i18n="module_bilan_choix_lead">Et maintenant ?</p>
+        <div class="steprow">
+          <button class="btn btn-primary" id="bilan-approfondir" data-i18n="module_bilan_approfondir">Reprendre les questions ratées</button>
+        </div>
+        <div class="steprow">
+          <button class="btn btn-ghost" id="bilan-mise-en-relation" data-i18n="module_bilan_mise_en_relation">Être mise en relation</button>
+        </div>
       </div>
     </div>
+
+    <!-- Barre verticale de progression du quiz du jour -->
+    <div id="quiz-barre" style="display:none; width:22px; display:flex; flex-direction:column-reverse; gap:3px; align-items:center; padding-top:4px;"></div>
   </section>
 </div>
 <script src="assets/fallback.js"></script>
@@ -96,68 +125,141 @@ document.addEventListener('DOMContentLoaded', async function(){
   const chargement = document.getElementById('module-chargement');
   const erreurBloc = document.getElementById('module-erreur');
   const erreurTexte = document.getElementById('module-erreur-texte');
-  const etapeRetour = document.getElementById('module-etape-retour');
-  const etapeConfirmation = document.getElementById('module-etape-confirmation');
-  const etapeBilan = document.getElementById('module-etape-bilan');
 
-  let moduleDef, etat;
+  const etapes = {
+    retourVeille: document.getElementById('module-etape-retour-veille'),
+    analyseVeille: document.getElementById('module-etape-analyse-veille'),
+    quiz: document.getElementById('module-etape-quiz'),
+    exercice: document.getElementById('module-etape-exercice'),
+    bilan: document.getElementById('module-etape-bilan')
+  };
+  const barreQuiz = document.getElementById('quiz-barre');
+
+  let moduleDef, etat, questionCourante;
+
+  function masquerToutesEtapes(){
+    Object.values(etapes).forEach(el => { el.style.display = 'none'; });
+    barreQuiz.style.display = 'none';
+  }
 
   function afficherErreur(erreur){
+    masquerToutesEtapes();
     chargement.style.display = 'none';
-    etapeRetour.style.display = 'none';
-    etapeConfirmation.style.display = 'none';
-    etapeBilan.style.display = 'none';
     erreurBloc.style.display = 'block';
     erreurTexte.textContent = 'Error: ' + erreur.message;
   }
 
-  function exerciceCourant(){
-    return moduleDef.exercices[etat.indexExercice];
+  function dessinerBarreQuiz(){
+    barreQuiz.innerHTML = '';
+    const etatCourant = FAST.getEtatModule(moduleId);
+    const total = etatCourant.quizAujourdhui.repondues;
+    const idsAujourdhui = etatCourant.questionsVuesSemaine.slice(-total);
+    idsAujourdhui.forEach(id => {
+      const bloc = document.createElement('div');
+      const correcte = etatCourant.reponsesQuizSemaine[id];
+      bloc.style.cssText = 'width:18px; height:18px; border-radius:4px; background:' + (correcte ? '#27ae60' : '#c0392b') + ';';
+      barreQuiz.appendChild(bloc);
+    });
+    barreQuiz.style.display = 'flex';
   }
 
   async function afficherEtapeCourante(){
     etat = FAST.getEtatModule(moduleId);
+    masquerToutesEtapes();
 
-    if(etat.indexExercice >= moduleDef.exercices.length){
+    if(etat.phase === 'bilan'){
       await afficherBilan();
       return;
     }
 
-    const exercice = exerciceCourant();
     const d = FAST.dict();
 
-    if(etat.etape === 'attente_retour'){
-      etapeRetour.style.display = 'block';
-      etapeConfirmation.style.display = 'none';
-      document.getElementById('module-progression').textContent =
-        (d.module_progression_label || 'Exercice') + ' ' + (etat.indexExercice + 1) + ' / ' + moduleDef.exercices.length;
-      document.getElementById('module-jour-titre').textContent = exercice.jour;
-      document.getElementById('module-objectif').textContent = exercice.objectif;
-      document.getElementById('module-retour-texte').value = '';
+    if(etat.phase === 'retour_veille'){
+      etapes.retourVeille.style.display = 'block';
+      const derniereEntree = etat.historiqueExercices[etat.historiqueExercices.length - 1];
+      document.getElementById('rv-jour').textContent = (d.module_progression_jour || 'Jour') + ' ' + etat.jour;
+      document.getElementById('rv-exercice-choisi').textContent = derniereEntree ? derniereEntree.exerciceChoisi : '';
+      document.getElementById('rv-texte').value = '';
 
-    } else if(etat.etape === 'attente_confirmation'){
-      etapeRetour.style.display = 'none';
-      etapeConfirmation.style.display = 'block';
-      document.getElementById('module-evaluation-texte').textContent = etat.derniereEvaluation || '';
+    } else if(etat.phase === 'analyse_veille'){
+      etapes.analyseVeille.style.display = 'block';
+      const derniereEntree = etat.historiqueExercices[etat.historiqueExercices.length - 1];
+      document.getElementById('analyse-texte').textContent = derniereEntree ? derniereEntree.analyse : '';
+
+    } else if(etat.phase === 'quiz'){
+      etapes.quiz.style.display = 'block';
+      dessinerBarreQuiz();
+      afficherQuestionQuiz();
+
+    } else if(etat.phase === 'exercice_propose'){
+      etapes.exercice.style.display = 'block';
+      const exerciceDef = moduleDef.exercices[etat.jour - 1];
+      document.getElementById('ex-jour').textContent = exerciceDef ? exerciceDef.jour : '';
+      document.getElementById('ex-objectif-suggere').textContent = exerciceDef ? exerciceDef.objectif : '';
+      document.getElementById('ex-texte').value = '';
     }
   }
 
-  async function afficherBilan(){
-    etapeRetour.style.display = 'none';
-    etapeConfirmation.style.display = 'none';
-    etapeBilan.style.display = 'block';
+  function afficherQuestionQuiz(){
+    const d = FAST.dict();
+    document.getElementById('quiz-progression').textContent =
+      (d.module_quiz_progression || 'Question du jour') + ' ' + (etat.quizAujourdhui.repondues + 1) +
+      ' (' + (d.module_quiz_objectif || 'objectif : 10/jour') + ')';
 
-    const chargementBilan = document.getElementById('module-bilan-chargement');
-    const contenuBilan = document.getElementById('module-bilan-contenu');
+    questionCourante = FAST.tirerQuestionQuiz(moduleDef, moduleId);
+    const blocQuestion = document.getElementById('quiz-question-bloc');
+    const blocFin = document.getElementById('quiz-fin-banque');
+
+    if(!questionCourante){
+      blocQuestion.style.display = 'none';
+      blocFin.style.display = 'block';
+      return;
+    }
+    blocQuestion.style.display = 'block';
+    blocFin.style.display = 'none';
+
+    document.getElementById('quiz-texte').textContent = questionCourante.text;
+    const optionsEl = document.getElementById('quiz-options');
+    optionsEl.innerHTML = '';
+
+    questionCourante.options.forEach(function(opt, idx){
+      const bouton = document.createElement('button');
+      bouton.type = 'button';
+      bouton.textContent = opt;
+      bouton.style.cssText = 'display:block; width:100%; text-align:left; padding:10px 12px; margin-bottom:6px; border-radius:8px; border:1px solid #ccc; background:#fff; font-size:13.5px; cursor:pointer;';
+      bouton.addEventListener('click', function(){
+        const correcte = FAST.soumettreReponseQuiz(moduleId, questionCourante, idx);
+        bouton.style.background = correcte ? '#27ae60' : '#c0392b';
+        bouton.style.color = '#fff';
+        bouton.style.borderColor = 'transparent';
+        Array.from(optionsEl.children).forEach(b => { b.disabled = true; });
+        if(!correcte){
+          const bonneOption = optionsEl.children[questionCourante.bonneReponse];
+          bonneOption.style.background = '#27ae60';
+          bonneOption.style.color = '#fff';
+        }
+        setTimeout(function(){
+          dessinerBarreQuiz();
+          afficherQuestionQuiz();
+        }, 900);
+      });
+      optionsEl.appendChild(bouton);
+    });
+  }
+
+  async function afficherBilan(){
+    etapes.bilan.style.display = 'block';
+    const chargementBilan = document.getElementById('bilan-chargement');
+    const contenuBilan = document.getElementById('bilan-contenu');
     try{
       const bilan = await FAST.produireBilanModule(moduleId);
       chargementBilan.style.display = 'none';
       contenuBilan.style.display = 'block';
-      document.getElementById('module-bilan-texte').textContent = bilan;
+      document.getElementById('bilan-texte').textContent = bilan;
     }catch(erreur){
       chargementBilan.style.display = 'none';
       contenuBilan.style.display = 'block';
-      document.getElementById('module-bilan-texte').textContent = 'Error: ' + erreur.message;
+      document.getElementById('bilan-texte').textContent = 'Error: ' + erreur.message;
     }
   }
 
@@ -174,34 +276,55 @@ document.addEventListener('DOMContentLoaded', async function(){
     afficherErreur(erreur);
   }
 
-  document.getElementById('module-retour-envoyer').addEventListener('click', async function(){
-    const texte = document.getElementById('module-retour-texte').value.trim();
+  document.getElementById('rv-envoyer').addEventListener('click', async function(){
+    const texte = document.getElementById('rv-texte').value.trim();
     if(!texte) return;
-    const bouton = document.getElementById('module-retour-envoyer');
+    const bouton = document.getElementById('rv-envoyer');
     bouton.disabled = true;
     try{
-      await FAST.soumettreRetourExercice(moduleId, exerciceCourant(), texte);
+      await FAST.soumettreRetourVeille(moduleId, texte);
       await afficherEtapeCourante();
-    }catch(erreur){
-      afficherErreur(erreur);
-    }
+    }catch(erreur){ afficherErreur(erreur); }
     bouton.disabled = false;
   });
 
-  document.getElementById('module-objectif-oui').addEventListener('click', async function(){
-    FAST.soumettreConfirmationObjectif(moduleId, exerciceCourant(), true);
+  document.getElementById('analyse-continuer').addEventListener('click', async function(){
+    FAST.passerAuQuizDuJour(moduleId);
     await afficherEtapeCourante();
   });
 
-  document.getElementById('module-objectif-non').addEventListener('click', async function(){
-    FAST.soumettreConfirmationObjectif(moduleId, exerciceCourant(), false);
+  document.getElementById('quiz-plus-tard').addEventListener('click', async function(){
+    FAST.arreterQuizPourAujourdhui(moduleId);
     await afficherEtapeCourante();
   });
 
-  document.getElementById('module-bilan-approfondir').addEventListener('click', function(){
-    window.location.href = 'your-question.html';
+  document.getElementById('ex-envoyer').addEventListener('click', async function(){
+    const texte = document.getElementById('ex-texte').value.trim();
+    if(!texte) return;
+    FAST.soumettreExerciceChoisi(moduleId, moduleDef, texte);
+    await afficherEtapeCourante();
   });
-  document.getElementById('module-bilan-mise-en-relation').addEventListener('click', function(){
+
+  document.getElementById('bilan-approfondir').addEventListener('click', function(){
+    const rattrapage = FAST.getQuestionsRateesSemaine(moduleDef, moduleId);
+    if(rattrapage.length === 0){
+      window.location.href = 'your-question.html';
+      return;
+    }
+    // Réinitialise l'accès à ces questions pour le rattrapage : on les
+    // retire de "vues cette semaine" afin qu'elles puissent réapparaître
+    // dans le quiz.
+    const etatCourant = FAST.getEtatModule(moduleId);
+    const idsRattrapage = rattrapage.map(q => q.id);
+    etatCourant.questionsVuesSemaine = etatCourant.questionsVuesSemaine.filter(id => !idsRattrapage.includes(id));
+    idsRattrapage.forEach(id => { delete etatCourant.reponsesQuizSemaine[id]; });
+    etatCourant.phase = 'quiz';
+    etatCourant.quizAujourdhui = { correctes: 0, incorrectes: 0, repondues: 0 };
+    localStorage.setItem('fast_module_' + moduleId, JSON.stringify(etatCourant));
+    afficherEtapeCourante();
+  });
+
+  document.getElementById('bilan-mise-en-relation').addEventListener('click', function(){
     window.location.href = 'marketplace.html';
   });
 });
