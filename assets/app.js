@@ -542,14 +542,19 @@ window.FAST = (function(){
   }
 
   // ---- Modules d'accompagnement quotidien ----
-  // Schéma générique : un module est une suite d'exercices (objectif +
-  // durée). Pour chaque exercice : l'utilisatrice documente son retour
-  // d'expérience en texte libre, l'IA l'évalue (avec le contexte du coach
-  // actuel + le profil + l'historique du module), puis l'utilisatrice
-  // indique si l'objectif est atteint. Si oui, exercice suivant. Si non,
-  // la durée de CE MÊME exercice est prolongée de 25% et on redemande un
-  // retour d'expérience, sans avancer. Une fois tous les exercices
-  // terminés, un bilan de synthèse est proposé.
+  // Schéma : un module = 5 exercices (Lun-Ven) + une banque de questions à
+  // choix multiple + un bilan du samedi.
+  //
+  // Déroulé d'une journée :
+  //  - Lundi (jour 1) : quiz -> proposition d'exercice du jour
+  //  - Mardi à Vendredi (jour 2-5) : retour sur l'exercice de la veille ->
+  //    analyse IA -> quiz -> proposition d'exercice du jour
+  //  - Après le jour 5 : bilan de la semaine (synthèse + choix)
+  //
+  // Le quiz : question tirée de la banque (sans répéter une question déjà
+  // vue cette semaine), réponse immédiatement corrigée (vert/rouge), un
+  // objectif indicatif de 10 questions/jour, arrêtable à tout moment via
+  // "J'en ferai plus demain".
 
   async function loadModule(moduleId){
     const res = await fetch('assets/modules.xml');
@@ -557,17 +562,26 @@ window.FAST = (function(){
     const doc = new DOMParser().parseFromString(await res.text(), 'text/xml');
     const noeud = Array.from(doc.querySelectorAll('module')).find(m => m.getAttribute('id') === moduleId);
     if(!noeud) throw new Error(`Module "${moduleId}" introuvable dans assets/modules.xml.`);
+
     const exercices = Array.from(noeud.querySelectorAll('exercices > exercice')).map(e => ({
       numero: parseInt(e.getAttribute('numero'), 10),
       jour: e.getAttribute('jour') || '',
-      objectif: (e.querySelector('objectif')?.textContent || '').trim(),
-      dureeJours: parseFloat(e.querySelector('duree_jours')?.textContent || '1')
+      objectif: (e.querySelector('objectif')?.textContent || '').trim()
     }));
+
+    const questions = Array.from(noeud.querySelectorAll('questions_choix_multiple > question')).map(q => ({
+      id: q.getAttribute('id'),
+      text: (q.querySelector('text')?.textContent || '').trim(),
+      options: Array.from(q.querySelectorAll('options > option')).map(o => o.textContent.trim()),
+      bonneReponse: parseInt(q.querySelector('bonne_reponse')?.textContent || '0', 10)
+    }));
+
     return {
       id: moduleId,
       name: (noeud.querySelector('name')?.textContent || '').trim(),
       description: (noeud.querySelector('description')?.textContent || '').trim(),
       exercices: exercices,
+      questions: questions,
       bilanDescription: (noeud.querySelector('bilan > description')?.textContent || '').trim()
     };
   }
@@ -581,91 +595,148 @@ window.FAST = (function(){
   }
 
   // Démarre (ou reprend) un module : renvoie l'état courant.
+  // phase : 'quiz' | 'retour_veille' | 'analyse_veille' | 'exercice_propose' | 'bilan'
   function demarrerOuReprendreModule(moduleId){
     let etat = getEtatModule(moduleId);
     if(!etat){
-      etat = { indexExercice: 0, dureeCourante: null, etape: 'attente_retour', historique: [], termine: false };
+      etat = {
+        jour: 1,
+        phase: 'quiz',
+        historiqueExercices: [], // {jour, objectifSuggere, exerciceChoisi, retour, analyse}
+        questionsVuesSemaine: [], // ids
+        reponsesQuizSemaine: {},  // { id: true/false (correcte) }
+        quizAujourdhui: { correctes: 0, incorrectes: 0, repondues: 0 }
+      };
       sauverEtatModule(moduleId, etat);
     }
     return etat;
   }
 
-  // Soumet le retour d'expérience de l'utilisatrice pour l'exercice
-  // courant, obtient l'évaluation IA, et l'ajoute à l'historique.
-  async function soumettreRetourExercice(moduleId, exercice, retourTexte){
+  // ---- Quiz ----
+
+  function tirerQuestionQuiz(moduleDef, moduleId){
+    const etat = getEtatModule(moduleId);
+    const dispo = moduleDef.questions.filter(q => !etat.questionsVuesSemaine.includes(q.id));
+    if(dispo.length === 0) return null; // banque de la semaine épuisée
+    return dispo[Math.floor(Math.random() * dispo.length)];
+  }
+
+  // Enregistre la réponse à une question de quiz. Renvoie si elle était
+  // correcte, pour l'affichage immédiat (bloc vert/rouge).
+  function soumettreReponseQuiz(moduleId, question, indexChoisi){
+    const etat = getEtatModule(moduleId);
+    const correcte = indexChoisi === question.bonneReponse;
+    etat.questionsVuesSemaine.push(question.id);
+    etat.reponsesQuizSemaine[question.id] = correcte;
+    etat.quizAujourdhui.repondues += 1;
+    if(correcte) etat.quizAujourdhui.correctes += 1; else etat.quizAujourdhui.incorrectes += 1;
+    sauverEtatModule(moduleId, etat);
+    return correcte;
+  }
+
+  // "J'en ferai plus demain" : passe à la proposition d'exercice du jour.
+  function arreterQuizPourAujourdhui(moduleId){
+    const etat = getEtatModule(moduleId);
+    etat.phase = 'exercice_propose';
+    sauverEtatModule(moduleId, etat);
+    return etat;
+  }
+
+  function formaterStatsQuiz(etat){
+    const total = Object.keys(etat.reponsesQuizSemaine).length;
+    if(total === 0) return "(aucune question de quiz répondue pour l'instant)";
+    const correctes = Object.values(etat.reponsesQuizSemaine).filter(Boolean).length;
+    return `${correctes} bonnes réponses sur ${total} questions répondues cette semaine.`;
+  }
+
+  // ---- Exercice du jour ----
+
+  // L'utilisatrice indique l'exercice qu'elle compte réaliser (texte libre,
+  // à partir de l'objectif suggéré du jour). Avance au jour suivant, ou au
+  // bilan si c'était le jour 5.
+  function soumettreExerciceChoisi(moduleId, moduleDef, exerciceTexte){
+    const etat = getEtatModule(moduleId);
+    const exerciceDuJour = moduleDef.exercices[etat.jour - 1];
+
+    etat.historiqueExercices.push({
+      jour: etat.jour,
+      objectifSuggere: exerciceDuJour ? exerciceDuJour.objectif : '',
+      exerciceChoisi: exerciceTexte,
+      retour: null,
+      analyse: null
+    });
+
+    if(etat.jour >= moduleDef.exercices.length){
+      etat.phase = 'bilan';
+    } else {
+      etat.jour += 1;
+      etat.phase = 'retour_veille';
+      etat.quizAujourdhui = { correctes: 0, incorrectes: 0, repondues: 0 };
+    }
+    sauverEtatModule(moduleId, etat);
+    return etat;
+  }
+
+  // Retour sur l'exercice de la veille (jour 2 à 5) : appelle l'IA pour
+  // produire une analyse, basée sur le profil + l'historique du module +
+  // les résultats du quiz.
+  async function soumettreRetourVeille(moduleId, retourTexte){
     const qaQ10 = getAnswersFor('q10');
     const qaQ5 = getAnswersFor('q5');
-    const etat = getEtatModule(moduleId) || demarrerOuReprendreModule(moduleId);
+    const etat = getEtatModule(moduleId);
+    const derniereEntree = etat.historiqueExercices[etat.historiqueExercices.length - 1];
+    derniereEntree.retour = retourTexte;
 
-    const historiqueTexte = etat.historique.length === 0
-      ? '(aucun exercice précédent dans ce module)'
-      : etat.historique.map((h, idx) =>
-          `${idx + 1}. Objectif : ${h.objectif}\nRetour : ${h.retour}\nÉvaluation : ${h.evaluation}`
-        ).join('\n\n');
+    const historiqueTexte = etat.historiqueExercices.slice(0, -1).map((h, idx) =>
+      `${idx + 1}. Objectif : ${h.objectifSuggere}\nExercice choisi : ${h.exerciceChoisi}\nRetour : ${h.retour || '(pas encore)'}\nAnalyse : ${h.analyse || '(pas encore)'}`
+    ).join('\n\n') || '(aucun exercice précédent)';
 
     const contexteCoach = await construireContexteCoach();
-    const prompt = await loadCoachPrompt('module_evaluation');
+    const prompt = await loadCoachPrompt('module_analyse');
     const promptFinal = construireConsigneIA() + prompt.systemPrompt + "\n\n" +
       prompt.userPromptTemplate
         .replace('{ANSWERS_Q10}', formatAnswersBlock(qaQ10))
         .replace('{ANSWERS_Q5}', formatAnswersBlock(qaQ5))
         .replace('{HISTORIQUE_MODULE}', historiqueTexte)
-        .replace('{EXERCICE_COURANT}', exercice.objectif)
+        .replace('{STATS_QUIZ}', formaterStatsQuiz(etat))
+        .replace('{EXERCICE_COURANT}', derniereEntree.exerciceChoisi)
         .replace('{RETOUR_UTILISATRICE}', retourTexte)
         .replace(/{COACH_NOM}/g, contexteCoach.nom)
         .replace(/{COACH_EXPERTISE}/g, contexteCoach.expertise);
 
-    const evaluation = await window.FAST_AI.interrogerAgentIA(promptFinal);
-
-    etat.dernierRetour = retourTexte;
-    etat.derniereEvaluation = evaluation;
-    etat.etape = 'attente_confirmation';
+    const analyse = await window.FAST_AI.interrogerAgentIA(promptFinal);
+    derniereEntree.analyse = analyse;
+    etat.phase = 'analyse_veille';
     sauverEtatModule(moduleId, etat);
-    return evaluation;
+    return analyse;
   }
 
-  // L'utilisatrice indique si elle considère l'objectif atteint.
-  // Oui -> exercice suivant. Non -> la durée de CE exercice est prolongée
-  // de 25% et on redemande un nouveau retour d'expérience sans avancer.
-  function soumettreConfirmationObjectif(moduleId, exercice, objectifAtteint){
+  // Après avoir vu l'analyse de la veille, on enchaîne directement sur le
+  // quiz du jour (pas de confirmation oui/non dans cette version).
+  function passerAuQuizDuJour(moduleId){
     const etat = getEtatModule(moduleId);
-    if(!etat) throw new Error("État du module introuvable — le module n'a pas été démarré correctement.");
-
-    etat.historique.push({
-      exerciceNumero: exercice.numero,
-      objectif: exercice.objectif,
-      retour: etat.dernierRetour,
-      evaluation: etat.derniereEvaluation,
-      objectifAtteint: objectifAtteint
-    });
-
-    if(objectifAtteint){
-      etat.indexExercice += 1;
-      etat.dureeCourante = null;
-      etat.etape = 'attente_retour';
-    } else {
-      const dureeBase = etat.dureeCourante || exercice.dureeJours;
-      etat.dureeCourante = dureeBase * 1.25;
-      etat.etape = 'attente_retour';
-    }
-    delete etat.dernierRetour;
-    delete etat.derniereEvaluation;
+    etat.phase = 'quiz';
     sauverEtatModule(moduleId, etat);
     return etat;
   }
 
-  // Bilan de fin de module (tous les exercices terminés) : synthèse de la
-  // semaine à partir de l'historique complet.
+  // ---- Bilan du samedi ----
+
+  function getQuestionsRateesSemaine(moduleDef, moduleId){
+    const etat = getEtatModule(moduleId);
+    const idsRatees = Object.keys(etat.reponsesQuizSemaine).filter(id => !etat.reponsesQuizSemaine[id]);
+    return moduleDef.questions.filter(q => idsRatees.includes(q.id));
+  }
+
   async function produireBilanModule(moduleId){
     const qaQ10 = getAnswersFor('q10');
     const qaQ5 = getAnswersFor('q5');
     const etat = getEtatModule(moduleId);
     if(!etat) throw new Error("État du module introuvable.");
-
     if(etat.bilan) return etat.bilan; // déjà calculé, pas de rappel IA
 
-    const historiqueTexte = etat.historique.map((h, idx) =>
-      `${idx + 1}. Objectif : ${h.objectif}\nRetour : ${h.retour}\nÉvaluation : ${h.evaluation}\nObjectif atteint : ${h.objectifAtteint ? 'Oui' : 'Non'}`
+    const historiqueTexte = etat.historiqueExercices.map((h, idx) =>
+      `${idx + 1}. Objectif : ${h.objectifSuggere}\nExercice choisi : ${h.exerciceChoisi}\nRetour : ${h.retour || '(non renseigné)'}\nAnalyse : ${h.analyse || '(non renseignée)'}`
     ).join('\n\n');
 
     const contexteCoach = await construireContexteCoach();
@@ -675,6 +746,7 @@ window.FAST = (function(){
         .replace('{ANSWERS_Q10}', formatAnswersBlock(qaQ10))
         .replace('{ANSWERS_Q5}', formatAnswersBlock(qaQ5))
         .replace('{HISTORIQUE_MODULE}', historiqueTexte)
+        .replace('{STATS_QUIZ}', formaterStatsQuiz(etat))
         .replace(/{COACH_NOM}/g, contexteCoach.nom)
         .replace(/{COACH_EXPERTISE}/g, contexteCoach.expertise);
 
@@ -1253,8 +1325,10 @@ window.FAST = (function(){
     getCoachRecommande: getCoachRecommande, getCoachActuel: getCoachActuel, idsCoachsValides: ID_COACHS_VALIDES,
     getSkillsOrdonnees: getSkillsOrdonnees,
     loadModule: loadModule, demarrerOuReprendreModule: demarrerOuReprendreModule, getEtatModule: getEtatModule,
-    soumettreRetourExercice: soumettreRetourExercice, soumettreConfirmationObjectif: soumettreConfirmationObjectif,
-    produireBilanModule: produireBilanModule,
+    tirerQuestionQuiz: tirerQuestionQuiz, soumettreReponseQuiz: soumettreReponseQuiz,
+    arreterQuizPourAujourdhui: arreterQuizPourAujourdhui, soumettreExerciceChoisi: soumettreExerciceChoisi,
+    soumettreRetourVeille: soumettreRetourVeille, passerAuQuizDuJour: passerAuQuizDuJour,
+    getQuestionsRateesSemaine: getQuestionsRateesSemaine, produireBilanModule: produireBilanModule,
     runFinalSynthesis: runFinalSynthesis,
     runProfileDeepening: runProfileDeepening,
     generateDeepenQuestions: generateDeepenQuestions,
