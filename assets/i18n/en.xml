@@ -255,4 +255,6 @@
   <string key="module_exercice_label">What will you actually do today?</string>
   <string key="module_exercice_ph">Describe your exercise for today...</string>
   <string key="module_exercice_envoyer">Let's go</string>
+  <string key="module_retour_samedi_eyebrow">Before your review</string>
+  <string key="module_retour_samedi_envoyer">Send and see my review</string>
 </i18n>

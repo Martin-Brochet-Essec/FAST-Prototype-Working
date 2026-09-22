@@ -255,4 +255,6 @@
   <string key="module_exercice_label">Ce vei face concret azi?</string>
   <string key="module_exercice_ph">Descrie exercițiul tău de azi...</string>
   <string key="module_exercice_envoyer">Hai să începem</string>
+  <string key="module_retour_samedi_eyebrow">Înainte de bilanțul tău</string>
+  <string key="module_retour_samedi_envoyer">Trimite și vezi bilanțul meu</string>
 </i18n>

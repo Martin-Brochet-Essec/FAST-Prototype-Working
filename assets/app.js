@@ -667,12 +667,24 @@ window.FAST = (function(){
     });
 
     if(etat.jour >= moduleDef.exercices.length){
-      etat.phase = 'bilan';
+      etat.phase = 'retour_samedi';
     } else {
       etat.jour += 1;
       etat.phase = 'retour_veille';
       etat.quizAujourdhui = { correctes: 0, incorrectes: 0, repondues: 0 };
     }
+    sauverEtatModule(moduleId, etat);
+    return etat;
+  }
+
+  // Retour sur le dernier exercice de la semaine (celui du vendredi),
+  // documenté le samedi juste avant le bilan. Pas d'analyse IA séparée
+  // ici : ce retour est directement intégré au rapport du samedi.
+  function soumettreRetourSamedi(moduleId, retourTexte){
+    const etat = getEtatModule(moduleId);
+    const derniereEntree = etat.historiqueExercices[etat.historiqueExercices.length - 1];
+    derniereEntree.retour = retourTexte;
+    etat.phase = 'bilan';
     sauverEtatModule(moduleId, etat);
     return etat;
   }
@@ -1328,6 +1340,7 @@ window.FAST = (function(){
     tirerQuestionQuiz: tirerQuestionQuiz, soumettreReponseQuiz: soumettreReponseQuiz,
     arreterQuizPourAujourdhui: arreterQuizPourAujourdhui, soumettreExerciceChoisi: soumettreExerciceChoisi,
     soumettreRetourVeille: soumettreRetourVeille, passerAuQuizDuJour: passerAuQuizDuJour,
+    soumettreRetourSamedi: soumettreRetourSamedi,
     getQuestionsRateesSemaine: getQuestionsRateesSemaine, produireBilanModule: produireBilanModule,
     runFinalSynthesis: runFinalSynthesis,
     runProfileDeepening: runProfileDeepening,

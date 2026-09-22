@@ -255,4 +255,6 @@
   <string key="module_exercice_label">¿Qué vas a hacer concretamente hoy?</string>
   <string key="module_exercice_ph">Describe tu ejercicio de hoy...</string>
   <string key="module_exercice_envoyer">Vamos</string>
+  <string key="module_retour_samedi_eyebrow">Antes de tu balance</string>
+  <string key="module_retour_samedi_envoyer">Enviar y ver mi balance</string>
 </i18n>

@@ -89,6 +89,19 @@
         </div>
       </div>
 
+      <!-- Étape : retour sur le dernier exercice, le samedi, avant le bilan -->
+      <div id="module-etape-retour-samedi" style="display:none;">
+        <div class="card">
+          <p style="font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.02em; margin:0 0 8px;" data-i18n="module_retour_samedi_eyebrow">Avant votre bilan</p>
+          <p id="rs-exercice-choisi" style="font-size:13.5px; line-height:1.6; margin:0; font-style:italic;"></p>
+        </div>
+        <p class="lead" data-i18n="module_retour_label">Comment ça s'est passé ?</p>
+        <textarea id="rs-texte" rows="5" data-i18n-ph="module_retour_ph" placeholder="Racontez votre expérience..."></textarea>
+        <div class="steprow">
+          <button class="btn btn-primary" id="rs-envoyer" data-i18n="module_retour_samedi_envoyer">Envoyer et voir mon bilan</button>
+        </div>
+      </div>
+
       <!-- Étape : bilan du samedi -->
       <div id="module-etape-bilan" style="display:none;">
         <div class="card" id="bilan-chargement">
@@ -131,6 +144,7 @@ document.addEventListener('DOMContentLoaded', async function(){
     analyseVeille: document.getElementById('module-etape-analyse-veille'),
     quiz: document.getElementById('module-etape-quiz'),
     exercice: document.getElementById('module-etape-exercice'),
+    retourSamedi: document.getElementById('module-etape-retour-samedi'),
     bilan: document.getElementById('module-etape-bilan')
   };
   const barreQuiz = document.getElementById('quiz-barre');
@@ -197,6 +211,12 @@ document.addEventListener('DOMContentLoaded', async function(){
       document.getElementById('ex-jour').textContent = exerciceDef ? exerciceDef.jour : '';
       document.getElementById('ex-objectif-suggere').textContent = exerciceDef ? exerciceDef.objectif : '';
       document.getElementById('ex-texte').value = '';
+
+    } else if(etat.phase === 'retour_samedi'){
+      etapes.retourSamedi.style.display = 'block';
+      const derniereEntree = etat.historiqueExercices[etat.historiqueExercices.length - 1];
+      document.getElementById('rs-exercice-choisi').textContent = derniereEntree ? derniereEntree.exerciceChoisi : '';
+      document.getElementById('rs-texte').value = '';
     }
   }
 
@@ -302,6 +322,13 @@ document.addEventListener('DOMContentLoaded', async function(){
     const texte = document.getElementById('ex-texte').value.trim();
     if(!texte) return;
     FAST.soumettreExerciceChoisi(moduleId, moduleDef, texte);
+    await afficherEtapeCourante();
+  });
+
+  document.getElementById('rs-envoyer').addEventListener('click', async function(){
+    const texte = document.getElementById('rs-texte').value.trim();
+    if(!texte) return;
+    FAST.soumettreRetourSamedi(moduleId, texte);
     await afficherEtapeCourante();
   });
 
