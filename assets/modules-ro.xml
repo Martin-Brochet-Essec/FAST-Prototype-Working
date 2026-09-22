@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modules>
+
+  <module id="coaching-julie">
+    <name>Coaching Julie — de luni până sâmbătă</name>
+    <description>Un parcurs de o săptămână, o mică provocare zilnică și un quiz pentru a ancora noțiunile, pentru a avansa concret pe subiectul tău.</description>
+
+    <exercices>
+      <exercice numero="1" jour="Luni">
+        <objectif>Identifică o situație în care vocea ta nu a fost suficient auzită, și pregătește o frază simplă pentru a te face auzită data viitoare.</objectif>
+      </exercice>
+      <exercice numero="2" jour="Marți">
+        <objectif>Pune această frază în practică într-o ședință sau discuție, și observă reacția obținută.</objectif>
+      </exercice>
+      <exercice numero="3" jour="Miercuri">
+        <objectif>Identifică o sarcină pe care ai putea să o delegi azi, și deleg-o cu adevărat.</objectif>
+      </exercice>
+      <exercice numero="4" jour="Joi">
+        <objectif>Cere unui coleg sau unei persoane apropiate un feedback constructiv despre atitudinea ta din această săptămână.</objectif>
+      </exercice>
+      <exercice numero="5" jour="Vineri">
+        <objectif>Notează o reușită a săptămânii, oricât de mică, și împărtășește-o cu cineva.</objectif>
+      </exercice>
+    </exercices>
+
+    <!-- Questions à choix multiple : pas encore traduites dans cette langue.
+         app.js retombe automatiquement sur modules-fr.xml pour cette section. -->
+
+    <bilan>
+      <description>Bilanțul de sâmbătă: sinteza săptămânii (exerciții + quiz), apoi alegerea între a aprofunda cu e-Coach-ul tău (reia întrebările greșite) sau a fi pusă în legătură.</description>
+    </bilan>
+  </module>
+
+  <module id="autopromotion-valorisation-test">
+    <name>Autopromovare și Valorizare Personală Test</name>
+    <description>Să-ți faci cunoscute rezultatele și să-ți revendici deschis impactul muncii.</description>
+
+    <exercices>
+      <exercice numero="1" jour="Luni">
+        <objectif>Inventarul realizărilor invizibile: identifică și cuantifică-ți contribuțiile reale nedocumentate. Revizuiește ultimele 6 luni, listează 5 reușite care nu erau în fișa postului inițială, asociază o metrică de impact fiecăreia, apoi adaugă-le în jurnalul tău de impact.</objectif>
+      </exercice>
+      <exercice numero="2" jour="Marți">
+        <objectif>Pitch-ul "Matricea de Impact": transformă o sarcină de execuție într-o poveste de valoare executivă. Alege o sarcină recurentă, reformuleaz-o ca [Acțiune de optimizare] + [Transformarea procesului] = [Rezultat strategic/financiar], apoi exersează un pitch de 30 de secunde până devine fluent.</objectif>
+      </exercice>
+      <exercice numero="3" jour="Miercuri">
+        <objectif>Ancorarea și Amplificarea în Ședințe: asigură-ți paternitatea ideilor. Înainte de următoarea ședință cheie, definește o frază de ancorare directă pentru recomandarea ta, și convine cu o colegă de încredere să vă amplificați reciproc citându-vă numele.</objectif>
+      </exercice>
+      <exercice numero="4" jour="Joi">
+        <objectif>Simularea "Fișei" Salariale: pregătește o negociere financiară bazată pe date concrete. Creează un document de o pagină cu cele mai mari 3 contribuții ale tale și metricile lor, stabilește cifra țintă pe baza pieței, apoi exersează într-un joc de rol să o anunți cu încredere.</objectif>
+      </exercice>
+      <exercice numero="5" jour="Vineri">
+        <objectif>Cartografierea Sponsorilor: structurează-ți rețeaua de influență și găsește aliați strategici. Listează 3 lideri din afara liniei tale ierarhice directe, identifică un subiect pe care să le ceri părerea, și planifică un prim contact cu cel puțin unul dintre ei în următoarele 14 zile.</objectif>
+      </exercice>
+    </exercices>
+
+    <!-- Questions à choix multiple : pas encore traduites dans cette langue.
+         app.js retombe automatiquement sur modules-fr.xml pour cette section. -->
+
+    <bilan>
+      <description>Bilanțul de sâmbătă: sinteza săptămânii (exerciții + quiz), apoi alegerea între a aprofunda cu e-Coach-ul tău (reia întrebările greșite) sau a fi pusă în legătură.</description>
+    </bilan>
+  </module>
+
+</modules>

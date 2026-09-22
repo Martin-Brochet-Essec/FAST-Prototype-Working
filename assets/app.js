@@ -556,12 +556,16 @@ window.FAST = (function(){
   // objectif indicatif de 10 questions/jour, arrêtable à tout moment via
   // "J'en ferai plus demain".
 
-  async function loadModule(moduleId){
-    const res = await fetch('assets/modules.xml');
-    if(!res.ok) throw new Error("assets/modules.xml introuvable (HTTP " + res.status + ").");
+  // Charge un module depuis le fichier de la langue actuelle
+  // (assets/modules-<lang>.xml). Si les questions du quiz n'y sont pas
+  // encore traduites (balise absente), on les récupère depuis
+  // assets/modules-fr.xml — les exercices restent dans la langue actuelle.
+  async function chargerModuleDepuisFichier(moduleId, lang){
+    const res = await fetch(`assets/modules-${lang}.xml`);
+    if(!res.ok) return null;
     const doc = new DOMParser().parseFromString(await res.text(), 'text/xml');
     const noeud = Array.from(doc.querySelectorAll('module')).find(m => m.getAttribute('id') === moduleId);
-    if(!noeud) throw new Error(`Module "${moduleId}" introuvable dans assets/modules.xml.`);
+    if(!noeud) return null;
 
     const exercices = Array.from(noeud.querySelectorAll('exercices > exercice')).map(e => ({
       numero: parseInt(e.getAttribute('numero'), 10),
@@ -573,7 +577,8 @@ window.FAST = (function(){
       id: q.getAttribute('id'),
       text: (q.querySelector('text')?.textContent || '').trim(),
       options: Array.from(q.querySelectorAll('options > option')).map(o => o.textContent.trim()),
-      bonneReponse: parseInt(q.querySelector('bonne_reponse')?.textContent || '0', 10)
+      bonneReponse: parseInt(q.querySelector('bonne_reponse')?.textContent || '0', 10),
+      explication: (q.querySelector('explication')?.textContent || '').trim()
     }));
 
     return {
@@ -584,6 +589,27 @@ window.FAST = (function(){
       questions: questions,
       bilanDescription: (noeud.querySelector('bilan > description')?.textContent || '').trim()
     };
+  }
+
+  async function loadModule(moduleId){
+    const lang = getLang();
+    let moduleDef = await chargerModuleDepuisFichier(moduleId, lang);
+
+    if(!moduleDef){
+      // Langue actuelle sans ce module du tout : repli intégral sur le français.
+      moduleDef = await chargerModuleDepuisFichier(moduleId, 'fr');
+      if(!moduleDef) throw new Error(`Module "${moduleId}" introuvable (même en français).`);
+      return moduleDef;
+    }
+
+    if(moduleDef.questions.length === 0 && lang !== 'fr'){
+      // Exercices traduits, mais questions du quiz pas encore disponibles
+      // dans cette langue : on les récupère en français uniquement.
+      const moduleFr = await chargerModuleDepuisFichier(moduleId, 'fr');
+      if(moduleFr) moduleDef.questions = moduleFr.questions;
+    }
+
+    return moduleDef;
   }
 
   function getEtatModule(moduleId){
@@ -602,7 +628,7 @@ window.FAST = (function(){
       etat = {
         jour: 1,
         phase: 'quiz',
-        historiqueExercices: [], // {jour, objectifSuggere, exerciceChoisi, retour, analyse}
+        historiqueExercices: [], // {jour, objectifSuggere, retour, analyse}
         questionsVuesSemaine: [], // ids
         reponsesQuizSemaine: {},  // { id: true/false (correcte) }
         quizAujourdhui: { correctes: 0, incorrectes: 0, repondues: 0 }
@@ -654,14 +680,16 @@ window.FAST = (function(){
   // L'utilisatrice indique l'exercice qu'elle compte réaliser (texte libre,
   // à partir de l'objectif suggéré du jour). Avance au jour suivant, ou au
   // bilan si c'était le jour 5.
-  function soumettreExerciceChoisi(moduleId, moduleDef, exerciceTexte){
+  // Valide la proposition d'exercice du jour et avance. Plus de champ
+  // libre : l'exercice suggéré (pré-écrit dans le module) est utilisé tel
+  // quel, l'utilisatrice n'a pas à reformuler ce qu'elle va faire.
+  function validerExerciceDuJour(moduleId, moduleDef){
     const etat = getEtatModule(moduleId);
     const exerciceDuJour = moduleDef.exercices[etat.jour - 1];
 
     etat.historiqueExercices.push({
       jour: etat.jour,
       objectifSuggere: exerciceDuJour ? exerciceDuJour.objectif : '',
-      exerciceChoisi: exerciceTexte,
       retour: null,
       analyse: null
     });
@@ -700,7 +728,7 @@ window.FAST = (function(){
     derniereEntree.retour = retourTexte;
 
     const historiqueTexte = etat.historiqueExercices.slice(0, -1).map((h, idx) =>
-      `${idx + 1}. Objectif : ${h.objectifSuggere}\nExercice choisi : ${h.exerciceChoisi}\nRetour : ${h.retour || '(pas encore)'}\nAnalyse : ${h.analyse || '(pas encore)'}`
+      `${idx + 1}. Objectif : ${h.objectifSuggere}\nRetour : ${h.retour || '(pas encore)'}\nAnalyse : ${h.analyse || '(pas encore)'}`
     ).join('\n\n') || '(aucun exercice précédent)';
 
     const contexteCoach = await construireContexteCoach();
@@ -711,7 +739,7 @@ window.FAST = (function(){
         .replace('{ANSWERS_Q5}', formatAnswersBlock(qaQ5))
         .replace('{HISTORIQUE_MODULE}', historiqueTexte)
         .replace('{STATS_QUIZ}', formaterStatsQuiz(etat))
-        .replace('{EXERCICE_COURANT}', derniereEntree.exerciceChoisi)
+        .replace('{EXERCICE_COURANT}', derniereEntree.objectifSuggere)
         .replace('{RETOUR_UTILISATRICE}', retourTexte)
         .replace(/{COACH_NOM}/g, contexteCoach.nom)
         .replace(/{COACH_EXPERTISE}/g, contexteCoach.expertise);
@@ -748,7 +776,7 @@ window.FAST = (function(){
     if(etat.bilan) return etat.bilan; // déjà calculé, pas de rappel IA
 
     const historiqueTexte = etat.historiqueExercices.map((h, idx) =>
-      `${idx + 1}. Objectif : ${h.objectifSuggere}\nExercice choisi : ${h.exerciceChoisi}\nRetour : ${h.retour || '(non renseigné)'}\nAnalyse : ${h.analyse || '(non renseignée)'}`
+      `${idx + 1}. Objectif : ${h.objectifSuggere}\nRetour : ${h.retour || '(non renseigné)'}\nAnalyse : ${h.analyse || '(non renseignée)'}`
     ).join('\n\n');
 
     const contexteCoach = await construireContexteCoach();
@@ -1338,7 +1366,7 @@ window.FAST = (function(){
     getSkillsOrdonnees: getSkillsOrdonnees,
     loadModule: loadModule, demarrerOuReprendreModule: demarrerOuReprendreModule, getEtatModule: getEtatModule,
     tirerQuestionQuiz: tirerQuestionQuiz, soumettreReponseQuiz: soumettreReponseQuiz,
-    arreterQuizPourAujourdhui: arreterQuizPourAujourdhui, soumettreExerciceChoisi: soumettreExerciceChoisi,
+    arreterQuizPourAujourdhui: arreterQuizPourAujourdhui, validerExerciceDuJour: validerExerciceDuJour,
     soumettreRetourVeille: soumettreRetourVeille, passerAuQuizDuJour: passerAuQuizDuJour,
     soumettreRetourSamedi: soumettreRetourSamedi,
     getQuestionsRateesSemaine: getQuestionsRateesSemaine, produireBilanModule: produireBilanModule,

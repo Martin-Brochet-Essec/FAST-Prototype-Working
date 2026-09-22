@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modules>
+
+  <module id="coaching-julie">
+    <name>Coaching Julie — Monday to Saturday</name>
+    <description>A week-long journey, a small daily challenge and a quiz to anchor the concepts, to make real progress on your topic.</description>
+
+    <exercices>
+      <exercice numero="1" jour="Monday">
+        <objectif>Spot a situation where your voice wasn't heard enough, and prepare a simple sentence to make it heard next time.</objectif>
+      </exercice>
+      <exercice numero="2" jour="Tuesday">
+        <objectif>Put that sentence into practice in a meeting or exchange, and observe the reaction you get.</objectif>
+      </exercice>
+      <exercice numero="3" jour="Wednesday">
+        <objectif>Identify a task you could delegate today, and actually delegate it.</objectif>
+      </exercice>
+      <exercice numero="4" jour="Thursday">
+        <objectif>Ask a colleague or someone close to you for constructive feedback on your posture this week.</objectif>
+      </exercice>
+      <exercice numero="5" jour="Friday">
+        <objectif>Note down a success from the week, however small, and share it with someone.</objectif>
+      </exercice>
+    </exercices>
+
+    <!-- Questions à choix multiple : pas encore traduites dans cette langue.
+         app.js retombe automatiquement sur modules-fr.xml pour cette section. -->
+
+    <bilan>
+      <description>Saturday review: a synthesis of the week (exercises + quiz), then the choice between going deeper with your e-Coach (redo the questions you got wrong) or being connected.</description>
+    </bilan>
+  </module>
+
+  <module id="autopromotion-valorisation-test">
+    <name>Self-Promotion and Personal Value Test</name>
+    <description>Making your results known and openly claiming the impact of your work.</description>
+
+    <exercices>
+      <exercice numero="1" jour="Monday">
+        <objectif>The inventory of invisible achievements: identify and quantify your real, undocumented contributions. Review your last 6 months, list 5 wins that weren't in your original job description, attach an impact metric to each, then add them to your impact journal.</objectif>
+      </exercice>
+      <exercice numero="2" jour="Tuesday">
+        <objectif>The "Impact Matrix" Pitch: turn an execution task into an executive value story. Pick a recurring task, rephrase it as [Optimization action] + [Process transformation] = [Strategic/financial result], then rehearse a 30-second pitch until it's fluent.</objectif>
+      </exercice>
+      <exercice numero="3" jour="Wednesday">
+        <objectif>Anchoring and Amplification in Meetings: secure ownership of your ideas. Before your next key meeting, prepare a direct anchor sentence for your recommendation, and agree with a trusted colleague to amplify each other by name.</objectif>
+      </exercice>
+      <exercice numero="4" jour="Thursday">
+        <objectif>The Salary "Fact Sheet" Simulation: prepare a financial negotiation based on hard data. Build a one-page sheet summarizing your 3 biggest contributions with their metrics, set your target figure from market benchmarks, then role-play announcing it confidently.</objectif>
+      </exercice>
+      <exercice numero="5" jour="Friday">
+        <objectif>The Sponsor Map: structure your influence network and find strategic allies. List 3 leaders outside your direct line who hold weight, identify a topic to seek their input on, and plan a first contact with at least one of them within 14 days.</objectif>
+      </exercice>
+    </exercices>
+
+    <!-- Questions à choix multiple : pas encore traduites dans cette langue.
+         app.js retombe automatiquement sur modules-fr.xml pour cette section. -->
+
+    <bilan>
+      <description>Saturday review: a synthesis of the week (exercises + quiz), then the choice between going deeper with your e-Coach (redo the questions you got wrong) or being connected.</description>
+    </bilan>
+  </module>
+
+</modules>

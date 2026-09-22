@@ -1,0 +1,1164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modules>
+
+  <module id="coaching-julie">
+    <name>Coaching Julie — du lundi au samedi</name>
+    <description>Un parcours d'une semaine, un petit défi chaque jour et un quiz pour ancrer les notions, pour avancer concrètement sur votre sujet.</description>
+
+    <exercices>
+      <exercice numero="1" jour="Lundi">
+        <objectif>Repérer une situation où votre voix n'a pas été suffisamment entendue, et préparer une phrase simple pour la faire entendre la prochaine fois.</objectif>
+      </exercice>
+      <exercice numero="2" jour="Mardi">
+        <objectif>Mettre cette phrase en pratique dans une réunion ou un échange, et observer la réaction obtenue.</objectif>
+      </exercice>
+      <exercice numero="3" jour="Mercredi">
+        <objectif>Identifier une tâche que vous pourriez déléguer aujourd'hui, et la déléguer réellement.</objectif>
+      </exercice>
+      <exercice numero="4" jour="Jeudi">
+        <objectif>Demander à un collègue ou un proche un retour constructif sur votre posture cette semaine.</objectif>
+      </exercice>
+      <exercice numero="5" jour="Vendredi">
+        <objectif>Noter une réussite de la semaine, aussi petite soit-elle, et la partager avec quelqu'un.</objectif>
+      </exercice>
+    </exercices>
+
+    <questions_choix_multiple>
+      <question id="1">
+        <text>Vous exprimez une idée en réunion mais un collègue se l'approprie ensuite. Quelle est la réaction la plus assertive ?</text>
+        <options>
+          <option>Ne rien dire pour éviter le conflit</option>
+          <option>Reprendre calmement la parole pour préciser que c'est votre proposition initiale</option>
+          <option>En parler uniquement en privé après la réunion, sans le mentionner publiquement</option>
+          <option>Abandonner l'idée pour éviter la confrontation</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Reprendre calmement la parole réaffirme la paternité de l'idée sans créer de conflit inutile.</explication>
+      </question>
+      <question id="2">
+        <text>Quelle formulation est la plus assertive pour refuser une tâche supplémentaire ?</text>
+        <options>
+          <option>"Je ne sais pas si je peux, on verra"</option>
+          <option>"Désolée, je ne pense pas être la bonne personne"</option>
+          <option>"Je ne peux pas prendre cela en plus sans revoir mes priorités actuelles"</option>
+          <option>"Peut-être, si j'ai le temps"</option>
+        </options>
+        <bonne_reponse>2</bonne_reponse>
+        <explication>Nommer le comportement avec calme fixe une limite claire sans escalade ni retrait.</explication>
+      </question>
+      <question id="3">
+        <text>Un(e) collègue interrompt systématiquement vos interventions. Quelle stratégie est la plus efficace sur la durée ?</text>
+        <options>
+          <option>Parler plus fort pour couvrir la voix</option>
+          <option>Nommer le comportement calmement ("Je n'ai pas terminé, je reviens à mon point")</option>
+          <option>Éviter de prendre la parole en sa présence</option>
+          <option>Se plaindre à d'autres collègues</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Des données concrètes et un ton assuré construisent la légitimité mieux que la modestie ou l'effacement.</explication>
+      </question>
+      <question id="4">
+        <text>Pour affirmer votre légitimité face au C-suite, quelle posture est recommandée ?</text>
+        <options>
+          <option>Minimiser vos résultats pour rester modeste</option>
+          <option>Parler avec des données concrètes et un ton assuré</option>
+          <option>Attendre d'être interrogée avant de parler</option>
+          <option>Éviter le contact visuel pour ne pas paraître arrogante</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Se préparer et respirer permet de rester concentrée sur le message plutôt que sur l'anxiété.</explication>
+      </question>
+      <question id="5">
+        <text>Quelle est la meilleure façon de gérer le stress avant une présentation à fort enjeu ?</text>
+        <options>
+          <option>Répéter mentalement tous les scénarios d'échec possibles</option>
+          <option>Se préparer, respirer, et se concentrer sur le message clé à transmettre</option>
+          <option>Éviter de se préparer pour ne pas stresser davantage</option>
+          <option>Demander à quelqu'un d'autre de présenter à votre place</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Recadrer factuellement, sans s'excuser, montre de l'assurance sans tomber dans le conflit.</explication>
+      </question>
+      <question id="6">
+        <text>Face à une remarque désobligeante en réunion, la réponse la plus constructive est :</text>
+        <options>
+          <option>Ignorer complètement</option>
+          <option>Répondre par une remarque équivalente</option>
+          <option>Recadrer factuellement et poursuivre sans s'excuser</option>
+          <option>Quitter la réunion</option>
+        </options>
+        <bonne_reponse>2</bonne_reponse>
+        <explication>Une demande appuyée sur des résultats concrets est bien plus efficace qu'une formulation vague ou hésitante.</explication>
+      </question>
+      <question id="7">
+        <text>Comment formuler une demande d'augmentation de façon assertive ?</text>
+        <options>
+          <option>"Je pense mériter peut-être un peu plus"</option>
+          <option>"Vu mes résultats sur X et Y, je souhaite discuter d'une revalorisation"</option>
+          <option>"Les autres gagnent plus que moi, ce n'est pas juste"</option>
+          <option>Ne pas en parler et espérer que ça arrive naturellement</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Un débit posé et des pauses renforcent la crédibilité ; parler vite ou éviter les questions l'affaiblit.</explication>
+      </question>
+      <question id="8">
+        <text>Quelle attitude aide le plus à instaurer une présence exécutive ?</text>
+        <options>
+          <option>Parler vite pour montrer sa maîtrise du sujet</option>
+          <option>Parler posément, avec des pauses, en allant à l'essentiel</option>
+          <option>Éviter les questions difficiles</option>
+          <option>Toujours être d'accord avec la hiérarchie</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Clarifier publiquement et factuellement protège votre contribution sans agressivité envers le collègue.</explication>
+      </question>
+      <question id="9">
+        <text>Un projet que vous avez porté est attribué à un collègue lors d'une présentation. Que faire ?</text>
+        <options>
+          <option>Ne rien dire, ce n'est pas grave</option>
+          <option>Clarifier publiquement, factuellement, votre contribution</option>
+          <option>En parler seulement en privé au collègue</option>
+          <option>Se plaindre à d'autres collègues sans agir directement</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Remercier et poursuivre calmement montre de la maturité, sans se justifier ni contre-attaquer.</explication>
+      </question>
+      <question id="10">
+        <text>Quelle est la meilleure manière de gérer une critique déstabilisante en public ?</text>
+        <options>
+          <option>Se justifier longuement</option>
+          <option>Remercier pour le retour, en prendre note, et poursuivre calmement</option>
+          <option>Contre-attaquer immédiatement</option>
+          <option>Rester silencieuse et paraître affectée</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Identifier les tâches à faible valeur ajoutée est le point de départ d'une délégation sereine.</explication>
+      </question>
+      <question id="11">
+        <text>Vous êtes surchargée. Quelle première étape pour déléguer sans culpabiliser ?</text>
+        <options>
+          <option>Faire tout vous-même pour ne pas déranger</option>
+          <option>Identifier les tâches à faible valeur ajoutée que vous pouvez confier</option>
+          <option>Déléguer au hasard sans réflexion</option>
+          <option>Attendre d'être épuisée pour déléguer</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Des plages horaires définies et communiquées évitent l'ambiguïté et protègent votre temps personnel.</explication>
+      </question>
+      <question id="12">
+        <text>Comment fixer une frontière claire entre vie professionnelle et vie personnelle ?</text>
+        <options>
+          <option>Répondre aux emails à toute heure pour montrer son engagement</option>
+          <option>Définir des plages horaires dédiées et les communiquer clairement</option>
+          <option>Ne jamais dire non à une sollicitation</option>
+          <option>Éviter d'en parler pour ne pas sembler rigide</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Expliquer sa disponibilité et proposer un autre moment respecte à la fois la relation et ses propres limites.</explication>
+      </question>
+      <question id="13">
+        <text>Un proche vous sollicite pendant vos heures de travail dédiées. Quelle réponse est la plus saine ?</text>
+        <options>
+          <option>Répondre immédiatement en abandonnant votre tâche</option>
+          <option>Expliquer calmement votre disponibilité et proposer un autre moment</option>
+          <option>Ignorer complètement sans explication</option>
+          <option>Se sentir coupable et travailler plus tard pour compenser</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Expliquer l'objectif et laisser de l'autonomie responsabilise la personne à qui l'on délègue.</explication>
+      </question>
+      <question id="14">
+        <text>Pour déléguer efficacement une tâche, il est important de :</text>
+        <options>
+          <option>Donner uniquement la tâche, sans contexte</option>
+          <option>Expliquer l'objectif et laisser de l'autonomie sur la méthode</option>
+          <option>Contrôler chaque étape en détail</option>
+          <option>Refaire la tâche soi-même si le résultat n'est pas parfait</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Montrer l'exemple d'un partage équilibré marque durablement plus que le discours seul.</explication>
+      </question>
+      <question id="15">
+        <text>Comment transmettre aux enfants une vision égalitaire des rôles ?</text>
+        <options>
+          <option>Répartir les tâches selon les stéréotypes traditionnels</option>
+          <option>Montrer par l'exemple un partage équilibré des responsabilités</option>
+          <option>Ne jamais aborder le sujet</option>
+          <option>Laisser l'école s'en charger entièrement</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Un dialogue ouvert sur les attentes de chacun désamorce la tension mieux que l'évitement ou la soumission.</explication>
+      </question>
+      <question id="16">
+        <text>Face à une tension familiale liée à votre charge de travail, la meilleure approche est :</text>
+        <options>
+          <option>Éviter le sujet pour ne pas envenimer les choses</option>
+          <option>Un dialogue ouvert sur les attentes et contraintes de chacun</option>
+          <option>Céder systématiquement pour avoir la paix</option>
+          <option>Réduire ses ambitions professionnelles sans en discuter</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Prioriser et savoir dire non protège l'énergie sur la durée, contrairement à l'acceptation systématique.</explication>
+      </question>
+      <question id="17">
+        <text>Quelle pratique aide à préserver son énergie sur la durée ?</text>
+        <options>
+          <option>Accepter toutes les sollicitations pour ne décevoir personne</option>
+          <option>Prioriser et dire non aux tâches à faible impact</option>
+          <option>Travailler sans interruption jusqu'à épuisement</option>
+          <option>Ne jamais demander d'aide</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Clarifier poliment son périmètre évite l'accumulation de tâches hors rôle sans dégrader la relation.</explication>
+      </question>
+      <question id="18">
+        <text>Un collègue vous confie régulièrement des tâches qui ne relèvent pas de votre rôle. Que faire ?</text>
+        <options>
+          <option>Accepter systématiquement pour être appréciée</option>
+          <option>Clarifier poliment le périmètre de votre rôle</option>
+          <option>Faire la tâche sans rien dire, à contrecœur</option>
+          <option>Se plaindre sans en parler directement à la personne</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Bloquer et respecter des moments dédiés à chaque sphère prévient l'épuisement à long terme.</explication>
+      </question>
+      <question id="19">
+        <text>Pour éviter l'épuisement, la gestion du temps partagé implique de :</text>
+        <options>
+          <option>Travailler le week-end pour rattraper le retard</option>
+          <option>Bloquer des moments dédiés à chaque sphère (pro/perso) et les respecter</option>
+          <option>Répondre à toutes les urgences immédiatement, sans exception</option>
+          <option>Ne jamais planifier, pour rester flexible</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Accepter qu'une tâche soit faite différemment est la clé pour déléguer sans reprendre le contrôle.</explication>
+      </question>
+      <question id="20">
+        <text>Déléguer sans culpabiliser suppose surtout de :</text>
+        <options>
+          <option>Se convaincre que personne ne fera aussi bien que soi</option>
+          <option>Accepter qu'une tâche puisse être faite différemment et rester efficace</option>
+          <option>Ne déléguer que les tâches déjà terminées</option>
+          <option>Éviter de déléguer les tâches importantes</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Partager factuellement l'impact, avec des chiffres, fait connaître son travail sans paraître arrogante.</explication>
+      </question>
+      <question id="21">
+        <text>Comment faire connaître vos résultats sans paraître arrogante ?</text>
+        <options>
+          <option>Ne jamais en parler et espérer qu'on les remarque</option>
+          <option>Partager factuellement l'impact de votre travail, avec des chiffres si possible</option>
+          <option>Attendre que quelqu'un d'autre le fasse à votre place</option>
+          <option>Exagérer légèrement pour être sûre d'être remarquée</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Documenter ce qui a marché, ce qui a été difficile et les ajustements rend chaque retour exploitable.</explication>
+      </question>
+      <question id="22">
+        <text>Après un exercice ou un défi, quel type de retour est le plus utile à documenter ?</text>
+        <options>
+          <option>Seulement les succès</option>
+          <option>Ce qui a fonctionné, ce qui a été difficile, et ce que vous ajusteriez</option>
+          <option>Un résumé très général sans détail</option>
+          <option>Rien, l'expérience suffit</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Écouter pleinement puis agir transforme un feedback en progrès concret, plutôt qu'en justification.</explication>
+      </question>
+      <question id="23">
+        <text>Comment recevoir un feedback constructif de façon productive ?</text>
+        <options>
+          <option>Le prendre personnellement et se justifier</option>
+          <option>L'écouter pleinement, poser des questions, puis en tirer des actions concrètes</option>
+          <option>L'ignorer si on n'est pas d'accord</option>
+          <option>Y répondre uniquement par écrit pour éviter la confrontation</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Une question précise et ciblée obtient un retour bien plus utile qu'une question générale.</explication>
+      </question>
+      <question id="24">
+        <text>Quelle est la meilleure façon de demander un retour constructif à un collègue ?</text>
+        <options>
+          <option>Attendre qu'il le propose spontanément</option>
+          <option>Poser une question précise sur un aspect particulier de votre travail</option>
+          <option>Demander "est-ce que c'était bien ?" de façon générale</option>
+          <option>Ne jamais demander, pour ne pas paraître en manque de confiance</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Partager la réussite avec son manager ou son équipe construit la visibilité au moment où elle compte.</explication>
+      </question>
+      <question id="25">
+        <text>Après une réussite, quelle action renforce le plus votre visibilité professionnelle ?</text>
+        <options>
+          <option>Ne rien dire, les résultats parlent d'eux-mêmes</option>
+          <option>La partager de façon factuelle avec votre manager ou votre équipe</option>
+          <option>En parler uniquement à des amis proches</option>
+          <option>Attendre l'entretien annuel pour la mentionner</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Évoquer directement le sujet avec le manager est plus efficace que d'attendre que cela se voie tout seul.</explication>
+      </question>
+      <question id="26">
+        <text>Un(e) manager ne mentionne jamais vos contributions en réunion. Quelle approche adopter ?</text>
+        <options>
+          <option>Rester silencieuse, cela finira par se voir</option>
+          <option>Évoquer directement avec le manager l'importance d'une reconnaissance visible</option>
+          <option>Se plaindre à des collègues</option>
+          <option>Réduire volontairement votre implication</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Analyser objectivement un échec en tire des enseignements concrets, plutôt que de l'oublier ou se blâmer.</explication>
+      </question>
+      <question id="27">
+        <text>Pour transformer un échec en levier de progression, la première étape est :</text>
+        <options>
+          <option>L'oublier rapidement</option>
+          <option>L'analyser objectivement pour en tirer des enseignements concrets</option>
+          <option>Se blâmer longuement</option>
+          <option>Reporter la responsabilité sur d'autres</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Préciser sa contribution spécifique valorise sans nier le travail collectif.</explication>
+      </question>
+      <question id="28">
+        <text>Quelle est la meilleure manière de valoriser un travail d'équipe tout en soulignant votre rôle ?</text>
+        <options>
+          <option>Ne jamais se distinguer du groupe</option>
+          <option>Préciser clairement votre contribution spécifique dans le succès collectif</option>
+          <option>S'attribuer l'intégralité du mérite</option>
+          <option>Laisser le manager deviner qui a fait quoi</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Structurer les options avant de trancher aide à garder la lucidité même sous pression.</explication>
+      </question>
+      <question id="29">
+        <text>Face à un stress décisionnel important, quelle pratique aide à garder sa lucidité ?</text>
+        <options>
+          <option>Décider dans l'urgence sans recul</option>
+          <option>Prendre un court moment pour structurer les options avant de trancher</option>
+          <option>Reporter indéfiniment la décision</option>
+          <option>Demander à quelqu'un d'autre de décider systématiquement</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Voir chaque obstacle comme une information à exploiter construit la résilience sur la durée.</explication>
+      </question>
+      <question id="30">
+        <text>Quelle habitude aide à construire la résilience face aux obstacles répétés ?</text>
+        <options>
+          <option>Éviter toute situation à risque d'échec</option>
+          <option>Considérer chaque obstacle comme une information à exploiter, pas un jugement</option>
+          <option>Se comparer constamment aux autres</option>
+          <option>Minimiser systématiquement l'ampleur des difficultés rencontrées</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Repérer une personne alignée et engager le dialogue est plus efficace qu'attendre d'être remarquée.</explication>
+      </question>
+      <question id="31">
+        <text>Comment identifier un(e) sponsor interne potentiel(le) ?</text>
+        <options>
+          <option>Attendre qu'on vous approche spontanément</option>
+          <option>Repérer une personne influente alignée avec vos objectifs et engager le dialogue</option>
+          <option>Ne solliciter que sa hiérarchie directe</option>
+          <option>Éviter ce type de démarche, jugée trop stratégique</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Le sponsor agit concrètement pour votre progression, contrairement au mentor qui conseille surtout.</explication>
+      </question>
+      <question id="32">
+        <text>Quelle est la différence principale entre un mentor et un sponsor ?</text>
+        <options>
+          <option>Il n'y a aucune différence</option>
+          <option>Le mentor conseille, le sponsor agit activement pour votre progression (ex: vous recommande)</option>
+          <option>Le sponsor est toujours hiérarchiquement supérieur au mentor</option>
+          <option>Le mentor est uniquement externe à l'entreprise</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Observer qui influence réellement les décisions révèle des dynamiques que l'organigramme seul ne montre pas.</explication>
+      </question>
+      <question id="33">
+        <text>Pour décoder les réseaux informels d'une entreprise, il est utile de :</text>
+        <options>
+          <option>Se concentrer uniquement sur l'organigramme officiel</option>
+          <option>Observer qui influence réellement les décisions, au-delà des titres</option>
+          <option>Ignorer ces dynamiques, jugées secondaires</option>
+          <option>Attendre qu'on vous les explique formellement</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Initier des échanges avec des profils variés élargit un réseau bien au-delà de son équipe directe.</explication>
+      </question>
+      <question id="34">
+        <text>Comment élargir efficacement son réseau professionnel ?</text>
+        <options>
+          <option>Attendre les événements officiels de l'entreprise uniquement</option>
+          <option>Initier des échanges réguliers avec des personnes de différents horizons</option>
+          <option>Se limiter à son équipe directe</option>
+          <option>Éviter les réseaux externes à l'entreprise</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Chercher activement à s'intégrer et à être visible ouvre des portes plutôt que d'attendre une invitation.</explication>
+      </question>
+      <question id="35">
+        <text>Face à des réseaux d'influence peu accessibles, une stratégie efficace est :</text>
+        <options>
+          <option>S'en exclure volontairement</option>
+          <option>Chercher activement à s'y intégrer et à y être visible</option>
+          <option>Attendre une invitation qui ne viendra peut-être jamais</option>
+          <option>Créer un réseau parallèle totalement séparé, sans lien avec l'existant</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Ces réseaux offrent opportunités, soutien et modèles inspirants, au-delà du seul networking social.</explication>
+      </question>
+      <question id="36">
+        <text>Quel est l'intérêt de se connecter à des réseaux nationaux/internationaux d'empouvoirement féminin ?</text>
+        <options>
+          <option>Aucun intérêt concret</option>
+          <option>Accéder à des opportunités, du soutien et des modèles inspirants</option>
+          <option>Remplacer entièrement le réseau professionnel interne</option>
+          <option>Uniquement pour le networking social</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>S'appuyer sur des données et des alliances renforce une prise de parole collective face aux institutions.</explication>
+      </question>
+      <question id="37">
+        <text>Comment porter une voix collective face à des institutions ou médias ?</text>
+        <options>
+          <option>Parler uniquement en son nom propre</option>
+          <option>S'appuyer sur des données et des alliances pour renforcer le message</option>
+          <option>Éviter toute prise de parole publique</option>
+          <option>Attendre que d'autres portent le sujet</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Se renseigner sur les obligations légales applicables permet d'exploiter concrètement le cadre juridique.</explication>
+      </question>
+      <question id="38">
+        <text>Quelle action concrète aide à décrypter le cadre juridique en matière d'équité (ex: quotas) ?</text>
+        <options>
+          <option>Ignorer ces textes, jugés trop complexes</option>
+          <option>Se renseigner sur les obligations légales applicables à son secteur</option>
+          <option>Attendre que l'entreprise communique spontanément dessus</option>
+          <option>Considérer que cela ne concerne que les services RH</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Identifier clairement un stéréotype est la première étape pour pouvoir le déconstruire consciemment.</explication>
+      </question>
+      <question id="39">
+        <text>Face à un stéréotype limitant, la meilleure première étape est :</text>
+        <options>
+          <option>L'intérioriser pour éviter le conflit</option>
+          <option>L'identifier clairement pour pouvoir le déconstruire consciemment</option>
+          <option>L'ignorer complètement</option>
+          <option>Le renforcer pour s'y conformer socialement</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Lister les personnes clés et la nature de leur soutien rend le réseau d'influence exploitable, pas seulement mental.</explication>
+      </question>
+      <question id="40">
+        <text>Quelle est une bonne pratique pour cartographier son réseau d'influence ?</text>
+        <options>
+          <option>Ne jamais le formaliser</option>
+          <option>Lister les personnes clés et la nature de leur soutien potentiel</option>
+          <option>Se fier uniquement à sa mémoire</option>
+          <option>Se limiter aux contacts déjà très proches</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Documenter ses résultats et connaître le marché prépare une négociation salariale solide.</explication>
+      </question>
+      <question id="41">
+        <text>Lors d'une négociation salariale, quelle préparation est la plus efficace ?</text>
+        <options>
+          <option>Improviser selon l'ambiance de l'échange</option>
+          <option>Documenter ses résultats et connaître les fourchettes du marché</option>
+          <option>Éviter de donner un chiffre précis</option>
+          <option>Accepter la première proposition pour ne pas sembler difficile</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Documenter sa contribution et en discuter proactivement protège son rôle avant que la décision ne soit prise.</explication>
+      </question>
+      <question id="42">
+        <text>Que faire si votre portefeuille de clients/projets est menacé par une réorganisation ?</text>
+        <options>
+          <option>Ne rien dire et accepter la situation</option>
+          <option>Documenter votre contribution et en discuter proactivement avec votre hiérarchie</option>
+          <option>Démissionner immédiatement</option>
+          <option>En parler uniquement à des collègues, pas à la hiérarchie</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Clarifier explicitement le périmètre de décision attendu est nécessaire pour revendiquer un vrai pouvoir décisionnel.</explication>
+      </question>
+      <question id="43">
+        <text>Quelle posture aide le plus à revendiquer un pouvoir décisionnel réel ?</text>
+        <options>
+          <option>Accepter des rôles d'exécution en attendant une promotion</option>
+          <option>Clarifier explicitement le périmètre de décision attendu dans son rôle</option>
+          <option>Espérer que le pouvoir vous soit donné sans le demander</option>
+          <option>Éviter toute discussion sur le sujet</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Démontrer régulièrement son expertise par des actions concrètes renforce la légitimité perçue.</explication>
+      </question>
+      <question id="44">
+        <text>Sur la légitimité perçue, quel facteur a le plus d'impact positif ?</text>
+        <options>
+          <option>Éviter de s'exprimer sur des sujets incertains</option>
+          <option>Démontrer régulièrement son expertise par des actions concrètes</option>
+          <option>Attendre une validation extérieure avant d'agir</option>
+          <option>Se comparer en permanence aux autres</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Observer les résultats concrets, au-delà des annonces, permet de questionner les écarts réels.</explication>
+      </question>
+      <question id="45">
+        <text>Une entreprise affiche des engagements sur l'accès des femmes à la direction mais les résultats sont faibles. Quelle attitude adopter ?</text>
+        <options>
+          <option>Faire confiance aveuglément aux annonces</option>
+          <option>Observer les résultats concrets et questionner les écarts constatés</option>
+          <option>Ignorer le sujet, cela ne me concerne pas</option>
+          <option>Quitter l'entreprise sans explorer d'autres options</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Un ton calme et factuel désamorce l'intimidation sans céder sur le fond.</explication>
+      </question>
+      <question id="46">
+        <text>Comment répondre à une tentative d'intimidation en environnement agressif ?</text>
+        <options>
+          <option>Se laisser déstabiliser visiblement</option>
+          <option>Garder un ton calme et factuel, sans céder sur le fond</option>
+          <option>Répondre avec la même agressivité</option>
+          <option>Quitter systématiquement la conversation</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Exprimer clairement ses attentes tout en écoutant l'autre partie permet de négocier fermement sans dégrader la relation.</explication>
+      </question>
+      <question id="47">
+        <text>Quelle approche aide à négocier fermement sans dégrader la relation ?</text>
+        <options>
+          <option>Éviter tout désaccord apparent</option>
+          <option>Exprimer clairement ses attentes tout en restant à l'écoute de l'autre partie</option>
+          <option>Imposer sans discussion possible</option>
+          <option>Accepter tout compromis pour préserver la relation</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Rassembler des indicateurs concrets en amont solidifie une négociation de primes de performance.</explication>
+      </question>
+      <question id="48">
+        <text>Pour préparer une négociation de primes de performance, il est utile de :</text>
+        <options>
+          <option>Se fier uniquement à son ressenti</option>
+          <option>Rassembler des indicateurs concrets de performance en amont</option>
+          <option>Attendre que l'employeur propose un chiffre en premier sans rien préparer</option>
+          <option>Éviter d'aborder le sujet des primes séparément du salaire</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>S'exposer progressivement à des défis et capitaliser sur les réussites construit la confiance dans la durée.</explication>
+      </question>
+      <question id="49">
+        <text>Quelle attitude renforce le plus la confiance en soi sur la durée ?</text>
+        <options>
+          <option>Éviter les situations inconfortables</option>
+          <option>S'exposer progressivement à des défis et capitaliser sur les réussites</option>
+          <option>Attendre que la confiance vienne naturellement avec l'âge</option>
+          <option>Se comparer aux plus expérimentés pour mesurer ses progrès</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Exprimer son point de vue avec respect, sans s'excuser inutilement, illustre une communication ferme et non agressive.</explication>
+      </question>
+      <question id="50">
+        <text>Quel comportement illustre le mieux une communication directe et ferme, sans agressivité ?</text>
+        <options>
+          <option>Dire ce que l'on pense sans filtre ni considération pour l'autre</option>
+          <option>Exprimer clairement son point de vue avec respect, sans s'excuser inutilement</option>
+          <option>Atténuer systématiquement son propos pour éviter tout désaccord</option>
+          <option>Éviter de donner son avis en réunion</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Une posture ouverte et assurée renforce la présence exécutive perçue, même sous pression.</explication>
+      </question>
+    </questions_choix_multiple>
+
+    <bilan>
+      <description>Bilan du samedi : synthèse de la semaine (exercices + quiz), puis le choix entre approfondir avec votre e-Coach (reprendre les questions ratées) ou être mise en relation.</description>
+    </bilan>
+  </module>
+
+  <module id="autopromotion-valorisation-test">
+    <name>Autopromotion et Valorisation Personnelle Test</name>
+    <description>Faire connaître ses résultats et revendiquer ouvertement l'impact de son travail.</description>
+
+    <exercices>
+      <exercice numero="1" jour="Lundi">
+        <objectif>L'inventaire des accomplissements invisibles : identifiez et chiffrez vos contributions réelles non documentées. Passez en revue vos 6 derniers mois, listez 5 réussites qui ne figuraient pas dans votre fiche de poste initiale, associez une métrique d'impact à chacune (temps gagné, budget préservé, satisfaction client...), puis intégrez ces points à votre dossier de synthèse ou journal d'impact.</objectif>
+      </exercice>
+      <exercice numero="2" jour="Mardi">
+        <objectif>Le Pitch "Matrice d'Impact" : transformez une tâche d'exécution en récit de valeur exécutive. Sélectionnez une tâche opérationnelle récurrente, reformulez-la selon la structure [Action d'optimisation] + [Transformation du processus] = [Résultat stratégique/financier], puis entraînez-vous à un pitch oral de 30 secondes jusqu'à ce qu'il soit fluide et naturel.</objectif>
+      </exercice>
+      <exercice numero="3" jour="Mercredi">
+        <objectif>L'Ancrage et l'Amplification en Réunion : sécurisez la paternité de vos idées et occupez le terrain verbal. Avant votre prochaine réunion clé, définissez une phrase d'ancrage directe pour porter votre recommandation, et convenez avec une collègue de confiance de vous amplifier mutuellement en citant vos noms sur vos interventions respectives.</objectif>
+      </exercice>
+      <exercice numero="4" jour="Jeudi">
+        <objectif>La Simulation de la "Fact Sheet" Salariale : préparez une négociation financière basée sur des données tangibles. Créez un document d'une page résumant vos 3 plus grandes contributions de l'année avec leurs métriques, déterminez votre chiffre cible sur la base des benchmarks du marché, puis réalisez un jeu de rôle de 10 minutes pour vous entraîner à l'annoncer sans hésiter et à gérer le silence qui suit.</objectif>
+      </exercice>
+      <exercice numero="5" jour="Vendredi">
+        <objectif>La Cartographie des Sponsors : structurez votre réseau d'influence et trouvez des alliés stratégiques. Listez 3 dirigeants ou décideurs hors de votre ligne hiérarchique directe, identifiez pour chacun un sujet d'expertise sur lequel solliciter leur avis, puis planifiez une prise de contact avec au moins l'un d'entre eux dans les 14 prochains jours.</objectif>
+      </exercice>
+    </exercices>
+
+    <questions_choix_multiple>
+      <question id="1">
+        <text>En entretien annuel, votre manager salue votre implication. Quelle formulation valorise le mieux votre travail ?</text>
+        <options>
+          <option>"Merci, c'est gentil, mais c'est surtout le travail de toute l'équipe qui a payé."</option>
+          <option>"J'ai restructuré la stratégie commerciale, ce qui a permis d'augmenter les ventes de 15%."</option>
+          <option>"Oui, j'ai eu de la chance d'avoir de bons projets cette année."</option>
+          <option>"Je n'ai fait que suivre la feuille de route donnée."</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>La réponse B associe directement l'action personnelle à un résultat mesurable (15%). La modestie excessive ou l'attribution au hasard effacent le mérite personnel et minimisent la valeur perçue du travail.</explication>
+      </question>
+      <question id="2">
+        <text>Un collègue s'attribue l'idée clé que vous avez formulée en réunion la semaine dernière. Que faites-vous ?</text>
+        <options>
+          <option>Vous ne dites rien sur le moment pour éviter le conflit et vous vous plaignez plus tard en privé.</option>
+          <option>Vous intervenez immédiatement : "Ravi de voir que tu rebondis sur l'analyse que j'ai présentée mardi."</option>
+          <option>Vous l'interrompez brutalement en disant qu'il est un voleur d'idées.</option>
+          <option>Vous attendez l'entretien annuel pour régler vos comptes.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>La réponse B réattribue publiquement la paternité de l'idée avec diplomatie et fermeté, sans agressivité. Laisser passer valide l'appropriation par autrui, tandis que l'agressivité dégrade la présence exécutive.</explication>
+      </question>
+      <question id="3">
+        <text>Un directeur salue la qualité de votre présentation. Quelle est la posture la plus adaptée ?</text>
+        <options>
+          <option>"Ce n'était rien du tout, c'est un sujet très simple."</option>
+          <option>"Désolée pour les quelques coquilles dans les slides."</option>
+          <option>"Merci. J'ai investi beaucoup de travail pour structurer ces analyses et clarifier la feuille de route."</option>
+          <option>"C'est mon collègue qui a fait le plus gros du travail."</option>
+        </options>
+        <bonne_reponse>2</bonne_reponse>
+        <explication>Accepter un compliment en affirmant l'effort et la valeur produite renforce la crédibilité. Chercher à s'excuser ou minimiser le travail envoie le signal que les compétences mobilisées ne méritent pas de valeur.</explication>
+      </question>
+      <question id="4">
+        <text>Vous avez résolu un problème technique majeur en urgence. Comment l'inscrivez-vous dans votre bilan ?</text>
+        <options>
+          <option>"J'ai simplement géré les urgences habituelles du service."</option>
+          <option>"Gestion de crise ayant préservé la continuité de service pour 100k€ de CA."</option>
+          <option>"J'ai dû travailler tard le soir pour corriger des erreurs d'autres personnes."</option>
+          <option>"J'ai résolu un bug qui n'aurait jamais dû arriver."</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Un événement d'urgence doit être traduit en valeur financière ou opérationnelle préservée. Cela transforme une tâche réactive en une démonstration d'impact business.</explication>
+      </question>
+      <question id="5">
+        <text>Quel outil personnel devriez-vous tenir régulièrement pour préparer votre valorisation ?</text>
+        <options>
+          <option>Une liste de reproches sur les dysfonctionnements de l'entreprise.</option>
+          <option>Un journal d'impact hebdomadaire consignant réussites, chiffres clés et retours positifs reçus.</option>
+          <option>Un relevé exact de vos heures de présence au bureau.</option>
+          <option>Un recueil des erreurs commises par vos pairs.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>La mémoire est sélective et le biais d'immédiateté fait oublier les réalisations du début d'année. Consigner les faits et métriques au fil de l'eau garantit un dossier factuel inattaquable lors des évaluations.</explication>
+      </question>
+      <question id="6">
+        <text>Pourquoi l'expression "J'ai eu de la chance de réussir ce projet" est-elle préjudiciable ?</text>
+        <options>
+          <option>Elle montre que l'on est une personne humble et appréciée.</option>
+          <option>Parce qu'elle dépossède l'autrice de ses compétences et attribue le succès au hasard.</option>
+          <option>Elle invite le manager à réduire le budget du prochain projet.</option>
+          <option>Elle n'est pas préjudiciable, c'est une formule de politesse normale.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Mettre ses réussites sur le compte de la chance dévalise le capital de compétence. Si le succès est dû au hasard, l'entreprise n'a aucun intérêt stratégique à promouvoir ou augmenter la personne.</explication>
+      </question>
+      <question id="7">
+        <text>Comment présenter un échec ou une erreur dans votre bilan sans dégrader votre valeur ?</text>
+        <options>
+          <option>Masquer totalement l'incident et espérer que personne ne s'en aperçoive.</option>
+          <option>Blâmer l'équipe ou les prestataires externes.</option>
+          <option>Expliquer le problème rencontré, les mesures correctives pilotées et les apprentissages clés retenus.</option>
+          <option>S'excuser à plusieurs reprises en reconnaissant son manque de compétences.</option>
+        </options>
+        <bonne_reponse>2</bonne_reponse>
+        <explication>La capacité à analyser un échec, à en extraire des apprentissages et à mettre en place des mesures correctives démontre un niveau de maturité et de leadership élevé.</explication>
+      </question>
+      <question id="8">
+        <text>Que signifie l'effet de "modeste dépréciation" souvent observé chez les femmes en entreprise ?</text>
+        <options>
+          <option>Une technique de négociation basée sur le rabais.</option>
+          <option>La tendance à minimiser ses accomplissements par peur d'apparaître arrogante ou prétentieuse.</option>
+          <option>Le fait d'accepter une baisse de salaire en période de crise.</option>
+          <option>Une méthode de gestion comptable des actifs.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>La socialisation conduit souvent à craindre que l'affirmation de soi ne soit perçue comme de l'arrogance. Cette peur pousse à la sous-estimation systématique des performances.</explication>
+      </question>
+      <question id="9">
+        <text>Quel est le meilleur moment pour faire connaître le succès d'un projet d'envergure ?</text>
+        <options>
+          <option>Uniquement au bout de 12 mois lors de l'entretien annuel.</option>
+          <option>Dès l'atteinte d'un jalon majeur, en partageant une note de synthèse d'impact ou un bilan intermédiaire.</option>
+          <option>Jamais, la hiérarchie s'en apercevra d'elle-même.</option>
+          <option>Lors des pauses café de manière informelle et confidentielle.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>La visibilité se construit dans le temps présent. Attendre l'entretien annuel est trop tardif et prive la personne du crédit immédiat pour les étapes franchies.</explication>
+      </question>
+      <question id="10">
+        <text>EXERCICE PRATIQUE DU LUNDI : Vous créez votre "Fiche d'Impact". Quel élément NE DOIT PAS y figurer ?</text>
+        <options>
+          <option>Les gains financiers ou d'efficacité générés.</option>
+          <option>La liste exhaustive de toutes vos tâches d'exécution quotidiennes et répétitives.</option>
+          <option>Les témoignages de satisfaction de clients ou partenaires clés.</option>
+          <option>Les projets transversaux pilotés.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Une fiche d'impact est un document stratégique de valeur, non une description de poste. Noyer les accomplissements sous les tâches d'exécution masque l'impact réel et nuit à la lisibilité exécutive.</explication>
+      </question>
+      <question id="11">
+        <text>Vous avez optimisé un processus interne. Comment présentez-vous cette réussite ?</text>
+        <options>
+          <option>"J'ai changé la façon dont on classe les dossiers au service."</option>
+          <option>"J'ai gagné 4 heures par semaine sur le traitement des dossiers, réallouées au suivi client."</option>
+          <option>"J'ai enfin corrigé le désordre laissé par mon prédécesseur."</option>
+          <option>"Le travail était trop long, alors j'ai trouvé un raccourci."</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>La valeur ne réside pas dans l'action cosmétique, mais dans la ressource libérée (4h/semaine) et son réinvestissement stratégique (suivi client).</explication>
+      </question>
+      <question id="12">
+        <text>Comment transformer un projet "qualitatif" (ex: bien-être au travail) en donnée d'impact business ?</text>
+        <options>
+          <option>En affirmant simplement que les équipes sont plus heureuses.</option>
+          <option>En mesurant la baisse du taux de turnover (-8%) et l'augmentation du score d'engagement.</option>
+          <option>En montrant des photos des événements organisés.</option>
+          <option>En disant que c'est un projet impossible à mesurer avec des chiffres.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Tout projet qualitatif peut s'évaluer par des indicateurs indirects (proxy) comme le taux de rétention, le recrutement ou l'absentéisme, qui sont immédiatement compréhensibles par un comité de direction.</explication>
+      </question>
+      <question id="13">
+        <text>Lors d'une réunion de cadrage budgétaire, quelle métrique devez-vous mettre en avant ?</text>
+        <options>
+          <option>Le nombre d'heures supplémentaires gratuites que vous avez effectuées.</option>
+          <option>Le ratio de retour sur investissement (ROI) et la marge nette générée par vos projets.</option>
+          <option>Le coût de vos déplacements professionnels.</option>
+          <option>La difficulté du travail réalisé.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Le langage du comité de direction est celui de la rentabilité et du capital. Se valoriser par la souffrance ou le temps passé est inefficace comparativement à la création de marge brute.</explication>
+      </question>
+      <question id="14">
+        <text>Que devez-vous faire si vous ne disposez pas de chiffres précis sur l'impact de votre travail ?</text>
+        <options>
+          <option>Inventer des chiffres spectaculaires pour faire bonne impression.</option>
+          <option>Ne mentionner aucun résultat et parler seulement de votre motivation.</option>
+          <option>Construire une estimation réaliste basée sur des hypothèses documentées et des ordres de grandeur.</option>
+          <option>Déclarer que la mesure des résultats n'est pas de votre responsabilité.</option>
+        </options>
+        <bonne_reponse>2</bonne_reponse>
+        <explication>Dans le monde exécutif, une estimation documentée et assise sur des hypothèses claires vaut mieux que l'absence totale de métrique, qui sous-entend un manque d'orientation vers les résultats.</explication>
+      </question>
+      <question id="15">
+        <text>Quelle est la meilleure manière d'intituler un projet réussi sur votre CV interne ?</text>
+        <options>
+          <option>"Participation aux réunions CRM."</option>
+          <option>"Pilotage de la migration CRM : 0 interruption de service et +12% de productivité commerciale."</option>
+          <option>"Aide apportée à l'équipe informatique."</option>
+          <option>"Gestion du changement informatique."</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>L'intitulé doit combiner la responsabilité prise (Pilotage), la maîtrise du risque (0 interruption) et l'impact direct sur l'entreprise (+12% de productivité).</explication>
+      </question>
+      <question id="16">
+        <text>Pourquoi est-il risqué de se définir uniquement comme une personne "fiable et organisée" ?</text>
+        <options>
+          <option>Parce que cela montre que vous manquez de sympathie.</option>
+          <option>Parce que cela vous enferme dans des rôles d'exécutante irremplaçable mais non promotionnable.</option>
+          <option>Parce que ce sont des défauts en entreprise.</option>
+          <option>Parce que les managers n'aiment pas l'organisation.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>La fiabilité est perçue comme une compétence d'exécution basique. Si vous devenez indispensable à l'organisation quotidienne, votre direction aura intérêt à vous maintenir à votre poste plutôt qu'à vous promouvoir.</explication>
+      </question>
+      <question id="17">
+        <text>Comment présenter un gain d'efficience obtenu grâce à une automatisation de tâche ?</text>
+        <options>
+          <option>"Je ne fais plus rien manuellement sur ce sujet."</option>
+          <option>"Automatisation des reporting : suppression de 10h d'envois manuels et réallocation sur l'analyse stratégique."</option>
+          <option>"J'ai trouvé un logiciel sympa qui travaille à ma place."</option>
+          <option>"Le travail manuel était trop rébarbatif."</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>La valeur ne vient pas de la suppression du travail, mais du transfert de temps de l'exécution vers la haute valeur ajoutée (analyse stratégique).</explication>
+      </question>
+      <question id="18">
+        <text>Quel indicateur devez-vous utiliser pour valoriser une action de fidélisation de portefeuille client ?</text>
+        <options>
+          <option>Le nombre de courriels d'empathie envoyés.</option>
+          <option>Le taux de rétention client (95%) et la valeur de vie client (LTV) préservée.</option>
+          <option>La gentillesse des clients lors des appels téléphoniques.</option>
+          <option>Le temps passé en rendez-vous de courtoisie.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Les métriques de rétention et de Lifetime Value (LTV) traduisent des relations de qualité en protection du chiffre d'affaires récurrent.</explication>
+      </question>
+      <question id="19">
+        <text>Vous avez formé 3 collaborateurs. Comment valorisez-vous cette contribution RH ?</text>
+        <options>
+          <option>"J'ai perdu trois journées à réexpliquer les bases aux nouveaux."</option>
+          <option>"Montée en compétences de 3 juniors : autonomie atteinte en 1 mois et réduction du temps d'onboarding de 50%."</option>
+          <option>"J'ai été très gentille avec la nouvelle équipe."</option>
+          <option>"J'ai fait le travail des RH à leur place."</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Former des personnes devient un succès d'ingénierie RH quand la durée de montée en charge (time-to-autonomy) est réduite, permettant un gain de productivité global.</explication>
+      </question>
+      <question id="20">
+        <text>EXERCICE PRATIQUE DU MARDI : Dans la "Matrice d'Impact", comment transformez-vous la tâche "Organisation de réunions" ?</text>
+        <options>
+          <option>"Gestion des réservations de salles et commande de repas."</option>
+          <option>"Alignement stratégique des décideurs : réduction des délais de décision de 2 semaines sur les projets clés."</option>
+          <option>"Prise de notes et envoi des comptes-rendus de séance."</option>
+          <option>"Animation des échanges et vérification des présences."</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>L'organisation logistique d'une réunion est une tâche opérationnelle. Son objectif stratégique et son impact réel résident dans la facilitation de la prise de décision et l'alignement des parties prenantes.</explication>
+      </question>
+      <question id="21">
+        <text>Lors d'une réunion, un collègue homme vous coupe systématiquement la parole. Comment réagissez-vous ?</text>
+        <options>
+          <option>Vous vous taisez immédiatement et abandonnez votre point.</option>
+          <option>Vous haussez le ton en criant pour couvrir sa voix.</option>
+          <option>Vous reprenez la parole calmement : "Thomas, laisse-moi terminer mon point avant de réagir."</option>
+          <option>Vous quittez la salle de réunion en signe de protestation.</option>
+        </options>
+        <bonne_reponse>2</bonne_reponse>
+        <explication>Réagir calmement mais fermement en désignant l'interruption par le prénom permet de fixer des limites claires et d'affirmer son autorité sans passer pour une personne émotive.</explication>
+      </question>
+      <question id="22">
+        <text>Quelle est la meilleure stratégie de prise de parole en début de réunion stratégique ?</text>
+        <options>
+          <option>Attendre la fin de la séance pour exprimer son avis global.</option>
+          <option>Intervenir dans les 10 premières minutes avec une question ou une affirmation structurée.</option>
+          <option>Ne parler que si le président de séance vous sollicite nominativement.</option>
+          <option>Parler sans arrêt pour monopoliser le temps de parole.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Intervenir tôt marque sa présence dans le cercle de discussion et établit votre statut de contributrice active, réduisant les risques d'être effacée par la suite.</explication>
+      </question>
+      <question id="23">
+        <text>En quoi consiste la technique de l'Amplification pour contrer la "Bropropriation" ?</text>
+        <options>
+          <option>Parler plus fort que tout le monde dans la pièce.</option>
+          <option>S'allier avec une collègue pour répéter et réattribuer publiquement les idées lancées par des femmes.</option>
+          <option>Utiliser un micro ou des supports visuels très volumineux.</option>
+          <option>Multiplier les envois d'emails de rappel après les réunions.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>L'amplification est une stratégie collective où des alliées reprennent une idée proposée par une femme en citant son nom, sécurisant ainsi la paternité et la visibilité de l'intervention.</explication>
+      </question>
+      <question id="24">
+        <text>Comment formuler une idée stratégique pour qu'elle ait un maximum d'impact en séance ?</text>
+        <options>
+          <option>"Je ne suis pas une experte, mais il me semble que peut-être..."</option>
+          <option>"Ma recommandation est de déployer l'option B afin de sécuriser notre marge de 15%."</option>
+          <option>"C'est une idée un peu folle qui ne va probablement pas vous plaire."</option>
+          <option>"Si personne n'a d'autres propositions, on pourrait éventuellement essayer cela."</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Les préambules auto-dépréciatifs détruisent la crédibilité avant même que l'idée ne soit entendue. L'affirmation directe avec argumentation s'impose d'elle-même.</explication>
+      </question>
+      <question id="25">
+        <text>Que faire si l'on vous attribue d'office le rôle de "secrétaire de séance" (prise de note) ?</text>
+        <options>
+          <option>Accepter sans rien dire à chaque réunion pour éviter le conflit.</option>
+          <option>Proposer une rotation : "J'ai pris les notes la semaine dernière, c'est au tour de Marc aujourd'hui."</option>
+          <option>Refuser brutalement en disant que ce n'est pas dans vos attributions.</option>
+          <option>Prenez des notes de manière illisible pour qu'on ne vous le redemande plus.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>La prise de note non attribuée de manière équitable est une forme de travail invisible. Proposer une rotation responsabilise l'ensemble du groupe.</explication>
+      </question>
+      <question id="26">
+        <text>Quelle posture corporelle adoptez-vous autour d'une table de conseil pour marquer votre présence ?</text>
+        <options>
+          <option>Se faire la plus petite possible et croiser les bras sous la table.</option>
+          <option>Poser les avant-bras sur la table, se tenir droite et occuper pleinement son espace de travail.</option>
+          <option>S'avachir sur son siège de manière détachée.</option>
+          <option>Garder la tête baissée sur ses notes personnelles.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>La communication non-verbale influence la perception de l'autorité. Occuper de l'espace physique en posant les bras sur la table envoie un signal clair de légitimité et d'engagement.</explication>
+      </question>
+      <question id="27">
+        <text>Comment répondre à une attaque personnelle ou une remise en cause déplacée en réunion ?</text>
+        <options>
+          <option>Répondre par une insulte équivalente.</option>
+          <option>Se justifier de manière confuse et émotionnelle.</option>
+          <option>Recadrer immédiatement sur les faits : "Restons-en aux données chiffrées du projet pour avancer."</option>
+          <option>Se mettre à pleurer sous l'effet du stress.</option>
+        </options>
+        <bonne_reponse>2</bonne_reponse>
+        <explication>Renvoyer l'interlocuteur aux faits ou aux métriques neutralise l'agressivité ad hominem et remplace le registre émotionnel par la rigueur professionnelle.</explication>
+      </question>
+      <question id="28">
+        <text>Pourquoi est-il déconseillé de commencer ses phrases par "Désolée mais..." ?</text>
+        <options>
+          <option>Parce que c'est une faute de grammaire.</option>
+          <option>Parce que cela place l'intervenante en position de faute prioritaire avant même d'avoir argumenté.</option>
+          <option>Parce que le mot "désolée" est réservé à la vie privée.</option>
+          <option>Cela n'a aucun impact sur l'auditoire.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>L'excusite préventive dévalue la parole et amène l'auditoire à chercher le problème dans ce qui va être dit, au lieu de se concentrer sur la proposition.</explication>
+      </question>
+      <question id="29">
+        <text>Comment réagir quand un supérieur vous attribue publiquement une réussite collective ?</text>
+        <options>
+          <option>Ne pas relever et prendre 100% du mérite pour soi.</option>
+          <option>Remercier chaleureusement puis préciser la contribution spécifique de chaque membre clé.</option>
+          <option>Corriger le supérieur devant tout le monde en disant qu'il s'est trompé.</option>
+          <option>Dire que vous n'avez presque rien fait et que l'équipe a tout réalisé.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Un grand leader sait s'approprier la responsabilité du succès global tout en distribuant le crédit aux équipes. Cela démontre un niveau élevé de présence stratégique et de générosité managériale.</explication>
+      </question>
+      <question id="30">
+        <text>EXERCICE PRATIQUE DU MERCREDI : Quelle phrase d'ancrage devez-vous préparer pour la réunion ?</text>
+        <options>
+          <option>"Je m'excuse par avance de mon manque de préparation..."</option>
+          <option>"Sur la base des analyses de mon pôle, voici l'orientation stratégique que nous devons valider."</option>
+          <option>"C'est juste mon opinion personnelle, vous en faites ce que vous voulez."</option>
+          <option>"Je ne veux pas vous faire perdre votre temps mais..."</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Une phrase d'ancrage efficace s'appuie sur la légitimité opérationnelle (les données de votre pôle) et formule une orientation claire à valider.</explication>
+      </question>
+      <question id="31">
+        <text>Lors de votre entretien d'augmentation, votre manager évoque des contraintes budgétaires. Que dites-vous ?</text>
+        <options>
+          <option>"Ah d'accord, je comprends, on en reparlera l'année prochaine alors."</option>
+          <option>"Je comprends l'environnement. Regardons la valeur créée par mes dossiers et fixons un échéancier dans 6 mois."</option>
+          <option>"Si c'est comme ça, je démissionne immédiatement."</option>
+          <option>"Ce n'est pas mon problème, je veux mon augmentation tout de suite."</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Bloquer sur le refus immédiat stoppe la négociation. Décaler la demande sur un calendrier intermédiaire et réaffirmer la valeur créée permet de garder la porte ouverte et d'engager le manager.</explication>
+      </question>
+      <question id="32">
+        <text>Quelle est la règle d'or pour fixer votre prétention salariale lors d'une promotion ?</text>
+        <options>
+          <option>Demander ce dont vous avez besoin pour vos dépenses personnelles.</option>
+          <option>S'appuyer sur les études de marché du secteur et viser le haut de la fourchette pour laisser de la marge.</option>
+          <option>Accepter la première proposition financière du RH sans discuter.</option>
+          <option>Demander le même salaire que votre collègue le moins bien payé.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Une négociation professionnelle repose sur la valeur marchande du poste et du profil (benchmarks) et non sur des besoins personnels. Viser le haut de fourchette ménage un espace de négociation.</explication>
+      </question>
+      <question id="33">
+        <text>On vous propose un nouveau projet d'envergure sans revalorisation de statut ni de salaire. Que répondez-vous ?</text>
+        <options>
+          <option>"Merci beaucoup, je suis honorée que vous pensiez à moi !"</option>
+          <option>"Ravi de cette confiance. Définissons les objectifs associés et les conditions de réévaluation à 6 mois."</option>
+          <option>"C'est du travail gratuit, je refuse catégoriquement."</option>
+          <option>"Je le fais seulement si vous me donnez un bureau plus grand."</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Accepter des responsabilités supplémentaires sans ancrer la possibilité d'une réévaluation financière future conduit à une surcharge de travail non récompensée.</explication>
+      </question>
+      <question id="34">
+        <text>Comment préparer un argumentaire de demande de ressources financières ou d'effectifs supplémentaires ?</text>
+        <options>
+          <option>En insistant sur votre niveau de fatigue et de stress actuel.</option>
+          <option>En démontrant que cet investissement débloquera de nouvelles opportunités de croissance rentable.</option>
+          <option>En disant que les autres services ont déjà obtenu des recrutements.</option>
+          <option>En menaçant de réduire la qualité du travail si vous n'obtenez rien.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Les décideurs raisonnent en termes de retour sur investissement (ROI). Une demande formulée sous l'angle du gain stratégique aura toujours plus de poids qu'une plainte sur la charge de travail.</explication>
+      </question>
+      <question id="35">
+        <text>Quel est l'impact de la phrase "Je serais déjà très heureuse si on m'accordait 5%" ?</text>
+        <options>
+          <option>Elle montre que vous êtes raisonnable et facile à gérer.</option>
+          <option>Elle donne l'autorisation à votre interlocuteur de vous offrir le minimum absolu, voire moins.</option>
+          <option>Elle incite la direction à vous accorder 10% par sympathie.</option>
+          <option>Elle n'a aucun impact sur l'issue de la négociation.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Annoncer son seuil d'insatisfaction ou un montant plancher comme un souhait affaiblit la position de départ et sert d'ancrage bas à la négociation pour la partie adverse.</explication>
+      </question>
+      <question id="36">
+        <text>Comment gérer un silence pesant laissé par votre manager après l'annonce de votre prétention financière ?</text>
+        <options>
+          <option>Remplir le vide en réduisant immédiatement sa demande tarifaire.</option>
+          <option>Maintenir un regard calme et confiant en attendant silencieusement la réponse de votre interlocuteur.</option>
+          <option>S'excuser d'avoir demandé une somme si élevée.</option>
+          <option>Parler de la météo pour détendre l'atmosphère.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Le silence est un outil classique de pression psychologique en négociation. Céder à l'inconfort du silence en baissant ses prétentions avant même une réponse formelle est une erreur stratégique.</explication>
+      </question>
+      <question id="37">
+        <text>En négociation, que comprend le package global de rémunération à ne pas négliger ?</text>
+        <options>
+          <option>Uniquement le salaire brut fixe mensuel.</option>
+          <option>Le fixe, le variable, les primes, le budget de formation, la flexibilité et les avantages en nature.</option>
+          <option>Les compliments verbaux donnés par la direction.</option>
+          <option>Le titre indiqué sur la carte de visite seulement.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Quand le budget fixe est verrouillé, la valeur globale peut se négocier sur le variable, la formation, les conditions de travail ou d'autres avantages accessoires.</explication>
+      </question>
+      <question id="38">
+        <text>Votre manager refuse votre promotion en disant : "Tu n'as pas encore assez de réseau en interne". Que faites-vous ?</text>
+        <options>
+          <option>Prendre la remarque comme une défaite définitive et abandonner.</option>
+          <option>Demander des critères précis : "Quel plan d'action d'influence pouvons-nous fixer pour les 6 prochains mois ?"</option>
+          <option>Dire que le réseau ne sert à rien et que seul le travail compte.</option>
+          <option>Accuser le manager de faire du favoritisme.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Transformer une objection floue en un plan d'action mesurable assorti d'une échéance oblige le manager à s'engager sur des critères d'évaluation objectifs.</explication>
+      </question>
+      <question id="39">
+        <text>Quelle est l'attitude correcte face à l'argument "Ce n'est pas le moment avec la crise actuelle" ?</text>
+        <options>
+          <option>Renoncer immédiatement à toute demande.</option>
+          <option>Démontrer comment votre travail a justement permis de protéger les résultats durant la crise.</option>
+          <option>Dire que la crise n'existe pas et qu'il s'agit d'un mensonge.</option>
+          <option>Réclamer une augmentation double pour compensation du préjudice.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>En période d'incertitude économique, la valeur des collaborateurs qui protègent la marge, sécurisent les clients ou réduisent les risques est encore plus précieuse.</explication>
+      </question>
+      <question id="40">
+        <text>EXERCICE PRATIQUE DU JEUDI : Lors d'une simulation de négociation salariale, quel est votre premier geste ?</text>
+        <options>
+          <option>Demander ce que l'entreprise a prévu de vous donner sans annoncer de chiffre.</option>
+          <option>Présenter votre "Fact Sheet" démontrant la valeur financière générée et fixer votre chiffre ancrage.</option>
+          <option>Dire que vous êtes mal payée par rapport à vos collègues.</option>
+          <option>Justifier votre demande par vos charges d'emprunt personnelles.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Poser l'ancrage le premier en l'adossant à des faits (Fact Sheet) donne la référence de départ de toute la négociation salariale.</explication>
+      </question>
+      <question id="41">
+        <text>Quelle est la définition d'un "Sponsor" en entreprise comparé à un simple "Mentor" ?</text>
+        <options>
+          <option>Le mentor paie vos déplacements, le sponsor relit votre CV.</option>
+          <option>Le mentor donne des conseils stratégiques ; le sponsor utilise son capital politique pour vous faire nommer.</option>
+          <option>Il n'y a aucune différence entre un mentor et un sponsor.</option>
+          <option>Le sponsor est obligatoirement votre manager direct.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Le mentorat développe le savoir-faire en privé ; le sponsoring débloque les opportunités en public. Un sponsor est un leader qui parle de vous en bien derrière les portes closes où se prennent les décisions.</explication>
+      </question>
+      <question id="42">
+        <text>Comment réagir si un réseau informel de décideurs ("Boys Club") vous semble inaccessible ?</text>
+        <options>
+          <option>Essayer de participer à leurs activités personnelles même si vous n'aimez pas cela.</option>
+          <option>Identifier les nœuds d'influence stratégiques et créer des opportunités d'échange pro sur des sujets d'expertise.</option>
+          <option>Critiquer ouvertement ce groupe auprès de l'ensemble des salariés.</option>
+          <option>Rester isolée dans son bureau en attendant que les mentalités évoluent.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Bypasser le réseau informel exige de créer son propre réseau de valeur basé sur l'expertise métier, l'apport de contenu stratégique et l'alignement d'intérêts professionnels.</explication>
+      </question>
+      <question id="43">
+        <text>Quelle est la fréquence idéale pour partager une mise à jour d'impact avec votre réseau interne ?</text>
+        <options>
+          <option>Tous les jours par un courriel détaillé.</option>
+          <option>De manière ciblée, lors d'étapes clés ou via une synthèse trimestrielle à valeur ajoutée.</option>
+          <option>Une fois tous les 5 ans lors d'un changement de poste.</option>
+          <option>Seulement si la direction vous le demande explicitement.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Une communication trop fréquente crée de la saturation, tandis qu'une communication trop rare vous rend invisible. Le point d'étape trimestriel trouve le bon équilibre d'exposition.</explication>
+      </question>
+      <question id="44">
+        <text>Comment partager un succès personnel sur LinkedIn sans passer pour une personne narcissique ?</text>
+        <options>
+          <option>"Je suis la meilleure dans mon domaine et j'ai encore écrasé la concurrence."</option>
+          <option>Ancrer le post sur l'apprentissage, les défis surmontés et remercier les partenaires d'aventure.</option>
+          <option>Publier une photo de sa fiche de paie.</option>
+          <option>Dire que le succès était facile et sans effort.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>L'autopromotion réussie sur les réseaux professionnels utilise la pédagogie (partage d'apprentissages) et la reconnaissance collective pour rendre la réussite inspirante et légitime.</explication>
+      </question>
+      <question id="45">
+        <text>Que faire si un pair tente de minimiser publiquement l'impact de votre travail devant un dirigeant ?</text>
+        <options>
+          <option>L'insulter pour défendre son honneur.</option>
+          <option>Rappeler calmement les faits avec les chiffres d'impact exacts validés par la direction.</option>
+          <option>Baisser la tête et hocher la tête en signe d'accord.</option>
+          <option>Annuler la présentation et quitter la pièce.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Réfuter une tentative de minimisation par des chiffres et des faits validés désarme l'attaquant sans entrer dans un conflit personnel, préservant ainsi votre posture exécutive.</explication>
+      </question>
+      <question id="46">
+        <text>En quoi consiste la stratégie du "Sponsorship croisé" entre femmes leaders ?</text>
+        <options>
+          <option>Se prêter du matériel de bureau.</option>
+          <option>S'engager mutuellement à citer et recommander les compétences de l'autre dans les cercles de décision.</option>
+          <option>Rédiger les rapports des unes et des autres en secret.</option>
+          <option>Prendre ses vacances aux mêmes dates.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Le sponsorship croisé permet de créer une masse critique d'influence. Recommander l'expertise d'une autre femme renforce la crédibilité du réseau tout entier.</explication>
+      </question>
+      <question id="47">
+        <text>Comment approcher un dirigeant de haut niveau pour en faire un sponsor potentiel ?</text>
+        <options>
+          <option>Lui envoyer un email en demandant : "Voulez-vous être mon sponsor ?"</option>
+          <option>Lui solliciter un avis sur un projet stratégique précis où son expertise est reconnue.</option>
+          <option>L'attendre à la sortie du parking pour l'aborder.</option>
+          <option>Lui envoyer la liste de toutes ses revendications salariales.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>La relation de sponsoring ne se commande pas. Elle se construit progressivement en sollicitant le dirigeant sur un enjeu professionnel précis, lui permettant de constater la valeur de vos réflexions.</explication>
+      </question>
+      <question id="48">
+        <text>Quel est le piège à éviter absolument lors des sessions de networking internes ?</text>
+        <options>
+          <option>Préparer à l'avance les sujets que l'on souhaite aborder.</option>
+          <option>Parler uniquement avec ses collègues proches de sa propre équipe.</option>
+          <option>Échanger avec des personnes de départements différents du sien.</option>
+          <option>Prendre les coordonnées des personnes rencontrées pour garder le contact.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Rester dans sa zone de confort en échangeant uniquement avec son cercle restreint annule l'intérêt du networking, qui est d'étendre sa visibilité et son capital social.</explication>
+      </question>
+      <question id="49">
+        <text>Comment transformer un compliment informel reçu à la machine à café en levier de carrière ?</text>
+        <options>
+          <option>Sourire, dire merci et l'oublier aussitôt.</option>
+          <option>Demander gentiment par écrit à l'auteur si vous pouvez citer son retour dans votre bilan trimestriel.</option>
+          <option>Le répéter à tout le monde de manière insistante.</option>
+          <option>Dire à la personne qu'elle aurait dû vous faire ce compliment en réunion officielle.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>Formaliser par écrit les retours positifs informels permet de constituer une preuve sociale exploitable lors des revues de performance et des négociations d'avancement.</explication>
+      </question>
+      <question id="50">
+        <text>EXERCICE PRATIQUE DU VENDREDI : Quelle est la première étape de votre cartographie des sponsors ?</text>
+        <options>
+          <option>Envoyer un message général à toute l'entreprise.</option>
+          <option>Lister les 3 personnes au sein de la direction qui ont du pouvoir décisionnel et connaissent vos résultats.</option>
+          <option>Attendre la prochaine réorganisation de l'entreprise.</option>
+          <option>Demander à ses collègues proches de voter pour vous.</option>
+        </options>
+        <bonne_reponse>1</bonne_reponse>
+        <explication>La cartographie commence par la clarification des centres de pouvoir. Identifier les décideurs clés permet de concentrer son énergie relationnelle là où l'impact stratégique sera le plus fort.</explication>
+      </question>
+    </questions_choix_multiple>
+
+    <bilan>
+      <description>Bilan du samedi : synthèse de la semaine (exercices + quiz), puis le choix entre approfondir avec votre e-Coach (reprendre les questions ratées) ou être mise en relation.</description>
+    </bilan>
+  </module>
+
+</modules>

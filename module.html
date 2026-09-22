@@ -21,6 +21,9 @@
   <fast-header></fast-header>
 
   <section class="screen" style="display:flex; gap:10px;">
+    <!-- Barre de progression du quiz : 50 briques fixes, groupées par 10 -->
+    <div id="quiz-barre" style="display:none; width:20px; flex-direction:column; gap:8px; padding-top:4px;"></div>
+
     <div style="flex:1; min-width:0;">
       <a class="back" href="index.html" data-i18n="back_generic">Retour</a>
       <div class="eyebrow" id="module-eyebrow">…</div>
@@ -66,14 +69,17 @@
         <div class="card" id="quiz-question-bloc">
           <p id="quiz-texte" style="font-size:14.5px; margin:0 0 10px;"></p>
           <div id="quiz-options"></div>
+          <p id="quiz-explication" style="font-size:12.5px; color:var(--text-dim); line-height:1.5; margin:10px 0 0; display:none;"></p>
         </div>
         <div class="card" id="quiz-fin-banque" style="display:none;">
           <p style="font-size:13.5px; color:var(--text-dim); margin:0;" data-i18n="module_quiz_banque_epuisee">Vous avez fait le tour de toutes les questions cette semaine.</p>
         </div>
         <div class="steprow">
+          <button class="btn btn-primary" id="quiz-suivante" data-i18n="module_quiz_suivante" disabled>Question suivante</button>
           <button class="btn btn-ghost" id="quiz-plus-tard" data-i18n="module_quiz_plus_tard">J'en ferai plus demain</button>
         </div>
       </div>
+
 
       <!-- Étape : proposition d'exercice du jour -->
       <div id="module-etape-exercice" style="display:none;">
@@ -82,8 +88,6 @@
           <h3 style="font-size:14.5px; margin:0 0 6px;" data-i18n="module_exercice_suggere_title">Idée pour aujourd'hui</h3>
           <p id="ex-objectif-suggere" style="font-size:13.5px; line-height:1.6; margin:0;"></p>
         </div>
-        <p class="lead" data-i18n="module_exercice_label">Qu'allez-vous faire concrètement aujourd'hui ?</p>
-        <textarea id="ex-texte" rows="4" data-i18n-ph="module_exercice_ph" placeholder="Décrivez votre exercice du jour..."></textarea>
         <div class="steprow">
           <button class="btn btn-primary" id="ex-envoyer" data-i18n="module_exercice_envoyer">C'est parti</button>
         </div>
@@ -122,9 +126,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Barre verticale de progression du quiz du jour -->
-    <div id="quiz-barre" style="display:none; width:22px; display:flex; flex-direction:column-reverse; gap:3px; align-items:center; padding-top:4px;"></div>
   </section>
 </div>
 <script src="assets/fallback.js"></script>
@@ -166,14 +167,25 @@ document.addEventListener('DOMContentLoaded', async function(){
   function dessinerBarreQuiz(){
     barreQuiz.innerHTML = '';
     const etatCourant = FAST.getEtatModule(moduleId);
-    const total = etatCourant.quizAujourdhui.repondues;
-    const idsAujourdhui = etatCourant.questionsVuesSemaine.slice(-total);
-    idsAujourdhui.forEach(id => {
-      const bloc = document.createElement('div');
-      const correcte = etatCourant.reponsesQuizSemaine[id];
-      bloc.style.cssText = 'width:18px; height:18px; border-radius:4px; background:' + (correcte ? '#27ae60' : '#c0392b') + ';';
-      barreQuiz.appendChild(bloc);
-    });
+    const total = moduleDef.questions.length;
+
+    for(let groupe = 0; groupe < Math.ceil(total / 10); groupe++){
+      const blocGroupe = document.createElement('div');
+      blocGroupe.style.cssText = 'display:flex; flex-direction:column; gap:2px;';
+      for(let i = 0; i < 10; i++){
+        const idx = groupe * 10 + i;
+        if(idx >= total) break;
+        const question = moduleDef.questions[idx];
+        const reponse = etatCourant.reponsesQuizSemaine[question.id];
+        let couleur = '#d9d9d9'; // grise : pas encore répondue cette semaine
+        if(reponse === true) couleur = '#27ae60';
+        else if(reponse === false) couleur = '#c0392b';
+        const brique = document.createElement('div');
+        brique.style.cssText = 'width:14px; height:8px; border-radius:2px; background:' + couleur + ';';
+        blocGroupe.appendChild(brique);
+      }
+      barreQuiz.appendChild(blocGroupe);
+    }
     barreQuiz.style.display = 'flex';
   }
 
@@ -192,7 +204,7 @@ document.addEventListener('DOMContentLoaded', async function(){
       etapes.retourVeille.style.display = 'block';
       const derniereEntree = etat.historiqueExercices[etat.historiqueExercices.length - 1];
       document.getElementById('rv-jour').textContent = (d.module_progression_jour || 'Jour') + ' ' + etat.jour;
-      document.getElementById('rv-exercice-choisi').textContent = derniereEntree ? derniereEntree.exerciceChoisi : '';
+      document.getElementById('rv-exercice-choisi').textContent = derniereEntree ? derniereEntree.objectifSuggere : '';
       document.getElementById('rv-texte').value = '';
 
     } else if(etat.phase === 'analyse_veille'){
@@ -215,7 +227,7 @@ document.addEventListener('DOMContentLoaded', async function(){
     } else if(etat.phase === 'retour_samedi'){
       etapes.retourSamedi.style.display = 'block';
       const derniereEntree = etat.historiqueExercices[etat.historiqueExercices.length - 1];
-      document.getElementById('rs-exercice-choisi').textContent = derniereEntree ? derniereEntree.exerciceChoisi : '';
+      document.getElementById('rs-exercice-choisi').textContent = derniereEntree ? derniereEntree.objectifSuggere : '';
       document.getElementById('rs-texte').value = '';
     }
   }
@@ -229,10 +241,17 @@ document.addEventListener('DOMContentLoaded', async function(){
     questionCourante = FAST.tirerQuestionQuiz(moduleDef, moduleId);
     const blocQuestion = document.getElementById('quiz-question-bloc');
     const blocFin = document.getElementById('quiz-fin-banque');
+    const boutonSuivante = document.getElementById('quiz-suivante');
+    const explicationEl = document.getElementById('quiz-explication');
+
+    explicationEl.style.display = 'none';
+    explicationEl.textContent = '';
+    boutonSuivante.disabled = true;
 
     if(!questionCourante){
       blocQuestion.style.display = 'none';
       blocFin.style.display = 'block';
+      boutonSuivante.disabled = true;
       return;
     }
     blocQuestion.style.display = 'block';
@@ -258,10 +277,12 @@ document.addEventListener('DOMContentLoaded', async function(){
           bonneOption.style.background = '#27ae60';
           bonneOption.style.color = '#fff';
         }
-        setTimeout(function(){
-          dessinerBarreQuiz();
-          afficherQuestionQuiz();
-        }, 900);
+        if(questionCourante.explication){
+          explicationEl.textContent = questionCourante.explication;
+          explicationEl.style.display = 'block';
+        }
+        dessinerBarreQuiz();
+        boutonSuivante.disabled = false;
       });
       optionsEl.appendChild(bouton);
     });
@@ -313,15 +334,17 @@ document.addEventListener('DOMContentLoaded', async function(){
     await afficherEtapeCourante();
   });
 
+  document.getElementById('quiz-suivante').addEventListener('click', function(){
+    afficherQuestionQuiz();
+  });
+
   document.getElementById('quiz-plus-tard').addEventListener('click', async function(){
     FAST.arreterQuizPourAujourdhui(moduleId);
     await afficherEtapeCourante();
   });
 
   document.getElementById('ex-envoyer').addEventListener('click', async function(){
-    const texte = document.getElementById('ex-texte').value.trim();
-    if(!texte) return;
-    FAST.soumettreExerciceChoisi(moduleId, moduleDef, texte);
+    FAST.validerExerciceDuJour(moduleId, moduleDef);
     await afficherEtapeCourante();
   });
 

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modules>
+
+  <module id="coaching-julie">
+    <name>Coaching Julie — de lunes a sábado</name>
+    <description>Un recorrido de una semana, un pequeño reto cada día y un quiz para afianzar los conceptos, para avanzar de verdad en tu tema.</description>
+
+    <exercices>
+      <exercice numero="1" jour="Lunes">
+        <objectif>Detecta una situación en la que tu voz no se escuchó lo suficiente, y prepara una frase sencilla para hacerte oír la próxima vez.</objectif>
+      </exercice>
+      <exercice numero="2" jour="Martes">
+        <objectif>Pon esa frase en práctica en una reunión o conversación, y observa la reacción que obtienes.</objectif>
+      </exercice>
+      <exercice numero="3" jour="Miércoles">
+        <objectif>Identifica una tarea que podrías delegar hoy, y delégala de verdad.</objectif>
+      </exercice>
+      <exercice numero="4" jour="Jueves">
+        <objectif>Pide a un compañero o a alguien cercano un feedback constructivo sobre tu postura esta semana.</objectif>
+      </exercice>
+      <exercice numero="5" jour="Viernes">
+        <objectif>Anota un logro de la semana, por pequeño que sea, y compártelo con alguien.</objectif>
+      </exercice>
+    </exercices>
+
+    <!-- Questions à choix multiple : pas encore traduites dans cette langue.
+         app.js retombe automatiquement sur modules-fr.xml pour cette section. -->
+
+    <bilan>
+      <description>Balance del sábado: síntesis de la semana (ejercicios + quiz), y luego la elección entre profundizar con tu e-Coach (repetir las preguntas falladas) o ser puesta en contacto.</description>
+    </bilan>
+  </module>
+
+  <module id="autopromotion-valorisation-test">
+    <name>Autopromoción y Valorización Personal Test</name>
+    <description>Dar a conocer tus resultados y reivindicar abiertamente el impacto de tu trabajo.</description>
+
+    <exercices>
+      <exercice numero="1" jour="Lunes">
+        <objectif>El inventario de logros invisibles: identifica y cuantifica tus contribuciones reales no documentadas. Repasa tus últimos 6 meses, enumera 5 logros que no figuraban en tu puesto inicial, asocia una métrica de impacto a cada uno, e inclúyelos en tu diario de impacto.</objectif>
+      </exercice>
+      <exercice numero="2" jour="Martes">
+        <objectif>El Pitch "Matriz de Impacto": convierte una tarea de ejecución en un relato de valor ejecutivo. Elige una tarea recurrente, reformúlala como [Acción de optimización] + [Transformación del proceso] = [Resultado estratégico/financiero], y ensaya un pitch de 30 segundos hasta que sea fluido.</objectif>
+      </exercice>
+      <exercice numero="3" jour="Miércoles">
+        <objectif>El Anclaje y la Amplificación en Reuniones: asegura la autoría de tus ideas. Antes de tu próxima reunión clave, define una frase de anclaje directa para tu recomendación, y acuerda con una compañera de confianza amplificarse mutuamente citando sus nombres.</objectif>
+      </exercice>
+      <exercice numero="4" jour="Jueves">
+        <objectif>La Simulación de la "Fact Sheet" Salarial: prepara una negociación financiera basada en datos. Crea una hoja de una página con tus 3 mayores contribuciones y sus métricas, fija tu cifra objetivo según el mercado, y practica en un juego de rol anunciarla con seguridad.</objectif>
+      </exercice>
+      <exercice numero="5" jour="Viernes">
+        <objectif>La Cartografía de Sponsors: estructura tu red de influencia y encuentra aliados estratégicos. Enumera 3 directivos fuera de tu línea jerárquica directa, identifica un tema sobre el que pedirles opinión, y planea un primer contacto con al menos uno de ellos en los próximos 14 días.</objectif>
+      </exercice>
+    </exercices>
+
+    <!-- Questions à choix multiple : pas encore traduites dans cette langue.
+         app.js retombe automatiquement sur modules-fr.xml pour cette section. -->
+
+    <bilan>
+      <description>Balance del sábado: síntesis de la semana (ejercicios + quiz), y luego la elección entre profundizar con tu e-Coach (repetir las preguntas falladas) o ser puesta en contacto.</description>
+    </bilan>
+  </module>
+
+</modules>
