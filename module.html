@@ -70,7 +70,7 @@
              relire), symbole selon le jour d'origine de la question. -->
         <div id="quiz-serpent-haut" style="display:none; flex-wrap:wrap; gap:3px; margin-bottom:6px;"></div>
         <div style="display:flex; gap:6px; align-items:stretch;">
-          <div id="quiz-serpent-gauche" style="display:none; flex-direction:column; gap:3px; flex-shrink:0;"></div>
+          <div id="quiz-serpent-gauche" style="display:none; flex-direction:column; flex-wrap:wrap; max-height:190px; gap:3px; flex-shrink:0;"></div>
           <div style="flex:1; min-width:0;">
             <div class="card" id="quiz-question-bloc">
               <p id="quiz-texte" style="font-size:14px; margin:0 0 10px;"></p>
@@ -78,7 +78,7 @@
               <p id="quiz-explication" style="font-size:12px; color:var(--text-dim); line-height:1.5; margin:10px 0 0; display:none;"></p>
             </div>
           </div>
-          <div id="quiz-serpent-droite" style="display:none; flex-direction:column; gap:3px; flex-shrink:0;"></div>
+          <div id="quiz-serpent-droite" style="display:none; flex-direction:column; flex-wrap:wrap; max-height:190px; gap:3px; flex-shrink:0;"></div>
         </div>
         <div id="quiz-serpent-bas" style="display:none; flex-wrap:wrap; gap:3px; margin-top:6px;"></div>
 
@@ -228,21 +228,23 @@ document.addEventListener('DOMContentLoaded', async function(){
   function dessinerBarreQuiz(){
     const etatCourant = FAST.getEtatModule(moduleId);
     const total = moduleDef.questions.length;
-    Object.values(zonesSerpent).forEach(z => { z.innerHTML = ''; });
+    Object.values(zonesSerpent).forEach(z => { z.innerHTML = ''; z.style.display = 'none'; });
 
-    const repartition = [
-      { zone: zonesSerpent.haut, n: 15, direction: 'row' },
-      { zone: zonesSerpent.droite, n: 10, direction: 'column' },
-      { zone: zonesSerpent.bas, n: 15, direction: 'row' },
-      { zone: zonesSerpent.gauche, n: 10, direction: 'column' }
-    ];
-    let idx = 0;
-    repartition.forEach(function(section){
-      for(let i = 0; i < section.n && idx < total; i++, idx++){
-        section.zone.appendChild(creerBrique(moduleDef.questions[idx], etatCourant, idx));
-      }
-      section.zone.style.display = idx > 0 ? 'flex' : 'none';
-    });
+    // Lundi (0-9) + Mardi (10-19) -> gauche (20 briques)
+    // Mercredi (20-29) -> haut (10 briques)
+    // Jeudi (30-39) + Vendredi (40-49) -> droite (20 briques)
+    for(let idx = 0; idx < Math.min(20, total); idx++){
+      zonesSerpent.gauche.appendChild(creerBrique(moduleDef.questions[idx], etatCourant, idx));
+    }
+    for(let idx = 20; idx < Math.min(30, total); idx++){
+      zonesSerpent.haut.appendChild(creerBrique(moduleDef.questions[idx], etatCourant, idx));
+    }
+    for(let idx = 30; idx < Math.min(50, total); idx++){
+      zonesSerpent.droite.appendChild(creerBrique(moduleDef.questions[idx], etatCourant, idx));
+    }
+    if(zonesSerpent.gauche.children.length) zonesSerpent.gauche.style.display = 'flex';
+    if(zonesSerpent.haut.children.length) zonesSerpent.haut.style.display = 'flex';
+    if(zonesSerpent.droite.children.length) zonesSerpent.droite.style.display = 'flex';
   }
 
   // Affiche une question déjà répondue en lecture seule : sa réponse
