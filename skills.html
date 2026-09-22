@@ -26,6 +26,13 @@
     <h1 style="font-size:20px; margin:4px 0 8px;" data-i18n="skills_h1">Vos compétences à développer</h1>
     <p class="lead" data-i18n="skills_lead">Une sélection de compétences pour progresser vers des responsabilités plus importantes.</p>
 
+    <div class="card" id="skills-formation-vedette" style="border:1px solid var(--rose-deep);">
+      <p style="font-size:11px; color:var(--rose-deep); text-transform:uppercase; letter-spacing:.02em; margin:0 0 6px;" data-i18n="skills_formation_vedette_label">Formation à l'essai</p>
+      <h3 style="font-size:14.5px; margin:0 0 6px;">Autopromotion et Valorisation Personnelle Test</h3>
+      <p style="font-size:13px; color:var(--text); line-height:1.5; margin:0 0 10px;" data-i18n="skills_formation_vedette_desc">Faire connaître ses résultats et revendiquer ouvertement l'impact de son travail.</p>
+      <button class="btn btn-primary" id="skills-formation-vedette-cta" data-i18n="skills_cta">Améliorer cette compétence</button>
+    </div>
+
     <div class="card" id="skills-chargement">
       <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="skills_chargement">
         Nous préparons votre sélection de compétences...
@@ -51,6 +58,9 @@
 <script src="assets/app.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', async function(){
+  document.getElementById('skills-formation-vedette-cta').addEventListener('click', function(){
+    window.location.href = 'module.html?module=autopromotion-valorisation-test';
+  });
   const chargement = document.getElementById('skills-chargement');
   const contenu = document.getElementById('skills-contenu');
   const erreurBloc = document.getElementById('skills-erreur');
@@ -85,11 +95,7 @@ document.addEventListener('DOMContentLoaded', async function(){
     bouton.className = 'btn btn-primary';
     bouton.textContent = d.skills_cta || 'Améliorer cette compétence';
     bouton.addEventListener('click', function(){
-      // Un seul module existe pour l'instant (coaching-julie) : toutes les
-      // compétences y mènent, avec la compétence choisie transmise en
-      // paramètre pour préparer un futur catalogue module-par-compétence.
-      const skillParam = encodeURIComponent(skill.title);
-      window.location.href = 'module.html?module=coaching-julie&skill=' + skillParam;
+      window.location.href = 'under-construction.html';
     });
     carte.appendChild(bouton);
 

@@ -257,4 +257,6 @@
   <string key="module_exercice_envoyer">Let's go</string>
   <string key="module_retour_samedi_eyebrow">Before your review</string>
   <string key="module_retour_samedi_envoyer">Send and see my review</string>
+  <string key="skills_formation_vedette_label">Test training</string>
+  <string key="skills_formation_vedette_desc">Making your results known and openly claiming the impact of your work.</string>
 </i18n>

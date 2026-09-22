@@ -257,4 +257,6 @@
   <string key="module_exercice_envoyer">C'est parti</string>
   <string key="module_retour_samedi_eyebrow">Avant votre bilan</string>
   <string key="module_retour_samedi_envoyer">Envoyer et voir mon bilan</string>
+  <string key="skills_formation_vedette_label">Formation à l'essai</string>
+  <string key="skills_formation_vedette_desc">Faire connaître ses résultats et revendiquer ouvertement l'impact de son travail.</string>
 </i18n>
