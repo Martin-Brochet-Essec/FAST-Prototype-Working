@@ -242,6 +242,17 @@
   <string key="module_bilan_chargement">Preparando el balance de tu semana...</string>
   <string key="module_bilan_title">Tu balance</string>
   <string key="module_bilan_choix_lead">¿Y ahora?</string>
-  <string key="module_bilan_approfondir">Profundizar con mi e-Coach</string>
+  <string key="module_bilan_approfondir">Repetir las preguntas falladas</string>
   <string key="module_bilan_mise_en_relation">Ser puesta en contacto</string>
+  <string key="module_analyse_title">Lo que piensa tu coach</string>
+  <string key="module_analyse_continuer">Continuar al quiz</string>
+  <string key="module_progression_jour">Día</string>
+  <string key="module_quiz_progression">Pregunta de hoy</string>
+  <string key="module_quiz_objectif">objetivo: 10/día</string>
+  <string key="module_quiz_plus_tard">Haré más mañana</string>
+  <string key="module_quiz_banque_epuisee">Has recorrido todas las preguntas de esta semana.</string>
+  <string key="module_exercice_suggere_title">Idea para hoy</string>
+  <string key="module_exercice_label">¿Qué vas a hacer concretamente hoy?</string>
+  <string key="module_exercice_ph">Describe tu ejercicio de hoy...</string>
+  <string key="module_exercice_envoyer">Vamos</string>
 </i18n>

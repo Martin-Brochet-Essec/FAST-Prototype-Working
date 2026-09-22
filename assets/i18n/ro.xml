@@ -242,6 +242,17 @@
   <string key="module_bilan_chargement">Pregătim bilanțul săptămânii tale...</string>
   <string key="module_bilan_title">Bilanțul tău</string>
   <string key="module_bilan_choix_lead">Și acum?</string>
-  <string key="module_bilan_approfondir">Aprofundează cu e-Coach-ul meu</string>
+  <string key="module_bilan_approfondir">Reia întrebările greșite</string>
   <string key="module_bilan_mise_en_relation">Fii pusă în legătură</string>
+  <string key="module_analyse_title">Ce crede coach-ul tău</string>
+  <string key="module_analyse_continuer">Continuă spre quiz</string>
+  <string key="module_progression_jour">Ziua</string>
+  <string key="module_quiz_progression">Întrebarea zilei</string>
+  <string key="module_quiz_objectif">obiectiv: 10/zi</string>
+  <string key="module_quiz_plus_tard">Voi face mai multe mâine</string>
+  <string key="module_quiz_banque_epuisee">Ai parcurs toate întrebările din această săptămână.</string>
+  <string key="module_exercice_suggere_title">Idee pentru azi</string>
+  <string key="module_exercice_label">Ce vei face concret azi?</string>
+  <string key="module_exercice_ph">Descrie exercițiul tău de azi...</string>
+  <string key="module_exercice_envoyer">Hai să începem</string>
 </i18n>

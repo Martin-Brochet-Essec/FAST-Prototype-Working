@@ -242,6 +242,17 @@
   <string key="module_bilan_chargement">Preparing your weekly review...</string>
   <string key="module_bilan_title">Your review</string>
   <string key="module_bilan_choix_lead">What now?</string>
-  <string key="module_bilan_approfondir">Go deeper with my e-Coach</string>
+  <string key="module_bilan_approfondir">Redo the questions you got wrong</string>
   <string key="module_bilan_mise_en_relation">Get connected</string>
+  <string key="module_analyse_title">What your coach thinks</string>
+  <string key="module_analyse_continuer">Continue to the quiz</string>
+  <string key="module_progression_jour">Day</string>
+  <string key="module_quiz_progression">Today's question</string>
+  <string key="module_quiz_objectif">goal: 10/day</string>
+  <string key="module_quiz_plus_tard">I'll do more tomorrow</string>
+  <string key="module_quiz_banque_epuisee">You've gone through all the questions this week.</string>
+  <string key="module_exercice_suggere_title">Idea for today</string>
+  <string key="module_exercice_label">What will you actually do today?</string>
+  <string key="module_exercice_ph">Describe your exercise for today...</string>
+  <string key="module_exercice_envoyer">Let's go</string>
 </i18n>
