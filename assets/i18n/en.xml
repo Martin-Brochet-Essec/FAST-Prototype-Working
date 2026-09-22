@@ -265,4 +265,6 @@
   <string key="module_bilan_accueil">Back to home</string>
   <string key="module_bilan_recommencer">Restart the whole week</string>
   <string key="module_bilan_recommencer_confirm">All your answers for the week will be forgotten. Continue?</string>
+  <string key="module_quiz_reinitialiser">Reset the questions to zero</string>
+  <string key="module_quiz_reinitialiser_confirm">All your quiz answers will be forgotten (your exercises stay saved). Continue?</string>
 </i18n>

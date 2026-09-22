@@ -265,4 +265,6 @@
   <string key="module_bilan_accueil">Volver al inicio</string>
   <string key="module_bilan_recommencer">Reiniciar toda la semana</string>
   <string key="module_bilan_recommencer_confirm">Se olvidarán todas tus respuestas de la semana. ¿Continuar?</string>
+  <string key="module_quiz_reinitialiser">Reiniciar las preguntas desde cero</string>
+  <string key="module_quiz_reinitialiser_confirm">Se olvidarán todas tus respuestas del quiz (tus ejercicios se conservan). ¿Continuar?</string>
 </i18n>

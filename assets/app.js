@@ -640,11 +640,14 @@ window.FAST = (function(){
 
   // ---- Quiz ----
 
+  // Ordre linéaire, pas de tirage aléatoire : on prend toujours la
+  // prochaine question non répondue cette semaine, dans l'ordre du
+  // fichier (donc par jour, puisque les questions y sont groupées par 10).
   function tirerQuestionQuiz(moduleDef, moduleId){
     const etat = getEtatModule(moduleId);
     const dispo = moduleDef.questions.filter(q => !etat.questionsVuesSemaine.includes(q.id));
     if(dispo.length === 0) return null; // banque de la semaine épuisée
-    return dispo[Math.floor(Math.random() * dispo.length)];
+    return dispo[0];
   }
 
   // Enregistre la réponse à une question de quiz (avec l'index choisi, pour
@@ -720,6 +723,19 @@ window.FAST = (function(){
   // toutes les réponses (exercices + quiz) sont oubliées.
   function reinitialiserModule(moduleId){
     localStorage.removeItem('fast_module_' + moduleId);
+  }
+
+  // Réinitialise uniquement les questions du quiz (toutes les questions
+  // redeviennent disponibles, les bonnes/mauvaises réponses sont oubliées),
+  // sans toucher au jour en cours ni aux exercices déjà validés. Accessible
+  // depuis l'écran de quiz de n'importe quel jour.
+  function reinitialiserQuestionsQuiz(moduleId){
+    const etat = getEtatModule(moduleId);
+    if(!etat) return;
+    etat.questionsVuesSemaine = [];
+    etat.reponsesQuizSemaine = {};
+    etat.quizAujourdhui = { correctes: 0, incorrectes: 0, repondues: 0 };
+    sauverEtatModule(moduleId, etat);
   }
 
   // Formate une entrée d'historique en indiquant si l'objectif quotidien de
@@ -1397,7 +1413,7 @@ window.FAST = (function(){
     soumettreRetourVeille: soumettreRetourVeille, passerAuQuizDuJour: passerAuQuizDuJour,
     soumettreRetourSamedi: soumettreRetourSamedi,
     getQuestionsRateesSemaine: getQuestionsRateesSemaine, produireBilanModule: produireBilanModule,
-    reinitialiserModule: reinitialiserModule,
+    reinitialiserModule: reinitialiserModule, reinitialiserQuestionsQuiz: reinitialiserQuestionsQuiz,
     runFinalSynthesis: runFinalSynthesis,
     runProfileDeepening: runProfileDeepening,
     generateDeepenQuestions: generateDeepenQuestions,

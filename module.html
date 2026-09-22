@@ -100,6 +100,9 @@
           <button class="btn btn-primary" id="quiz-suivante" data-i18n="module_quiz_suivante" disabled>Question suivante</button>
           <button class="btn btn-ghost" id="quiz-plus-tard" data-i18n="module_quiz_plus_tard">J'en ferai plus demain</button>
         </div>
+        <div class="steprow">
+          <button class="btn btn-ghost" id="quiz-reinitialiser" data-i18n="module_quiz_reinitialiser" style="color:#c0392b; font-size:12px;">Reprendre les questions à zéro</button>
+        </div>
       </div>
 
 
@@ -438,6 +441,14 @@ document.addEventListener('DOMContentLoaded', async function(){
   document.getElementById('quiz-plus-tard').addEventListener('click', async function(){
     FAST.arreterQuizPourAujourdhui(moduleId);
     await afficherEtapeCourante();
+  });
+
+  document.getElementById('quiz-reinitialiser').addEventListener('click', function(){
+    const d = FAST.dict();
+    const confirmation = window.confirm(d.module_quiz_reinitialiser_confirm || 'Toutes vos réponses au quiz seront oubliées (vos exercices restent conservés). Continuer ?');
+    if(!confirmation) return;
+    FAST.reinitialiserQuestionsQuiz(moduleId);
+    afficherEtapeCourante();
   });
 
   document.getElementById('ex-envoyer').addEventListener('click', async function(){
