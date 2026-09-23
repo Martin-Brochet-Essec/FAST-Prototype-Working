@@ -404,65 +404,35 @@ window.FAST = (function(){
   // Charge les 4 profils de coachs spécialisés depuis <coach_profiles> dans
   // assets/prompts.xml. Retourne un objet { id: {id, name, tagline, expertise} }.
   // ---- Badge visuel du e-Coach ----
-  // Un badge rond coloré par coach : visage simple (traits distincts par
-  // coach), petit médaillon avec un symbole, et le nom du coach affiché
-  // en couronne (texte courbé) au-dessus. Composant réutilisable partout
-  // où le coach "parle" : results.html, results-even-better.html,
-  // deepen-question.html, final-response.html, who-am-i.html, module.html.
-  const COACH_VISUELS = {
-    society: {
-      couleur: '#5B6FA8',
-      symbole: '\u2696',
-      visage: '<rect x="35" y="47" width="6" height="5" rx="1.5" fill="#fff"/><rect x="59" y="47" width="6" height="5" rx="1.5" fill="#fff"/><path d="M 37 68 Q 50 73 63 68" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>'
-    },
-    family: {
-      couleur: '#4E9B72',
-      symbole: '\u2302',
-      visage: '<circle cx="38" cy="49" r="3.6" fill="#fff"/><circle cx="62" cy="49" r="3.6" fill="#fff"/><path d="M 35 65 Q 50 80 65 65" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>'
-    },
-    enterprise: {
-      couleur: '#A8455D',
-      symbole: '\u25C6',
-      visage: '<rect x="35" y="48" width="6" height="4" rx="1" fill="#fff"/><rect x="59" y="48" width="6" height="4" rx="1" fill="#fff"/><path d="M 38 68 L 62 68" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>'
-    },
-    individual: {
-      couleur: '#C98A2E',
-      symbole: '\u2605',
-      visage: '<circle cx="38" cy="50" r="3.4" fill="#fff"/><circle cx="62" cy="50" r="3.4" fill="#fff"/><path d="M 36 66 Q 50 78 64 66" stroke="#fff" stroke-width="3.2" fill="none" stroke-linecap="round"/>'
-    }
+  // Un badge rond par coach, à partir des 4 illustrations fournies
+  // (déjà recadrées en cercle : anneau coloré + portrait + médaillon
+  // symbole). Composant réutilisable partout où le coach "parle" :
+  // results.html, results-even-better.html, deepen-question.html,
+  // final-response.html, who-am-i.html, module.html.
+  const COACH_AVATARS = {
+    society: 'assets/img/coach-society.png',
+    family: 'assets/img/coach-family.png',
+    enterprise: 'assets/img/coach-enterprise.png',
+    individual: 'assets/img/coach-individual.png'
   };
-  const VISUEL_PAR_DEFAUT = {
-    couleur: '#8a8a86', symbole: '?',
-    visage: '<circle cx="38" cy="50" r="3.2" fill="#fff"/><circle cx="62" cy="50" r="3.2" fill="#fff"/><path d="M 38 68 L 62 68" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>'
-  };
-
-  let compteurBadgeCoach = 0;
 
   function echapperHtml(s){
     return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
 
   // genererBadgeCoachHTML(coachId, nomCoach, taille) -> chaîne HTML du badge.
-  // nomCoach : le nom à afficher en couronne (ex: profils[coachId].name).
+  // nomCoach : utilisé comme texte alternatif (accessibilité) et comme
+  // repli (initiale) si coachId est inconnu.
   // taille : diamètre en pixels (défaut 72).
   function genererBadgeCoachHTML(coachId, nomCoach, taille){
     taille = taille || 72;
-    const visuel = COACH_VISUELS[coachId] || VISUEL_PAR_DEFAUT;
-    compteurBadgeCoach += 1;
-    const idArc = 'arcBadgeCoach' + compteurBadgeCoach;
-    const nomAffiche = echapperHtml((nomCoach || '').toUpperCase());
-    return '<div class="fast-coach-badge" style="display:inline-flex; flex-direction:column; align-items:center; flex-shrink:0; overflow:visible;">' +
-      '<svg width="' + taille + '" height="' + taille + '" viewBox="0 0 100 100" style="overflow:visible; display:block;">' +
-      '<defs><path id="' + idArc + '" d="M 8 40 A 42 42 0 0 1 92 40" fill="none"/></defs>' +
-      '<circle cx="50" cy="56" r="34" fill="' + visuel.couleur + '"/>' +
-      visuel.visage +
-      '<circle cx="74" cy="77" r="12" fill="#fff" stroke="' + visuel.couleur + '" stroke-width="1.5"/>' +
-      '<text x="74" y="81" font-size="12" text-anchor="middle" fill="' + visuel.couleur + '">' + visuel.symbole + '</text>' +
-      '<text font-size="8.5" fill="' + visuel.couleur + '" letter-spacing="1" font-weight="600">' +
-      '<textPath href="#' + idArc + '" startOffset="50%" text-anchor="middle">' + nomAffiche + '</textPath>' +
-      '</text>' +
-      '</svg>' +
-      '</div>';
+    const src = COACH_AVATARS[coachId];
+    const alt = echapperHtml(nomCoach || '');
+    if(!src){
+      const initiale = echapperHtml((nomCoach || '?').charAt(0).toUpperCase());
+      return '<div class="fast-coach-badge" style="display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:' + taille + 'px; height:' + taille + 'px; border-radius:50%; background:#8a8a86; color:#fff; font-size:' + Math.round(taille*0.4) + 'px; font-weight:600;">' + initiale + '</div>';
+    }
+    return '<img class="fast-coach-badge" src="' + src + '" alt="' + alt + '" width="' + taille + '" height="' + taille + '" style="border-radius:50%; display:block; flex-shrink:0; object-fit:cover;">';
   }
 
   async function loadCoachProfiles(){
