@@ -76,7 +76,6 @@
             <div class="card" id="quiz-question-bloc">
               <p id="quiz-texte" style="font-size:14px; margin:0 0 10px;"></p>
               <div id="quiz-options"></div>
-              <p id="quiz-explication" style="font-size:12px; color:var(--text-dim); line-height:1.5; margin:10px 0 0; display:none;"></p>
             </div>
           </div>
           <div id="quiz-serpent-droite" style="display:none; flex-direction:column; flex-wrap:wrap; max-height:190px; gap:3px; flex-shrink:0;"></div>
@@ -88,8 +87,12 @@
           <p id="relecture-jour" style="font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.02em; margin:0 0 8px;"></p>
           <p id="relecture-texte" style="font-size:14px; margin:0 0 10px;"></p>
           <div id="relecture-options"></div>
-          <p id="relecture-explication" style="font-size:12px; color:var(--text-dim); line-height:1.5; margin:10px 0 0;"></p>
-          <div class="steprow">
+          <p id="relecture-explication" style="font-size:13.5px; color:var(--text); line-height:1.6; margin:12px 0 0; padding-top:10px; border-top:1px solid #eee;"></p>
+          <div class="steprow" id="relecture-boutons-reponse" style="display:none;">
+            <button class="btn btn-primary" id="relecture-suivante" data-i18n="module_quiz_suivante">Question suivante</button>
+            <button class="btn btn-ghost" id="relecture-plus-tard" data-i18n="module_quiz_plus_tard">J'en ferai plus demain</button>
+          </div>
+          <div class="steprow" id="relecture-bouton-fermer">
             <button class="btn btn-ghost" id="relecture-fermer" data-i18n="module_relecture_fermer">Fermer</button>
           </div>
         </div>
@@ -256,13 +259,10 @@ document.addEventListener('DOMContentLoaded', async function(){
 
   // Affiche une question déjà répondue en lecture seule : sa réponse
   // choisie, la bonne réponse, et l'explication.
-  function ouvrirRelecture(question, reponse){
-    document.getElementById('quiz-question-bloc').style.display = 'none';
-    document.getElementById('quiz-fin-banque').style.display = 'none';
-    zoneRelecture.style.display = 'block';
-
-    const d = FAST.dict();
-    document.getElementById('relecture-jour').textContent = d.module_relecture_label || 'Relecture';
+  // Rendu commun : question, options colorées (bonne/mauvaise), explication.
+  // Utilisé à la fois pour la relecture d'une question passée et pour la
+  // popup affichée juste après avoir répondu.
+  function remplirCarteExplication(question, indexChoisi){
     document.getElementById('relecture-texte').textContent = question.text;
 
     const optionsEl = document.getElementById('relecture-options');
@@ -271,12 +271,44 @@ document.addEventListener('DOMContentLoaded', async function(){
       const ligne = document.createElement('div');
       let style = 'padding:10px 12px; margin-bottom:6px; border-radius:8px; border:1px solid #ccc; font-size:13px; box-sizing:border-box;';
       if(idx === question.bonneReponse){ style += 'background:#27ae60; color:#fff; border-color:transparent;'; }
-      else if(idx === reponse.indexChoisi){ style += 'background:#c0392b; color:#fff; border-color:transparent;'; }
+      else if(idx === indexChoisi){ style += 'background:#c0392b; color:#fff; border-color:transparent;'; }
       ligne.style.cssText = style;
       ligne.textContent = opt;
       optionsEl.appendChild(ligne);
     });
     document.getElementById('relecture-explication').textContent = question.explication || '';
+  }
+
+  // Relecture d'une question déjà répondue (clic sur une brique verte/rouge
+  // du serpent) : lecture seule, un seul bouton "Fermer".
+  function ouvrirRelecture(question, reponse){
+    document.getElementById('quiz-question-bloc').style.display = 'none';
+    document.getElementById('quiz-fin-banque').style.display = 'none';
+    zoneRelecture.style.display = 'block';
+
+    document.getElementById('relecture-jour').textContent = FAST.dict().module_relecture_label || 'Relecture';
+    remplirCarteExplication(question, reponse.indexChoisi);
+
+    document.getElementById('relecture-boutons-reponse').style.display = 'none';
+    document.getElementById('relecture-bouton-fermer').style.display = 'flex';
+  }
+
+  // Popup affichée juste après avoir répondu à la question du jour : même
+  // rendu, mais avec les boutons "Question suivante" / "J'en ferai plus
+  // demain" dupliqués, pour agir directement sans fermer la fenêtre.
+  function ouvrirPopupApresReponse(question, indexChoisi){
+    document.getElementById('quiz-question-bloc').style.display = 'none';
+    document.getElementById('quiz-fin-banque').style.display = 'none';
+    zoneRelecture.style.display = 'block';
+
+    const d = FAST.dict();
+    document.getElementById('relecture-jour').textContent = indexChoisi === question.bonneReponse
+      ? (d.module_quiz_bonne_reponse || 'Bonne réponse !')
+      : (d.module_quiz_mauvaise_reponse || 'Pas tout à fait...');
+    remplirCarteExplication(question, indexChoisi);
+
+    document.getElementById('relecture-bouton-fermer').style.display = 'none';
+    document.getElementById('relecture-boutons-reponse').style.display = 'flex';
   }
 
   function fermerRelecture(){
@@ -338,10 +370,7 @@ document.addEventListener('DOMContentLoaded', async function(){
     const blocQuestion = document.getElementById('quiz-question-bloc');
     const blocFin = document.getElementById('quiz-fin-banque');
     const boutonSuivante = document.getElementById('quiz-suivante');
-    const explicationEl = document.getElementById('quiz-explication');
 
-    explicationEl.style.display = 'none';
-    explicationEl.textContent = '';
     boutonSuivante.disabled = true;
 
     if(!questionCourante){
@@ -372,22 +401,10 @@ document.addEventListener('DOMContentLoaded', async function(){
       bouton.style.cssText = 'display:block; width:100%; box-sizing:border-box; text-align:left; padding:12px 10px; margin-bottom:6px; border-radius:8px; border:1px solid #ccc; background:#fff; font-size:13px; line-height:1.4; cursor:pointer;';
       bouton.addEventListener('click', function(){
         const correcte = FAST.soumettreReponseQuiz(moduleId, questionCourante, indexCanonique);
-        bouton.style.background = correcte ? '#27ae60' : '#c0392b';
-        bouton.style.color = '#fff';
-        bouton.style.borderColor = 'transparent';
         Array.from(optionsEl.children).forEach(b => { b.disabled = true; });
-        if(!correcte){
-          const posBonneReponse = ordreAffichageCourant.indexOf(questionCourante.bonneReponse);
-          const bonneOption = optionsEl.children[posBonneReponse];
-          bonneOption.style.background = '#27ae60';
-          bonneOption.style.color = '#fff';
-        }
-        if(questionCourante.explication){
-          explicationEl.textContent = questionCourante.explication;
-          explicationEl.style.display = 'block';
-        }
         dessinerBarreQuiz();
         boutonSuivante.disabled = false;
+        ouvrirPopupApresReponse(questionCourante, indexCanonique);
       });
       optionsEl.appendChild(bouton);
     });
@@ -464,10 +481,12 @@ document.addEventListener('DOMContentLoaded', async function(){
   });
 
   document.getElementById('quiz-suivante').addEventListener('click', function(){
+    fermerRelecture();
     afficherQuestionQuiz();
   });
 
   document.getElementById('quiz-plus-tard').addEventListener('click', async function(){
+    fermerRelecture();
     FAST.arreterQuizPourAujourdhui(moduleId);
     await afficherEtapeCourante();
   });
@@ -518,6 +537,17 @@ document.addEventListener('DOMContentLoaded', async function(){
 
   document.getElementById('relecture-fermer').addEventListener('click', function(){
     fermerRelecture();
+  });
+
+  document.getElementById('relecture-suivante').addEventListener('click', function(){
+    fermerRelecture();
+    afficherQuestionQuiz();
+  });
+
+  document.getElementById('relecture-plus-tard').addEventListener('click', async function(){
+    fermerRelecture();
+    FAST.arreterQuizPourAujourdhui(moduleId);
+    await afficherEtapeCourante();
   });
 
   document.getElementById('bilan-accueil').addEventListener('click', function(){

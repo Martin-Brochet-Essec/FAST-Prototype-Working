@@ -273,4 +273,6 @@
   <string key="final_pont_titre">Go further</string>
   <string key="final_pont_lead">Want to work on this over time?</string>
   <string key="final_pont_cta">Discover the skills to develop</string>
+  <string key="module_quiz_bonne_reponse">Correct!</string>
+  <string key="module_quiz_mauvaise_reponse">Not quite...</string>
 </i18n>

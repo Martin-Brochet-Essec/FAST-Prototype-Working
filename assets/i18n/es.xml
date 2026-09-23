@@ -273,4 +273,6 @@
   <string key="final_pont_titre">Ir más lejos</string>
   <string key="final_pont_lead">¿Quieres trabajar esto a largo plazo?</string>
   <string key="final_pont_cta">Descubrir mis habilidades a desarrollar</string>
+  <string key="module_quiz_bonne_reponse">¡Correcto!</string>
+  <string key="module_quiz_mauvaise_reponse">No del todo...</string>
 </i18n>

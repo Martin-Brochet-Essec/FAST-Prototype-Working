@@ -273,4 +273,6 @@
   <string key="final_pont_titre">Pour aller plus loin</string>
   <string key="final_pont_lead">Envie de travailler ça dans la durée ?</string>
   <string key="final_pont_cta">Découvrir mes compétences à développer</string>
+  <string key="module_quiz_bonne_reponse">Bonne réponse !</string>
+  <string key="module_quiz_mauvaise_reponse">Pas tout à fait...</string>
 </i18n>
