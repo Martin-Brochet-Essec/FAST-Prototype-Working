@@ -24,6 +24,7 @@
     <div class="eyebrow" data-i18n="reb_eyebrow">Votre profil, plus précisément</div>
 
     <div class="card" id="reb-chargement">
+      <div id="reb-chargement-badge" style="display:none; justify-content:center; margin:0 0 14px;"></div>
       <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="reb_chargement">
         Nous croisons vos réponses pour affiner votre profil...
       </p>
@@ -60,6 +61,21 @@ document.addEventListener('DOMContentLoaded', async function(){
   const boutonContinuer = document.getElementById('reb-continuer');
 
   try{
+    // Si un coach est déjà identifié (choix manuel ou recommandation
+    // précédente), on l'affiche en grand pendant l'attente IA.
+    if(FAST.coachDejaIdentifie()){
+      try{
+        const profils = await FAST.loadCoachProfiles();
+        const { ids } = FAST.getCoachActuel();
+        const idPrincipal = ids.find(id => profils[id]);
+        if(idPrincipal){
+          const badgeChargement = document.getElementById('reb-chargement-badge');
+          badgeChargement.innerHTML = FAST.genererBadgeCoachHTML(idPrincipal, profils[idPrincipal].name, 140);
+          badgeChargement.style.display = 'flex';
+        }
+      }catch(e){ /* pas bloquant */ }
+    }
+
     // Cache : si Q10+Q5 n'ont pas changé depuis la dernière fois, on
     // réutilise la synthèse déjà calculée sans rappeler l'IA.
     const qaQ10Actuelles = FAST.getAnswersFor('q10');

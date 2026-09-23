@@ -24,6 +24,7 @@
     <div class="eyebrow" data-i18n="final_eyebrow">Notre réponse</div>
 
     <div class="card" id="final-chargement">
+      <div id="final-chargement-badge" style="display:none; justify-content:center; margin:0 0 14px;"></div>
       <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="final_chargement">
         Nous préparons votre réponse à partir de l'ensemble de vos réponses...
       </p>
@@ -71,6 +72,21 @@ document.addEventListener('DOMContentLoaded', async function(){
   const boutonContinuer = document.getElementById('final-continuer');
 
   try{
+    // Si un coach est déjà identifié, on l'affiche en grand pendant
+    // l'attente IA.
+    if(FAST.coachDejaIdentifie()){
+      try{
+        const profils = await FAST.loadCoachProfiles();
+        const { ids } = FAST.getCoachActuel();
+        const idPrincipal = ids.find(id => profils[id]);
+        if(idPrincipal){
+          const badgeChargement = document.getElementById('final-chargement-badge');
+          badgeChargement.innerHTML = FAST.genererBadgeCoachHTML(idPrincipal, profils[idPrincipal].name, 140);
+          badgeChargement.style.display = 'flex';
+        }
+      }catch(e){ /* pas bloquant */ }
+    }
+
     // Vérifie si une synthèse finale déjà calculée correspond exactement
     // aux réponses actuelles (Q10 + Q5 + question libre + deepen) : si
     // oui, on l'affiche sans rappeler l'IA.

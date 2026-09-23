@@ -135,6 +135,7 @@
       <!-- Étape : bilan du samedi -->
       <div id="module-etape-bilan" style="display:none;">
         <div class="card" id="bilan-chargement">
+          <div id="bilan-chargement-badge" style="display:none; justify-content:center; margin:0 0 14px;"></div>
           <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="module_bilan_chargement">
             Préparation du bilan de votre semaine...
           </p>
@@ -396,6 +397,11 @@ document.addEventListener('DOMContentLoaded', async function(){
     etapes.bilan.style.display = 'block';
     const chargementBilan = document.getElementById('bilan-chargement');
     const contenuBilan = document.getElementById('bilan-contenu');
+    if(badgeCoachHTML){
+      const badgeChargementBilan = document.getElementById('bilan-chargement-badge');
+      badgeChargementBilan.innerHTML = badgeCoachHTML;
+      badgeChargementBilan.style.display = 'flex';
+    }
     try{
       const bilan = await FAST.produireBilanModule(moduleId);
       chargementBilan.style.display = 'none';
@@ -420,7 +426,7 @@ document.addEventListener('DOMContentLoaded', async function(){
       const profils = await FAST.loadCoachProfiles();
       const { ids } = FAST.getCoachActuel();
       const idPrincipal = ids.find(id => profils[id]);
-      if(idPrincipal) badgeCoachHTML = FAST.genererBadgeCoachHTML(idPrincipal, profils[idPrincipal].name);
+      if(idPrincipal) badgeCoachHTML = FAST.genererBadgeCoachHTML(idPrincipal, profils[idPrincipal].name, 140);
     }catch(e){ /* pas bloquant si le badge échoue à se calculer */ }
 
     FAST.demarrerOuReprendreModule(moduleId);

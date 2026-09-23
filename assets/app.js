@@ -451,13 +451,13 @@ window.FAST = (function(){
     compteurBadgeCoach += 1;
     const idArc = 'arcBadgeCoach' + compteurBadgeCoach;
     const nomAffiche = echapperHtml((nomCoach || '').toUpperCase());
-    return '<div class="fast-coach-badge" style="display:inline-flex; flex-direction:column; align-items:center;">' +
-      '<svg width="' + taille + '" height="' + taille + '" viewBox="0 0 100 100">' +
+    return '<div class="fast-coach-badge" style="display:inline-flex; flex-direction:column; align-items:center; flex-shrink:0; overflow:visible;">' +
+      '<svg width="' + taille + '" height="' + taille + '" viewBox="0 0 100 100" style="overflow:visible; display:block;">' +
       '<defs><path id="' + idArc + '" d="M 8 40 A 42 42 0 0 1 92 40" fill="none"/></defs>' +
       '<circle cx="50" cy="56" r="34" fill="' + visuel.couleur + '"/>' +
       visuel.visage +
-      '<circle cx="76" cy="80" r="13" fill="#fff" stroke="' + visuel.couleur + '" stroke-width="1.5"/>' +
-      '<text x="76" y="85" font-size="13" text-anchor="middle" fill="' + visuel.couleur + '">' + visuel.symbole + '</text>' +
+      '<circle cx="74" cy="77" r="12" fill="#fff" stroke="' + visuel.couleur + '" stroke-width="1.5"/>' +
+      '<text x="74" y="81" font-size="12" text-anchor="middle" fill="' + visuel.couleur + '">' + visuel.symbole + '</text>' +
       '<text font-size="8.5" fill="' + visuel.couleur + '" letter-spacing="1" font-weight="600">' +
       '<textPath href="#' + idArc + '" startOffset="50%" text-anchor="middle">' + nomAffiche + '</textPath>' +
       '</text>' +
@@ -566,6 +566,15 @@ window.FAST = (function(){
     if(manuel.length > 0) return { ids: manuel, manuel: true };
     const auto = getCoachRecommande();
     return { ids: [auto || 'individual'], manuel: false };
+  }
+
+  // Vrai seulement si un coach a réellement été identifié (choix manuel ou
+  // recommandation IA déjà calculée) — par opposition au simple repli
+  // "individual" par défaut de getCoachActuel(). Sert à savoir si on peut
+  // afficher le badge du coach pendant un écran de chargement, avant même
+  // d'avoir appelé l'IA.
+  function coachDejaIdentifie(){
+    return getCoachManuel().length > 0 || !!getCoachRecommande();
   }
 
   // S'assure qu'une vraie recommandation (basée sur les réponses) existe
@@ -1468,6 +1477,7 @@ window.FAST = (function(){
     getRecentQuestions: getRecentQuestions, getRecentDeepenHistory: getRecentDeepenHistory,
     loadCoachProfiles: loadCoachProfiles, getCoachManuel: getCoachManuel, setCoachManuel: setCoachManuel,
     getCoachRecommande: getCoachRecommande, getCoachActuel: getCoachActuel, idsCoachsValides: ID_COACHS_VALIDES,
+    coachDejaIdentifie: coachDejaIdentifie,
     genererBadgeCoachHTML: genererBadgeCoachHTML,
     getSkillsOrdonnees: getSkillsOrdonnees,
     loadModule: loadModule, demarrerOuReprendreModule: demarrerOuReprendreModule, getEtatModule: getEtatModule,

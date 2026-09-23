@@ -24,10 +24,10 @@
   <section class="screen">
 <a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
 <div class="eyebrow" data-i18n="deepen_eyebrow">On approfondit</div>
-<div id="deepen-coach-badge" style="margin:6px 0 10px; display:none;"></div>
 
 <!-- Étape 1 : génération des 3 questions par l'IA -->
 <div class="card" id="deepen-chargement">
+  <div id="deepen-coach-badge" style="display:none; justify-content:center; margin:0 0 14px;"></div>
   <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="deepen_generation">
     Nous préparons 3 questions pour bien cerner votre situation...
   </p>
@@ -66,19 +66,20 @@ document.addEventListener('DOMContentLoaded', async function(){
   const stepperBloc = document.getElementById('deepen-stepper');
 
   try{
-    // Badge du coach actuel, affiché dès l'arrivée sur la page (avant
-    // même la génération des questions).
-    try{
-      const profils = await FAST.loadCoachProfiles();
-      const { ids } = FAST.getCoachActuel();
-      const idPrincipal = ids[0];
-      const p = profils[idPrincipal];
-      if(p){
-        const badge = document.getElementById('deepen-coach-badge');
-        badge.innerHTML = FAST.genererBadgeCoachHTML(idPrincipal, p.name);
-        badge.style.display = 'flex';
-      }
-    }catch(e){ /* pas bloquant si le badge échoue à s'afficher */ }
+    // Badge du coach en grand, affiché pendant la génération des
+    // questions — seulement si un coach est déjà réellement identifié.
+    if(FAST.coachDejaIdentifie()){
+      try{
+        const profils = await FAST.loadCoachProfiles();
+        const { ids } = FAST.getCoachActuel();
+        const idPrincipal = ids.find(id => profils[id]);
+        if(idPrincipal){
+          const badge = document.getElementById('deepen-coach-badge');
+          badge.innerHTML = FAST.genererBadgeCoachHTML(idPrincipal, profils[idPrincipal].name, 140);
+          badge.style.display = 'flex';
+        }
+      }catch(e){ /* pas bloquant si le badge échoue à s'afficher */ }
+    }
 
     // 'deepen_questions_generator' = id du coach dans assets/prompts.xml
     // Génère 3 questions à partir de Q10 + Q5 + la question libre posée
