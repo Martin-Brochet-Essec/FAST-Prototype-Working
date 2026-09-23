@@ -267,4 +267,7 @@
   <string key="module_bilan_recommencer_confirm">Toate răspunsurile din această săptămână vor fi uitate. Continui?</string>
   <string key="module_quiz_reinitialiser">Reia întrebările de la zero</string>
   <string key="module_quiz_reinitialiser_confirm">Toate răspunsurile tale la quiz vor fi uitate (exercițiile tale rămân salvate). Continui?</string>
+  <string key="module_bilan_telecharger">Descarcă ca .txt</string>
+  <string key="module_bilan_aucune_question_ratee">Bravo, nu mai există întrebări greșite de reluat!</string>
+  <string key="module_analyse_chargement">Mă gândesc...</string>
 </i18n>

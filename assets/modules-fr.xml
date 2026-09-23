@@ -38,10 +38,10 @@
       <question id="2">
         <text>Quelle formulation est la plus assertive pour refuser une tâche supplémentaire ?</text>
         <options>
-          <option>"Je ne sais pas si je peux, on verra"</option>
-          <option>"Désolée, je ne pense pas être la bonne personne"</option>
-          <option>"Je ne peux pas prendre cela en plus sans revoir mes priorités actuelles"</option>
-          <option>"Peut-être, si j'ai le temps"</option>
+          <option>Je ne sais pas si je peux, on verra</option>
+          <option>Désolée, je ne pense pas être la bonne personne</option>
+          <option>Je ne peux pas prendre cela en plus sans revoir mes priorités actuelles</option>
+          <option>Peut-être, si j'ai le temps</option>
         </options>
         <bonne_reponse>2</bonne_reponse>
         <explication>Nommer le comportement avec calme fixe une limite claire sans escalade ni retrait. Quelle phrase pourriez-vous préparer à l'avance pour la prochaine fois ?</explication>
@@ -50,7 +50,7 @@
         <text>Un(e) collègue interrompt systématiquement vos interventions. Quelle stratégie est la plus efficace sur la durée ?</text>
         <options>
           <option>Parler plus fort pour couvrir la voix</option>
-          <option>Nommer le comportement calmement ("Je n'ai pas terminé, je reviens à mon point")</option>
+          <option>Nommer le comportement calmement (Je n'ai pas terminé, je reviens à mon point)</option>
           <option>Éviter de prendre la parole en sa présence</option>
           <option>Se plaindre à d'autres collègues</option>
         </options>
@@ -93,9 +93,9 @@
       <question id="7">
         <text>Comment formuler une demande d'augmentation de façon assertive ?</text>
         <options>
-          <option>"Je pense mériter peut-être un peu plus"</option>
-          <option>"Vu mes résultats sur X et Y, je souhaite discuter d'une revalorisation"</option>
-          <option>"Les autres gagnent plus que moi, ce n'est pas juste"</option>
+          <option>Je pense mériter peut-être un peu plus</option>
+          <option>Vu mes résultats sur X et Y, je souhaite discuter d'une revalorisation</option>
+          <option>Les autres gagnent plus que moi, ce n'est pas juste</option>
           <option>Ne pas en parler et espérer que ça arrive naturellement</option>
         </options>
         <bonne_reponse>1</bonne_reponse>
@@ -282,7 +282,7 @@
         <options>
           <option>Attendre qu'il le propose spontanément</option>
           <option>Poser une question précise sur un aspect particulier de votre travail</option>
-          <option>Demander "est-ce que c'était bien ?" de façon générale</option>
+          <option>Demander est-ce que c'était bien ? de façon générale</option>
           <option>Ne jamais demander, pour ne pas paraître en manque de confiance</option>
         </options>
         <bonne_reponse>1</bonne_reponse>
@@ -599,7 +599,7 @@
         <objectif>La Simulation de la "Fact Sheet" Salariale : Préparer une négociation financière basée sur des données tangibles. Créez un document d'une page ("Fact Sheet") résumant vos 3 plus grandes contributions de l'année avec leurs métriques financières ou opérationnelles. Déterminez votre chiffre cible sur la base des benchmarks du marché. Réalisez un jeu de rôle de 10 minutes avec un pair ou un coach pour vous entraîner à annoncer ce chiffre sans hésitation, puis à gérer le silence qui suit.</objectif>
       </exercice>
       <exercice numero="5" jour="Vendredi">
-        <objectif>La Cartographie des Sponsors : Structurer son réseau d'influence et trouver des alliés stratégiques. Lister 3 dirigeants ou décideurs hors de votre ligne hiérarchique directe qui ont du poids au sein de l'organisation. Pour chacun, identifiez un sujet d'expertise sur lequel vous pouvez solliciter leur avis ou partager un résultat stratégique récent. Planifiez une prise de contact ou une interaction informelle avec au moins l'un d'entre eux dans les 14 prochains jours. ================================================================================ QUESTIONS À CHOIX MULTIPLE (50 SITUATIONS) ================================================================================ -------------------------------------------------------------------------------- LUNDI : LES FONDATIONS DE LA VALORISATION ET DE L'IMPACT -------------------------------------------------------------------------------- Q1 : En entretien annuel, votre manager salue votre implication. Quelle formulation valorise le mieux votre travail ? Options : A) "Merci, c'est gentil, mais c'est surtout le travail de toute l'équipe qui a payé." B) "J'ai restructuré la stratégie commerciale, ce qui a permis d'augmenter les ventes de 15%." C) "Oui, j'ai eu de la chance d'avoir de bons projets cette année." D) "Je n'ai fait que suivre la feuille de route donnée." Réponse la plus appropriée : B Explication : La réponse B associe directement l'action personnelle à un résultat mesurable (15%). La modestie excessive (réponse A) ou l'attribution au hasard (réponse C) effacent le mérite personnel et minimisent la valeur perçue du travail. Q2 : Un collègue s'attribue l'idée clé que vous avez formulée en réunion la semaine dernière. Que faites-vous ? Options : A) Vous ne dites rien sur le moment pour éviter le conflit et vous vous plaignez plus tard en privé. B) Vous intervenez immédiatement : "Ravi de voir que tu rebondis sur l'analyse que j'ai présentée mardi." C) Vous l'interrompez brutalement en disant qu'il est un voleur d'idées. D) Vous attendez l'entretien annuel pour régler vos comptes. Réponse la plus appropriée : B Explication : La réponse B réattribue publiquement la paternité de l'idée avec diplomatie et fermeté, sans agressivité. Laisser passer valide l'appropriation par autrui, tandis que l'agressivité dégrade la présence exécutive. Q3 : Un directeur salue la qualité de votre présentation. Quelle est la posture la plus adaptée ? Options : A) "Ce n'était rien du tout, c'est un sujet très simple." B) "Désolée pour les quelques coquilles dans les slides." C) "Merci. J'ai investi beaucoup de travail pour structurer ces analyses et clarifier la feuille de route." D) "C'est mon collègue qui a fait le plus gros du travail." Réponse la plus appropriée : C Explication : Accepter un compliment en affirmant l'effort et la valeur produite renforce la crédibilité. Chercher à s'excuser ou minimiser le travail envoie le signal que les compétences mobilisées ne méritent pas de valeur. Q4 : Vous avez résolu un problème technique majeur en urgence. Comment l'inscrivez-vous dans votre bilan ? Options : A) "J'ai simplement géré les urgences habituelles du service." B) "Gestion de crise ayant préservé la continuité de service pour 100k€ de CA." C) "J'ai dû travailler tard le soir pour corriger des erreurs d'autres personnes." D) "J'ai résolu un bug qui n'aurait jamais dû arriver." Réponse la plus appropriée : B Explication : Un événement d'urgence doit être traduit en valeur financière ou opérationnelle préservée. Cela transforme une tâche réactive en une démonstration d'impact business. Q5 : Quel outil personnel devriez-vous tenir régulièrement pour préparer votre valorisation ? Options : A) Une liste de reproches sur les dysfonctionnements de l'entreprise. B) Un journal d'impact hebdomadaire consignant réussites, chiffres clés et retours positifs reçus. C) Un relevé exact de vos heures de présence au bureau. D) Un recueil des erreurs commises par vos pairs. Réponse la plus appropriée : B Explication : La mémoire est sélective et le biais d'immédiateté fait oublier les réalisations du début d'année. Consigner les faits et métriques au fil de l'eau garantit un dossier factuel inattaquable lors des évaluations. Q6 : Pourquoi l'expression "J'ai eu de la chance de réussir ce projet" est-elle préjudiciable ? Options : A) Elle montre que l'on est une personne humble et appréciée. B) Parce qu'elle dépossède l'autrice de ses compétences et attribue le succès au hasard. C) Elle invite le manager à réduire le budget du prochain projet. D) Elle n'est pas préjudiciable, c'est une formule de politesse normale. Réponse la plus appropriée : B Explication : Mettre ses réussites sur le compte de la chance dévalise le capital de compétence. Si le succès est dû au hasard, l'entreprise n'a aucun intérêt stratégique à promouvoir ou augmenter la personne. Q7 : Comment présenter un échec ou une erreur dans votre bilan sans dégrader votre valeur ? Options : A) Masquer totalement l'incident et espérer que personne ne s'en aperçoive. B) Blâmer l'équipe ou les prestataires externes. C) Expliquer le problème rencontré, les mesures correctives pilotées et les apprentissages clés retenus. D) S'excuser à plusieurs reprises en reconnaissant son manque de compétences. Réponse la plus appropriée : C Explication : La capacité à analyser un échec, à en extraire des apprentissages et à mettre en place des mesures correctives démontre un niveau de maturité et de leadership élevé. Q8 : Que signifie l'effet de "modeste dépréciation" souvent observé chez les femmes en enterprise ? Options : A) Une technique de négociation basée sur le rabais. B) La tendance à minimiser ses accomplissements par peur d'apparaître arrogante ou prétentieuse. C) Le fait d'accepter une baisse de salaire en période de crise. D) Une méthode de gestion comptable des actifs. Réponse la plus appropriée : B Explication : La socialisation conduit souvent à craindre que l'affirmation de soi ne soit perçue comme de l'arrogance. Cette peur pousse à la sous-estimation systématique des performances. Q9 : Quel est le meilleur moment pour faire connaître le succès d'un projet d'envergure ? Options : A) Uniquement au bout de 12 mois lors de l'entretien annuel. B) Dès l'atteinte d'un jalon majeur, en partageant une note de synthèse d'impact ou un bilan intermédiaire. C) Jamais, la hiérarchie s'en apercevra d'elle-même. D) Lors des pauses café de manière informelle et confidentielle. Réponse la plus appropriée : B Explication : La visibilité se construit dans le temps présent. Attendre l'entretien annuel est trop tardif et prive la personne du crédit immédiat pour les étapes franchies. Q10 : EXERCICE PRATIQUE DU LUNDI : Vous créez votre "Fiche d'Impact". Quel élément NE DOIT PAS y figurer ? Options : A) Les gains financiers ou d'efficacité générés. B) La liste exhaustive de toutes vos tâches d'exécution quotidiennes et répétitives. C) Les témoignages de satisfaction de clients ou partenaires clés. D) Les projets transversaux pilotés. Réponse la plus appropriée : B Explication : Une fiche d'impact est un document stratégique de valeur, non une description de poste. Noyez les accomplissements sous les tâches d'exécution masque l'impact réel et nuit à la lisibilité exécutive. -------------------------------------------------------------------------------- MARDI : TRADUIRE SON TRAVAIL EN MÉTRIQUES ET IMPACT BUSINESS -------------------------------------------------------------------------------- Q11 : Vous avez optimisé un processus interne. Comment présentez-vous cette réussite ? Options : A) "J'ai changé la façon dont on classe les dossiers au service." B) "J'ai gagné 4 heures par semaine sur le traitement des dossiers, réallouées au suivi client." C) "J'ai enfin corrigé le désordre laissé par mon prédécesseur." D) "Le travail était trop long, alors j'ai trouvé un raccourci." Réponse la plus appropriée : B Explication : La valeur ne réside pas dans l'action cosmétique, mais dans la ressource libérée (4h/semaine) et son réinvestissement stratégique (suivi client). Q12 : Comment transformer un projet "qualitatif" (ex: bien-être au travail) en donnée d'impact business ? Options : A) En affirmant simplement que les équipes sont plus heureuses. B) En mesurant la baisse du taux de turnover (-8%) et l'augmentation du score d'engagement. C) En montrant des photos des événements organisés. D) En disant que c'est un projet impossible à mesurer avec des chiffres. Réponse la plus appropriée : B Explication : Tout projet qualitatif peut s'évaluer par des indicateurs indirects (proxy) comme le taux de rétention, le recrutement ou l'absentéisme, qui sont immédiatement compréhensibles par un comité de direction. Q13 : Lors d'une réunion de cadrage budgétaire, quelle métrique devez-vous mettre en avant ? Options : A) Le nombre d'heures supplémentaires gratuites que vous avez effectuées. B) Le ratio de retour sur investissement (ROI) et la marge nette générée par vos projets. C) Le coût de vos déplacements professionnels. D) La difficulté du travail réalisé. Réponse la plus appropriée : B Explication : Le langage du comité de direction est celui de la rentabilité et du capital. Se valoriser par la souffrance ou le temps passé (heures sup) est inefficace comparativement à la création de marge brute. Q14 : Que devez-vous faire si vous ne disposez pas de chiffres précis sur l'impact de votre travail ? Options : A) Inventer des chiffres spectaculaires pour faire bonne impression. B) Ne mentionner aucun résultat et parler seulement de votre motivation. C) Construire une estimation réaliste basée sur des hypothèses documentées et des ordres de grandeur. D) Déclarer que la mesure des résultats n'est pas de votre responsabilité. Réponse la plus appropriée : C Explication : Dans le monde exécutif, une estimation documentée et assise sur des hypothèses claires vaut mieux que l'absence totale de métrique, qui sous-entend un manque d'orientation vers les résultats. Q15 : Quelle est la meilleure manière d'intituler un projet réussi sur votre CV interne ? Options : A) "Participation aux réunions CRM." B) "Pilotage de la migration CRM : 0 interruption de service et +12% de productivité commerciale." C) "Aide apportée à l'équipe informatique." D) "Gestion du changement informatique." Réponse la plus appropriée : B Explication : L'intitulé doit combiner la responsabilité prise (Pilotage), la maîtrise du risque (0 interruption) et l'impact direct sur l'entreprise (+12% de productivité). Q16 : Pourquoi est-il risqué de se définir uniquement comme une personne "fiable et organisée" ? Options : A) Parce que cela montre que vous manquez de sympathie. B) Parce que cela vous enferme dans des rôles d'exécutante irremplaçable mais non promotionnable. C) Parce que ce sont des défauts en entreprise. D) Parce que les managers n'aiment pas l'organisation. Réponse la plus appropriée : B Explication : La fiabilité est perçue comme une compétence d'exécution basique. Si vous devenez indispensable à l'organisation quotidienne, votre direction aura intérêt à vous maintenir à votre poste plutôt qu'à vous promouvoir au C-Suite. Q17 : Comment présenter un gain d'efficience obtenu grâce à une automatisation de tâche ? Options : A) "Je ne fais plus rien manuellement sur ce sujet." B) "Automatisation des reporting : suppression de 10h d'envois manuels et réallocation sur l'analyse stratégique." C) "J'ai trouvé un logiciel sympa qui travaille à ma place." D) "Le travail manuel était trop rébarbatif." Réponse la plus appropriée : B Explication : La valeur ne vient pas de la suppression du travail, mais du transfert de temps de l'exécution vers la haute valeur ajoutée (analyse stratégique). Q18 : Quel indicateur devez-vous utiliser pour valoriser une action de fidélisation de portefeuille client ? Options : A) Le nombre de courriels d'empathie envoyés. B) Le taux de rétention client (95%) et la valeur de vie client (LTV) préservée. C) La gentillesse des clients lors des appels téléphoniques. D) Le temps passé en rendez-vous de courtoisie. Réponse la plus appropriée : B Explication : Les métriques de rétention et de Lifetime Value (LTV) traduisent des relations de qualité en protection du chiffre d'affaires récurrent. Q19 : Vous avez formé 3 collaborateurs. Comment valorisez-vous cette contribution RH ? Options : A) "J'ai perdu trois journées à réexpliquer les bases aux nouveaux." B) "Montée en compétences de 3 juniors : autonomie atteinte en 1 mois et réduction du temps d'onboarding de 50%." C) "J'ai été très gentille avec la nouvelle équipe." D) "J'ai fait le travail des RH à leur place." Réponse la plus appropriée : B Explication : Former des personnes devient un succès d'ingénierie RH quand la durée de montée en charge (time-to-autonomy) est réduite, permettant un gain de productivité global. Q20 : EXERCICE PRATIQUE DU MARDI : Dans la "Matrice d'Impact", comment transformez-vous la tâche "Organisation de réunions" ? Options : A) "Gestion des réservations de salles et commande de repas." B) "Alignement stratégique des décideurs : réduction des délais de décision de 2 semaines sur les projets clés." C) "Prise de notes et envoi des comptes-rendus de séance." D) "Animation des échanges et vérification des présences." Réponse la plus appropriée : B Explication : L'organisation logistique d'une réunion est une tâche opérationnelle. Son objectif stratégique et son impact réel résident dans la facilitation de la prise de décision et l'alignement des parties prenantes. -------------------------------------------------------------------------------- MERCREDI : ANCRAGE, ASSERTIVITÉ ET PRÉSENCE EN RÉUNION -------------------------------------------------------------------------------- Q21 : Lors d'une réunion, un collègue homme vous coupe systématiquement la parole. Comment réagissez-vous ? Options : A) Vous vous taisez immédiatement et abandonnez votre point. B) Vous haussez le ton en criant pour couvrir sa voix. C) Vous reprenez la parole calmement : "Thomas, laisse-moi terminer mon point avant de réagir." D) Vous quittez la salle de réunion en signe de protestation. Réponse la plus appropriée : C Explication : Réagir calmement mais fermement en désignant l'interruption par le prénom permet de fixer des limites claires et d'affirmer son autorité sans passer pour une personne émotive. Q22 : Quelle est la meilleure stratégie de prise de parole en début de réunion stratégique ? Options : A) Attendre la fin de la séance pour exprimer son avis global. B) Intervenir dans les 10 premières minutes avec une question ou une affirmation structurée. C) Ne parler que si le président de séance vous sollicite nominativement. D) Parler sans arrêt pour monopoliser le temps de parole. Réponse la plus appropriée : B Explication : Intervenir tôt marque sa présence dans le cercle de discussion et établit votre statut de contributrice active, réduisant les risques d'être effacée par la suite. Q23 : En quoi consiste la technique de l'Amplification pour contrer la "Bropropriation" ? Options : A) Parler plus fort que tout le monde dans la pièce. B) S'allier avec une collègue pour répéter et réattribuer publiquement les idées lancées par des femmes. C) Utiliser un micro ou des supports visuels très volumineux. D) Multiplier les envois d'emails de rappel après les réunions. Réponse la plus appropriée : B Explication : L'amplification est une stratégie collective où des alliées reprennent une idée proposée par une femme en citant son nom (ex: "Comme l'a souligné Sarah..."), sécurisant ainsi la paternité et la visibilité de l'intervention. Q24 : Comment formuler une idée stratégique pour qu'elle ait un maximum d'impact en séance ? Options : A) "Je ne suis pas une experte, mais il me semble que peut-être..." B) "Ma recommandation est de déployer l'option B afin de sécuriser notre marge de 15%." C) "C'est une idée un peu folle qui ne va probablement pas vous plaire." D) "Si personne n'a d'autres propositions, on pourrait éventuellement essayer cela." Réponse la plus appropriée : B Explication : Les préambules auto-dépréciatifs ("Je ne suis pas experte...") détruisent la crédibilité avant même que l'idée ne soit entendue. L'affirmation directe avec argumentation financière s'impose d'elle-même. Q25 : Que faire si l'on vous attribue d'office le rôle de "secrétaire de séance" (prise de note) ? Options : A) Accepter sans rien dire à chaque réunion pour éviter le conflit. B) Proposer une rotation : "J'ai pris les notes la semaine dernière, c'est au tour de Marc aujourd'hui." C) Refuser brutalement en disant que ce n'est pas dans vos attributions. D) Prenez des notes de manière illisible pour qu'on ne vous le redemande plus. Réponse la plus appropriée : B Explication : La prise de note non attribuée de manière équitable est une forme de "travail domestique de bureau" invisible. Proposer une rotation responsabilise l'ensemble du groupe. Q26 : Quelle posture corporelle adoptez-vous autour d'une table de conseil pour marquer votre présence ? Options : A) Se faire la plus petite possible et croiser les bras sous la table. B) Poser les avant-bras sur la table, se tenir droite et occuper pleinement son espace de travail. C) S'avachir sur son siège de manière détachée. D) Garder la tête baissée sur ses notes personnelles. Réponse la plus appropriée : B Explication : La communication non-verbale influence la perception de l'autorité. Occuper de l'espace physique en posant les bras sur la table envoie un signal clair de légitimité et d'engagement. Q27 : Comment répondre à une attaque personnelle ou une remise en cause déplacée en réunion ? Options : A) Répondre par une insulte équivalente. B) Se justifier de manière confuse et émotionnelle. C) Recadrer immédiatement sur les faits : "Restons-en aux données chiffrées du projet pour avancer." D) Se mettre à pleurer sous l'effet du stress. Réponse la plus appropriée : C Explication : Renvoyer l'interlocuteur aux faits ou aux métriques neutralise l'agressivité ad hominem et remplace le registre émotionnel par la rigueur professionnelle. Q28 : Pourquoi est-il déconseillé de commencer ses phrases par "Désolée mais..." ? Options : A) Parce que c'est une faute de grammaire. B) Parce que cela place l'intervenante en position de faute prioritaire avant même d'avoir argumenté. C) Parce que le mot "désolée" est réservé à la vie privée. D) Cela n'a aucun impact sur l'auditoire. Réponse la plus appropriée : B Explication : L'excusite préventive dévalue la parole et amène l'auditoire à chercher le problème dans ce qui va être dit, au lieu de se concentrer sur la proposition. Q29 : Comment réagir quand un supérieur vous attribue publiquement une réussite collective ? Options : A) Ne pas relever et prendre 100% du mérite pour soi. B) Remercier chaleureusement puis préciser la contribution spécifique de chaque membre clé. C) Corriger le supérieur devant tout le monde en disant qu'il s'est trompé. D) Dire que vous n'avez presque rien fait et que l'équipe a tout réalisé. Réponse la plus appropriée : B Explication : Un grand leader sait s'approprier la responsabilité du succès global tout en distribuant le crédit aux équipes. Cela démontre un niveau élevé de présence stratégique et de générosité managériale. Q30 : EXERCICE PRATIQUE DU MERCREDI : Quelle phrase d'ancrage devez-vous préparer pour la réunion ? Options : A) "Je m'excuse par avance de mon manque de préparation..." B) "Sur la base des analyses de mon pôle, voici l'orientation stratégique que nous devons valider." C) "C'est juste mon opinion personnelle, vous en faites ce que vous voulez." D) "Je ne veux pas vous faire perdre votre temps mais..." Réponse la plus appropriée : B Explication : Une phrase d'ancrage efficace s'appuie sur la légitimité opérationnelle (les données de votre pôle) et formule une orientation claire à valider. -------------------------------------------------------------------------------- JEUDI : NÉGOCIATION SALARIALE ET VALORISATION FINANCIÈRE -------------------------------------------------------------------------------- Q31 : Lors de votre entretien d'augmentation, votre manager évoque des contraintes budgétaires. Que dites-vous ? Options : A) "Ah d'accord, je comprends, on en reparlera l'année prochaine alors." B) "Je comprends l'environnement. Regardons la valeur créée par mes dossiers et fixons un échéancier dans 6 mois." C) "Si c'est comme ça, je démissionne immédiatement." D) "Ce n'est pas mon problème, je veux mon augmentation tout de suite." Réponse la plus appropriée : B Explication : Bloquer sur le refus immédiat stoppe la négociation. Décaler la demande sur un calendrier intermédiaire et réaffirmer la valeur créée permet de garder la porte ouverte et d'engager le manager. Q32 : Quelle est la règle d'or pour fixer votre prétention salariale lors d'une promotion ? Options : A) Demander ce dont vous avez besoin pour vos dépenses personnelles. B) S'appuyer sur les études de marché du secteur et viser le haut de la fourchette pour laisser de la marge. C) Accepter la première proposition financière du RH sans discuter. D) Demander le même salaire que votre collègue le moins bien payé. Réponse la plus appropriée : B Explication : Une négociation professionnelle repose sur la valeur marchande du poste et du profil (benchmarks) et non sur des besoins personnels. Viser le haut de fourchette ménage un espace de négociation. Q33 : On vous propose un nouveau projet d'envergure sans revalorisation de statut ni de salaire. Que répondez-vous ? Options : A) "Merci beaucoup, je suis honorée que vous pensiez à moi !" B) "Ravi de cette confiance. Définissons les objectifs associés et les conditions de réévaluation à 6 mois." C) "C'est du travail gratuit, je refuse catégoriquement." D) "Je le fais seulement si vous me donnez un bureau plus grand." Réponse la plus appropriée : B Explication : Accepter des responsabilités supplémentaires sans ancrer la possibilité d'une réévaluation financière future conduit à une surcharge de travail non récompensée. Q34 : Comment préparer un argumentaire de demande de ressources financières ou d'effectifs supplémentaires ? Options : A) En insistant sur votre niveau de fatigue et de stress actuel. B) En démontrant que cet investissement débloquera de nouvelles opportunités de croissance rentable. C) En disant que les autres services ont déjà obtenu des recrutements. D) En menaçant de réduire la qualité du travail si vous n'obtenez rien. Réponse la plus appropriée : B Explication : Les décideurs raisonnent en termes de retour sur investissement (ROI). Une demande formulée sous l'angle du gain stratégique et financier aura toujours plus de poids qu'une plainte sur la charge de travail. Q35 : Quel est l'impact de la phrase "Je serais déjà très heureuse si on m'accordait 5%" ? Options : A) Elle montre que vous êtes raisonnable et facile à gérer. B) Elle donne l'autorisation à votre interlocuteur de vous offrir le minimum absolu, voire moins. C) Elle incite la direction à vous accorder 10% par sympathie. D) Elle n'a aucun impact sur l'issue de la négociation. Réponse la plus appropriée : B Explication : Annoncer son seuil d'insatisfaction ou un montant plancher comme un souhait affaiblit la position de départ et sert d'ancrage bas à la négociation pour la partie adverse. Q36 : Comment gérer un silence pesant laissé par votre manager après l'annonce de votre prétention financière ? Options : A) Remplir le vide en réduisant immédiatement sa demande tarifaire. B) Maintenir un regard calme et confiant en attendant silencieusement la réponse de votre interlocuteur. C) S'excuser d'avoir demandé une somme si élevée. D) Parler de la météo pour détendre l'atmosphère. Réponse la plus appropriée : B Explication : Le silence est un outil classique de pression psychologique en négociation. Céder à l'inconfort du silence en baissant ses prétentions avant même une réponse formelle est une erreur stratégique. Q37 : En négociation, que comprend le package global de rémunération à ne pas négliger ? Options : A) Uniquement le salaire brut fixe mensuel. B) Le fixe, le variable, les primes, le budget de formation, la flexibilité et les avantages en nature. C) Les compliments verbaux donnés par la direction. D) Le titre indiqué sur la carte de visite seulement. Réponse la plus appropriée : B Explication : Quand le budget fixe est verrouillé, la valeur globale peut se négocier sur le variable, la formation, les conditions de travail ou d'autres avantages accessoires. Q38 : Votre manager refuse votre promotion en disant : "Tu n'as pas encore assez de réseau en interne". Que faites-vous ? Options : A) Prendre la remarque comme une défaite définitive et abandonner. B) Demander des critères précis : "Quel plan d'action d'influence pouvons-nous fixer pour les 6 prochains mois ?" C) Dire que le réseau ne sert à rien et que seul le travail compte. D) Accuser le manager de faire du favoritisme. Réponse la plus appropriée : B Explication : Transformer une objection floue ("manque de réseau") en un plan d'action mesurable assorti d'une échéance oblige le manager à s'engager sur des critères d'évaluation objectifs. Q39 : Quelle est l'attitude correcte face à l'argument "Ce n'est pas le moment avec la crise actuelle" ? Options : A) Renoncer immédiatement à toute demande. B) Démontrer comment votre travail a justement permis de protéger les résultats durant la crise. C) Dire que la crise n'existe pas et qu'il s'agit d'un mensonge. D) Réclamer une augmentation double pour compensation du préjudice. Réponse la plus appropriée : B Explication : En période d'incertitude économique, la valeur des collaborateurs qui protègent la marge, sécurisent les clients ou réduisent les risques est encore plus précieuse. Q40 : EXERCICE PRATIQUE DU JEUDI : Lors d'une simulation de négociation salariale, quel est votre premier geste ? Options : A) Demander ce que l'entreprise a prévu de vous donner sans annoncer de chiffre. B) Présenter votre "Fact Sheet" démontrant la valeur financière générée et fixer votre chiffre ancrage. C) Dire que vous êtes mal payée par rapport à vos collègues. D) Justifier votre demande par vos charges d'emprunt personnelles. Réponse la plus appropriée : B Explication : Poser l'ancrage le premier en l'adossant à des faits (Fact Sheet) donne la référence de départ de toute la négociation salariale. -------------------------------------------------------------------------------- VENDREDI : RÉSEAU STRATÉGIQUE, SPONSORING ET CAPITAL SOCIAL -------------------------------------------------------------------------------- Q41 : Quelle est la définition d'un "Sponsor" en entreprise comparé à un simple "Mentor" ? Options : A) Le mentor paie vos déplacements, le sponsor relit votre CV. B) Le mentor donne des conseils stratégiques ; le sponsor utilise son capital politique pour vous faire nommer. C) Il n'y a aucune différence entre un mentor et un sponsor. D) Le sponsor est obligatoirement votre manager direct. Réponse la plus appropriée : B Explication : Le mentorat développe le savoir-faire en privé ; le sponsoring débloque les opportunités en public. Un sponsor est un leader qui parle de vous en bien derrière les portes closes où se prennent les décisions. Q42 : Comment réagir si un réseau informel de décideurs ("Boys Club") vous semble inaccessible ? Options : A) Essayer de participer à leurs activités personnelles même si vous n'aimez pas cela. B) Identifier les nœuds d'influence stratégiques et créer des opportunités d'échange pro sur des sujets d'expertise. C) Critiquer ouvertement ce groupe auprès de l'ensemble des salariés. D) Rester isolée dans son bureau en attendant que les mentalités évoluent. Réponse la plus appropriée : B Explication : Bypass le réseau informel exige de créer son propre réseau de valeur basé sur l'expertise métier, l'apport de contenu stratégique et l'alignement d'intérêts professionnels. Q43 : Quelle est la fréquence idéale pour partager une mise à jour d'impact avec votre réseau interne ? Options : A) Tous les jours par un courriel détaillé. B) De manière ciblée, lors d'étapes clés ou via une synthèse trimestrielle à valeur ajoutée. C) Une fois tous les 5 ans lors d'un changement de poste. D) Seulement si la direction vous le demande explicitement. Réponse la plus appropriée : B Explication : Une communication trop fréquente crée de la saturation, tandis qu'une communication trop rare vous rend invisible. Le point d'étape trimestriel trouve le bon équilibre d'exposition. Q44 : Comment partager un succès personnel sur LinkedIn sans passer pour une personne narcissique ? Options : A) "Je suis la meilleure dans mon domaine et j'ai encore écrasé la concurrence." B) Ancrer le post sur l'apprentissage, les défis surmontés et remercier les partenaires d'aventure. C) Publier une photo de sa fiche de paie. D) Dire que le succès était facile et sans effort. Réponse la plus appropriée : B Explication : L'autopromotion réussie sur les réseaux professionnels utilise la pédagogie (partage d'apprentissages) et la reconnaissance collective pour rendre la réussite inspirante et légitime. Q45 : Que faire si un pair tente de minimiser publiquement l'impact de votre travail devant un dirigeant ? Options : A) L'insulter pour défendre son honneur. B) Rappeler calmement les faits avec les chiffres d'impact exacts validés par la direction. C) Baisser la tête et hocher la tête en signe d'accord. D) Annuler la présentation et quitter la pièce. Réponse la plus appropriée : B Explication : Réfuter une tentative de minimisation par des chiffres et des faits validés désarme l'attaquant sans entrer dans un conflit personnel, préservant ainsi votre posture exécutive. Q46 : En quoi consiste la stratégie du "Sponsorship croisé" entre femmes leaders ? Options : A) Se prêter du matériel de bureau. B) S'engager mutuellement à citer et recommander les compétences de l'autre dans les cercles de décision. C) Rédiger les rapports des unes et des autres en secret. D) Prendre ses vacances aux mêmes dates. Réponse la plus appropriée : B Explication : Le sponsorship croisé permet de créer une masse critique d'influence. Recommander l'expertise d'une autre femme renforce la crédibilité du réseau tout entier. Q47 : Comment approcher un dirigeant de haut niveau pour en faire un sponsor potentiel ? Options : A) Lui envoyer un email en demandant : "Voulez-vous être mon sponsor ?" B) Lui solliciter un avis sur un projet stratégique précis où son expertise est reconnue. C) L'attendre à la sortie du parking pour l'aborder. D) Lui envoyer la liste de toutes ses revendications salariales. Réponse la plus appropriée : B Explication : La relation de sponsoring ne se commande pas. Elle se construit progressivement en sollicitant le dirigeant sur un enjeu professionnel précis, lui permettant de constater la valeur de vos réflexions. Q48 : Quel est le piège à éviter absolument lors des sessions de networking internes ? Options : A) Préparer à l'avance les sujets que l'on souhaite aborder. B) Parler uniquement avec ses collègues proches de sa propre équipe. C) Échanger avec des personnes de départements différents du sien. D) Prendre les coordonnées des personnes rencontrées pour garder le contact. Réponse la plus appropriée : B Explication : Rester dans sa zone de confort en échangeant uniquement avec son cercle restreint annule l'intérêt du networking, qui est d'étendre sa visibilité et son capital social auprès d'autres pôles. Q49 : Comment transformer un compliment informel reçu à la machine à café en levier de carrière ? Options : A) Sourire, dire merci et l'oublier aussitôt. B) Demander gentiment par écrit à l'auteur si vous pouvez citer son retour dans votre bilan trimestriel. C) Le répéter à tout le monde de manière insistante. D) Dire à la personne qu'elle aurait dû vous faire ce compliment en réunion officielle. Réponse la plus appropriée : B Explication : Formaliser par écrit les retours positifs informels permet de constituer une preuve sociale (Social Proof) exploitable lors des revues de performance et des négociations d'avancement. Q50 : EXERCICE PRATIQUE DU VENDREDI : Quelle est la première étape de votre cartographie des sponsors ? Options : A) Envoyer un message général à toute l'entreprise. B) Lister les 3 personnes au sein de la direction qui ont du pouvoir décisionnel et connaissent vos résultats. C) Attendre la prochaine réorganisation de l'entreprise. D) Demander à ses collègues proches de voter pour vous. Réponse la plus appropriée : B Explication : La cartographie commence par la clarification des centres de pouvoir. Identifier les décideurs clés permet de concentrer son énergie relationnelle là où l'impact stratégique sera le plus fort. ================================================================================ FIN DU PROGRAMME DE FORMATION ================================================================================</objectif>
+        <objectif>La Cartographie des Sponsors : Structurer son réseau d'influence et trouver des alliés stratégiques. Lister 3 dirigeants ou décideurs hors de votre ligne hiérarchique directe qui ont du poids au sein de l'organisation. Pour chacun, identifiez un sujet d'expertise sur lequel vous pouvez solliciter leur avis ou partager un résultat stratégique récent. Planifiez une prise de contact ou une interaction informelle avec au moins l'un d'entre eux dans les 14 prochains jours.</objectif>
       </exercice>
     </exercices>
 
@@ -607,10 +607,10 @@
       <question id="1">
         <text>En entretien annuel, votre manager salue votre implication. Quelle formulation valorise le mieux votre travail ?</text>
         <options>
-          <option>"Merci, c'est gentil, mais c'est surtout le travail de toute l'équipe qui a payé."</option>
-          <option>"J'ai restructuré la stratégie commerciale, ce qui a permis d'augmenter les ventes de 15%."</option>
-          <option>"Oui, j'ai eu de la chance d'avoir de bons projets cette année."</option>
-          <option>"Je n'ai fait que suivre la feuille de route donnée."</option>
+          <option>Merci, c'est gentil, mais c'est surtout le travail de toute l'équipe qui a payé.</option>
+          <option>J'ai restructuré la stratégie commerciale, ce qui a permis d'augmenter les ventes de 15%.</option>
+          <option>Oui, j'ai eu de la chance d'avoir de bons projets cette année.</option>
+          <option>Je n'ai fait que suivre la feuille de route donnée.</option>
         </options>
         <bonne_reponse>1</bonne_reponse>
         <explication>La réponse B associe directement l'action personnelle à un résultat mesurable (15%). La modestie excessive (réponse A) ou l'attribution au hasard (réponse C) effacent le mérite personnel et minimisent la valeur perçue du travail.</explication>
@@ -619,7 +619,7 @@
         <text>Un collègue s'attribue l'idée clé que vous avez formulée en réunion la semaine dernière. Que faites-vous ?</text>
         <options>
           <option>Vous ne dites rien sur le moment pour éviter le conflit et vous vous plaignez plus tard en privé.</option>
-          <option>Vous intervenez immédiatement : "Ravi de voir que tu rebondis sur l'analyse que j'ai présentée mardi."</option>
+          <option>Vous intervenez immédiatement : Ravi de voir que tu rebondis sur l'analyse que j'ai présentée mardi.</option>
           <option>Vous l'interrompez brutalement en disant qu'il est un voleur d'idées.</option>
           <option>Vous attendez l'entretien annuel pour régler vos comptes.</option>
         </options>
@@ -629,10 +629,10 @@
       <question id="3">
         <text>Un directeur salue la qualité de votre présentation. Quelle est la posture la plus adaptée ?</text>
         <options>
-          <option>"Ce n'était rien du tout, c'est un sujet très simple."</option>
-          <option>"Désolée pour les quelques coquilles dans les slides."</option>
-          <option>"Merci. J'ai investi beaucoup de travail pour structurer ces analyses et clarifier la feuille de route."</option>
-          <option>"C'est mon collègue qui a fait le plus gros du travail."</option>
+          <option>Ce n'était rien du tout, c'est un sujet très simple.</option>
+          <option>Désolée pour les quelques coquilles dans les slides.</option>
+          <option>Merci. J'ai investi beaucoup de travail pour structurer ces analyses et clarifier la feuille de route.</option>
+          <option>C'est mon collègue qui a fait le plus gros du travail.</option>
         </options>
         <bonne_reponse>2</bonne_reponse>
         <explication>Accepter un compliment en affirmant l'effort et la valeur produite renforce la crédibilité. Chercher à s'excuser ou minimiser le travail envoie le signal que les compétences mobilisées ne méritent pas de valeur.</explication>
@@ -640,10 +640,10 @@
       <question id="4">
         <text>Vous avez résolu un problème technique majeur en urgence. Comment l'inscrivez-vous dans votre bilan ?</text>
         <options>
-          <option>"J'ai simplement géré les urgences habituelles du service."</option>
-          <option>"Gestion de crise ayant préservé la continuité de service pour 100k€ de CA."</option>
-          <option>"J'ai dû travailler tard le soir pour corriger des erreurs d'autres personnes."</option>
-          <option>"J'ai résolu un bug qui n'aurait jamais dû arriver."</option>
+          <option>J'ai simplement géré les urgences habituelles du service.</option>
+          <option>Gestion de crise ayant préservé la continuité de service pour 100k€ de CA.</option>
+          <option>J'ai dû travailler tard le soir pour corriger des erreurs d'autres personnes.</option>
+          <option>J'ai résolu un bug qui n'aurait jamais dû arriver.</option>
         </options>
         <bonne_reponse>1</bonne_reponse>
         <explication>Un événement d'urgence doit être traduit en valeur financière ou opérationnelle préservée. Cela transforme une tâche réactive en une démonstration d'impact business.</explication>
@@ -717,10 +717,10 @@
       <question id="11">
         <text>Vous avez optimisé un processus interne. Comment présentez-vous cette réussite ?</text>
         <options>
-          <option>"J'ai changé la façon dont on classe les dossiers au service."</option>
-          <option>"J'ai gagné 4 heures par semaine sur le traitement des dossiers, réallouées au suivi client."</option>
-          <option>"J'ai enfin corrigé le désordre laissé par mon prédécesseur."</option>
-          <option>"Le travail était trop long, alors j'ai trouvé un raccourci."</option>
+          <option>J'ai changé la façon dont on classe les dossiers au service.</option>
+          <option>J'ai gagné 4 heures par semaine sur le traitement des dossiers, réallouées au suivi client.</option>
+          <option>J'ai enfin corrigé le désordre laissé par mon prédécesseur.</option>
+          <option>Le travail était trop long, alors j'ai trouvé un raccourci.</option>
         </options>
         <bonne_reponse>1</bonne_reponse>
         <explication>La valeur ne réside pas dans l'action cosmétique, mais dans la ressource libérée (4h/semaine) et son réinvestissement stratégique (suivi client).</explication>
@@ -761,10 +761,10 @@
       <question id="15">
         <text>Quelle est la meilleure manière d'intituler un projet réussi sur votre CV interne ?</text>
         <options>
-          <option>"Participation aux réunions CRM."</option>
-          <option>"Pilotage de la migration CRM : 0 interruption de service et +12% de productivité commerciale."</option>
-          <option>"Aide apportée à l'équipe informatique."</option>
-          <option>"Gestion du changement informatique."</option>
+          <option>Participation aux réunions CRM.</option>
+          <option>Pilotage de la migration CRM : 0 interruption de service et +12% de productivité commerciale.</option>
+          <option>Aide apportée à l'équipe informatique.</option>
+          <option>Gestion du changement informatique.</option>
         </options>
         <bonne_reponse>1</bonne_reponse>
         <explication>L'intitulé doit combiner la responsabilité prise (Pilotage), la maîtrise du risque (0 interruption) et l'impact direct sur l'entreprise (+12% de productivité).</explication>
@@ -783,10 +783,10 @@
       <question id="17">
         <text>Comment présenter un gain d'efficience obtenu grâce à une automatisation de tâche ?</text>
         <options>
-          <option>"Je ne fais plus rien manuellement sur ce sujet."</option>
-          <option>"Automatisation des reporting : suppression de 10h d'envois manuels et réallocation sur l'analyse stratégique."</option>
-          <option>"J'ai trouvé un logiciel sympa qui travaille à ma place."</option>
-          <option>"Le travail manuel était trop rébarbatif."</option>
+          <option>Je ne fais plus rien manuellement sur ce sujet.</option>
+          <option>Automatisation des reporting : suppression de 10h d'envois manuels et réallocation sur l'analyse stratégique.</option>
+          <option>J'ai trouvé un logiciel sympa qui travaille à ma place.</option>
+          <option>Le travail manuel était trop rébarbatif.</option>
         </options>
         <bonne_reponse>1</bonne_reponse>
         <explication>La valeur ne vient pas de la suppression du travail, mais du transfert de temps de l'exécution vers la haute valeur ajoutée (analyse stratégique).</explication>
@@ -805,10 +805,10 @@
       <question id="19">
         <text>Vous avez formé 3 collaborateurs. Comment valorisez-vous cette contribution RH ?</text>
         <options>
-          <option>"J'ai perdu trois journées à réexpliquer les bases aux nouveaux."</option>
-          <option>"Montée en compétences de 3 juniors : autonomie atteinte en 1 mois et réduction du temps d'onboarding de 50%."</option>
-          <option>"J'ai été très gentille avec la nouvelle équipe."</option>
-          <option>"J'ai fait le travail des RH à leur place."</option>
+          <option>J'ai perdu trois journées à réexpliquer les bases aux nouveaux.</option>
+          <option>Montée en compétences de 3 juniors : autonomie atteinte en 1 mois et réduction du temps d'onboarding de 50%.</option>
+          <option>J'ai été très gentille avec la nouvelle équipe.</option>
+          <option>J'ai fait le travail des RH à leur place.</option>
         </options>
         <bonne_reponse>1</bonne_reponse>
         <explication>Former des personnes devient un succès d'ingénierie RH quand la durée de montée en charge (time-to-autonomy) est réduite, permettant un gain de productivité global.</explication>
@@ -816,10 +816,10 @@
       <question id="20">
         <text>EXERCICE PRATIQUE DU MARDI : Dans la "Matrice d'Impact", comment transformez-vous la tâche "Organisation de réunions" ?</text>
         <options>
-          <option>"Gestion des réservations de salles et commande de repas."</option>
-          <option>"Alignement stratégique des décideurs : réduction des délais de décision de 2 semaines sur les projets clés."</option>
-          <option>"Prise de notes et envoi des comptes-rendus de séance."</option>
-          <option>"Animation des échanges et vérification des présences."</option>
+          <option>Gestion des réservations de salles et commande de repas.</option>
+          <option>Alignement stratégique des décideurs : réduction des délais de décision de 2 semaines sur les projets clés.</option>
+          <option>Prise de notes et envoi des comptes-rendus de séance.</option>
+          <option>Animation des échanges et vérification des présences.</option>
         </options>
         <bonne_reponse>1</bonne_reponse>
         <explication>L'organisation logistique d'une réunion est une tâche opérationnelle. Son objectif stratégique et son impact réel résident dans la facilitation de la prise de décision et l'alignement des parties prenantes. -------------------------------------------------------------------------------- MERCREDI : ANCRAGE, ASSERTIVITÉ ET PRÉSENCE EN RÉUNION --------------------------------------------------------------------------------</explication>
@@ -829,7 +829,7 @@
         <options>
           <option>Vous vous taisez immédiatement et abandonnez votre point.</option>
           <option>Vous haussez le ton en criant pour couvrir sa voix.</option>
-          <option>Vous reprenez la parole calmement : "Thomas, laisse-moi terminer mon point avant de réagir."</option>
+          <option>Vous reprenez la parole calmement : Thomas, laisse-moi terminer mon point avant de réagir.</option>
           <option>Vous quittez la salle de réunion en signe de protestation.</option>
         </options>
         <bonne_reponse>2</bonne_reponse>
@@ -860,10 +860,10 @@
       <question id="24">
         <text>Comment formuler une idée stratégique pour qu'elle ait un maximum d'impact en séance ?</text>
         <options>
-          <option>"Je ne suis pas une experte, mais il me semble que peut-être..."</option>
-          <option>"Ma recommandation est de déployer l'option B afin de sécuriser notre marge de 15%."</option>
-          <option>"C'est une idée un peu folle qui ne va probablement pas vous plaire."</option>
-          <option>"Si personne n'a d'autres propositions, on pourrait éventuellement essayer cela."</option>
+          <option>Je ne suis pas une experte, mais il me semble que peut-être...</option>
+          <option>Ma recommandation est de déployer l'option B afin de sécuriser notre marge de 15%.</option>
+          <option>C'est une idée un peu folle qui ne va probablement pas vous plaire.</option>
+          <option>Si personne n'a d'autres propositions, on pourrait éventuellement essayer cela.</option>
         </options>
         <bonne_reponse>1</bonne_reponse>
         <explication>Les préambules auto-dépréciatifs ("Je ne suis pas experte...") détruisent la crédibilité avant même que l'idée ne soit entendue. L'affirmation directe avec argumentation financière s'impose d'elle-même.</explication>
@@ -872,7 +872,7 @@
         <text>Que faire si l'on vous attribue d'office le rôle de "secrétaire de séance" (prise de note) ?</text>
         <options>
           <option>Accepter sans rien dire à chaque réunion pour éviter le conflit.</option>
-          <option>Proposer une rotation : "J'ai pris les notes la semaine dernière, c'est au tour de Marc aujourd'hui."</option>
+          <option>Proposer une rotation : J'ai pris les notes la semaine dernière, c'est au tour de Marc aujourd'hui.</option>
           <option>Refuser brutalement en disant que ce n'est pas dans vos attributions.</option>
           <option>Prenez des notes de manière illisible pour qu'on ne vous le redemande plus.</option>
         </options>
@@ -895,7 +895,7 @@
         <options>
           <option>Répondre par une insulte équivalente.</option>
           <option>Se justifier de manière confuse et émotionnelle.</option>
-          <option>Recadrer immédiatement sur les faits : "Restons-en aux données chiffrées du projet pour avancer."</option>
+          <option>Recadrer immédiatement sur les faits : Restons-en aux données chiffrées du projet pour avancer.</option>
           <option>Se mettre à pleurer sous l'effet du stress.</option>
         </options>
         <bonne_reponse>2</bonne_reponse>
@@ -906,7 +906,7 @@
         <options>
           <option>Parce que c'est une faute de grammaire.</option>
           <option>Parce que cela place l'intervenante en position de faute prioritaire avant même d'avoir argumenté.</option>
-          <option>Parce que le mot "désolée" est réservé à la vie privée.</option>
+          <option>Parce que le mot désolée est réservé à la vie privée.</option>
           <option>Cela n'a aucun impact sur l'auditoire.</option>
         </options>
         <bonne_reponse>1</bonne_reponse>
@@ -926,10 +926,10 @@
       <question id="30">
         <text>EXERCICE PRATIQUE DU MERCREDI : Quelle phrase d'ancrage devez-vous préparer pour la réunion ?</text>
         <options>
-          <option>"Je m'excuse par avance de mon manque de préparation..."</option>
-          <option>"Sur la base des analyses de mon pôle, voici l'orientation stratégique que nous devons valider."</option>
-          <option>"C'est juste mon opinion personnelle, vous en faites ce que vous voulez."</option>
-          <option>"Je ne veux pas vous faire perdre votre temps mais..."</option>
+          <option>Je m'excuse par avance de mon manque de préparation...</option>
+          <option>Sur la base des analyses de mon pôle, voici l'orientation stratégique que nous devons valider.</option>
+          <option>C'est juste mon opinion personnelle, vous en faites ce que vous voulez.</option>
+          <option>Je ne veux pas vous faire perdre votre temps mais...</option>
         </options>
         <bonne_reponse>1</bonne_reponse>
         <explication>Une phrase d'ancrage efficace s'appuie sur la légitimité opérationnelle (les données de votre pôle) et formule une orientation claire à valider. -------------------------------------------------------------------------------- JEUDI : NÉGOCIATION SALARIALE ET VALORISATION FINANCIÈRE --------------------------------------------------------------------------------</explication>
@@ -937,10 +937,10 @@
       <question id="31">
         <text>Lors de votre entretien d'augmentation, votre manager évoque des contraintes budgétaires. Que dites-vous ?</text>
         <options>
-          <option>"Ah d'accord, je comprends, on en reparlera l'année prochaine alors."</option>
-          <option>"Je comprends l'environnement. Regardons la valeur créée par mes dossiers et fixons un échéancier dans 6 mois."</option>
-          <option>"Si c'est comme ça, je démissionne immédiatement."</option>
-          <option>"Ce n'est pas mon problème, je veux mon augmentation tout de suite."</option>
+          <option>Ah d'accord, je comprends, on en reparlera l'année prochaine alors.</option>
+          <option>Je comprends l'environnement. Regardons la valeur créée par mes dossiers et fixons un échéancier dans 6 mois.</option>
+          <option>Si c'est comme ça, je démissionne immédiatement.</option>
+          <option>Ce n'est pas mon problème, je veux mon augmentation tout de suite.</option>
         </options>
         <bonne_reponse>1</bonne_reponse>
         <explication>Bloquer sur le refus immédiat stoppe la négociation. Décaler la demande sur un calendrier intermédiaire et réaffirmer la valeur créée permet de garder la porte ouverte et d'engager le manager.</explication>
@@ -959,10 +959,10 @@
       <question id="33">
         <text>On vous propose un nouveau projet d'envergure sans revalorisation de statut ni de salaire. Que répondez-vous ?</text>
         <options>
-          <option>"Merci beaucoup, je suis honorée que vous pensiez à moi !"</option>
-          <option>"Ravi de cette confiance. Définissons les objectifs associés et les conditions de réévaluation à 6 mois."</option>
-          <option>"C'est du travail gratuit, je refuse catégoriquement."</option>
-          <option>"Je le fais seulement si vous me donnez un bureau plus grand."</option>
+          <option>Merci beaucoup, je suis honorée que vous pensiez à moi !</option>
+          <option>Ravi de cette confiance. Définissons les objectifs associés et les conditions de réévaluation à 6 mois.</option>
+          <option>C'est du travail gratuit, je refuse catégoriquement.</option>
+          <option>Je le fais seulement si vous me donnez un bureau plus grand.</option>
         </options>
         <bonne_reponse>1</bonne_reponse>
         <explication>Accepter des responsabilités supplémentaires sans ancrer la possibilité d'une réévaluation financière future conduit à une surcharge de travail non récompensée.</explication>
@@ -1015,7 +1015,7 @@
         <text>Votre manager refuse votre promotion en disant : "Tu n'as pas encore assez de réseau en interne". Que faites-vous ?</text>
         <options>
           <option>Prendre la remarque comme une défaite définitive et abandonner.</option>
-          <option>Demander des critères précis : "Quel plan d'action d'influence pouvons-nous fixer pour les 6 prochains mois ?"</option>
+          <option>Demander des critères précis : Quel plan d'action d'influence pouvons-nous fixer pour les 6 prochains mois ?</option>
           <option>Dire que le réseau ne sert à rien et que seul le travail compte.</option>
           <option>Accuser le manager de faire du favoritisme.</option>
         </options>
@@ -1037,7 +1037,7 @@
         <text>EXERCICE PRATIQUE DU JEUDI : Lors d'une simulation de négociation salariale, quel est votre premier geste ?</text>
         <options>
           <option>Demander ce que l'entreprise a prévu de vous donner sans annoncer de chiffre.</option>
-          <option>Présenter votre "Fact Sheet" démontrant la valeur financière générée et fixer votre chiffre ancrage.</option>
+          <option>Présenter votre Fact Sheet démontrant la valeur financière générée et fixer votre chiffre ancrage.</option>
           <option>Dire que vous êtes mal payée par rapport à vos collègues.</option>
           <option>Justifier votre demande par vos charges d'emprunt personnelles.</option>
         </options>
@@ -1080,7 +1080,7 @@
       <question id="44">
         <text>Comment partager un succès personnel sur LinkedIn sans passer pour une personne narcissique ?</text>
         <options>
-          <option>"Je suis la meilleure dans mon domaine et j'ai encore écrasé la concurrence."</option>
+          <option>Je suis la meilleure dans mon domaine et j'ai encore écrasé la concurrence.</option>
           <option>Ancrer le post sur l'apprentissage, les défis surmontés et remercier les partenaires d'aventure.</option>
           <option>Publier une photo de sa fiche de paie.</option>
           <option>Dire que le succès était facile et sans effort.</option>
@@ -1113,7 +1113,7 @@
       <question id="47">
         <text>Comment approcher un dirigeant de haut niveau pour en faire un sponsor potentiel ?</text>
         <options>
-          <option>Lui envoyer un email en demandant : "Voulez-vous être mon sponsor ?"</option>
+          <option>Lui envoyer un email en demandant : Voulez-vous être mon sponsor ?</option>
           <option>Lui solliciter un avis sur un projet stratégique précis où son expertise est reconnue.</option>
           <option>L'attendre à la sortie du parking pour l'aborder.</option>
           <option>Lui envoyer la liste de toutes ses revendications salariales.</option>

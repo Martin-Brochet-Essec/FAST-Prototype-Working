@@ -267,4 +267,7 @@
   <string key="module_bilan_recommencer_confirm">Toutes vos réponses de la semaine seront oubliées. Continuer ?</string>
   <string key="module_quiz_reinitialiser">Reprendre les questions à zéro</string>
   <string key="module_quiz_reinitialiser_confirm">Toutes vos réponses au quiz seront oubliées (vos exercices restent conservés). Continuer ?</string>
+  <string key="module_bilan_telecharger">Télécharger en .txt</string>
+  <string key="module_bilan_aucune_question_ratee">Bravo, il n'y a plus aucune question ratée à reprendre !</string>
+  <string key="module_analyse_chargement">Je réfléchis...</string>
 </i18n>

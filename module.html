@@ -68,7 +68,7 @@
              symbole par jour), enveloppant la carte de question. Grise =
              pas encore répondue, verte/rouge = répondue (cliquable pour
              relire), symbole selon le jour d'origine de la question. -->
-        <div id="quiz-serpent-haut" style="display:none; flex-wrap:wrap; gap:3px; margin-bottom:6px;"></div>
+        <div id="quiz-serpent-haut" style="display:none; flex-wrap:wrap; justify-content:center; gap:3px; margin-bottom:6px;"></div>
         <div style="display:flex; gap:6px; align-items:stretch;">
           <div id="quiz-serpent-gauche" style="display:none; flex-direction:column; flex-wrap:wrap; max-height:190px; gap:3px; flex-shrink:0;"></div>
           <div style="flex:1; min-width:0;">
@@ -140,7 +140,8 @@
         </div>
         <div class="card" id="bilan-contenu" style="display:none;">
           <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="module_bilan_title">Votre bilan</h3>
-          <p id="bilan-texte" style="font-size:13.5px; color:var(--text); line-height:1.7; margin:0; white-space:pre-line;"></p>
+          <p id="bilan-texte" style="font-size:13.5px; color:var(--text); line-height:1.7; margin:0 0 10px; white-space:pre-line;"></p>
+          <button class="btn btn-ghost" id="bilan-telecharger" data-i18n="module_bilan_telecharger">Télécharger en .txt</button>
         </div>
         <p class="lead" data-i18n="module_bilan_choix_lead">Et maintenant ?</p>
         <div class="steprow">
@@ -422,6 +423,14 @@ document.addEventListener('DOMContentLoaded', async function(){
     if(!texte) return;
     const bouton = document.getElementById('rv-envoyer');
     bouton.disabled = true;
+
+    // Affiche tout de suite l'écran "Ce que votre coach en pense" avec un
+    // indicateur de chargement, plutôt que de laisser la page inerte
+    // pendant l'appel IA.
+    etapes.retourVeille.style.display = 'none';
+    etapes.analyseVeille.style.display = 'block';
+    document.getElementById('analyse-texte').textContent = FAST.dict().module_analyse_chargement || 'Je réfléchis...';
+
     try{
       await FAST.soumettreRetourVeille(moduleId, texte);
       await afficherEtapeCourante();
@@ -466,7 +475,9 @@ document.addEventListener('DOMContentLoaded', async function(){
   document.getElementById('bilan-approfondir').addEventListener('click', function(){
     const rattrapage = FAST.getQuestionsRateesSemaine(moduleDef, moduleId);
     if(rattrapage.length === 0){
-      window.location.href = 'your-question.html';
+      // Toujours rester sur la page du module — ne jamais rediriger
+      // ailleurs, même quand il n'y a plus rien à reprendre.
+      window.alert(FAST.dict().module_bilan_aucune_question_ratee || "Bravo, il n'y a plus aucune question ratée à reprendre !");
       return;
     }
     // Réinitialise l'accès à ces questions pour le rattrapage : on les
@@ -503,6 +514,19 @@ document.addEventListener('DOMContentLoaded', async function(){
 
   document.getElementById('bilan-mise-en-relation').addEventListener('click', function(){
     window.location.href = 'marketplace.html';
+  });
+
+  document.getElementById('bilan-telecharger').addEventListener('click', function(){
+    const texte = document.getElementById('bilan-texte').textContent;
+    const blob = new Blob([texte], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const lien = document.createElement('a');
+    lien.href = url;
+    lien.download = 'bilan-' + moduleId + '.txt';
+    document.body.appendChild(lien);
+    lien.click();
+    document.body.removeChild(lien);
+    URL.revokeObjectURL(url);
   });
 });
 </script>
