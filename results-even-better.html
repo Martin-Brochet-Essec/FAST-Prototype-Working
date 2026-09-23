@@ -32,7 +32,8 @@
     <div class="card" id="reb-contenu" style="display:none;">
       <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="reb_synthese_title">Ce que nous précisons</h3>
       <p id="reb-texte" style="font-size:14px; color:var(--text); line-height:1.7; margin:0;"></p>
-      <p id="reb-coach-ligne" style="font-size:13.5px; font-weight:600; color:var(--rose-deep); margin:14px 0 0; display:none;"></p>
+      <div id="reb-coach-badge" style="margin:16px 0 4px; display:none;"></div>
+      <p id="reb-coach-ligne" style="font-size:13.5px; font-weight:600; color:var(--rose-deep); margin:6px 0 0; display:none;"></p>
       <p style="font-size:12px; color:var(--text-dim); margin:12px 0 0;" data-i18n="reb_note">Vous pouvez maintenant nous poser la question qui vous préoccupe aujourd'hui.</p>
     </div>
 
@@ -95,6 +96,9 @@ document.addEventListener('DOMContentLoaded', async function(){
           const libelle = d.reb_coach_suggere || 'Coach suggéré :';
           const mentionAuto = d.coach_mention_auto || '(Auto)';
           ligne.textContent = libelle + ' ' + p.name + ' (' + p.tagline + ') ' + mentionAuto;
+          const badge = document.getElementById('reb-coach-badge');
+          badge.innerHTML = FAST.genererBadgeCoachHTML(synthese.coachRecommande, p.name);
+          badge.style.display = 'flex';
         } else {
           ligne.textContent = d.coach_non_identifie || "Votre coach n'est pas encore identifié.";
         }

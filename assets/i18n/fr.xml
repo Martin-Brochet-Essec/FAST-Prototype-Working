@@ -270,4 +270,7 @@
   <string key="module_bilan_telecharger">Télécharger en .txt</string>
   <string key="module_bilan_aucune_question_ratee">Bravo, il n'y a plus aucune question ratée à reprendre !</string>
   <string key="module_analyse_chargement">Je réfléchis...</string>
+  <string key="final_pont_titre">Pour aller plus loin</string>
+  <string key="final_pont_lead">Envie de travailler ça dans la durée ?</string>
+  <string key="final_pont_cta">Découvrir mes compétences à développer</string>
 </i18n>

@@ -34,6 +34,7 @@
 </div>
 <div class="card" id="coach-card" style="display:none;">
   <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 8px;" data-i18n="whoami_coach_title">Votre e-Coach</h3>
+  <div id="whoami-coach-badge" style="margin:0 0 10px;"></div>
   <p id="coach-actuel-ligne" style="font-size:13.5px; font-weight:600; margin:0 0 10px;"></p>
   <div id="coach-choix"></div>
   <div class="steprow" style="margin-top:10px;">
@@ -125,6 +126,10 @@ document.addEventListener('DOMContentLoaded', async function(){
         const noms = ids.filter(id => profils[id]).map(id => profils[id].name).join(' + ') || '—';
         const suffixe = manuel ? (d.whoami_coach_manuel || '(choix manuel)') : (d.whoami_coach_auto_suffixe || '(recommandation automatique)');
         ligneActuel.textContent = (d.whoami_coach_actuel || 'Coach actuel :') + ' ' + noms + ' ' + suffixe;
+
+        const idPrincipal = ids.find(id => profils[id]);
+        const badge = document.getElementById('whoami-coach-badge');
+        badge.innerHTML = idPrincipal ? FAST.genererBadgeCoachHTML(idPrincipal, profils[idPrincipal].name) : '';
       }
 
       function rafraichirBoutonSave(){

@@ -53,6 +53,7 @@
       <div id="module-etape-analyse-veille" style="display:none;">
         <div class="card">
           <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="module_analyse_title">Ce que votre coach en pense</h3>
+          <div id="analyse-coach-badge" style="margin:0 0 8px;"></div>
           <p id="analyse-texte" style="font-size:14px; color:var(--text); line-height:1.7; margin:0;"></p>
         </div>
         <div class="steprow">
@@ -140,6 +141,7 @@
         </div>
         <div class="card" id="bilan-contenu" style="display:none;">
           <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 6px;" data-i18n="module_bilan_title">Votre bilan</h3>
+          <div id="bilan-coach-badge" style="margin:0 0 8px;"></div>
           <p id="bilan-texte" style="font-size:13.5px; color:var(--text); line-height:1.7; margin:0 0 10px; white-space:pre-line; display:-webkit-box; -webkit-line-clamp:10; -webkit-box-orient:vertical; overflow:hidden; text-overflow:ellipsis;"></p>
           <button class="btn btn-ghost" id="bilan-telecharger" data-i18n="module_bilan_telecharger">Télécharger en .txt</button>
         </div>
@@ -303,6 +305,7 @@ document.addEventListener('DOMContentLoaded', async function(){
       etapes.analyseVeille.style.display = 'block';
       const derniereEntree = etat.historiqueExercices[etat.historiqueExercices.length - 1];
       document.getElementById('analyse-texte').textContent = derniereEntree ? derniereEntree.analyse : '';
+      document.getElementById('analyse-coach-badge').innerHTML = badgeCoachHTML;
 
     } else if(etat.phase === 'quiz'){
       etapes.quiz.style.display = 'block';
@@ -398,6 +401,7 @@ document.addEventListener('DOMContentLoaded', async function(){
       chargementBilan.style.display = 'none';
       contenuBilan.style.display = 'block';
       document.getElementById('bilan-texte').textContent = bilan;
+      document.getElementById('bilan-coach-badge').innerHTML = badgeCoachHTML;
     }catch(erreur){
       chargementBilan.style.display = 'none';
       contenuBilan.style.display = 'block';
@@ -405,10 +409,19 @@ document.addEventListener('DOMContentLoaded', async function(){
     }
   }
 
+  let badgeCoachHTML = '';
+
   try{
     moduleDef = await FAST.loadModule(moduleId);
     document.getElementById('module-eyebrow').textContent = FAST.dict().module_eyebrow || 'Votre parcours';
     document.getElementById('module-titre').textContent = moduleDef.name;
+
+    try{
+      const profils = await FAST.loadCoachProfiles();
+      const { ids } = FAST.getCoachActuel();
+      const idPrincipal = ids.find(id => profils[id]);
+      if(idPrincipal) badgeCoachHTML = FAST.genererBadgeCoachHTML(idPrincipal, profils[idPrincipal].name);
+    }catch(e){ /* pas bloquant si le badge échoue à se calculer */ }
 
     FAST.demarrerOuReprendreModule(moduleId);
     chargement.style.display = 'none';
@@ -430,6 +443,7 @@ document.addEventListener('DOMContentLoaded', async function(){
     etapes.retourVeille.style.display = 'none';
     etapes.analyseVeille.style.display = 'block';
     document.getElementById('analyse-texte').textContent = FAST.dict().module_analyse_chargement || 'Je réfléchis...';
+    document.getElementById('analyse-coach-badge').innerHTML = badgeCoachHTML;
 
     try{
       await FAST.soumettreRetourVeille(moduleId, texte);

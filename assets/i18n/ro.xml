@@ -270,4 +270,7 @@
   <string key="module_bilan_telecharger">Descarcă ca .txt</string>
   <string key="module_bilan_aucune_question_ratee">Bravo, nu mai există întrebări greșite de reluat!</string>
   <string key="module_analyse_chargement">Mă gândesc...</string>
+  <string key="final_pont_titre">Mergi mai departe</string>
+  <string key="final_pont_lead">Vrei să lucrezi la asta pe termen lung?</string>
+  <string key="final_pont_cta">Descoperă abilitățile mele de dezvoltat</string>
 </i18n>

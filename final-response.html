@@ -34,6 +34,19 @@
       <p id="final-texte" style="font-size:14px; color:var(--text); line-height:1.7; margin:0;"></p>
     </div>
 
+    <div class="card" id="final-pont-proactif" style="display:none; border:1px solid var(--rose-deep);">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div id="final-coach-badge"></div>
+        <div>
+          <p style="font-size:13px; font-weight:600; margin:0 0 4px;" data-i18n="final_pont_titre">Pour aller plus loin</p>
+          <p style="font-size:12.5px; color:var(--text-dim); margin:0;" data-i18n="final_pont_lead">Envie de travailler ça dans la durée ?</p>
+        </div>
+      </div>
+      <div class="steprow">
+        <button class="btn btn-ghost" id="final-pont-cta" data-i18n="final_pont_cta">Découvrir mes compétences à développer</button>
+      </div>
+    </div>
+
     <div class="card" id="final-erreur" style="display:none;">
       <p style="font-size:13.5px; color:#c0392b; line-height:1.6; margin:0;" id="final-erreur-texte"></p>
     </div>
@@ -102,6 +115,19 @@ document.addEventListener('DOMContentLoaded', async function(){
     texte.textContent = synthese.reponseIA;
     boutonContinuer.style.display = 'inline-block';
 
+    // Badge + bloc "Pour aller plus loin" : pont vers le mode proactif
+    // (skills.html), pas de mapping compétence -> module pour l'instant.
+    try{
+      const profils = await FAST.loadCoachProfiles();
+      const { ids } = FAST.getCoachActuel();
+      const idPrincipal = ids[0];
+      const p = profils[idPrincipal];
+      if(p){
+        document.getElementById('final-coach-badge').innerHTML = FAST.genererBadgeCoachHTML(idPrincipal, p.name, 56);
+        document.getElementById('final-pont-proactif').style.display = 'block';
+      }
+    }catch(e){ /* pas bloquant si le pont échoue à s'afficher */ }
+
   }catch(erreur){
     chargement.style.display = 'none';
     erreurBloc.style.display = 'block';
@@ -110,6 +136,10 @@ document.addEventListener('DOMContentLoaded', async function(){
 
   boutonContinuer.addEventListener('click', function(){
     window.location.href = 'index.html';
+  });
+
+  document.getElementById('final-pont-cta').addEventListener('click', function(){
+    window.location.href = 'skills.html';
   });
 });
 </script>
