@@ -23,7 +23,10 @@
   <section class="screen">
     <a class="back" href="#" onclick="history.back(); return false;" data-i18n="back_generic">Retour</a>
     <div class="eyebrow" data-i18n="skills_eyebrow">Développement de compétences</div>
-    <h1 style="font-size:20px; margin:4px 0 8px;" data-i18n="skills_h1">Vos compétences à développer</h1>
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+      <h1 style="font-size:20px; margin:4px 0 8px;" data-i18n="skills_h1">Vos compétences à développer</h1>
+      <span id="skills-streak" style="display:none; font-size:12px; font-weight:600; color:var(--rose-deep); white-space:nowrap;"></span>
+    </div>
     <p class="lead" data-i18n="skills_lead">Une sélection de compétences pour progresser vers des responsabilités plus importantes.</p>
 
     <div class="card" id="skills-formation-vedette" style="border:1px solid var(--rose-deep);">
@@ -58,6 +61,17 @@
 <script src="assets/app.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', async function(){
+  try{
+    const streak = FAST.getStreakActuelle();
+    if(streak.jours > 0){
+      const d = FAST.dict();
+      const el = document.getElementById('skills-streak');
+      const libelle = streak.jours > 1 ? (d.streak_label_pluriel || 'Série : {n} jours') : (d.streak_label_singulier || 'Série : {n} jour');
+      el.textContent = libelle.replace('{n}', streak.jours);
+      el.style.display = 'inline';
+    }
+  }catch(e){ /* pas bloquant */ }
+
   document.getElementById('skills-formation-vedette-cta').addEventListener('click', function(){
     window.location.href = 'module.html?module=autopromotion-valorisation-test';
   });

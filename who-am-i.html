@@ -36,6 +36,7 @@
   <h3 style="font-size:13px; color:var(--rose-deep); margin:0 0 8px;" data-i18n="whoami_coach_title">Votre e-Coach</h3>
   <div id="whoami-coach-badge" style="margin:0 0 10px;"></div>
   <p id="coach-actuel-ligne" style="font-size:13.5px; font-weight:600; margin:0 0 10px;"></p>
+  <p id="whoami-stats-globales" style="font-size:12.5px; color:var(--text-dim); margin:0 0 14px; display:none;"></p>
   <div id="coach-choix"></div>
   <div class="steprow" style="margin-top:10px;">
     <button class="btn btn-ghost" id="coach-save" data-i18n="whoami_coach_save" disabled>Enregistrer mon choix</button>
@@ -63,6 +64,20 @@
 <script src="assets/app.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', async function(){
+  try{
+    const stats = FAST.getStatsGlobales();
+    if(stats.questionsQuiz > 0 || stats.exercicesValides > 0 || stats.analysesRecues > 0){
+      const d = FAST.dict();
+      const texte = (d.whoami_stats_globales || 'Depuis le début : {questions} questions répondues, {exercices} exercices réalisés, {analyses} analyses reçues de vos coachs.')
+        .replace('{questions}', stats.questionsQuiz)
+        .replace('{exercices}', stats.exercicesValides)
+        .replace('{analyses}', stats.analysesRecues);
+      const el = document.getElementById('whoami-stats-globales');
+      el.textContent = texte;
+      el.style.display = 'block';
+    }
+  }catch(e){ /* pas bloquant */ }
+
   const summaryEl = document.getElementById('summaryText');
   const boutonModifier = document.getElementById('whoami-modifier');
 

@@ -19,6 +19,10 @@
   </div>
   <fast-header></fast-header>
   <section class="screen">
+<div id="retour-bandeau" style="display:none; background:var(--rose-deep); color:#fff; border-radius:10px; padding:12px 14px; margin-bottom:14px; align-items:center; justify-content:space-between; gap:10px;">
+  <p id="retour-bandeau-texte" style="font-size:13px; margin:0; flex:1;"></p>
+  <button id="retour-bandeau-bouton" style="background:#fff; color:var(--rose-deep); border:none; border-radius:6px; padding:6px 10px; font-size:12px; font-weight:600; cursor:pointer; white-space:nowrap;"></button>
+</div>
 <div class="home-header">
   <div>
     <div class="eyebrow" data-i18n="home_eyebrow">Bonjour</div>
@@ -63,11 +67,38 @@
 <script src="assets/fallback.js"></script>
 <script src="assets/app.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', async function(){
   var p = FAST.getProfile();
   var input = document.getElementById('firstnameInput');
   if(p.firstname) input.value = p.firstname;
   input.addEventListener('input', function(){ FAST.saveProfile({firstname: input.value}); });
+
+  // Bandeau de retour : uniquement si un module est en cours ET que plus
+  // de 24h se sont écoulées depuis la visite précédente.
+  try{
+    const precedente = FAST.getDerniereVisitePrecedente();
+    if(precedente){
+      const heuresEcoulees = (Date.now() - new Date(precedente).getTime()) / 3600000;
+      if(heuresEcoulees > 24){
+        const modulesEnCours = FAST.listerModulesEnCours();
+        if(modulesEnCours.length > 0){
+          modulesEnCours.sort((a, b) => b.jour - a.jour);
+          const plusAvance = modulesEnCours[0];
+          const moduleDef = await FAST.loadModule(plusAvance.moduleId);
+          const totalJours = moduleDef.exercices.length;
+          const d = FAST.dict();
+          const texte = (d.retour_bandeau_texte || 'Votre semaine vous attend — jour {jour} sur {total}')
+            .replace('{jour}', plusAvance.jour).replace('{total}', totalJours);
+          document.getElementById('retour-bandeau-texte').textContent = texte;
+          document.getElementById('retour-bandeau-bouton').textContent = d.retour_bandeau_bouton || 'Continuer';
+          document.getElementById('retour-bandeau-bouton').addEventListener('click', function(){
+            window.location.href = 'module.html?module=' + encodeURIComponent(plusAvance.moduleId);
+          });
+          document.getElementById('retour-bandeau').style.display = 'flex';
+        }
+      }
+    }
+  }catch(e){ /* pas bloquant si le bandeau échoue à s'afficher */ }
 });
 </script>
 </body>

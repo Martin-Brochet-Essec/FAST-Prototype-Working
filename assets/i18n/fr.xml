@@ -275,4 +275,12 @@
   <string key="final_pont_cta">Découvrir mes compétences à développer</string>
   <string key="module_quiz_bonne_reponse">Bonne réponse !</string>
   <string key="module_quiz_mauvaise_reponse">Pas tout à fait...</string>
+  <string key="retour_bandeau_texte">Votre semaine vous attend — jour {jour} sur {total}</string>
+  <string key="retour_bandeau_bouton">Continuer</string>
+  <string key="streak_label_singulier">Série : {n} jour</string>
+  <string key="streak_label_pluriel">Série : {n} jours</string>
+  <string key="whoami_stats_globales">Depuis le début : {questions} questions répondues, {exercices} exercices réalisés, {analyses} analyses reçues de vos coachs.</string>
+  <string key="module_felicitation_titre">Objectif du jour atteint !</string>
+  <string key="module_felicitation_texte">Vous avez répondu à vos 10 questions du jour. Vous pouvez continuer si vous le souhaitez.</string>
+  <string key="module_felicitation_continuer">Continuer</string>
 </i18n>

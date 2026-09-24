@@ -672,7 +672,8 @@ window.FAST = (function(){
         historiqueExercices: [], // {jour, objectifSuggere, retour, analyse}
         questionsVuesSemaine: [], // ids
         reponsesQuizSemaine: {},  // { id: true/false (correcte) }
-        quizAujourdhui: { correctes: 0, incorrectes: 0, repondues: 0 }
+        quizAujourdhui: { correctes: 0, incorrectes: 0, repondues: 0 },
+        felicitationJourVue: false
       };
       sauverEtatModule(moduleId, etat);
     }
@@ -686,9 +687,18 @@ window.FAST = (function(){
   // fichier (donc par jour, puisque les questions y sont groupées par 10).
   function tirerQuestionQuiz(moduleDef, moduleId){
     const etat = getEtatModule(moduleId);
-    const dispo = moduleDef.questions.filter(q => !etat.questionsVuesSemaine.includes(q.id));
-    if(dispo.length === 0) return null; // banque de la semaine épuisée
-    return dispo[0];
+
+    const dispoJour = idsDuJour(moduleDef, etat.jour).filter(q => !etat.questionsVuesSemaine.includes(q.id));
+    if(dispoJour.length > 0){
+      return dispoJour[Math.floor(Math.random() * dispoJour.length)];
+    }
+
+    // Les 10 questions du jour sont épuisées : ordre linéaire habituel
+    // sur le reste de la banque (jours suivants), pour l'utilisatrice qui
+    // continue au-delà de l'objectif quotidien.
+    const dispoApres = moduleDef.questions.filter(q => !etat.questionsVuesSemaine.includes(q.id));
+    if(dispoApres.length === 0) return null; // banque de la semaine épuisée
+    return dispoApres[0];
   }
 
   // Enregistre la réponse à une question de quiz (avec l'index choisi, pour
@@ -702,6 +712,8 @@ window.FAST = (function(){
     etat.quizAujourdhui.repondues += 1;
     if(correcte) etat.quizAujourdhui.correctes += 1; else etat.quizAujourdhui.incorrectes += 1;
     sauverEtatModule(moduleId, etat);
+    enregistrerActiviteStreak();
+    incrementerStatGlobale('questionsQuiz');
     return correcte;
   }
 
@@ -755,8 +767,10 @@ window.FAST = (function(){
       etat.jour += 1;
       etat.phase = 'retour_veille';
       etat.quizAujourdhui = { correctes: 0, incorrectes: 0, repondues: 0 };
+      etat.felicitationJourVue = false;
     }
     sauverEtatModule(moduleId, etat);
+    incrementerStatGlobale('exercicesValides');
     return etat;
   }
 
@@ -834,6 +848,7 @@ window.FAST = (function(){
     derniereEntree.analyse = analyse;
     etat.phase = 'analyse_veille';
     sauverEtatModule(moduleId, etat);
+    incrementerStatGlobale('analysesRecues');
     return analyse;
   }
 
@@ -878,6 +893,7 @@ window.FAST = (function(){
     etat.bilan = bilan;
     etat.termine = true;
     sauverEtatModule(moduleId, etat);
+    incrementerStatGlobale('analysesRecues');
     return bilan;
   }
 
@@ -1434,7 +1450,112 @@ window.FAST = (function(){
 
 
   
-  function init(){ applyI18n(); }
+  // ---- Engagement : visite, streak, statistiques cumulées ----
+
+  // Enregistre la visite actuelle et renvoie l'horodatage de la
+  // PRÉCÉDENTE visite (ou null si c'est la première). À appeler une fois
+  // au chargement de chaque page.
+  function enregistrerVisiteEtObtenirPrecedente(){
+    const precedente = localStorage.getItem('fast_derniere_visite');
+    localStorage.setItem('fast_derniere_visite', new Date().toISOString());
+    return precedente;
+  }
+
+  // Liste les modules dont l'utilisatrice a commencé la semaine sans
+  // l'avoir terminée (etat.termine n'est jamais passé à true).
+  function listerModulesEnCours(){
+    const resultats = [];
+    for(let i = 0; i < localStorage.length; i++){
+      const cle = localStorage.key(i);
+      if(!cle || cle.indexOf('fast_module_') !== 0) continue;
+      try{
+        const etat = JSON.parse(localStorage.getItem(cle));
+        if(etat && !etat.termine){
+          resultats.push({ moduleId: cle.slice('fast_module_'.length), jour: etat.jour });
+        }
+      }catch(e){ /* entrée corrompue, ignorée */ }
+    }
+    return resultats;
+  }
+
+  // ---- Série de jours (streak) ----
+  // Tolérance : un écart d'1 ou 2 jours depuis la dernière activité
+  // prolonge la série ; 3 jours ou plus la remet à 1 (jamais à 0, pour
+  // éviter l'effet culpabilisant d'un compteur qui retombe à zéro).
+  function enregistrerActiviteStreak(){
+    const aujourdhui = new Date().toISOString().slice(0, 10);
+    let streak = null;
+    try{ streak = JSON.parse(localStorage.getItem('fast_streak')); }catch(e){}
+    if(!streak) streak = { jours: 0, derniereDate: null };
+
+    if(streak.derniereDate === aujourdhui) return streak; // déjà comptée aujourd'hui
+
+    if(streak.derniereDate){
+      const diffJours = Math.round((new Date(aujourdhui) - new Date(streak.derniereDate)) / 86400000);
+      streak.jours = (diffJours >= 1 && diffJours <= 2) ? streak.jours + 1 : 1;
+    } else {
+      streak.jours = 1;
+    }
+    streak.derniereDate = aujourdhui;
+    localStorage.setItem('fast_streak', JSON.stringify(streak));
+    return streak;
+  }
+
+  function getStreakActuelle(){
+    try{ return JSON.parse(localStorage.getItem('fast_streak')) || { jours: 0, derniereDate: null }; }
+    catch(e){ return { jours: 0, derniereDate: null }; }
+  }
+
+  // ---- Statistiques cumulées à vie (jamais remises à zéro) ----
+  function incrementerStatGlobale(cle){
+    let stats = null;
+    try{ stats = JSON.parse(localStorage.getItem('fast_stats_globales')); }catch(e){}
+    if(!stats) stats = { questionsQuiz: 0, exercicesValides: 0, analysesRecues: 0 };
+    stats[cle] = (stats[cle] || 0) + 1;
+    localStorage.setItem('fast_stats_globales', JSON.stringify(stats));
+    return stats;
+  }
+
+  function getStatsGlobales(){
+    try{ return JSON.parse(localStorage.getItem('fast_stats_globales')) || { questionsQuiz: 0, exercicesValides: 0, analysesRecues: 0 }; }
+    catch(e){ return { questionsQuiz: 0, exercicesValides: 0, analysesRecues: 0 }; }
+  }
+
+  // ---- Tirage du quiz avec variabilité sur le jour courant ----
+  // Aléatoire parmi les 10 questions du jour courant tant qu'il en reste ;
+  // une fois ce bloc épuisé, reprend l'ordre linéaire habituel sur le
+  // reste de la banque (jours suivants), comme avant.
+  function idsDuJour(moduleDef, jour){
+    const idMin = (jour - 1) * 10 + 1;
+    const idMax = jour * 10;
+    return moduleDef.questions.filter(q => {
+      const n = parseInt(q.id, 10);
+      return n >= idMin && n <= idMax;
+    });
+  }
+
+  function dixQuestionsDuJourTerminees(moduleDef, moduleId){
+    const etat = getEtatModule(moduleId);
+    const questionsJour = idsDuJour(moduleDef, etat.jour);
+    return questionsJour.length > 0 && questionsJour.every(q => etat.questionsVuesSemaine.includes(q.id));
+  }
+
+  function marquerFelicitationJourAffichee(moduleId){
+    const etat = getEtatModule(moduleId);
+    etat.felicitationJourVue = true;
+    sauverEtatModule(moduleId, etat);
+  }
+
+  let derniereVisitePrecedenteCapturee = null;
+
+  function init(){
+    applyI18n();
+    derniereVisitePrecedenteCapturee = enregistrerVisiteEtObtenirPrecedente();
+  }
+
+  function getDerniereVisitePrecedente(){
+    return derniereVisitePrecedenteCapturee;
+  }
 
   return {
     getLang: getLang, setLang: setLang, applyI18n: applyI18n, dict: dict,
@@ -1457,6 +1578,12 @@ window.FAST = (function(){
     soumettreRetourSamedi: soumettreRetourSamedi,
     getQuestionsRateesSemaine: getQuestionsRateesSemaine, produireBilanModule: produireBilanModule,
     reinitialiserModule: reinitialiserModule, reinitialiserQuestionsQuiz: reinitialiserQuestionsQuiz,
+    enregistrerVisiteEtObtenirPrecedente: enregistrerVisiteEtObtenirPrecedente,
+    getDerniereVisitePrecedente: getDerniereVisitePrecedente,
+    listerModulesEnCours: listerModulesEnCours,
+    getStreakActuelle: getStreakActuelle, getStatsGlobales: getStatsGlobales,
+    dixQuestionsDuJourTerminees: dixQuestionsDuJourTerminees,
+    marquerFelicitationJourAffichee: marquerFelicitationJourAffichee,
     runFinalSynthesis: runFinalSynthesis,
     runProfileDeepening: runProfileDeepening,
     generateDeepenQuestions: generateDeepenQuestions,

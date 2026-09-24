@@ -24,7 +24,10 @@
     <div>
       <a class="back" href="index.html" data-i18n="back_generic">Retour</a>
       <div class="eyebrow" id="module-eyebrow">…</div>
-      <h1 style="font-size:20px; margin:4px 0 12px;" id="module-titre">…</h1>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+        <h1 style="font-size:20px; margin:4px 0 12px;" id="module-titre">…</h1>
+        <span id="module-streak" style="display:none; font-size:12px; font-weight:600; color:var(--rose-deep); white-space:nowrap;"></span>
+      </div>
 
       <div class="card" id="module-chargement">
         <p style="font-size:13.5px; color:var(--text-dim); line-height:1.6; margin:0;" data-i18n="module_chargement">
@@ -99,6 +102,13 @@
 
         <div class="card" id="quiz-fin-banque" style="display:none;">
           <p style="font-size:13.5px; color:var(--text-dim); margin:0;" data-i18n="module_quiz_banque_epuisee">Vous avez fait le tour de toutes les questions cette semaine.</p>
+        </div>
+
+        <div class="card" id="quiz-felicitation-jour" style="display:none; border:1px solid var(--rose-deep); text-align:center;">
+          <p style="font-size:28px; margin:0 0 8px;">🎉</p>
+          <p style="font-size:14px; font-weight:600; margin:0 0 6px;" data-i18n="module_felicitation_titre">Objectif du jour atteint !</p>
+          <p style="font-size:13px; color:var(--text-dim); margin:0 0 14px;" data-i18n="module_felicitation_texte">Vous avez répondu à vos 10 questions du jour. Vous pouvez continuer si vous le souhaitez.</p>
+          <button class="btn btn-primary" id="felicitation-continuer" data-i18n="module_felicitation_continuer">Continuer</button>
         </div>
         <div class="steprow">
           <button class="btn btn-primary" id="quiz-suivante" data-i18n="module_quiz_suivante" disabled>Question suivante</button>
@@ -201,6 +211,7 @@ document.addEventListener('DOMContentLoaded', async function(){
     Object.values(etapes).forEach(el => { el.style.display = 'none'; });
     Object.values(zonesSerpent).forEach(z => { z.style.display = 'none'; });
     zoneRelecture.style.display = 'none';
+    document.getElementById('quiz-felicitation-jour').style.display = 'none';
   }
 
   function afficherErreur(erreur){
@@ -314,6 +325,32 @@ document.addEventListener('DOMContentLoaded', async function(){
   function fermerRelecture(){
     zoneRelecture.style.display = 'none';
     document.getElementById('quiz-question-bloc').style.display = 'block';
+  }
+
+  // Si les 10 questions du jour viennent d'être terminées (et que la
+  // félicitation n'a pas déjà été montrée pour ce jour), ouvre la fenêtre
+  // de félicitation au lieu d'enchaîner directement sur la question
+  // suivante. Sinon, comportement normal.
+  function passerALaQuestionSuivanteOuFeliciter(){
+    if(FAST.dixQuestionsDuJourTerminees(moduleDef, moduleId)){
+      const etatCourant = FAST.getEtatModule(moduleId);
+      if(!etatCourant.felicitationJourVue){
+        FAST.marquerFelicitationJourAffichee(moduleId);
+        ouvrirFelicitationJour();
+        return;
+      }
+    }
+    afficherQuestionQuiz();
+  }
+
+  function ouvrirFelicitationJour(){
+    document.getElementById('quiz-question-bloc').style.display = 'none';
+    document.getElementById('quiz-fin-banque').style.display = 'none';
+    document.getElementById('quiz-felicitation-jour').style.display = 'block';
+  }
+
+  function fermerFelicitationJour(){
+    document.getElementById('quiz-felicitation-jour').style.display = 'none';
   }
 
   async function afficherEtapeCourante(){
@@ -440,6 +477,17 @@ document.addEventListener('DOMContentLoaded', async function(){
     document.getElementById('module-titre').textContent = moduleDef.name;
 
     try{
+      const streak = FAST.getStreakActuelle();
+      if(streak.jours > 0){
+        const d = FAST.dict();
+        const el = document.getElementById('module-streak');
+        const libelle = streak.jours > 1 ? (d.streak_label_pluriel || 'Série : {n} jours') : (d.streak_label_singulier || 'Série : {n} jour');
+        el.textContent = libelle.replace('{n}', streak.jours);
+        el.style.display = 'inline';
+      }
+    }catch(e){ /* pas bloquant */ }
+
+    try{
       const profils = await FAST.loadCoachProfiles();
       const { ids } = FAST.getCoachActuel();
       const idPrincipal = ids.find(id => profils[id]);
@@ -482,7 +530,7 @@ document.addEventListener('DOMContentLoaded', async function(){
 
   document.getElementById('quiz-suivante').addEventListener('click', function(){
     fermerRelecture();
-    afficherQuestionQuiz();
+    passerALaQuestionSuivanteOuFeliciter();
   });
 
   document.getElementById('quiz-plus-tard').addEventListener('click', async function(){
@@ -541,6 +589,11 @@ document.addEventListener('DOMContentLoaded', async function(){
 
   document.getElementById('relecture-suivante').addEventListener('click', function(){
     fermerRelecture();
+    passerALaQuestionSuivanteOuFeliciter();
+  });
+
+  document.getElementById('felicitation-continuer').addEventListener('click', function(){
+    fermerFelicitationJour();
     afficherQuestionQuiz();
   });
 
